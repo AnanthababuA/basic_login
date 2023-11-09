@@ -1,0 +1,124 @@
+<mat-card class="cardWithShadow">
+    <mat-tab-group animationDuration="0ms">
+        <!-- Tab 1 -->
+
+        <mat-tab label="Display summary" style="font-size: 20px !important;">
+            <mat-card-content class="p-24">
+
+
+
+
+                <mat-card class="cardWithShadow">
+                    <mat-card-header class="d-flex">
+                        <mat-card-title>Top Projects</mat-card-title>
+                        <mat-card-subtitle class="mat-body-1">top new products</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="table-responsive m-t-30">
+                            <table class="w-100">
+                                <thead>
+                                    <tr>
+                                        <th class="f-w-600 mat-subtitle-1 f-s-14 p-l-0">Policy type</th>
+                                        <th class="f-w-600 mat-subtitle-1 f-s-14">Total policy</th>
+                                        <th class="f-w-600 mat-subtitle-1 f-s-14">Active policy</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="p-l-0 d-flex justify-content-center">
+                                            <div class="d-flex align-items-center">
+                                                <div class="m-l-16">
+                                                    <h6 class="mat-subtitle-1 f-s-14 f-w-600">IP</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="mat-body-1 text-center "> <span>{{policySummary?.IP.total}}</span>
+                                        </td>
+                                        <td class=" d-flex justify-content-center ">
+                                            <span
+                                                class="bg-light-accent text-accent rounded f-w-600 p-6 p-y-4 f-s-12">{{policySummary?.IP.addlist}}</span>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td class="p-l-0 d-flex justify-content-center">
+                                            <div class="d-flex align-items-center">
+                                                <div class="m-l-16">
+                                                    <h6 class="mat-subtitle-1 f-s-14 f-w-600">URL</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="mat-body-1 text-center">{{policySummary?.URL.total}}</td>
+                                        <td class=" d-flex justify-content-center ">
+                                            <span
+                                                class="bg-light-primary text-primary rounded f-w-600 p-6 p-y-4 f-s-12">{{policySummary?.URL.addlist}}</span>
+                                        </td>
+                                        <!-- <td class="mat-body-1">$20k</td> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+
+                <!-- ============================== -->
+
+
+
+
+
+
+
+            </mat-card-content>
+        </mat-tab>
+        <!-- End Tab 1 -->
+
+        <!-- Tab 2 -->
+        <mat-tab label="Add Policy">
+            <mat-card-content class="p-24">
+
+                <!-- <mat-sidenav style="width: 290px" class="shadow-none">
+                    <ng-scrollbar class="position-relative" style="height: 100%"> -->
+
+                <!-- <mat-nav-list class="p-x-16">
+                            <ng-container>
+                                <mat-list-item class="notes-item rounded m-b-8 bg-light-warning" lines="3">
+                                    <span class="note-title mat-subtitle-1 f-w-500 text-warning"
+                                        matListItemTitle>note3</span>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="note-time f-s-12 f-w-500">9999</span>
+                                        <span class="remove-note" matTooltip="Delete">
+                                            <i-tabler name="trash" class="icon-16"></i-tabler>
+                                        </span>
+                                    </div>
+                                </mat-list-item>
+                            </ng-container>
+                            <ng-template #elseBlock>
+                                <p class="m-b-0 text-center font-18 font-bold m-t-40">
+                                    No Notes Found
+                                </p>
+                            </ng-template>
+                        </mat-nav-list> -->
+
+                <!-- </ng-scrollbar>
+                </mat-sidenav> -->
+
+                <!-- app policy component  -->
+                <app-add-policy></app-add-policy>
+            </mat-card-content>
+        </mat-tab>
+
+    </mat-tab-group>
+</mat-card>
+
+<!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
+    <p class="text-white"> {{ loaderStatus }} </p>
+  </ngx-spinner> -->
+
+
+
+
+

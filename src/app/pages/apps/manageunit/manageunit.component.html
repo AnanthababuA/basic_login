@@ -1,0 +1,182 @@
+
+<mat-card class="cardWithShadow">
+  <mat-tab-group animationDuration="0ms" #tabGroup (selectedIndexChange)="tabChanged($event)">
+    <!-- Tab 1 -->
+
+    <mat-tab label="Create Unit" style="font-size: 20px !important;">
+      <mat-card-content class="p-24">
+        <form class="m-t-24" [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Create Unit</ng-template>
+          <div>
+
+            <div class="row m-t-20">
+              <div class="col-lg-6">
+                <div style="display: flex;">
+
+                  <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Parent unit</mat-label>
+                  <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">&nbsp; </span>
+                </div>
+
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <mat-select placeholder="Select" formControlName="unitid" required>
+
+                    <mat-option *ngFor="let item of unitName" [value]="item.unit_id">
+                      {{ item.unit_name }}
+                    </mat-option>
+
+                  </mat-select>
+                  <mat-error *ngIf="secondFormGroup?.get('unitid')?.hasError('required')">
+                    Parent unit is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-lg-6" >
+                <div style="display: flex;">
+
+                  <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Unit Name
+                  </mat-label><span style="font-size: 0.7rem; margin-left: 10px; color: gray;">* Maximum 10
+                    character's and special character not allowed</span>
+                </div>
+
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input matInput formControlName="unitname" required placeholder="Enter unit name" />
+                    <mat-icon matPrefix>
+                      <i-tabler name="users" class="icon-20 d-flex"></i-tabler>
+                    </mat-icon>
+                    <mat-error *ngIf="secondFormGroup?.get('unitname')?.hasError('required')">
+                      Unit Name is required
+                    </mat-error>
+      
+                    <mat-error
+                      *ngIf="secondFormGroup.get('unitname')?.hasError('pattern') && secondFormGroup.get('unitname')?.invalid">
+                      Unit name should be maximum 10 characters & special character not allowed
+                    </mat-error>
+                  </mat-form-field>
+              </div>
+            
+              </div>
+
+
+            </div>
+            <!-- input for unitname -->
+            <div >
+
+              <!-- <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Unit Name
+              </mat-label><span style="font-size: 0.7rem; margin-left: 10px; color: gray;">* Maximum 10
+                character's and special character not allowed</span>
+            </div>
+            <mat-form-field appearance="outline" class="w-100">
+              <input matInput formControlName="unitname" required placeholder="Enter unit name" />
+              <mat-icon matPrefix>
+                <i-tabler name="users" class="icon-20 d-flex"></i-tabler>
+              </mat-icon>
+              <mat-error *ngIf="secondFormGroup?.get('unitname')?.hasError('required')">
+                Unit Name is required
+              </mat-error>
+
+              <mat-error
+                *ngIf="secondFormGroup.get('unitname')?.hasError('pattern') && secondFormGroup.get('unitname')?.invalid">
+                Unit name should be maximum 10 characters & special character not allowed
+              </mat-error>
+
+
+            </mat-form-field> -->
+            <!-- input for unitdesc -->
+            <div style="display: flex;">
+
+              <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Describe some information about unit
+              </mat-label> <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">* Maximum 200
+                character's</span>
+            </div>
+            <mat-form-field appearance="outline" class="w-100 custom-form-field">
+              <textarea matInput formControlName="unitdesc" rows="5" required
+                placeholder="Enter unit description"></textarea>
+
+              <mat-icon matPrefix>
+                <i-tabler name="notebook" class="icon-20 d-flex"></i-tabler>
+              </mat-icon>
+              <!-- <input matInput formControlName="unitdesc" required /> -->
+              <mat-error *ngIf="secondFormGroup?.get('unitdesc')?.hasError('required')">
+                Unit description is required
+              </mat-error>
+
+              <mat-error
+                *ngIf="secondFormGroup.get('unitdesc')?.hasError('pattern') && secondFormGroup.get('unitdesc')?.invalid">
+                Unit description should be maximum 200 characters
+              </mat-error>
+
+
+            </mat-form-field>
+          </div>
+          <div class="m-t-12">
+            <button mat-flat-button color="primary" (click)="submit()" [disabled]="secondFormGroup.invalid">Add
+              Unit</button>
+            <button mat-flat-button color="warn" class="m-l-8" type="reset">Reset</button>
+
+            <!-- <button mat-flat-button color="primary" (click)="submit()" [disabled]="secondFormGroup?.invalid">
+              Add Unit
+            </button> -->
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-tab>
+    <!-- End Tab 1 -->
+
+    <!-- Tab 2 -->
+    <mat-tab label="Manage Units">
+      <mat-card-content class="p-24">
+
+
+        <!-- <table datatable dtOptions="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover"></table> -->
+        <div *ngIf="showEventTable">
+
+          <table datatable [dtOptions]="dtOptions" class="row-border hover">
+            <thead>
+              <tr>
+                <th>Sr No</th>
+                <th>Unit Name</th>
+                <th>Unit Desc</th>
+                <th>Created On</th>
+                <th>Parent Unit</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of manageUnitDetails; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ item?.unit_name }}</td>
+                <td>{{ item?.unit_desc }}</td>
+                <td>{{ item?.created_on }}</td>
+                <td>{{ item?.parent_unit }}</td>
+                <td>
+                  <!-- <Button>Edit</Button>  
+                  <button>Delete</button> -->
+                  <button class="bg-success f-s-12 p-x-8 p-y-4 rounded text-white" style="border: none; cursor: pointer;" (click)="editRow()">Edit</button> &nbsp; &nbsp;
+
+                  <button class="bg-error f-s-12 p-x-8 p-y-4 rounded text-white" style="border: none; cursor: pointer;"  (click)="deleteRow()">Delete</button>
+
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+
+
+
+
+        <!-- ============================================================================================================== -->
+
+
+      </mat-card-content>
+    </mat-tab>
+
+  </mat-tab-group>
+</mat-card>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
+  <p class="text-white"> {{ loaderStatus }} </p>
+</ngx-spinner>

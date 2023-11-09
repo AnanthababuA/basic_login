@@ -1,0 +1,209 @@
+
+  
+  
+  <!-- ======================================================================== -->
+
+
+  
+
+  <mat-card class="cardWithShadow">
+    <mat-tab-group animationDuration="0ms">
+      <!-- Tab 1 -->
+      <mat-tab label="Create local admin">
+        <mat-card-content class="p-24">
+
+          <form class="m-t-24" [formGroup]="secondFormGroup">
+
+            <div class="row m-t-20">
+    
+          
+              <div class="col-lg-6">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Unit name</mat-label>
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <mat-select placeholder="Select" formControlName="unitid" required>
+
+                    <mat-option *ngFor="let item of unitName" [value]="item.unit_id">
+                      {{ item.unit_name }}
+                    </mat-option>
+
+          
+
+                    <!-- <mat-option value="0100">0100</mat-option>
+                    <mat-option value="0101">0101</mat-option>
+                    <mat-option value="0102">0102</mat-option> -->
+                  </mat-select>
+                  <mat-error *ngIf="secondFormGroup?.get('unitid')?.hasError('required')">
+                    Unit name is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+    
+              <div class="col-lg-6">
+                <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">User Type</mat-label>
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <mat-select placeholder="Select" formControlName="usertype" required>
+
+                    <mat-option *ngFor="let item of unitType" [value]="item.name">
+                      {{ item.name }}
+                    </mat-option>
+
+
+                    <!-- <mat-option value="local_admin">Local Admin</mat-option>
+                    <mat-option value="Log Viewer User">Log Viewer User</mat-option>
+                    <mat-option value="Policy User">Policy User</mat-option> -->
+                    
+                  </mat-select>
+                  <mat-error *ngIf="secondFormGroup?.get('usertype')?.hasError('required')">
+                    User Type is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+    
+            </div>
+    
+    
+            <div class="row m-t-20">
+              <div class="col-lg-6">
+                <!-- input -->
+                <div style="display: flex;">
+    
+                  <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">User name</mat-label>
+                   <span style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* Maximum 10 characters</span>
+                </div>
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput formControlName="username" required placeholder="Enter user name"/>
+                  <mat-icon matPrefix>
+                    <i-tabler name="user" class="icon-20 d-flex"></i-tabler>
+                  </mat-icon>
+                  <mat-error *ngIf="secondFormGroup?.get('username')?.hasError('required')">
+                    User name is required
+                  </mat-error>
+    
+                  <mat-error *ngIf="secondFormGroup.get('username')?.hasError('pattern') && secondFormGroup.get('username')?.invalid">
+                    User name should be maximum 10 character
+                  </mat-error>
+    
+                </mat-form-field>
+              </div>
+          
+              <div class="col-lg-6">
+                <!-- input -->
+              
+    
+                  <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">E-mail</mat-label>
+                 
+            
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput type="text" formControlName="email" required placeholder="Enter email"/>
+
+                  <mat-icon matPrefix>
+                    <i-tabler name="mail" class="icon-20 d-flex"></i-tabler>
+                  </mat-icon>
+
+                  <mat-error *ngIf="secondFormGroup?.get('email')?.hasError('required')">
+                    E-mail id is required
+                  </mat-error>
+    
+                  <mat-error *ngIf="secondFormGroup.get('email')?.hasError('pattern') && secondFormGroup.get('email')?.invalid">
+                    Enter valid email id
+                  </mat-error>
+    
+                </mat-form-field>
+              </div>
+            </div>
+          
+            <div class="row m-t-20">
+              <div class="col-lg-6">
+                <!-- input -->
+    
+                <div style="display: flex;">
+    
+                  <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Password</mat-label>
+                  <span style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* 8-16 characters with 1 digit, 1 uppercase, and 1 lowercase letter.</span>
+                </div>
+    
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput  [type]="passwordVisible ? 'text' : 'password'"  formControlName="password" required placeholder="Enter password"/>
+                  <mat-icon matPrefix>
+                    <i-tabler name="lock" class="icon-20 d-flex"></i-tabler>
+                  </mat-icon>
+                  <mat-icon matSuffix style="cursor: pointer;"  (click)="togglePasswordVisibility()">
+                    <i-tabler name="{{passwordVisible ? 'eye' : 'eye-closed'}}" class="icon-20 d-flex"></i-tabler>
+                  </mat-icon>
+                  <mat-error *ngIf="secondFormGroup?.get('password')?.hasError('required')">
+                    Password is required
+                  </mat-error>
+                  <mat-error *ngIf="secondFormGroup.get('password')?.hasError('pattern') && secondFormGroup.get('password')?.invalid">
+                    Password should contain least one uppercase letter, one lowercase letter, one digit, and has a length between 8 and 16 characters. 
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <div class="col-lg-6">
+                <!-- input -->
+               
+    
+                  <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Confirm Password</mat-label> 
+             
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput [type]="cpasswordVisible ? 'text' : 'password'"  formControlName="cpassword" required placeholder="Enter confirm password"/>
+    
+                <mat-icon matPrefix>
+              <i-tabler name="lock" class="icon-20 d-flex"></i-tabler>
+            </mat-icon>
+
+            <mat-icon matSuffix style="cursor: pointer;"  (click)="togglecPasswordVisibility()">
+              <i-tabler name="{{cpasswordVisible ? 'eye' : 'eye-closed'}}" class="icon-20 d-flex"></i-tabler>
+            </mat-icon>
+    
+    
+                  <mat-error *ngIf="secondFormGroup?.get('cpassword')?.hasError('required')">
+                    Confirm Password is required
+                  </mat-error>
+    
+    
+                  <mat-error *ngIf="secondFormGroup.get('cpassword')?.hasError('passwordMismatch')">
+                    Passwords do not match
+                  </mat-error>
+    
+                  
+    
+                </mat-form-field>
+                     
+                  
+              </div>
+    
+            </div>
+    
+    
+    
+              <div class="row m-t-20">
+              <!-- <mat-card-actions class="b-t-1"> -->
+                <button mat-flat-button color="primary" (click)="submit('create')">CreateLogin</button>
+                <button mat-flat-button color="warn" type="reset" class="m-l-8">Reset</button>
+  
+    
+            </div>
+          
+          </form>
+          <!-- content 1 -->
+        </mat-card-content>
+      </mat-tab>
+      <!-- End Tab 1 -->
+
+      <!-- Tab 2 -->
+      <!-- <mat-tab label="Create viewlog user">
+        <mat-card-content class="p-24">
+          <p>List Unit contents 2</p>
+        </mat-card-content>
+      </mat-tab> -->
+
+    </mat-tab-group>
+  </mat-card>
+
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
+    <p class="text-white"> {{ loaderStatus }} </p>
+  </ngx-spinner>
+
+
+  

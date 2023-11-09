@@ -1,0 +1,54 @@
+// .custom-form-field {
+//     height: 10em; /* Set the height to be equivalent to 10 rows */
+//     /* You can also set additional styles like padding, margin, etc. as needed */
+//   }
+//   /* Apply custom styles to DataTables export buttons */
+// .dt-button {
+//   background-color: your-background-color;
+//   border: none;
+//   cursor: pointer;
+//   color: your-text-color;
+//   font-size: your-font-size;
+//   margin: 2px; 
+//   padding: 8px 12px; 
+//   border-radius: 4px;
+// }
+
+// .button {
+//   background-color: green;
+// }
+
+// .dt-button.print {
+//   background-color: blue;
+// }
+
+// .dt-button.csv {
+//   background-color:yellow;
+// }
+
+
+
+
+
+
+// mat-mdc-tab-header {
+//   // --mat-tab-header-label-text-font: Poppins;
+//   --mat-tab-header-label-text-size: 22px !important;
+//   // --mat-tab-header-label-text-letter-spacing: normal;
+//   // --mat-tab-header-label-text-line-height: 14px;
+//   // --mat-tab-header-label-text-weight: 400;
+// }
+
+::ng-deep .mat-tab-label {
+  font-style: italic !important; /* You can use other values like 'normal' or 'oblique' */
+}
+::ng-deep .mat-tab-label .mat-tab-label-content {
+  font-size: x-large;
+}
+
+.aaa span {
+  font-size: 30px !important;
+  background-color: green !important;
+}
+
+
