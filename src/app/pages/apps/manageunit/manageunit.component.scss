@@ -52,3 +52,25 @@
 }
 
 
+.content { 
+  .mat-tab-label{
+    font-size: 30px !important;
+  } 
+}
+
+.mat-tab-label{
+  font-size: 20px !important;
+} 
+
+// Or you can use the following in component CSS
+
+::ng-deep .mat-tab-label .mat-tab-label-content {
+  font-size: x-large;
+}
+
+::ng-deep .mat-tab-label {
+  font-size: 26px; /* Adjust the font size according to your preference */
+}
+
+
+

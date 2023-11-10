@@ -10,8 +10,8 @@
 
                 <mat-card class="cardWithShadow">
                     <mat-card-header class="d-flex">
-                        <mat-card-title>Top Projects</mat-card-title>
-                        <mat-card-subtitle class="mat-body-1">top new products</mat-card-subtitle>
+                        <mat-card-title>Summary</mat-card-title>
+                        <!-- <mat-card-subtitle class="mat-body-1">top new products</mat-card-subtitle> -->
                     </mat-card-header>
                     <mat-card-content>
                         <div class="table-responsive m-t-30">
@@ -37,7 +37,7 @@
                                         </td>
                                         <td class=" d-flex justify-content-center ">
                                             <span
-                                                class="bg-light-accent text-accent rounded f-w-600 p-6 p-y-4 f-s-12">{{policySummary?.IP.addlist}}</span>
+                                                class="">{{policySummary?.IP.addlist}}</span>
                                         </td>
                                     </tr>
 
@@ -53,7 +53,7 @@
                                         <td class="mat-body-1 text-center">{{policySummary?.URL.total}}</td>
                                         <td class=" d-flex justify-content-center ">
                                             <span
-                                                class="bg-light-primary text-primary rounded f-w-600 p-6 p-y-4 f-s-12">{{policySummary?.URL.addlist}}</span>
+                                                class="">{{policySummary?.URL.addlist}}</span>
                                         </td>
                                         <!-- <td class="mat-body-1">$20k</td> -->
                                     </tr>
@@ -78,7 +78,7 @@
 
         <!-- Tab 2 -->
         <mat-tab label="Add Policy">
-            <mat-card-content class="p-24">
+            <!-- <mat-card-content class="p-24"> -->
 
                 <!-- <mat-sidenav style="width: 290px" class="shadow-none">
                     <ng-scrollbar class="position-relative" style="height: 100%"> -->
@@ -108,7 +108,7 @@
 
                 <!-- app policy component  -->
                 <app-add-policy></app-add-policy>
-            </mat-card-content>
+            <!-- </mat-card-content> -->
         </mat-tab>
 
     </mat-tab-group>

@@ -139,16 +139,17 @@ export const navItems: NavItem[] = [
     iconName: 'file-invoice',
     route: 'apps/clientAdministration',
   },
+  // {
+  //   displayName: 'Policy configuration',
+  //   iconName: 'edit',
+  //   route: 'apps/policyConfiguration',
+  // },
+
   {
     displayName: 'Policy',
-    iconName: 'edit',
-    route: 'apps/policyConfiguration',
+    iconName: 'checklist',
+    route: 'apps/groups',
   },
-  // {
-  //   displayName: 'Taskboard',
-  //   iconName: 'checklist',
-  //   route: 'apps/taskboard',
-  // },
   // {
   //   displayName: 'Blog',
   //   iconName: 'chart-donut-3',

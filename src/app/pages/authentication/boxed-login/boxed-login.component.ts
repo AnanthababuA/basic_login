@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import Swal from 'sweetalert2';
 
 
 
@@ -130,6 +131,16 @@ export class AppBoxedLoginComponent {
 
           this.router.navigate(['/dashboards/dashboard1']);
           // this.spinner.hide();
+          Swal.fire({
+            icon: 'success',
+            title: 'Welcome to ISOC',
+            text: `You have successfully logged-in.`,
+            timer: 3000, 
+            // showConfirmButton: false,
+          }).then(() => {
+            // this.router.navigate(['dashboard']);
+          });
+          
 
         } else {
           this.spinner.hide();

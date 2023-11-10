@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -17,7 +17,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-manageunit',
   templateUrl: './manageunit.component.html',
-  styleUrls: ['./manageunit.component.scss']
+  styleUrls: ['./manageunit.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ManageunitComponent {
 
@@ -112,11 +113,11 @@ export class ManageunitComponent {
           className: ' bg-warning rounded btn-sm btn btn-primary mx-2 text-dark',
         },
         
-        {
-          extend: 'excel',
-          text: '<i class="mdi mdi-printer"></i> Excel',
-          className: ' bg-primary rounded btn-sm btn btn-primary mx-2 text-dark',
-        },
+        // {
+        //   extend: 'excel',
+        //   text: '<i class="mdi mdi-printer"></i> Excel',
+        //   className: ' bg-primary rounded btn-sm btn btn-primary mx-2 text-dark',
+        // },
         
         {
           extend: 'csv',

@@ -86,6 +86,10 @@ import { DataTablesModule } from "angular-datatables";
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PolicyConfigurationComponent } from './policy-configuration/policy-configuration.component';
 import { AddPolicyComponent } from './add-policy/add-policy.component';
+import { ListregclientComponent } from './listregclient/listregclient.component';
+import { RegstatusclientComponent } from './regstatusclient/regstatusclient.component';
+import { GroupsComponent } from './groups/groups.component';
+import { PolicyUpdateComponent } from './policy-update/policy-update.component';
 
 
 @NgModule({
@@ -150,6 +154,10 @@ import { AddPolicyComponent } from './add-policy/add-policy.component';
     ClientAdministraionComponent,
     PolicyConfigurationComponent,
     AddPolicyComponent,
+    ListregclientComponent,
+    RegstatusclientComponent,
+    GroupsComponent,
+    PolicyUpdateComponent,
   ],
   providers: [DatePipe],
 })

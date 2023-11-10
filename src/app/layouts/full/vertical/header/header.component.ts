@@ -78,6 +78,8 @@ export class HeaderComponent {
 
   userName = this.ts.getUser();
 
+  userType = this.ts.getUserType()
+
   public selectedLanguage: any = {
     language: 'English',
     code: 'en',
@@ -234,5 +236,32 @@ export class HeaderComponent {
       link: '/apps/taskboard',
     },
   ];
+
+  ngOnInit(): void {
+
+    console.log("userName log...", this.capitalizeFirstLetter(this.userName));
+    this.userName = this.capitalizeFirstLetter(this.userName)
+
+    this.userType = this.formatUserName(this.userType)
+    console.log("userType log...", this.userType);
+
+    console.log("userName log...", this.userName);
+    console.log("userType log 99999...", this.formatUserName(this.userType));
+    
+  }
+
+
+// Function to capitalize the first letter of a string
+ capitalizeFirstLetter(str: string): string {
+  return str.toUpperCase() 
+}
+
+ formatUserName(str: string): string {
+  const formattedString = str.replace(/_/g, ' '); // Replace underscores with spaces
+  return formattedString.toUpperCase() 
+
+  // return formattedString.charAt(0).toUpperCase() + formattedString.slice(1);
+
+}
 }
 

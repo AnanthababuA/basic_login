@@ -1,0 +1,147 @@
+
+<div style="margin-bottom: 70px;"></div>
+
+<mat-card class="cardWithShadow">
+    <mat-card-content class="p-24">
+      <div class="row justify-content-between m-b-8">
+        <div class="col-lg-5 col-sm-6 d-flex align-items-center">
+          <div>
+            <mat-card-title
+              >List of Registered Clients</mat-card-title
+            >
+                       
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+          <mat-form-field appearance="outline" class="w-100 hide-hint">
+            <mat-label>Search Here</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Filter" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div style="margin-bottom: 70px;"></div>
+
+        <div class="table table-responsive m-t-30" >
+
+        <mat-table  [dataSource]="dataSources" matSort  >
+          <ng-container matColumnDef="ID">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="f-w-600 mat-subtitle-1 f-s-16 ">
+          ID
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="p-l-0">
+          <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
+            <span class="f-s-12"> {{ row.client_id }}</span>
+          </div>
+          
+        
+        </mat-cell>
+      </ng-container>
+         
+  
+          <ng-container matColumnDef="ClientName">
+            <mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              class="f-w-600 mat-subtitle-1 f-s-16"
+            >
+              Client Name
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row"> 
+              <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
+                <span class="f-s-12"> {{ row.client_name }} </span>
+              </div>
+              
+
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="MacID">
+            <mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              class="f-w-600 mat-subtitle-1 f-s-16"
+            >
+              Mac ID
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row"> 
+              <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
+                <span class="f-s-12"> {{ row.client_macid }}</span>
+              </div>
+              </mat-cell>
+          </ng-container>
+          
+          <ng-container matColumnDef="Unit">
+            <mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              class="f-w-600 mat-subtitle-1 f-s-16"
+            >
+            Unit
+        </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
+                <span class="f-s-12"> {{ row.client_unit }}</span>
+              </div>
+              
+            
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="IP">
+            <mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              class="f-w-600 mat-subtitle-1 f-s-16"
+            >
+            IP
+        </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
+                <span class="f-s-12"> {{ row.client_id }}</span>
+              </div>
+             
+             
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="LastCommunicationtime">
+            <mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              class="f-w-600 mat-subtitle-1 f-s-16"
+            >
+            Last Communication time
+        </mat-header-cell>
+            <mat-cell *matCellDef="let row" >
+              <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
+                <span class="f-s-12"> {{ row.client_reg_time }}</span>
+              </div>
+              
+             
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="RegStatus">
+            <mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              class="f-w-600 mat-subtitle-1 f-s-16"
+            >
+            Reg Status
+        </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
+                <span class="f-s-12">  {{ row.reg_status }}</span>
+              </div>
+             
+             
+            </mat-cell>
+          </ng-container>
+         
+  
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"> </mat-row>
+        </mat-table>
+  
+        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons ></mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  

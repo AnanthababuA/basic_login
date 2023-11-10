@@ -24,6 +24,9 @@ import { ManageunitComponent } from './manageunit/manageunit.component';
 import { LocaladminComponent } from './localadmin/localadmin.component';
 import { ClientAdministraionComponent } from './client-administraion/client-administraion.component';
 import { PolicyConfigurationComponent } from './policy-configuration/policy-configuration.component';
+import { ListregclientComponent } from './listregclient/listregclient.component';
+import { RegstatusclientComponent } from './regstatusclient/regstatusclient.component';
+import { GroupsComponent } from './groups/groups.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -75,6 +78,18 @@ export const AppsRoutes: Routes = [
           ],
         },
       },
+
+      {
+        path: 'groups',
+        component: GroupsComponent,
+        data: {
+          title: 'Policy configuration',
+          urls: [
+            { title: 'Dashboard', url: '/dashboards/dashboard1' },
+            { title: 'Policy configuration' },
+          ],
+        },
+      },
       
       // {
       //   path: 'chat',
@@ -110,6 +125,8 @@ export const AppsRoutes: Routes = [
       //   },
       // },
       { path: 'email', redirectTo: 'email/inbox', pathMatch: 'full' },
+      { path: 'listregclient', component: ListregclientComponent }, 
+  {path:'statusregclients',component:RegstatusclientComponent},
       // {
       //   path: 'email/:type',
       //   component: AppEmailComponent,

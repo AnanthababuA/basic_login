@@ -53,11 +53,40 @@ export class CommonServicesService {
 
   }
 
-  addPolicy(policyDeail: any): Observable<any> {
+  // addPolicy(policyDeail: any): Observable<any> {
    
-    return this.http.post(env.apiHost.concat('/policy/policy-add'), policyDeail)
+  //   return this.http.post(env.apiHost.concat('/policy/policy-add'), policyDeail)
 
+  // }
+
+
+  addPolicy(policyvalue: any, policytype: any): Observable<any> {
+    const requestBody = {
+      policyvalue: policyvalue,
+      policytype: policytype,
+    };
+
+    return this.http.post(env.apiHost.concat('/policy/policy-add'), requestBody)
+
+
+    // Assuming you are making a POST request to your API
+    // return this.http.post<any>(`${this.apiUrl}/add-policy`, requestBody);
   }
+// }
 
+
+  Registeredclients(){
+    return this.http.post<any>(env.apiHost.concat('/registration/client-reg-list'),{});
+
+}
+Registeredstatusclients(){
+  return this.http.post<any>(env.apiHost.concat('/registration/client-status-list'),{});
+  
+}
+
+policyBulkUpload(formData: any){
+  return this.http.post<any>(env.apiHost.concat('/policy/policy-bulk'),formData);
+  
+}
 
 }

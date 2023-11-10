@@ -18,6 +18,8 @@ interface topcards {
   templateUrl: './top-cards.component.html',
 })
 export class AppTopCardsComponent {
+
+  
   topcards: topcards[] = [
     {
       id: 1,
