@@ -89,4 +89,14 @@ policyBulkUpload(formData: any){
   
 }
 
+urlAddition(){
+  return this.http.post<any>(env.apiHost.concat('/policy/url-addition'),{});
+  
+}
+
+urlDeletion(){
+  return this.http.post<any>(env.apiHost.concat('/policy/url-deletion'),{});
+  
+}
+
 }

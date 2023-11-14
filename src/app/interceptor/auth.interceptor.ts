@@ -44,10 +44,10 @@ export class AuthInterceptor implements HttpInterceptor {
 
         // Swal.fire('Unable to connect server', '', 'error');
 
-        this.router.navigate(['/login'])
+        this.router.navigate(['/authentication/login'])
       }
 
-      if (error instanceof HttpErrorResponse && !authReq.url.includes('/login') && error.status === 401) {
+      if (error instanceof HttpErrorResponse && !authReq.url.includes('/authentication/login') && error.status === 401) {
 
         if (authReq.url.includes('/registration/token/refresh')) {
 
@@ -55,7 +55,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
           // this.spinner.hide();
 
-          this.router.navigate(['/login'])
+          this.router.navigate(['/authentication/login'])
 
         } else {
 
@@ -82,7 +82,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
       }, catchError => {
 
-        this.router.navigate(['/login'])
+        this.router.navigate(['/authentication/login'])
 
       });
 
@@ -123,7 +123,6 @@ export class AuthInterceptor implements HttpInterceptor {
   private addTokenHeader(request: HttpRequest<any>, token: string) {
 
     return request.clone({ headers: request.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
-    // return request.clone({ setHeaders: { Authorization: `Bearer ${token}`, Retry: "true" } });
 
   }
 

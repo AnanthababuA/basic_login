@@ -2,39 +2,49 @@
 
     <mat-nav-list class="p-x-16" style="display: flex;">
 
-        <mat-list-item class=" notes-item rounded m-b-8 bg-light-primary" style="max-width: 130px;
+        <!-- <mat-list-item class=" notes-item rounded m-b-8 bg-light-primary" style="max-width: 130px;
         max-height: 50px; 
         " [class.border-red]="formNo === 0" (click)="AddPolicy(0, 'Summary', 'ADMIN')" lines="3">
-            <span class="note-title mat-subtitle-1 f-w-500 text-primary" matListItemTitle>Summary</span>
-        </mat-list-item>
+            <span class="note-title  mat-subtitle-1 f-w-500 text-primary" matListItemTitle>Summary</span>
+        </mat-list-item> -->
+
+        <button mat-flat-button  class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 0" (click)="AddPolicy(0, 'Summary', 'ADMIN')"> <span class="text-primary" >summary</span></button>
 
 
         <!-- 11111111111111111111111111111111111111111111111111111111111111111111111111111  -->
 
-        <mat-list-item class="notes-item rounded m-b-8 bg-light-accent" style="max-width: 130px;
+        <!-- <mat-list-item class="notes-item rounded m-b-8 bg-light-accent" style="max-width: 130px;
         max-height: 50px;
         " [class.border-red]="formNo === 1" (click)="AddPolicy(1, 'URL', 'ADMIN')" lines="3">
             <span class="note-title mat-subtitle-1 f-w-500 text-accent" matListItemTitle>Add URL</span>
-            <!-- <div class="d-flex justify-content-between">
-  <span class="note-time f-s-12 f-w-500">desc</span>
-</div> -->
-        </mat-list-item>
+
+        </mat-list-item> -->
+
+        <button mat-flat-button  class="rounded m-b-8 bg-light-accent" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 1" (click)="AddPolicy(1, 'URL', 'ADMIN')" > <span class="text-accent" >Add URL</span></button>
+
 
         <!-- 22222222222222222222 -->
 
-        <mat-list-item class="notes-item rounded m-b-8 bg-light-success" style="max-width: 130px;
+        <!-- <mat-list-item class="notes-item rounded m-b-8 bg-light-success" style="max-width: 130px;
         max-height: 50px;
         " [class.border-red]="formNo === 2" (click)="AddPolicy(2, 'IP', 'ADMIN')" lines="3">
             <span class="note-title mat-subtitle-1 f-w-500 text-success" matListItemTitle>Add IP</span>
-        </mat-list-item>
+        </mat-list-item> -->
+
+
+        <button mat-flat-button  class="rounded m-b-8 bg-light-success" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 2" (click)="AddPolicy(2, 'IP', 'ADMIN')"> <span class="text-success" >Add IP</span></button>
+
 
         <!-- 33333333333333333333333333  -->
 
-        <mat-list-item class="notes-item rounded m-b-8 bg-light-error" (click)="AddPolicy(3, 'IP', 'ADMIN')" style="max-width: 130px;
+        <!-- <mat-list-item class="notes-item rounded m-b-8 bg-light-error" (click)="AddPolicy(3, 'IP', 'ADMIN')" style="max-width: 130px;
         max-height: 50px;
         " [class.border-red]="formNo === 3" lines="3">
             <span class="note-title mat-subtitle-1 f-w-500 text-error" matListItemTitle>Bulk upload</span>
-        </mat-list-item>
+        </mat-list-item> -->
+
+        <button mat-flat-button  class="rounded m-b-8 bg-light-error" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 3" (click)="AddPolicy(3, 'BulkUpload', 'ADMIN')"> <span class="text-error" >Bulk upload</span></button>
+
 
         <!-- 44444444444444444444444444444444  -->
         <!-- <mat-list-item class="notes-item rounded m-b-8 bg-light-warning" (click)="AddPolicy(4, 'IP', 'ADMIN')" style="max-width: 122px;
@@ -47,13 +57,16 @@
               
         </mat-list-item> -->
 
-        <mat-list-item [class.border-red]="formNo === 4" class="notes-item rounded m-b-8 bg-light-warning"
+        <!-- <mat-list-item [class.border-red]="formNo === 4" class="notes-item rounded m-b-8 bg-light-warning"
             (click)="AddPolicy(4, 'IP', 'ADMIN')" style="max-width: 130px; max-height: 50px; overflow: hidden;">
             <span class="note-title mat-subtitle-1 f-w-500 text-warning" matListItemTitle
                 style="display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                 Policy update
             </span>
-        </mat-list-item>
+        </mat-list-item> -->
+
+        <button mat-flat-button  class="rounded m-b-8 bg-light-warning" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 4" (click)="AddPolicy(4, 'policyUpdate', 'ADMIN')"> <span class="text-warning" >Policy update</span></button>
+
 
 
 
@@ -154,8 +167,7 @@
                                         <td class="mat-body-1 text-center" style="border-bottom: 1px solid #ddd;">
                                             <span>{{policySummary?.IP.total}}</span>
                                         </td>
-                                        <td class="d-flex justify-content-center"
-                                            style="border-bottom: 1px solid #ddd;">
+                                        <td class="mat-body-1 text-center" style="border-bottom: 1px solid #ddd;">
                                             <span>{{policySummary?.IP.addlist}}</span>
                                         </td>
                                     </tr>
@@ -172,8 +184,7 @@
                                         <td class="mat-body-1 text-center" style="border-bottom: 1px solid #ddd;">
                                             {{policySummary?.URL.total}}
                                         </td>
-                                        <td class="d-flex justify-content-center"
-                                            style="border-bottom: 1px solid #ddd;">
+                                        <td class="mat-body-1 text-center" style="border-bottom: 1px solid #ddd;">
                                             <span>{{policySummary?.URL.addlist}}</span>
                                         </td>
                                     </tr>
@@ -187,99 +198,141 @@
 
             </div>
 
-            <div *ngIf="formNo ==1" style="max-width: fit-content;">
+            <div *ngIf="formNo ==1">
 
-                <!-- <div class="d-flex">
-                    <div> <strong>Policy Type:&nbsp;&nbsp;&nbsp;</strong></div>
-                    <div>URL</div>
-                </div> -->
+
                 <div class="d-flex">
                     <div><strong>Policy author:&nbsp;&nbsp;&nbsp;</strong> </div>
                     <div>{{userName}}</div>
                 </div>
 
-                <form class="m-t-30" [formGroup]="policyForm" (ngSubmit)="submitt()">
-                    <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">URL</mat-label>
-                    <mat-form-field appearance="outline" class="w-100" color="primary">
-                        <input matInput formControlName="policyvalue" placeholder="Enter URL" />
-                        <mat-icon matPrefix>
-                            <i-tabler name="chart-donut-3" class="icon-20 d-flex"></i-tabler>
-                        </mat-icon>
-                        <mat-error *ngIf="policyForm.get('policyvalue')?.hasError('required')">
-                            URL is required
-                        </mat-error>
-                    </mat-form-field>
-                    <button mat-flat-button color="primary" class="w-100">
-                        Submit
-                    </button>
-                </form>
+                <div class="row m-t-20">
 
-                <!-- dummy  -->
-                <!-- <input type="text" placeholder="enter">
-                <button>add url</button>
 
-                <div>
-                    display added url
+                    <div class="col-lg-6">
+
+                        <form [formGroup]="urlForm">
+
+                            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">URL</mat-label>
+                            <!-- <div style="display: flex;">
+                                <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">* Atleast one dot
+                                    should present</span>
+                            </div> -->
+
+                            <mat-form-field appearance="outline" class="w-100" color="primary">
+                                <input matInput formControlName="url" placeholder="Enter URL" />
+                                <mat-icon matPrefix>
+                                    <i-tabler name="chart-donut-3" class="icon-20 d-flex"></i-tabler>
+                                </mat-icon>
+                                <mat-error
+                                    *ngIf="urlForm.get('url')?.hasError('pattern') && urlForm.get('url')?.invalid">
+                                    Enter valid url
+                                </mat-error>
+
+                            </mat-form-field>
+                            <button mat-flat-button color="primary" class="w-100" type="button" (click)="addUrl()"
+                                style="max-width: fit-content;">
+                                Add URL
+                            </button>
+
+
+                            <!-- <input type="text" placeholder="Enter URL" formControlName="url"> -->
+                            <!-- <button type="button" (click)="addUrl()">Add URL</button> -->
+                        </form>
+
+
+
+                    </div>
+
+                    <div class="col-lg-6">
+
+                        <div
+                            style="border-radius: 2rem; box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5); padding-top: 12px;">
+
+
+
+                            <div style=" min-height: 300px;">
+
+                                <div *ngIf="addedUrls.length > 0" style="max-height: 500px; overflow: auto;">
+
+                                    <mat-card-content>
+                                        <div class="table-responsive m-t-30">
+                                            <table mat-table [dataSource]="dataSource" class="w-100">
+
+                                                <ng-container matColumnDef="serialNumber">
+                                                    <th mat-header-cell *matHeaderCellDef
+                                                        class="f-w-600 mat-subtitle-1 f-s-14">
+                                                        Sr. No.
+                                                    </th>
+                                                    <td mat-cell *matCellDef="let i = index" class="mat-body-1">
+                                                        {{ i + 1 }}
+                                                    </td>
+                                                </ng-container>
+
+                                                <!-- URL Column -->
+                                                <ng-container matColumnDef="URL">
+                                                    <th mat-header-cell *matHeaderCellDef
+                                                        class="f-w-600 mat-subtitle-1 f-s-14">
+                                                        URL
+                                                    </th>
+                                                    <td mat-cell *matCellDef="let url" class="mat-body-1">
+                                                        {{ url }}
+                                                    </td>
+                                                </ng-container>
+
+                                                <!-- Button Column -->
+                                                <ng-container matColumnDef="action">
+                                                    <th mat-header-cell *matHeaderCellDef
+                                                        class="f-w-600 mat-subtitle-1 f-s-14">
+                                                        Action
+                                                    </th>
+                                                    <td mat-cell *matCellDef="let url" class="mat-body-1">
+                                                        <button mat-flat-button color="warn" type="button"
+                                                            (click)="deleteUrl(url)">Delete</button>
+                                                    </td>
+                                                </ng-container>
+
+                                                <!-- Header and Row Definitions -->
+                                                <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                                                <tr mat-row
+                                                    *matRowDef="let row; columns: ['serialNumber', 'URL', 'action']">
+                                                </tr>
+                                                <!-- <tr mat-row *matRowDef="let url; columns: displayedColumns1"></tr> -->
+                                            </table>
+                                        </div>
+                                    </mat-card-content>
+
+                                </div>
+
+                                <div *ngIf="addedUrls.length ===0">
+                                    <h2 style="margin-left: 20px;">Please add URL</h2>
+
+                                </div>
+
+                            </div>
+                            <div style="display: flex; justify-content: center; padding-bottom: 15px;">
+                                <button mat-flat-button color="accent" type="button" (click)="submitUrls()"
+                                    [disabled]="addedUrls.length === 0">Submit URLs</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <button>submit the url</button> -->
-
-                <!-- <form [formGroup]="urlForm">
-                    <input type="text" placeholder="Enter URL" formControlName="url">
-                    <button type="button" (click)="addUrl()">Add URL</button>
-                  </form>
-                  
-                  <div *ngIf="addedUrls.length > 0">
-                    <h3>Added URLs:</h3>
-                    <ul>
-                      <li *ngFor="let url of addedUrls">{{ url }}</li>
-                    </ul>
-                  </div>
-                  
-                  <button type="button" (click)="submitUrls()" [disabled]="addedUrls.length === 0">Submit URLs</button>
-                   -->
-
-                <form [formGroup]="urlForm">
-                    <input type="text" placeholder="Enter URL" formControlName="url">
-                    <button type="button" (click)="addUrl()">Add URL</button>
-                </form>
-
-                <div *ngIf="addedUrls.length > 0">
-                    <table>
-                        <thead>
-                            <th>url</th>
-                            <th>Action</th>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let url of addedUrls">
-                                <td>{{ url.url }}</td>
-                                <td><button type="button" (click)="deleteUrl(url.id)">Delete</button></td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                   
-                </div>
-
-                <button type="button" (click)="submitUrls()" [disabled]="addedUrls.length === 0">Submit URLs</button>
 
 
 
             </div>
 
-            <div *ngIf="formNo ==2" style="max-width: fit-content;">
+            <div *ngIf="formNo ==2">
 
-                <!-- <div class="d-flex">
-                    <div> <strong>Policy Type:&nbsp;&nbsp;&nbsp;</strong></div>
-                    <div>IP</div>
-                </div> -->
+
                 <div class="d-flex">
                     <div><strong>Policy author:&nbsp;&nbsp;&nbsp;</strong> </div>
                     <div>{{userName}}</div>
                 </div>
 
-                <form class="m-t-30" [formGroup]="policyFormURL" (ngSubmit)="submitt2()">
 
+
+                <!-- <form class="m-t-30" [formGroup]="policyFormURL" (ngSubmit)="submitt2()">
 
                     <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">IP</mat-label>
                     <mat-form-field appearance="outline" class="w-100" color="primary">
@@ -293,25 +346,95 @@
                     </mat-form-field>
 
                     <mat-form-field style="display: none;" appearance="outline" class="w-100" color="primary">
-                        <!-- <input matInput formControlName="policyvalue" placeholder="Enter IP" />
-                <mat-icon matPrefix>
-                    <i-tabler name="chart-donut-3" class="icon-20 d-flex"></i-tabler>
-                </mat-icon>
-                <mat-error *ngIf="policyFormURL.get('policyvalue')?.hasError('required')">
-                    IP is required
-                  </mat-error> -->
+         
                         <input style="display: none;" matInput formControlName="policytype" placeholder="Enter IP"
                             value="IP" />
                     </mat-form-field>
 
-
-
-
-
                     <button mat-flat-button color="primary" class="w-100">
                         Submit
                     </button>
-                </form>
+                </form> -->
+
+
+
+                <!-- new form from the url  -->
+                <!-- IP Address Section -->
+                <div class="row m-t-20">
+                    <div class="col-lg-6">
+                        <form [formGroup]="ipForm">
+                            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">IP Address</mat-label>
+                            <mat-form-field appearance="outline" class="w-100" color="primary">
+                                <input matInput formControlName="ip" placeholder="Enter IP Address" />
+                                <mat-error *ngIf="ipForm.get('ip')?.hasError('pattern') && ipForm.get('ip')?.invalid">
+                                    Enter a valid IP address
+                                </mat-error>
+                            </mat-form-field>
+                            <button mat-flat-button color="primary" class="w-100" type="button" (click)="addIP()"
+                                style="max-width: fit-content;">
+                                Add IP
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Display Section for Added IPs -->
+                    <div class="col-lg-6">
+                        <div
+                            style="border-radius: 2rem; box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5); padding-top: 12px;">
+                            <div style="min-height: 300px;">
+                                <div *ngIf="addedIPs.length > 0" style="max-height: 500px; overflow: auto;">
+                                    <mat-card-content>
+                                        <div class="table-responsive m-t-30">
+                                            <table mat-table [dataSource]="ipDataSource" class="w-100">
+
+                                                <!-- Serial Number Column -->
+                                                <ng-container matColumnDef="serialNumber">
+                                                    <th mat-header-cell *matHeaderCellDef
+                                                        class="f-w-600 mat-subtitle-1 f-s-14">Sr. No.</th>
+                                                    <td mat-cell *matCellDef="let i = index" class="mat-body-1">{{ i + 1
+                                                        }}</td>
+                                                </ng-container>
+
+                                                <!-- IP Address Column -->
+                                                <ng-container matColumnDef="IP">
+                                                    <th mat-header-cell *matHeaderCellDef
+                                                        class="f-w-600 mat-subtitle-1 f-s-14">IP Address</th>
+                                                    <td mat-cell *matCellDef="let ip" class="mat-body-1">{{ ip }}</td>
+                                                </ng-container>
+
+                                                <!-- Button Column -->
+                                                <ng-container matColumnDef="action">
+                                                    <th mat-header-cell *matHeaderCellDef
+                                                        class="f-w-600 mat-subtitle-1 f-s-14">Action</th>
+                                                    <td mat-cell *matCellDef="let ip" class="mat-body-1">
+                                                        <button mat-flat-button color="warn" type="button"
+                                                            (click)="deleteIP(ip)">Delete</button>
+                                                    </td>
+                                                </ng-container>
+
+                                                <!-- Header and Row Definitions -->
+                                                <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                                                <tr mat-row
+                                                    *matRowDef="let row; columns: ['serialNumber', 'IP', 'action']">
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </mat-card-content>
+                                </div>
+
+                                <div *ngIf="addedIPs.length === 0">
+                                    <h2 style="margin-left: 20px;">Please add IP Address</h2>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: center; padding-bottom: 15px;">
+                                <button mat-flat-button color="accent" type="button" (click)="submitIPs()"
+                                    [disabled]="addedIPs.length === 0">Submit IPs</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 
 
             </div>

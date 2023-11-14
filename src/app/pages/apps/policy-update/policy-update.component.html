@@ -1,69 +1,125 @@
-
 <mat-card class="cardWithShadow">
-    <mat-tab-group animationDuration="0ms" #tabGroup (selectedIndexChange)="tabChanged($event)">
-      <!-- Tab 1 -->
-  
-      <mat-tab label="URL" style="font-size: 20px !important;">
-        <mat-card-content class="p-24">
-     
+  <mat-tab-group animationDuration="0ms" #tabGroup (selectedIndexChange)="tabChanged($event)">
+    <!-- Tab 1 -->
 
-            URL
-        </mat-card-content>
-      </mat-tab>
-      <!-- End Tab 1 -->
-  
-      <!-- Tab 2 -->
-      <mat-tab label="IP">
-        <mat-card-content class="p-24">
+    <mat-tab label="URL" style="font-size: 20px !important;">
+      <mat-card-content class="p-24">
 
-  
-          <!-- <table datatable dtOptions="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover"></table> -->
-          <div *ngIf="showEventTable">
-  
-            <table datatable [dtOptions]="dtOptions" class="row-border hover">
-              <thead>
-                <tr>
-                  <th>URL</th>
-                  <th>Created On</th>
-              
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- <tr >
-                  <td>1</td>
-                  <td>2</td>
-                  <td>
-                    <button class="bg-error f-s-12 p-x-8 p-y-4 rounded text-white" style="border: none; cursor: pointer;"  >Delete</button>
-                  </td>
-                </tr> -->
+        <div class="row m-t-20" style="min-height: 50vh;">
+          <div class="col-lg-5 col-sm-5" style="border: 1px solid red;">
+            <div>
+              <!-- search -->
+              <!-- <input type="text"> -->
 
-                <tr *ngFor="let item of data; let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ item.unitName }}</td>
-                    <td>
-                      <button class="bg-error f-s-12 p-x-8 p-y-4 rounded text-white" style="border: none; cursor: pointer;">Delete</button>
-                    </td>
-                  </tr>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput type="text" placeholder="Search here" [(ngModel)]="searchText" (input)="applyFilter()" />
+                <mat-icon matSuffix style="cursor: pointer;">
+                  <i-tabler name="search" class="icon-20 d-flex"></i-tabler>
+                </mat-icon>
+              </mat-form-field>
+              <!-- Checkbox list for allowed URLs -->
+              <div style="background-color: bisque; height: 50vh; overflow: auto;">
+                <div *ngFor="let item of filteredAllowedUrl">
+                  <label>
+                    <input type="checkbox" [value]="item" (change)="onCheckboxChange($event, item, 'allowed')" />
+                    {{ item }}
+                  </label>
+                </div>
+              </div>
 
-              </tbody>
-            </table>
+
+            </div>
+
+
           </div>
-  
-  
-  
-  
-  
-  
-          <!-- ============================================================================================================== -->
-  
-  
-        </mat-card-content>
-      </mat-tab>
-  
-    </mat-tab-group>
-  </mat-card>
-  
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
-    <p class="text-white"> {{ loaderStatus }} </p>
-  </ngx-spinner>
+
+
+          <div class="col-lg-2 col-sm-2"
+            style="border: 1px solid black; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <!-- <button style="margin-bottom: 10px;">1</button>
+            <button>2</button> -->
+            <button mat-stroked-button color="warn" type="button" (click)="moveToBlocked()">moveToBlocked</button>
+            <button mat-stroked-button color="accent" type="button"  (click)="moveToAllowed()"> moveToAllowed</button>
+
+          </div>
+
+
+          <div class=" col-lg-5 col-sm-5" style="border: 1px solid pink;">
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="text" placeholder="Search here" [(ngModel)]="blockedSearchText" (input)="applyBlockedFilter()" />
+              <mat-icon matSuffix style="cursor: pointer;">
+                <i-tabler name="search" class="icon-20 d-flex"></i-tabler>
+              </mat-icon>
+            </mat-form-field>
+
+            <!-- Checkbox list for blocked URLs -->
+            <div style="background-color: bisque; height: 50vh; overflow: auto;">
+              <div *ngFor="let item of filteredBlockedUrl">
+                <label>
+                  <input type="checkbox" [value]="item" (change)="onCheckboxChange($event, item, 'blocked')" />
+                  {{ item }}
+                </label>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <button>submit</button>
+
+      </mat-card-content>
+    </mat-tab>
+    <!-- End Tab 1 -->
+
+    <!-- Tab 2 -->
+    <mat-tab label="IP">
+      <mat-card-content class="p-24">
+
+
+        <!-- <table datatable dtOptions="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover"></table> -->
+        <div *ngIf="showEventTable">
+          <h1>Added IP</h1>
+          <table datatable [dtOptions]="dtOptions" class="row-border hover">
+            <thead>
+              <tr>
+                <th>URL</th>
+                <th>Created On</th>
+
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of data; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.unitName }}</td>
+                <td>
+                  <button class="bg-error f-s-12 p-x-8 p-y-4 rounded text-white"
+                    style="border: none; cursor: pointer;">Delete</button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+
+
+
+
+
+        <!-- ============================================================================================================== -->
+
+
+      </mat-card-content>
+    </mat-tab>
+
+  </mat-tab-group>
+</mat-card>
+
+
+
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
+  <p class="text-white"> {{ loaderStatus }} </p>
+</ngx-spinner>
