@@ -89,14 +89,25 @@ policyBulkUpload(formData: any){
   
 }
 
-urlAddition(){
-  return this.http.post<any>(env.apiHost.concat('/policy/url-addition'),{});
-  
+urlAddition(search_term:any){
+  return this.http.post<any>(env.apiHost.concat('/policy/url-addition'),search_term);
 }
 
-urlDeletion(){
-  return this.http.post<any>(env.apiHost.concat('/policy/url-deletion'),{});
-  
+urlDeletion(search_term:any){
+  return this.http.post<any>(env.apiHost.concat('/policy/url-deletion'),search_term);
 }
+
+ipAddition(search_term:any){
+  return this.http.post<any>(env.apiHost.concat('/policy/ip-addition'),search_term);
+}
+
+ipDeletion(search_term:any){
+  return this.http.post<any>(env.apiHost.concat('/policy/ip-deletion'),search_term);
+}
+
+serverPolicyVersion(){
+  return this.http.post<any>(env.apiHost.concat('/policy/server-policy-version'),{});
+}
+
 
 }

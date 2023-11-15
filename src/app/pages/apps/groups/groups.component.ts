@@ -62,7 +62,7 @@ export class GroupsComponent {
   addedIPs: string[] = [];
   ipForm: FormGroup;
   ipDataSource: MatTableDataSource<string> = new MatTableDataSource();
-
+  server_policy_version: any
   constructor(public noteService: NoteService, private fb: FormBuilder, private common: CommonServicesService, private spinner: NgxSpinnerService, private ts: TokenStorageService) {
     this.notes = this.noteService.getNotes();
 
@@ -429,9 +429,56 @@ export class GroupsComponent {
     if(i ===0){
       console.log("summary page called");
       this.policySummaryAPI();
-
-      
     }
+
+    if(i===5){
+      this.serverPolicyVersionAPi()
+    }
+
+    console.log("fornNo", this.formNo);
+    
+  }
+
+
+  serverPolicyVersionAPi(){
+    console.log("serverPolicyVersionAPi fun",);
+
+    this.spinner.show()
+    this.common.serverPolicyVersion().subscribe((res: any) => {
+
+      // console.log("in the unit name subscribe");
+
+
+      if (res.api_status === true) {
+        this.spinner.hide();
+        this.server_policy_version = res.server_policy_version
+        console.log("serverPolicyVersionAPi",res);
+        
+        // Swal.fire({
+        //   icon: 'success',
+        //   title: `${res.message}`,
+        // })
+
+      } else {
+        this.spinner.hide();
+
+
+        // Swal.fire({
+        //   icon: 'error',
+        //   title: `${res.message}`,
+        // })
+      }
+
+    }, error => {
+
+      this.spinner.hide();
+
+      // this.es.apiErrorHandler(error);
+      console.log("eerror---", error);
+
+
+    })
+
   }
 
   submitt() {

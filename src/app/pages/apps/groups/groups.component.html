@@ -1,76 +1,29 @@
 <mat-card class="  cardWithShadow" style="min-height: 80vh;">
 
-    <mat-nav-list class="p-x-16" style="display: flex;">
+    <mat-nav-list class="p-x-16" style="display: flex; border-bottom: 1px solid black;">
 
-        <!-- <mat-list-item class=" notes-item rounded m-b-8 bg-light-primary" style="max-width: 130px;
-        max-height: 50px; 
-        " [class.border-red]="formNo === 0" (click)="AddPolicy(0, 'Summary', 'ADMIN')" lines="3">
-            <span class="note-title  mat-subtitle-1 f-w-500 text-primary" matListItemTitle>Summary</span>
-        </mat-list-item> -->
-
-        <button mat-flat-button  class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 0" (click)="AddPolicy(0, 'Summary', 'ADMIN')"> <span class="text-primary" >summary</span></button>
+        <button mat-flat-button  class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 0" (click)="AddPolicy(0, 'Summary', 'ADMIN')"> <span class="text-primary" >Summary</span></button>
 
 
         <!-- 11111111111111111111111111111111111111111111111111111111111111111111111111111  -->
-
-        <!-- <mat-list-item class="notes-item rounded m-b-8 bg-light-accent" style="max-width: 130px;
-        max-height: 50px;
-        " [class.border-red]="formNo === 1" (click)="AddPolicy(1, 'URL', 'ADMIN')" lines="3">
-            <span class="note-title mat-subtitle-1 f-w-500 text-accent" matListItemTitle>Add URL</span>
-
-        </mat-list-item> -->
 
         <button mat-flat-button  class="rounded m-b-8 bg-light-accent" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 1" (click)="AddPolicy(1, 'URL', 'ADMIN')" > <span class="text-accent" >Add URL</span></button>
 
 
         <!-- 22222222222222222222 -->
 
-        <!-- <mat-list-item class="notes-item rounded m-b-8 bg-light-success" style="max-width: 130px;
-        max-height: 50px;
-        " [class.border-red]="formNo === 2" (click)="AddPolicy(2, 'IP', 'ADMIN')" lines="3">
-            <span class="note-title mat-subtitle-1 f-w-500 text-success" matListItemTitle>Add IP</span>
-        </mat-list-item> -->
-
-
         <button mat-flat-button  class="rounded m-b-8 bg-light-success" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 2" (click)="AddPolicy(2, 'IP', 'ADMIN')"> <span class="text-success" >Add IP</span></button>
 
 
         <!-- 33333333333333333333333333  -->
 
-        <!-- <mat-list-item class="notes-item rounded m-b-8 bg-light-error" (click)="AddPolicy(3, 'IP', 'ADMIN')" style="max-width: 130px;
-        max-height: 50px;
-        " [class.border-red]="formNo === 3" lines="3">
-            <span class="note-title mat-subtitle-1 f-w-500 text-error" matListItemTitle>Bulk upload</span>
-        </mat-list-item> -->
-
-        <button mat-flat-button  class="rounded m-b-8 bg-light-error" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 3" (click)="AddPolicy(3, 'BulkUpload', 'ADMIN')"> <span class="text-error" >Bulk upload</span></button>
-
+        <button mat-flat-button  class="rounded m-b-8 bg-light-error" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 3" (click)="AddPolicy(3, 'BulkUpload', 'ADMIN')"> <span class="text-error" >Bulk Upload</span></button>
 
         <!-- 44444444444444444444444444444444  -->
-        <!-- <mat-list-item class="notes-item rounded m-b-8 bg-light-warning" (click)="AddPolicy(4, 'IP', 'ADMIN')" style="max-width: 122px;
-        max-height: 50px;
-        "
-            lines="3">
-            <span class="note-title mat-subtitle-1 f-w-500 text-warning" matListItemTitle style="display: block;">
-                Policy update
-              </span>
-              
-        </mat-list-item> -->
 
-        <!-- <mat-list-item [class.border-red]="formNo === 4" class="notes-item rounded m-b-8 bg-light-warning"
-            (click)="AddPolicy(4, 'IP', 'ADMIN')" style="max-width: 130px; max-height: 50px; overflow: hidden;">
-            <span class="note-title mat-subtitle-1 f-w-500 text-warning" matListItemTitle
-                style="display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                Policy update
-            </span>
-        </mat-list-item> -->
+        <button mat-flat-button  class="rounded m-b-8 bg-light-warning" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 4" (click)="AddPolicy(4, 'policyUpdate', 'ADMIN')"> <span class="text-warning" >Policy Update</span></button>
 
-        <button mat-flat-button  class="rounded m-b-8 bg-light-warning" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 4" (click)="AddPolicy(4, 'policyUpdate', 'ADMIN')"> <span class="text-warning" >Policy update</span></button>
-
-
-
-
-
+        <button mat-flat-button  class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 5" (click)="AddPolicy(5, 'policyVersion', 'ADMIN')"> <span class="text-primary" >Policy Version</span></button>
 
 
     </mat-nav-list>
@@ -87,59 +40,8 @@
                 <mat-card class="cardWithShadow">
                     <mat-card-header class="d-flex">
                         <mat-card-title>Summary</mat-card-title>
-                        <!-- <mat-card-subtitle class="mat-body-1">top new products</mat-card-subtitle> -->
                     </mat-card-header>
                     <mat-card-content>
-
-
-                        <!-- <div class="table-responsive m-t-30">
-                            <table class="w-100">
-                                <thead>
-                                    <tr>
-                                        <th class="f-w-600 mat-subtitle-1 f-s-14 p-l-0">Policy type</th>
-                                        <th class="f-w-600 mat-subtitle-1 f-s-14">Total policy</th>
-                                        <th class="f-w-600 mat-subtitle-1 f-s-14">Active policy</th>
-                                    </tr>
-
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="p-l-0 d-flex justify-content-center">
-                                            <div class="d-flex align-items-center">
-                                                <div class="m-l-16">
-                                                    <h6 class="mat-subtitle-1 f-s-14 f-w-600">IP</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="mat-body-1 text-center ">
-                                            <span>{{policySummary?.IP.total}}</span>
-                                        </td>
-                                        <td class=" d-flex justify-content-center ">
-                                            <span class="">{{policySummary?.IP.addlist}}</span>
-                                        </td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <td class="p-l-0 d-flex justify-content-center">
-                                            <div class="d-flex align-items-center">
-                                                <div class="m-l-16">
-                                                    <h6 class="mat-subtitle-1 f-s-14 f-w-600">URL</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="mat-body-1 text-center">
-                                            {{policySummary?.URL.total}}
-
-                                        </td>
-                                        <td class=" d-flex justify-content-center ">
-                                            <span class="">{{policySummary?.URL.addlist}}</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> -->
-
 
 
                         <div class="table-responsive m-t-30">
@@ -214,10 +116,6 @@
                         <form [formGroup]="urlForm">
 
                             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">URL</mat-label>
-                            <!-- <div style="display: flex;">
-                                <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">* Atleast one dot
-                                    should present</span>
-                            </div> -->
 
                             <mat-form-field appearance="outline" class="w-100" color="primary">
                                 <input matInput formControlName="url" placeholder="Enter URL" />
@@ -235,9 +133,6 @@
                                 Add URL
                             </button>
 
-
-                            <!-- <input type="text" placeholder="Enter URL" formControlName="url"> -->
-                            <!-- <button type="button" (click)="addUrl()">Add URL</button> -->
                         </form>
 
 
@@ -247,7 +142,7 @@
                     <div class="col-lg-6">
 
                         <div
-                            style="border-radius: 2rem; box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5); padding-top: 12px;">
+                            style="border-radius: 2rem; box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2); padding-top: 12px;">
 
 
 
@@ -330,34 +225,6 @@
                     <div>{{userName}}</div>
                 </div>
 
-
-
-                <!-- <form class="m-t-30" [formGroup]="policyFormURL" (ngSubmit)="submitt2()">
-
-                    <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">IP</mat-label>
-                    <mat-form-field appearance="outline" class="w-100" color="primary">
-                        <input matInput formControlName="policyvalue" placeholder="Enter IP" />
-                        <mat-icon matPrefix>
-                            <i-tabler name="chart-donut-3" class="icon-20 d-flex"></i-tabler>
-                        </mat-icon>
-                        <mat-error *ngIf="policyFormURL.get('policyvalue')?.hasError('required')">
-                            IP is required
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field style="display: none;" appearance="outline" class="w-100" color="primary">
-         
-                        <input style="display: none;" matInput formControlName="policytype" placeholder="Enter IP"
-                            value="IP" />
-                    </mat-form-field>
-
-                    <button mat-flat-button color="primary" class="w-100">
-                        Submit
-                    </button>
-                </form> -->
-
-
-
                 <!-- new form from the url  -->
                 <!-- IP Address Section -->
                 <div class="row m-t-20">
@@ -380,7 +247,7 @@
                     <!-- Display Section for Added IPs -->
                     <div class="col-lg-6">
                         <div
-                            style="border-radius: 2rem; box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5); padding-top: 12px;">
+                            style="border-radius: 2rem; box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2); padding-top: 12px;">
                             <div style="min-height: 300px;">
                                 <div *ngIf="addedIPs.length > 0" style="max-height: 500px; overflow: auto;">
                                     <mat-card-content>
@@ -455,131 +322,10 @@
                                 <input type="file" class="file-upload" accept=".csv" (change)="uploadPolicy($event)"
                                     id="fileInput">
                                 <label for="fileInput" class="custom-label">Choose a CSV file</label>
-
-
-                                <!-- <button
-                            mat-flat-button
-                            color="primary"
-                            matTooltip="Info about the action"
-                          >
-                            Button
-                          </button> -->
                             </mat-card-content>
                         </mat-card>
                     </div>
 
-                </div>
-
-                <br>
-
-
-
-                <div class="d-flex">
-                    <!-- <div> <strong>Policy Type:&nbsp;&nbsp;&nbsp;</strong></div>
-                    <div>IP</div> -->
-                </div>
-                <!-- <div class="d-flex">
-                    <div><strong>Bulk upload:&nbsp;&nbsp;&nbsp;</strong> </div>
-                </div> -->
-
-                <!-- ----------------------------  -->
-
-                <!-- <label  for="fileInput" class="file-upload-button">
-                    Browse..
-                  </label>
-                <input type="file" name="" id="fileInput"
-                     style="display: none;">
-                    <br>
-                      <span >No file selected</span> -->
-
-
-                <!-- <div class="col-sm-6">
-                      <div
-                        style="
-                          width: 400px;
-                          height: 300px;
-                          margin: 0 auto;
-                          display: flex;
-                          align-items: center;
-                          justify-content: center;
-                        "
-                      >
-                        <img
-                          class="sampleCSV"
-                          src="assets/sampleCSV.png"
-                          alt="image not found"
-                          style="
-                            max-wuploadQPidth: 100%;
-                            max-height: 100%;
-                            border: 1px solid black;
-                          "
-                        />
-                      </div>
-        
-                      <p style="display: flex; justify-content: center">
-                        Sample Preview
-                      </p>
-                      <div style="display: flex; justify-content: center">
-                        <button class="btn btn-success" >
-                          Download sample csv
-                        </button>
-                      </div>
-                    </div> -->
-
-                <div class="row">
-                    <!-- <div class="col-sm-6">
-                      <div
-                        style="
-                          width: 400px;
-                          height: 300px;
-                          margin: 0 auto;
-                          display: flex;
-                          align-items: center;
-                          justify-content: center;
-                        "
-                      >
-                        <img
-                          class="sampleCSV"
-                          src="assets/sampleCSV.png"
-                          alt="image not found"
-                          style="
-                            max-width: 100%;
-                            max-height: 100%;
-                            border: 1px solid black;
-                          "
-                        />
-                      </div>
-        
-                      <p style="display: flex; justify-content: center">
-                        Sample Preview
-                      </p>
-                      <div style="display: flex; justify-content: center">
-                        <button class="btn btn-success" >
-                          Download sample csv
-                        </button>
-                      </div>
-                    </div> -->
-                    <!-- <div class="col-sm-6" style="
-                        border: 1px solid black;
-                        margin: auto 0;
-                        padding: 20px 10px;
-                        border-radius: 10px;
-                      ">
-                        <p style="background-color: yellow">
-                            *Upload only .csv file with policy type and value. Please check
-                            sample.csv file for more detail
-                        </p>
-
-                        <hr />
-
-                        <input type="file" class="file-upload" accept=".csv" (change)="uploadPolicy($event)">
-                        <br>
-
-                        <input type="file" class="file-upload" accept=".csv" (change)="uploadPolicy($event)"
-                            id="fileInput">
-                        <label for="fileInput" class="custom-label">Choose a CSV file</label>
-
-                    </div> -->
                 </div>
 
 
@@ -590,42 +336,10 @@
                 <app-policy-update></app-policy-update>
             </div>
 
-            <!-- <table id="myTable" style="display: none">
-                <thead>
-                    <tr>
-                        <th>Policy Type</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>url</td>
-                        <td>facebook.com</td>
-                    </tr>
-                    <tr>
-                        <td>ip</td>
-                        <td>10.0.0.1</td>
-                    </tr>
-                    <tr>
-                        <td>package</td>
-                        <td>2vcard</td>
-                    </tr>
-                    <tr>
-                        <td>service</td>
-                        <td>apatche2</td>
-                    </tr>
-                    <tr>
-                        <td>application</td>
-                        <td>gimp</td>
-                    </tr>
-                    <tr>
-                        <td>device</td>
-                        <td>23ws:34ed</td>
-                    </tr>
-                </tbody>
-            </table> -->
+            <div *ngIf="formNo ==5">
 
-
+                <h1 style="display: flex; justify-content: center;">Server Policy Version: {{server_policy_version}}</h1> 
+            </div>
 
         </div>
     </mat-card-content>
@@ -634,488 +348,6 @@
 </mat-card>
 
 
-
-
-<!-- 999999999999999999999 divide 9999999999999999999999  -->
-
-<mat-card class="mat-card-top notes-app cardWithShadow" style="display: none;">
-    <mat-sidenav-container [ngClass]="{
-        'side-panel-opened': sidePanelOpened,
-        'side-panel-closed': !sidePanelOpened
-      }" class="h-100 bg-white">
-        <mat-sidenav #noteslist [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" (open)="sidePanelOpened = true"
-            (close)="sidePanelOpened = false" style="width: 150px" class="shadow-none">
-            <ng-scrollbar class="position-relative" style="height: 100%">
-
-
-                <mat-nav-list class="p-x-16">
-
-                    <mat-list-item class=" notes-item rounded m-b-8 bg-light-primary" style="max-width: 130px;
-                    max-height: 50px;
-                    " (click)="AddPolicy(0, 'Summary', 'ADMIN')" lines="3">
-                        <span class="note-title mat-subtitle-1 f-w-500 text-primary" matListItemTitle>Summary</span>
-                    </mat-list-item>
-
-
-                    <!-- 11111111111111111111111111111111111111111111111111111111111111111111111111111  -->
-
-                    <mat-list-item class="notes-item rounded m-b-8 bg-light-accent" style="max-width: 130px;
-                    max-height: 50px;
-                    " (click)="AddPolicy(1, 'URL', 'ADMIN')" lines="3">
-                        <span class="note-title mat-subtitle-1 f-w-500 text-accent" matListItemTitle>Add URL</span>
-                        <!-- <div class="d-flex justify-content-between">
-              <span class="note-time f-s-12 f-w-500">desc</span>
-            </div> -->
-                    </mat-list-item>
-
-                    <!-- 22222222222222222222 -->
-
-                    <mat-list-item class="notes-item rounded m-b-8 bg-light-success" style="max-width: 130px;
-                    max-height: 50px;
-                    " (click)="AddPolicy(2, 'IP', 'ADMIN')" lines="3">
-                        <span class="note-title mat-subtitle-1 f-w-500 text-success" matListItemTitle>Add IP</span>
-                    </mat-list-item>
-
-                    <!-- 33333333333333333333333333  -->
-
-                    <mat-list-item class="notes-item rounded m-b-8 bg-light-error" (click)="AddPolicy(3, 'IP', 'ADMIN')"
-                        style="max-width: 130px;
-                    max-height: 50px;
-                    " lines="3">
-                        <span class="note-title mat-subtitle-1 f-w-500 text-error" matListItemTitle>Bulk upload</span>
-                    </mat-list-item>
-
-                    <!-- 44444444444444444444444444444444  -->
-                    <!-- <mat-list-item class="notes-item rounded m-b-8 bg-light-warning" (click)="AddPolicy(4, 'IP', 'ADMIN')" style="max-width: 122px;
-                    max-height: 50px;
-                    "
-                        lines="3">
-                        <span class="note-title mat-subtitle-1 f-w-500 text-warning" matListItemTitle style="display: block;">
-                            Policy update
-                          </span>
-                          
-                    </mat-list-item> -->
-
-                    <mat-list-item class="notes-item rounded m-b-8 bg-light-warning"
-                        (click)="AddPolicy(4, 'IP', 'ADMIN')"
-                        style="max-width: 130px; max-height: 50px; overflow: hidden;">
-                        <span class="note-title mat-subtitle-1 f-w-500 text-warning" matListItemTitle
-                            style="display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                            Policy update
-                        </span>
-                    </mat-list-item>
-
-
-
-
-
-                </mat-nav-list>
-            </ng-scrollbar>
-        </mat-sidenav>
-        <mat-toolbar class="bg-white b-b-1">
-            <div class="d-flex align-items-center justify-content-between w-100">
-                <button (click)="noteslist.toggle()" class="d-flex" mat-icon-button>
-                    <i-tabler name="menu-2" class="icon-20"></i-tabler>
-                </button>
-
-            </div>
-        </mat-toolbar>
-        <mat-card-content class="p-24 bg-white">
-            <div class="" *ngIf="notes.length > 0">
-
-                <div *ngIf="formNo ==0">
-
-
-                    <mat-card class="cardWithShadow">
-                        <mat-card-header class="d-flex">
-                            <mat-card-title>Summary</mat-card-title>
-                            <!-- <mat-card-subtitle class="mat-body-1">top new products</mat-card-subtitle> -->
-                        </mat-card-header>
-                        <mat-card-content>
-
-
-                            <!-- <div class="table-responsive m-t-30">
-                                <table class="w-100">
-                                    <thead>
-                                        <tr>
-                                            <th class="f-w-600 mat-subtitle-1 f-s-14 p-l-0">Policy type</th>
-                                            <th class="f-w-600 mat-subtitle-1 f-s-14">Total policy</th>
-                                            <th class="f-w-600 mat-subtitle-1 f-s-14">Active policy</th>
-                                        </tr>
-
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="p-l-0 d-flex justify-content-center">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="m-l-16">
-                                                        <h6 class="mat-subtitle-1 f-s-14 f-w-600">IP</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="mat-body-1 text-center ">
-                                                <span>{{policySummary?.IP.total}}</span>
-                                            </td>
-                                            <td class=" d-flex justify-content-center ">
-                                                <span class="">{{policySummary?.IP.addlist}}</span>
-                                            </td>
-                                        </tr>
-
-
-                                        <tr>
-                                            <td class="p-l-0 d-flex justify-content-center">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="m-l-16">
-                                                        <h6 class="mat-subtitle-1 f-s-14 f-w-600">URL</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="mat-body-1 text-center">
-                                                {{policySummary?.URL.total}}
-
-                                            </td>
-                                            <td class=" d-flex justify-content-center ">
-                                                <span class="">{{policySummary?.URL.addlist}}</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div> -->
-
-
-
-                            <div class="table-responsive m-t-30">
-                                <table class="w-100">
-                                    <thead>
-                                        <tr>
-                                            <th class="f-w-600 mat-subtitle-1 f-s-14 p-l-0">Policy type</th>
-                                            <th class="f-w-600 mat-subtitle-1 f-s-14">Total policy</th>
-                                            <th class="f-w-600 mat-subtitle-1 f-s-14">Active policy</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="p-l-0 d-flex justify-content-center">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="m-l-16">
-                                                        <h6 class="mat-subtitle-1 f-s-14 f-w-600">IP</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="mat-body-1 text-center" style="border-bottom: 1px solid #ddd;">
-                                                <span>{{policySummary?.IP.total}}</span>
-                                            </td>
-                                            <td class="d-flex justify-content-center"
-                                                style="border-bottom: 1px solid #ddd;">
-                                                <span>{{policySummary?.IP.addlist}}</span>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="p-l-0 d-flex justify-content-center">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="m-l-16">
-                                                        <h6 class="mat-subtitle-1 f-s-14 f-w-600">URL</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="mat-body-1 text-center" style="border-bottom: 1px solid #ddd;">
-                                                {{policySummary?.URL.total}}
-                                            </td>
-                                            <td class="d-flex justify-content-center"
-                                                style="border-bottom: 1px solid #ddd;">
-                                                <span>{{policySummary?.URL.addlist}}</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-
-                        </mat-card-content>
-                    </mat-card>
-
-                </div>
-
-                <div *ngIf="formNo ==1" style="max-width: fit-content;">
-
-                    <!-- <div class="d-flex">
-                        <div> <strong>Policy Type:&nbsp;&nbsp;&nbsp;</strong></div>
-                        <div>URL</div>
-                    </div> -->
-                    <div class="d-flex">
-                        <div><strong>Policy author:&nbsp;&nbsp;&nbsp;</strong> </div>
-                        <div>{{userName}}</div>
-                    </div>
-
-                    <form class="m-t-30" [formGroup]="policyForm" (ngSubmit)="submitt()">
-
-
-                        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">URL</mat-label>
-                        <mat-form-field appearance="outline" class="w-100" color="primary">
-                            <input matInput formControlName="policyvalue" placeholder="Enter URL" />
-                            <mat-icon matPrefix>
-                                <i-tabler name="chart-donut-3" class="icon-20 d-flex"></i-tabler>
-                            </mat-icon>
-                            <mat-error *ngIf="policyForm.get('policyvalue')?.hasError('required')">
-                                URL is required
-                            </mat-error>
-                        </mat-form-field>
-
-
-
-
-
-                        <button mat-flat-button color="primary" class="w-100">
-                            Submit
-                        </button>
-                    </form>
-
-                </div>
-
-                <div *ngIf="formNo ==2" style="max-width: fit-content;">
-
-                    <!-- <div class="d-flex">
-                        <div> <strong>Policy Type:&nbsp;&nbsp;&nbsp;</strong></div>
-                        <div>IP</div>
-                    </div> -->
-                    <div class="d-flex">
-                        <div><strong>Policy author:&nbsp;&nbsp;&nbsp;</strong> </div>
-                        <div>{{userName}}</div>
-                    </div>
-
-                    <form class="m-t-30" [formGroup]="policyFormURL" (ngSubmit)="submitt2()">
-
-
-                        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">IP</mat-label>
-                        <mat-form-field appearance="outline" class="w-100" color="primary">
-                            <input matInput formControlName="policyvalue" placeholder="Enter IP" />
-                            <mat-icon matPrefix>
-                                <i-tabler name="chart-donut-3" class="icon-20 d-flex"></i-tabler>
-                            </mat-icon>
-                            <mat-error *ngIf="policyFormURL.get('policyvalue')?.hasError('required')">
-                                IP is required
-                            </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field style="display: none;" appearance="outline" class="w-100" color="primary">
-                            <!-- <input matInput formControlName="policyvalue" placeholder="Enter IP" />
-                    <mat-icon matPrefix>
-                        <i-tabler name="chart-donut-3" class="icon-20 d-flex"></i-tabler>
-                    </mat-icon>
-                    <mat-error *ngIf="policyFormURL.get('policyvalue')?.hasError('required')">
-                        IP is required
-                      </mat-error> -->
-                            <input style="display: none;" matInput formControlName="policytype" placeholder="Enter IP"
-                                value="IP" />
-                        </mat-form-field>
-
-
-
-
-
-                        <button mat-flat-button color="primary" class="w-100">
-                            Submit
-                        </button>
-                    </form>
-
-
-                </div>
-
-                <div *ngIf="formNo ==3">
-
-
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-8">
-                            <mat-card class="b-1 shadow-none">
-                                <mat-card-header>
-                                    <mat-card-title><strong>Bulk upload policies</strong></mat-card-title>
-                                </mat-card-header>
-                                <mat-card-content class="b-t-1">
-
-                                    <p> *Upload only .csv file with policy type and value.</p>
-
-                                    <input type="file" class="file-upload" accept=".csv" (change)="uploadPolicy($event)"
-                                        id="fileInput">
-                                    <label for="fileInput" class="custom-label">Choose a CSV file</label>
-
-
-                                    <!-- <button
-                                mat-flat-button
-                                color="primary"
-                                matTooltip="Info about the action"
-                              >
-                                Button
-                              </button> -->
-                                </mat-card-content>
-                            </mat-card>
-                        </div>
-
-                    </div>
-
-                    <br>
-
-
-
-                    <div class="d-flex">
-                        <!-- <div> <strong>Policy Type:&nbsp;&nbsp;&nbsp;</strong></div>
-                        <div>IP</div> -->
-                    </div>
-                    <!-- <div class="d-flex">
-                        <div><strong>Bulk upload:&nbsp;&nbsp;&nbsp;</strong> </div>
-                    </div> -->
-
-                    <!-- ----------------------------  -->
-
-                    <!-- <label  for="fileInput" class="file-upload-button">
-                        Browse..
-                      </label>
-                    <input type="file" name="" id="fileInput"
-                         style="display: none;">
-                        <br>
-                          <span >No file selected</span> -->
-
-
-                    <!-- <div class="col-sm-6">
-                          <div
-                            style="
-                              width: 400px;
-                              height: 300px;
-                              margin: 0 auto;
-                              display: flex;
-                              align-items: center;
-                              justify-content: center;
-                            "
-                          >
-                            <img
-                              class="sampleCSV"
-                              src="assets/sampleCSV.png"
-                              alt="image not found"
-                              style="
-                                max-wuploadQPidth: 100%;
-                                max-height: 100%;
-                                border: 1px solid black;
-                              "
-                            />
-                          </div>
-            
-                          <p style="display: flex; justify-content: center">
-                            Sample Preview
-                          </p>
-                          <div style="display: flex; justify-content: center">
-                            <button class="btn btn-success" >
-                              Download sample csv
-                            </button>
-                          </div>
-                        </div> -->
-
-                    <div class="row">
-                        <!-- <div class="col-sm-6">
-                          <div
-                            style="
-                              width: 400px;
-                              height: 300px;
-                              margin: 0 auto;
-                              display: flex;
-                              align-items: center;
-                              justify-content: center;
-                            "
-                          >
-                            <img
-                              class="sampleCSV"
-                              src="assets/sampleCSV.png"
-                              alt="image not found"
-                              style="
-                                max-width: 100%;
-                                max-height: 100%;
-                                border: 1px solid black;
-                              "
-                            />
-                          </div>
-            
-                          <p style="display: flex; justify-content: center">
-                            Sample Preview
-                          </p>
-                          <div style="display: flex; justify-content: center">
-                            <button class="btn btn-success" >
-                              Download sample csv
-                            </button>
-                          </div>
-                        </div> -->
-                        <!-- <div class="col-sm-6" style="
-                            border: 1px solid black;
-                            margin: auto 0;
-                            padding: 20px 10px;
-                            border-radius: 10px;
-                          ">
-                            <p style="background-color: yellow">
-                                *Upload only .csv file with policy type and value. Please check
-                                sample.csv file for more detail
-                            </p>
-
-                            <hr />
-
-                            <input type="file" class="file-upload" accept=".csv" (change)="uploadPolicy($event)">
-                            <br>
-
-                            <input type="file" class="file-upload" accept=".csv" (change)="uploadPolicy($event)"
-                                id="fileInput">
-                            <label for="fileInput" class="custom-label">Choose a CSV file</label>
-
-                        </div> -->
-                    </div>
-
-
-                </div>
-
-                <div *ngIf="formNo ==4">
-
-                    <app-policy-update></app-policy-update>
-                </div>
-
-                <!-- <table id="myTable" style="display: none">
-                    <thead>
-                        <tr>
-                            <th>Policy Type</th>
-                            <th>Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>url</td>
-                            <td>facebook.com</td>
-                        </tr>
-                        <tr>
-                            <td>ip</td>
-                            <td>10.0.0.1</td>
-                        </tr>
-                        <tr>
-                            <td>package</td>
-                            <td>2vcard</td>
-                        </tr>
-                        <tr>
-                            <td>service</td>
-                            <td>apatche2</td>
-                        </tr>
-                        <tr>
-                            <td>application</td>
-                            <td>gimp</td>
-                        </tr>
-                        <tr>
-                            <td>device</td>
-                            <td>23ws:34ed</td>
-                        </tr>
-                    </tbody>
-                </table> -->
-
-
-
-            </div>
-        </mat-card-content>
-
-
-    </mat-sidenav-container>
-</mat-card>
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
     <p class="text-white"> {{ loaderStatus }} </p>
