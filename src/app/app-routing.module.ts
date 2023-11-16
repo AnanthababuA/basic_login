@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
         path: 'starter',
         loadChildren: () =>
           import('./pages/pages.module').then((m) => m.PagesModule),
+          canActivate: [AuthGuard]
       },
       {
         path: 'dashboards',
@@ -24,6 +26,7 @@ const routes: Routes = [
           import('./pages/dashboards/dashboards.module').then(
             (m) => m.DashboardsModule
           ),
+          canActivate: [AuthGuard]
       },
       // {
       //   path: 'ui-components',
@@ -46,6 +49,7 @@ const routes: Routes = [
         path: 'apps',
         loadChildren: () =>
           import('./pages/apps/apps.module').then((m) => m.AppsModule),
+          canActivate: [AuthGuard]
       },
       // {
       //   path: 'widgets',

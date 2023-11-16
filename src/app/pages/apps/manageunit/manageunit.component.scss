@@ -58,19 +58,40 @@
   } 
 }
 
-.mat-tab-label{
-  font-size: 20px !important;
-} 
+// .mat-tab-label{
+//   font-size: 20px !important;
+// } 
 
 // Or you can use the following in component CSS
 
-::ng-deep .mat-tab-label .mat-tab-label-content {
-  font-size: x-large;
+// ::ng-deep .mat-tab-label .mat-tab-label-content {
+//   font-size: x-large;
+// }
+
+// ::ng-deep .mat-tab-label {
+//   font-size: 26px; /* Adjust the font size according to your preference */
+// }
+
+
+/* mat header font size */
+// .mat-mdc-tab-header {
+//   --mat-tab-header-label-text-size: 20px;
+// }
+
+
+
+
+
+.mdc-tab--active {
+  background-color: #dcecfb;
 }
 
-::ng-deep .mat-tab-label {
-  font-size: 26px; /* Adjust the font size according to your preference */
-}
 
 
+// .md-tabs > .md-tabs-wrapper {
+//   background-color: #f00 !important;
+// }
 
+// md-tab.md-active{
+// background-color: green;
+// }

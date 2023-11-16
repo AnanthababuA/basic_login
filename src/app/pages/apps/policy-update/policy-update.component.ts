@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./policy-update.component.scss']
 })
 export class PolicyUpdateComponent {
-  loaderStatus: string = 'loading...';
+  loaderStatus: string = 'Loading...';
 
   // for tab 1 
   allowedUrl: string[] = [];

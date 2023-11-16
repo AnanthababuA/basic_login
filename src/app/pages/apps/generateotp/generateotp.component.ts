@@ -20,7 +20,7 @@ export class GenerateotpComponent {
 
   genOtpForm: FormGroup;
   params: any;
-  loaderStatus: string = 'loading...';
+  loaderStatus: string = 'Loading...';
 
 
   constructor(private fb: FormBuilder, private auth: AuthService,private spinner: NgxSpinnerService) {

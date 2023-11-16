@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonServicesService } from 'src/app/services/common-services.service';
@@ -12,7 +12,9 @@ interface Food {
 @Component({
   selector: 'app-localadmin',
   templateUrl: './localadmin.component.html',
-  styleUrls: ['./localadmin.component.scss']
+  styleUrls: ['./localadmin.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+
 })
 export class LocaladminComponent  {
   passwordVisible: boolean = false;
@@ -26,7 +28,7 @@ export class LocaladminComponent  {
   activeSection: string = 'localAdmin'; // Initial active section
   passwordmisatch1 : boolean 
   passwordmisatch : string = '10'
-  loaderStatus: string = 'loading...';
+  loaderStatus: string = 'Loading...';
 
   unitName: any
   unitType: any

@@ -83,10 +83,10 @@ export const AppsRoutes: Routes = [
         path: 'groups',
         component: GroupsComponent,
         data: {
-          title: 'Policy Configuration',
+          title: 'Groups',
           urls: [
             { title: 'Dashboard', url: '/dashboards/dashboard1' },
-            { title: 'Policy Configuration' },
+            { title: 'Groups' },
           ],
         },
       },

@@ -27,7 +27,7 @@ export class ManageunitComponent {
   // dtTrigger: Subject<any> = new Subject<any>();
   dummyData: any[] = [];
 
-  loaderStatus: string = 'loading...';
+  loaderStatus: string = 'Loading...';
 
 
   showEventTable: boolean = false;
@@ -104,7 +104,7 @@ export class ManageunitComponent {
         {
           extend: 'copy',
           text: '<i class="mdi mdi-content-copy"></i> Copy',
-          className: 'bg-success rounded btn-sm btn btn-warning mx-2 text-dark',
+          className: 'bg-success rounded btn-sm btn btn-warning m-x-6 text-dark',
 
         },
         {
@@ -144,6 +144,9 @@ export class ManageunitComponent {
     this.unitNameLocalAdminfun()
 
     // this.unitTypeLocalAdminfun()
+
+      // Initialize editMode array with 'false' for each row initially
+  this.editMode = new Array(this.manageUnitDetails.length).fill(false);
 
   }
 
@@ -256,15 +259,50 @@ this.spinner.show()
     this.dataSource.sort = this.sort;
   }
 
-  editRow() {
-    console.log("edit row");
+  // Inside your component class
+editMode: boolean[] = []; // To toggle between view and edit mode for each row
 
-  }
+editRow(index: number) {
+  // Toggle the edit mode for the selected row
+  this.editMode[index] = !this.editMode[index];
+}
 
-  deleteRow() {
-    console.log("delete row");
+// ngOnInit(): void {
+//   // Assuming manageUnitDetails is populated with data
 
-  }
+//   // Initialize editMode array with 'false' for each row initially
+//   this.editMode = new Array(this.manageUnitDetails.length).fill(false);
+// }
+
+// Create a method to save changes when 'Save' is clicked
+saveChanges(index: number) {
+  // Save changes made to the row here, for example:
+  console.log('Updated Unit Name:', this.manageUnitDetails[index].unit_name);
+  console.log('Updated Unit Desc:', this.manageUnitDetails[index].unit_desc);
+
+  // Toggle back to view mode after saving changes
+  this.editMode[index] = false;
+}
+deleteRow(index: number) {
+  // Implement the logic to delete the row using the provided index
+  // For example:
+  this.manageUnitDetails.splice(index, 1);
+  // Additional logic for deleting the row...
+
+  // Ensure to update other necessary data or perform delete operations here
+}
+
+
+// before 
+  // editRow() {
+  //   console.log("edit row");
+
+  // }
+
+  // deleteRow() {
+  //   console.log("delete row");
+
+  // }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

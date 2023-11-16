@@ -93,14 +93,14 @@ export const navItems: NavItem[] = [
   //   route: 'apps/chat',
   // },
   {
-    displayName: 'Unit',
+    displayName: 'Manage Unit',
     iconName: 'file-invoice',
     route: 'apps/manageunit',
   },
 
   {
     displayName: 'Local Admin',
-    iconName: 'mail',
+    iconName: 'user-star',
     route: 'apps/localadmin',
   },
 
@@ -139,15 +139,15 @@ export const navItems: NavItem[] = [
     iconName: 'file-invoice',
     route: 'apps/clientAdministration',
   },
-  // {
-  //   displayName: 'Policy configuration',
-  //   iconName: 'edit',
-  //   route: 'apps/policyConfiguration',
-  // },
+  {
+    displayName: 'Policy Configuration',
+    iconName: 'edit',
+    route: 'apps/policyConfiguration',
+  },
 
   {
-    displayName: 'Policy',
-    iconName: 'checklist',
+    displayName: 'Groups',
+    iconName: 'users-group',
     route: 'apps/groups',
   },
   // {

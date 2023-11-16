@@ -22,7 +22,7 @@ export class AppBoxedLoginComponent {
 
   loginError: string | null = null;
 
-  loaderStatus: string = 'loading...';
+  loaderStatus: string = 'Loading...';
   options = this.settings.getOptions();
 
 

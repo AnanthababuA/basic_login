@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+// import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -16,6 +16,9 @@ import { TokenStorageService } from '../services/token-storage.service';
 import { environment as env } from '../../environments/environment';
 // import Swal from 'sweetalert2';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Injectable } from '@angular/core';
 
 const TOKEN_HEADER_KEY = 'Authorization';
 
@@ -24,7 +27,7 @@ export class AuthInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private tokenService: TokenStorageService, private authService: AuthService, private router: Router, private http: HttpClient) {}
+  constructor(private tokenService: TokenStorageService, private authService: AuthService, private router: Router, private http: HttpClient, private spinner: NgxSpinnerService) {}
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // return next.handle(request);
@@ -40,9 +43,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
       if ((error instanceof HttpErrorResponse && error.status === 500)) {
 
-        // this.spinner.hide();
+        this.spinner.hide();
 
-        // Swal.fire('Unable to connect server', '', 'error');
+        Swal.fire('Unable to connect server', '', 'error');
 
         this.router.navigate(['/authentication/login'])
       }
@@ -53,7 +56,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
           // console.log('Expired Refresh Token')
 
-          // this.spinner.hide();
+          this.spinner.hide();
 
           this.router.navigate(['/authentication/login'])
 
@@ -78,7 +81,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
       this.http.post<any>(env.apiHost.concat('/registration/token/verify'), { token: token }).subscribe((res) => {
 
-        // console.log(res)
+        console.log("verify response",res)
 
       }, catchError => {
 
@@ -132,4 +135,125 @@ export class AuthInterceptor implements HttpInterceptor {
 export const authInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
 ];
+
+
+
+// import { Injectable } from '@angular/core';
+// import {
+//   HttpRequest,
+//   HttpHandler,
+//   HttpEvent,
+//   HttpInterceptor,
+//   HttpErrorResponse,
+//   HTTP_INTERCEPTORS,
+//   HttpClient,
+// } from '@angular/common/http';
+// import { Observable, BehaviorSubject, throwError } from 'rxjs';
+// import { catchError, switchMap, filter, take, exhaustMap } from 'rxjs/operators';
+// import { TokenStorageService } from '../services/token-storage.service';
+// import { AuthService } from '../services/auth.service';
+// import { Router } from '@angular/router';
+
+// const TOKEN_HEADER_KEY = 'Authorization';
+
+// @Injectable()
+// export class AuthInterceptor implements HttpInterceptor {
+//   private isRefreshing = false;
+//   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
+//   constructor(
+//     private tokenService: TokenStorageService,
+//     private authService: AuthService,
+//     private router: Router,
+//     private http: HttpClient
+//   ) {}
+
+//   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+//     let authReq = req.clone();
+//     const token = this.tokenService.getToken();
+
+//     if (token != null) {
+//       authReq = this.addTokenHeader(req, token);
+//     }
+
+//     return next.handle(authReq).pipe(
+//       catchError((error) => {
+//         if (error instanceof HttpErrorResponse && error.status === 401) {
+//           return this.handle401Error(req, next);
+//         }
+//         return throwError(error);
+//       })
+//     );
+//   }
+
+//   private handle401Error(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+//     if (!this.isRefreshing) {
+//       this.isRefreshing = true;
+//       this.refreshTokenSubject.next(null);
+  
+//       const token = this.tokenService.getRefreshToken();
+
+//       this.http.post<any>(env.apiHost.concat('/registration/token/verify'), { token: token }).subscribe((res) => {
+
+//         console.log("verify response",res)
+
+//       }, catchError => {
+
+//         this.router.navigate(['/authentication/login'])
+
+//       });
+
+  
+//       if (token !== null) { // Ensure token is not null before proceeding
+//         return this.authService.refreshToken(token).pipe(
+//           switchMap((refreshedToken: any) => {
+//             this.isRefreshing = false;
+  
+//             if (refreshedToken?.access) {
+//               this.tokenService.saveToken(refreshedToken.access);
+//               this.tokenService.saveRefreshToken(refreshedToken.refresh);
+//               this.refreshTokenSubject.next(refreshedToken.access);
+//               return next.handle(this.addTokenHeader(request, refreshedToken.access));
+//             } else {
+//               this.tokenService.signOut();
+//               return throwError('No access token received');
+//             }
+//           }),
+//           catchError((err) => {
+//             this.isRefreshing = false;
+//             this.tokenService.signOut();
+//             return throwError(err);
+//           })
+//         );
+//       } else {
+//         this.isRefreshing = false;
+//         this.tokenService.signOut();
+//         return throwError('Null token encountered');
+//       }
+//     } else {
+//       return this.refreshTokenSubject.pipe(
+//         filter((token) => token !== null),
+//         take(1),
+//         exhaustMap((token) => {
+//           if (typeof token === 'string') { // Ensure token is of type 'string'
+//             return next.handle(this.addTokenHeader(request, token));
+//           } else {
+//             this.tokenService.signOut();
+//             return throwError('Invalid token type');
+//           }
+//         })
+//       );
+//     }
+//   }
+  
+
+//   private addTokenHeader(request: HttpRequest<any>, token: string): HttpRequest<any> {
+//     return request.clone({ setHeaders: { Authorization: 'Bearer ' + token } });
+//   }
+// }
+
+// export const authInterceptorProviders = [
+//   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+// ];
+
 

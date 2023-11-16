@@ -71,7 +71,7 @@
                    <span style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* Maximum 10 characters</span>
                 </div>
                 <mat-form-field appearance="outline" class="w-100" color="primary">
-                  <input matInput formControlName="username" required placeholder="Enter user name"/>
+                  <input matInput formControlName="username" required placeholder="Enter User Name"/>
                   <mat-icon matPrefix>
                     <i-tabler name="user" class="icon-20 d-flex"></i-tabler>
                   </mat-icon>
@@ -94,7 +94,7 @@
                  
             
                 <mat-form-field appearance="outline" class="w-100" color="primary">
-                  <input matInput type="text" formControlName="email" required placeholder="Enter email"/>
+                  <input matInput type="text" formControlName="email" required placeholder="Enter E-Mail"/>
 
                   <mat-icon matPrefix>
                     <i-tabler name="mail" class="icon-20 d-flex"></i-tabler>
@@ -123,7 +123,7 @@
                 </div>
     
                 <mat-form-field appearance="outline" class="w-100" color="primary">
-                  <input matInput  [type]="passwordVisible ? 'text' : 'password'"  formControlName="password" required placeholder="Enter password"/>
+                  <input matInput  [type]="passwordVisible ? 'text' : 'password'"  formControlName="password" required placeholder="Enter Password"/>
                   <mat-icon matPrefix>
                     <i-tabler name="lock" class="icon-20 d-flex"></i-tabler>
                   </mat-icon>
@@ -146,7 +146,7 @@
                   <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Confirm Password</mat-label> 
              
                 <mat-form-field appearance="outline" class="w-100" color="primary">
-                  <input matInput [type]="cpasswordVisible ? 'text' : 'password'"  formControlName="cpassword" required placeholder="Enter confirm password"/>
+                  <input matInput [type]="cpasswordVisible ? 'text' : 'password'"  formControlName="cpassword" required placeholder="Enter Confirm Password"/>
     
                 <mat-icon matPrefix>
               <i-tabler name="lock" class="icon-20 d-flex"></i-tabler>
@@ -179,7 +179,7 @@
     
               <div class="row m-t-20">
               <!-- <mat-card-actions class="b-t-1"> -->
-                <button mat-flat-button color="primary" (click)="submit('create')">CreateLogin</button>
+                <button mat-flat-button color="primary" (click)="submit('create')">Create Login</button>
                 <button mat-flat-button color="warn" type="reset" class="m-l-8">Reset</button>
   
     

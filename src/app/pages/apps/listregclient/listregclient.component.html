@@ -95,7 +95,7 @@
         </mat-header-cell>
             <mat-cell *matCellDef="let row">
               <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
-                <span class="f-s-12"> {{ row.client_id }}</span>
+                <span class="f-s-12"> {{ row.client_publicip }}</span>
               </div>
              
              
@@ -111,7 +111,7 @@
         </mat-header-cell>
             <mat-cell *matCellDef="let row" >
               <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
-                <span class="f-s-12"> {{ row.client_reg_time }}</span>
+                <span class="f-s-12"> {{ row.last_communication }}</span>
               </div>
               
              
@@ -123,11 +123,11 @@
               mat-sort-header
               class="f-w-600 mat-subtitle-1 f-s-16"
             >
-            Reg Status
+            Client Registration Date
         </mat-header-cell>
             <mat-cell *matCellDef="let row">
               <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
-                <span class="f-s-12">  {{ row.reg_status }}</span>
+                <span class="f-s-12">  {{ row.client_reg_time }}</span>
               </div>
              
              
