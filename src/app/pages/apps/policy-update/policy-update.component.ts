@@ -104,36 +104,36 @@ export class PolicyUpdateComponent {
 
     const search_term = { search_term: this.blockedSearchText };
 
-    // this.spinner.show()
-    // this.common.urlDeletion(search_term).subscribe((res: any) => {
+    this.spinner.show()
+    this.common.urlDeletion(search_term).subscribe((res: any) => {
 
-    //   console.log("addion subscribe");
+      console.log("addion subscribe");
 
-    //   if (res.api_status === true) {
-    //     this.spinner.hide();
+      if (res.api_status === true) {
+        this.spinner.hide();
 
-    //     console.log("additon res is  ", res.policy_data);
+        console.log("additon res is  ", res.policy_data);
 
-    //     this.blockedUrl = res.policy_data
-    //     this.filteredBlockedUrl = this.blockedUrl; // Initially set filteredBlockedUrl to blockedUrl
+        this.blockedUrl = res.policy_data
+        this.filteredBlockedUrl = this.blockedUrl; // Initially set filteredBlockedUrl to blockedUrl
 
-    //   } else {
-    //     this.spinner.hide();
+      } else {
+        this.spinner.hide();
 
-    //     Swal.fire({
-    //       icon: 'error',
-    //       title: `${res.message}`,
-    //     })
-    //   }
+        Swal.fire({
+          icon: 'error',
+          title: `${res.message}`,
+        })
+      }
 
-    // }, error => {
+    }, error => {
 
-    //   this.spinner.hide();
+      this.spinner.hide();
 
-    //   // this.es.apiErrorHandler(error);
-    //   console.log("eerror---", error);
+      // this.es.apiErrorHandler(error);
+      console.log("eerror---", error);
 
-    // })
+    })
   }
 
   // Add this method in your TypeScript component
