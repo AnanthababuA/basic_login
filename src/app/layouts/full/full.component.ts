@@ -20,6 +20,8 @@ import { MaterialModule } from 'src/app/material.module';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppNavItemComponent } from './vertical/sidebar/nav-item/nav-item.component';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
+// import { NavItem } from './vertical/nav-item/nav-item'; // Replace this with the correct path to your NavItem interface
 
 const MOBILE_VIEW = 'screen and (max-width: 768px)';
 const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
@@ -68,11 +70,17 @@ export class FullComponent implements OnInit {
     return this.resView;
   }
 
+  userType = this.ts.getUserType()
+
+  // userType: string = "admin"
+  filteredNavItems: any[] =[];
+  
   constructor(
     private settings: CoreService,
     private mediaMatcher: MediaMatcher,
     private navService: NavService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private ts: TokenStorageService
   ) {
     this.htmlElement = document.querySelector('html')!;
     this.layoutChangesSubscription = this.breakpointObserver
@@ -91,6 +99,9 @@ export class FullComponent implements OnInit {
 
     // Initialize project theme with options
     this.receiveOptions(this.options);
+
+    this.filterNavItems();
+
   }
 
   ngOnInit(): void {}
@@ -133,4 +144,27 @@ export class FullComponent implements OnInit {
       this.htmlElement.classList.add('light-theme');
     }
   }
+
+  // filterNavItems() {
+  //   if (this.userType === 'adminn') {
+  //     // Show all items for admin
+  //     this.filteredNavItems = navItems.slice(); // Copy all items
+  //   } else {
+  //     // Show all items except 'Dashboard' for non-admin users
+  //     this.filteredNavItems = navItems.filter(item => item.displayName !== 'Manage Unit');
+  //   }
+  // }
+
+  filterNavItems() {
+    
+    if (this.userType === 'admin_user' || this.userType === 'superadmin_user') {
+     
+      this.filteredNavItems = navItems.slice();
+    } else {
+      
+      this.filteredNavItems = navItems.filter(item => item.displayName !== 'Manage Unit');
+    }
+  }
+  
+
 }

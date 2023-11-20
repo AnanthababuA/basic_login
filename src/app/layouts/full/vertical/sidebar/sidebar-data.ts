@@ -12,7 +12,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Dashboard',
     iconName: 'coffee',
-    route: '/dashboards/dashboard1',
+    route: '/dashboards/dashboard',
   },
   // {
   //   displayName: 'Demographical',

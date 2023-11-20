@@ -25,6 +25,9 @@
 
         <button mat-flat-button  class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 5" (click)="AddPolicy(5, 'policyVersion', 'ADMIN')"> <span class="text-primary" >Policy Version</span></button>
 
+        <button mat-flat-button  class="rounded m-b-8 bg-light-accent" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 6" (click)="AddPolicy(6, 'patchVersion', 'ADMIN')"> <span class="text-accent" >Patch Version</span></button>
+
+
 
     </mat-nav-list>
 
@@ -337,8 +340,13 @@
             </div>
 
             <div *ngIf="formNo ==5">
+                <h1 style="display: flex; justify-content: center;">Server Policy Version : {{serverPolicyVersion?.policy_version}}</h1> 
+                <h1 style="display: flex; justify-content: center;">Updated On : {{serverPolicyVersion?.created_on | date:'dd-MM-yyyy HH:mm:ss' }}</h1> 
+            </div>
 
-                <h1 style="display: flex; justify-content: center;">Server Policy Version : {{server_policy_version}}</h1> 
+            <div *ngIf="formNo ==6">
+                <h1 style="display: flex; justify-content: center;">Server Patch Id : {{serverPatchVersion?.patchid}}</h1> 
+                <h1 style="display: flex; justify-content: center;">Updated On : {{serverPatchVersion?.updated_on | date:'dd-MM-yyyy HH:mm:ss'}}</h1> 
             </div>
 
         </div>

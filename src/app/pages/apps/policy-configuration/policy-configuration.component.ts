@@ -65,7 +65,8 @@ export class PolicyConfigurationComponent {
   addedIPs: string[] = [];
   ipForm: FormGroup;
   ipDataSource: MatTableDataSource<string> = new MatTableDataSource();
-  server_policy_version: any
+  serverPolicyVersion: any
+  serverPatchVersion:any
   constructor( private fb: FormBuilder, private common: CommonServicesService, private spinner: NgxSpinnerService, private ts: TokenStorageService) {
     // this.notes = this.noteService.getNotes();
 
@@ -438,6 +439,10 @@ export class PolicyConfigurationComponent {
       this.serverPolicyVersionAPi()
     }
 
+    if(i===6){
+      this.serverPatchVersionAPi()
+    }
+    
     console.log("fornNo", this.formNo);
     
   }
@@ -454,8 +459,8 @@ export class PolicyConfigurationComponent {
 
       if (res.api_status === true) {
         this.spinner.hide();
-        this.server_policy_version = res.server_policy_version
-        console.log("serverPolicyVersionAPi",res);
+        this.serverPolicyVersion = res.data[0]
+        console.log("serverPolicyVersionAPi",this.serverPolicyVersion);
         
         // Swal.fire({
         //   icon: 'success',
@@ -483,6 +488,48 @@ export class PolicyConfigurationComponent {
     })
 
   }
+
+  serverPatchVersionAPi(){
+    console.log("serverPolicyVersionAPi fun",);
+
+    this.spinner.show()
+    this.common.serverPatchVersion().subscribe((res: any) => {
+
+      // console.log("in the unit name subscribe");
+
+
+      if (res.api_status === true) {
+        this.spinner.hide();
+        this.serverPatchVersion = res.data[0]
+        console.log("serverPolicyVersionAPi",this.serverPatchVersion);
+        
+        // Swal.fire({
+        //   icon: 'success',
+        //   title: `${res.message}`,
+        // })
+
+      } else {
+        this.spinner.hide();
+
+
+        // Swal.fire({
+        //   icon: 'error',
+        //   title: `${res.message}`,
+        // })
+      }
+
+    }, error => {
+
+      this.spinner.hide();
+
+      // this.es.apiErrorHandler(error);
+      console.log("eerror---", error);
+
+
+    })
+
+  }
+
 
   submitt() {
     this.policyForm.value.policytype = this.policyTypes

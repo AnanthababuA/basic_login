@@ -1,11 +1,4 @@
 
-  
-  
-  <!-- ======================================================================== -->
-
-
-  
-
   <mat-card class="cardWithShadow">
     <mat-tab-group animationDuration="0ms">
       <!-- Tab 1 -->
@@ -179,7 +172,7 @@
     
               <div class="row m-t-20">
               <!-- <mat-card-actions class="b-t-1"> -->
-                <button mat-flat-button color="primary" (click)="submit('create')">Create Login</button>
+                <button mat-flat-button color="primary" (click)="submit('create')" [disabled]="secondFormGroup.invalid">Create Login</button>
                 <button mat-flat-button color="warn" type="reset" class="m-l-8">Reset</button>
   
     
@@ -201,9 +194,9 @@
     </mat-tab-group>
   </mat-card>
 
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
+  <!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
     <p class="text-white"> {{ loaderStatus }} </p>
-  </ngx-spinner>
+  </ngx-spinner> -->
 
 
   

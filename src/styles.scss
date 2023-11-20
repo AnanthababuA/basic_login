@@ -7,7 +7,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* ATab header font size*/
 .mat-mdc-tab-header {
-    --mat-tab-header-label-text-size: 20px !important;
+    --mat-tab-header-label-text-size: 18px !important;
   }
 
+  .mdc-tab--active {
+    background-color: #dcecfb !important;
+  }
   

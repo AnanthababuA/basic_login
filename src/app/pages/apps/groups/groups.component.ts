@@ -36,10 +36,55 @@ export class GroupsComponent {
     }
     if (event === 2) {
       console.log("client mapped to existing froup");
+      this.serverPolicyVersionAPi()
     }
   }
 
   submit(){
     console.log("form data..",this.createGroup.value);
   }
+
+  // sample code for the api 
+   allServerPolicyDetails: any
+
+  serverPolicyVersionAPi(){
+    console.log("serverPolicyVersionAPi fun",);
+
+    this.spinner.show()
+    this.common.allServerPatchVersion().subscribe((res: any) => {
+
+      // console.log("in the unit name subscribe");
+
+      if (res.api_status === true) {
+        this.spinner.hide();
+        console.log("serverPolicyVersionAPi",res);
+        
+        this.allServerPolicyDetails = res.data;
+        // Swal.fire({
+        //   icon: 'success',
+        //   title: `${res.message}`,
+        // })
+
+      } else {
+        this.spinner.hide();
+
+
+        // Swal.fire({
+        //   icon: 'error',
+        //   title: `${res.message}`,
+        // })
+      }
+
+    }, error => {
+
+      this.spinner.hide();
+
+      // this.es.apiErrorHandler(error);
+      console.log("eerror---", error);
+
+
+    })
+
+  }
+
 }

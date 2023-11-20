@@ -163,7 +163,7 @@
               <tr>
                 <th>Sr No</th>
                 <th>Unit Name</th>
-                <th>Unit Desc</th>
+                <th>Unit Description</th>
                 <th>Created On</th>
                 <th>Parent Unit</th>
                 <th>Action</th>
@@ -177,7 +177,7 @@
                     {{ item.unit_name }}
                   </ng-container>
                   <ng-template #editModeTemplate>
-                    <input type="text" [(ngModel)]="item.unit_name" />
+                    <input type="text" [(ngModel)]="item.unit_name"  style="padding: 5px 10px; border-radius: 0.4rem;border: 1px solid gray" />
                   </ng-template>
                 </td>
                 <td>
@@ -185,7 +185,7 @@
                     {{ item.unit_desc }}
                   </ng-container>
                   <ng-template #editModeDescTemplate>
-                    <input type="text" [(ngModel)]="item.unit_desc" />
+                    <input type="text" [(ngModel)]="item.unit_desc" style="padding: 5px 10px; border-radius: 0.4rem; border: 1px solid gray;"  />
                   </ng-template>
                 </td>
                 <td>{{ item.created_on }}</td>

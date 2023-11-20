@@ -131,7 +131,7 @@ export class HeaderComponent {
 
  
     logout(){
-      console.log("log out...");
+      // console.log("log out...");
       
       this.auth.isLogin = false;
   
@@ -239,14 +239,14 @@ export class HeaderComponent {
 
   ngOnInit(): void {
 
-    console.log("userName log...", this.capitalizeFirstLetter(this.userName));
+    // console.log("userName log...", this.capitalizeFirstLetter(this.userName));
     this.userName = this.capitalizeFirstLetter(this.userName)
 
     this.userType = this.formatUserName(this.userType)
-    console.log("userType log...", this.userType);
+    // console.log("userType log...", this.userType);
 
-    console.log("userName log...", this.userName);
-    console.log("userType log 99999...", this.formatUserName(this.userType));
+    // console.log("userName log...", this.userName);
+    // console.log("userType log 99999...", this.formatUserName(this.userType));
     
   }
 

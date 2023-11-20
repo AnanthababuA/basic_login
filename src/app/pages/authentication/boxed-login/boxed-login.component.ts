@@ -65,14 +65,14 @@ export class AppBoxedLoginComponent {
   }
 
   ShowPassword(){
-    console.log("print show password", this.passwordVisible);
+    // console.log("print show password", this.passwordVisible);
     
   }
 
   togglePasswordVisibility() {
     this.passwordVisible = !this.passwordVisible; // Toggle password visibility
 
-    console.log("print show password", this.passwordVisible);
+    // console.log("print show password", this.passwordVisible);
 
   }
 
@@ -80,7 +80,7 @@ export class AppBoxedLoginComponent {
     // console.log(this.form.value);
     // this.router.navigate(['/dashboards/dashboard1']);
 
-    console.log("spinner show..");
+    // console.log("spinner show..");
     
 
     this.spinner.show();
@@ -92,17 +92,17 @@ export class AppBoxedLoginComponent {
     // }, 0);
 
 
-    console.log("spinner hide..");
+    // console.log("spinner hide..");
 
 
-    console.log(this.loginForm.value)
+    // console.log(this.loginForm.value)
 
     if (this.loginForm.valid) {
 
       this.spinner.show();
 
       this.auth.login(this.loginForm.value).subscribe((res) => {
-        console.log("log in111");
+        // console.log("log in111");
 
         if (res.api_status) {
           // console.log("log in", res);
@@ -120,7 +120,7 @@ export class AppBoxedLoginComponent {
 
 
 
-          console.log("res.refresh: ", res.user_type);
+          // console.log("res.refresh: ", res.user_type);
 
 
           // this.router.navigate(['dashboard']);
@@ -129,7 +129,7 @@ export class AppBoxedLoginComponent {
           //   this.router.navigate(['/dashboards/dashboard1']);
           // }, 2000); 
 
-          this.router.navigate(['/dashboards/dashboard1']);
+          this.router.navigate(['/dashboards/dashboard']);
           // this.spinner.hide();
           Swal.fire({
             icon: 'success',
@@ -144,7 +144,7 @@ export class AppBoxedLoginComponent {
 
         } else {
           this.spinner.hide();
-          console.log("message", res.message);
+          // console.log("message", res.message);
           this.loginError = 'Invalid login ID  or password.';
         }
 
@@ -153,7 +153,7 @@ export class AppBoxedLoginComponent {
     } else {
       this.spinner.hide();
 
-      console.log("invalid form");
+      // console.log("invalid form");
 
     }
 

@@ -133,7 +133,20 @@ serverPolicyVersion(){
   return this.http.post<any>(env.apiHost.concat('/policy/server-policy-version'),{});
 }
 
+serverPatchVersion(){
+  return this.http.post<any>(env.apiHost.concat('/policy/server-patch-version'),{});
+}
 
+allServerPolicyVersion(){
+  return this.http.post<any>(env.apiHost.concat('/policy/all-server-policy-version'),{});
+}
 
+allServerPatchVersion(){
+  return this.http.post<any>(env.apiHost.concat('/policy/all-server-patch-version'),{});
+}
+
+policyStatusChange(policyStatus:any){
+  return this.http.post<any>(env.apiHost.concat('/policy/policy-status-change'),policyStatus);
+}
 
 }
