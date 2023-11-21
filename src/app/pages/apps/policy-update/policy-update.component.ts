@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonServicesService } from 'src/app/services/common-services.service';
 import Swal from 'sweetalert2';
