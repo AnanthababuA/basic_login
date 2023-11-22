@@ -3,22 +3,12 @@
 
   <!-- --------------------------------------------------------------- -->
   <!-- Desktop Menu -->
-  <button
-    mat-icon-button
-    (click)="toggleCollapsed.emit()"
-    *ngIf="showToggle"
-    class="d-flex justify-content-center"
-  >
+  <button mat-icon-button (click)="toggleCollapsed.emit()" *ngIf="showToggle" class="d-flex justify-content-center">
     <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
   </button>
 
   <!-- Mobile Menu -->
-  <button
-    mat-icon-button
-    (click)="toggleMobileNav.emit()"
-    *ngIf="!showToggle"
-    class="d-flex justify-content-center"
-  >
+  <button mat-icon-button (click)="toggleMobileNav.emit()" *ngIf="!showToggle" class="d-flex justify-content-center">
     <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
   </button>
   <!-- --------------------------------------------------------------- -->
@@ -37,25 +27,44 @@
   <span class="flex-1-auto"></span>
 
 
-  <div></div>
-  <p style="color: white;">{{userName}}</p> &nbsp; &nbsp;  <p style="color: white;">( {{userType}} )</p>
-<!-- <img src="https://cdn-icons-png.flaticon.com/512/1053/1053210.png" alt="" style="height: 55px;" (click)="logout()"> -->
-  <button (click)="logout()" style="background: transparent;
+  <!-- <div style="margin-right:1rem; display:flex"> -->
+    <i-tabler name="user" class="icon-20 d-flex larger-icon" style=" color: white; transform: scale(1.5); margin-right: 0.5rem;"></i-tabler>
+
+  <p style="color: white; font-weight:bold; font-size: 1.3rem; margin-right: 0.5rem;">{{userName}}</p>
+  <p style="color: white;"> <span style="font-size: 1.3rem; margin-right: .7rem;">({{userType}})</span></p>
+  &nbsp; &nbsp;
+  <!-- </div> -->
+
+  <!-- <img src="https://cdn-icons-png.flaticon.com/512/1053/1053210.png" alt="" style="height: 55px;" (click)="logout()"> -->
+
+  <div style="display: flex;
+  color: white;
+ 
+  cursor: pointer;" (click)="logout()">
+    <i-tabler name="logout" class="icon-20 d-flex" style="margin: auto; color: white; transform: scale(1.5); margin-right: 0.5rem;"></i-tabler>
+    <p style="font-size: 1.3rem">
+      Logout
+    </p>
+  </div>
+
+  <!-- <button (click)="logout()" style="background: transparent;
   border: none;
   cursor: pointer;
-  cursor: pointer;
+  
 width: 117px;
 display: flex;
 color: white;
 /* font-size: 1.2rem; */
 justify-content: center;
-transform: scale(1.2);">
-    <mat-icon >
-      <i-tabler name="logout" class="icon-20 d-flex"></i-tabler> 
+transform: scale(1.2);
+align-items: center;">
+    <mat-icon style="align-items: center; display: flex;">
+      <i-tabler name="logout" class="icon-20 d-flex"></i-tabler>
     </mat-icon>
-    <div>
+    <p>
       Logout
-    </div></button>
+    </p>
+  </button> -->
 
   <!-- --------------------------------------------------------------- -->
   <!-- langugage Dropdown -->
@@ -225,8 +234,8 @@ transform: scale(1.2);">
           </div>
         </a> -->
 
-        <!-- upgrade -->
-        <!-- <div
+  <!-- upgrade -->
+  <!-- <div
           class="p-24 overflow-hidden bg-light-primary rounded position-relative m-y-16"
         >
           <div class="d-flex align-items-center">

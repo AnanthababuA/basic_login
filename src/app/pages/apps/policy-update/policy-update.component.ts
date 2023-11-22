@@ -319,7 +319,7 @@ export class PolicyUpdateComponent {
     // Clear selected items array after moving items
     this.selectedBlockedItems = [];
 
-    this.applyBlockedFilter();
+    // this.applyBlockedFilter();
   }
 
   urlUpdate() {
@@ -348,7 +348,7 @@ export class PolicyUpdateComponent {
               this.spinner.hide();
               Swal.fire({
                 icon: 'success',
-                title: `Policy updated successfully`,
+                title: `${res.data}`,
               });
 
               this.urlAddtionApi();
@@ -604,7 +604,7 @@ export class PolicyUpdateComponent {
              
               Swal.fire({
                 icon: 'success',
-                title: `Policy updated successfully`,
+                title: `${res.data}`,
               });
               this.ipAddtionApi();
               this.ipDeletionApi();

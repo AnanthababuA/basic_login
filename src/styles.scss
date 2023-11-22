@@ -13,4 +13,41 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .mdc-tab--active {
     background-color: #dcecfb !important;
   }
+
+
+
+  @media screen and (min-width: 1280px) {
+
+
+  h1 {
+    font-size: 2em;
+  }
+  
+  h4,
+  th,
+  mat-card-title {
+    font-size: 22px !important;
+  }
+  
+  p,
+  span,
+  td,
+  label,
+  div {
+    font-size: 20px;
+  }
+
+  .mat-subtitle-2 {
+    font-size: 20px !important;
+  }
+  .hide-menu{
+    font-size: 20px !important;
+  }
+  .mat-mdc-list-item-unscoped-content{
+    font-size: 30px !important;
+  }
+
+  
+}
+
   

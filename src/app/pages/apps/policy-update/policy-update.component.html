@@ -5,12 +5,12 @@
     <mat-tab label="URL" style="font-size: 20px !important;">
       <mat-card-content class="p-24">
 
-        <div class="row m-t-20" style="min-height: 30vh;">
+        <div class="row " style="min-height: 30vh;">
           <div class="col-lg-3 col-sm-5">
             <div>
-              <h2>Blocked urls</h2>
+              <h2 style="margin-top: 0;">Blocked URLs</h2>
               <mat-form-field appearance="outline" class="w-100" color="primary">
-                <input matInput type="text" placeholder="Search blocked url" [(ngModel)]="searchText" (keyup.enter)="searchAllowedUrl()"/>
+                <input matInput type="text" placeholder="Search Blocked URL" [(ngModel)]="searchText" (keyup.enter)="searchAllowedUrl()"/>
                 <mat-icon matSuffix style="cursor: pointer; background-color: #f7c878; border-radius: 0.5rem;"
                   (click)="searchAllowedUrl()">
                   <i-tabler name="search" class="icon-20 d-flex searchIcon"></i-tabler>
@@ -50,10 +50,10 @@
 
           <div class=" col-lg-3 col-sm-5" style="margin-bottom: 10px;">
 
-            <h2>Allowed urls</h2>
+            <h2 style="margin-top: 0;">Allowed URLs</h2>
 
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="text" placeholder="Search allowed url" [(ngModel)]="blockedSearchText" (keyup.enter)="applyBlockedFilter()"/>
+              <input matInput type="text" placeholder="Search Allowed URL" [(ngModel)]="blockedSearchText" (keyup.enter)="applyBlockedFilter()"/>
               <mat-icon matSuffix style="cursor: pointer; background-color: #f7c878; border-radius: 0.5rem;"
                 (click)="applyBlockedFilter()">
                 <i-tabler name="search" class="icon-20 d-flex searchIcon"></i-tabler>
@@ -113,7 +113,7 @@
 
               </div>
               <div *ngIf="submitchanges.length === 0">
-                <p>No allowed url added</p>
+                <p>No Allowed URL Added</p>
               </div>
             </div>
 
@@ -154,7 +154,7 @@
                 </table>
               </div>
               <div *ngIf="submitchanges.length === 0">
-                <p>No bolcked url added</p>
+                <p>No Blocked URL Added</p>
               </div>
             </div>
           </div>
@@ -163,7 +163,7 @@
 
         <div style="display: flex; justify-content: center;">
           <button mat-flat-button color="primary" type="button" (click)="urlUpdate()"
-            [disabled]="submitchanges.length == 0">submit</button>
+            [disabled]="submitchanges.length == 0">Submit</button>
         </div>
 
 
@@ -176,12 +176,12 @@
       <mat-card-content class="p-24">
 
       
-        <div class="row m-t-20" style="min-height: 30vh;">
+        <div class="row " style="min-height: 30vh;">
           <div class="col-lg-3 col-sm-5">
             <div>
-              <h2>Blocked IPs</h2>
+              <h2 style="margin-top: 0;">Blocked IPs</h2>
               <mat-form-field appearance="outline" class="w-100" color="primary">
-                <input matInput type="text" placeholder="Search blocked ip" [(ngModel)]="searchTextForAllowedIPs" (keyup.enter)="searchAllowedIP()" />
+                <input matInput type="text" placeholder="Search Blocked IP" [(ngModel)]="searchTextForAllowedIPs" (keyup.enter)="searchAllowedIP()" />
                 <mat-icon matSuffix style="cursor: pointer; background-color: #f7c878; border-radius: 0.5rem;"
                   (click)="searchAllowedIP()">
                   <i-tabler name="search" class="icon-20 d-flex searchIcon"></i-tabler>
@@ -221,10 +221,10 @@
 
           <div class=" col-lg-3 col-sm-5" style="margin-bottom: 10px;">
 
-            <h2>Allowed IPs</h2>
+            <h2 style="margin-top: 0;">Allowed IPs</h2>
 
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="text" placeholder="Search allowed ip" [(ngModel)]="searchTextForBlockedIPs" (keyup.enter)="applyBlockedIPFilter()" />
+              <input matInput type="text" placeholder="Search Allowed IP" [(ngModel)]="searchTextForBlockedIPs" (keyup.enter)="applyBlockedIPFilter()" />
               <mat-icon matSuffix style="cursor: pointer; background-color: #f7c878; border-radius: 0.5rem;"
                 (click)="applyBlockedIPFilter()">
                 <i-tabler name="search" class="icon-20 d-flex searchIcon"></i-tabler>
@@ -284,7 +284,7 @@
 
               </div>
               <div *ngIf="submitchanges.length === 0">
-                <p>No allowed ip added</p>
+                <p>No Allowed IP Added</p>
               </div>
             </div>
 
@@ -325,7 +325,7 @@
                 </table>
               </div>
               <div *ngIf="submitchanges.length === 0">
-                <p>No bolcked ip added</p>
+                <p>No Blocked IP Added</p>
               </div>
             </div>
           </div>
@@ -334,7 +334,7 @@
 
         <div style="display: flex; justify-content: center;">
           <button mat-flat-button color="primary" type="button" (click)="ipUpdate()"
-            [disabled]="submitchanges.length == 0">submit</button>
+            [disabled]="submitchanges.length == 0">Submit</button>
         </div>
 
 

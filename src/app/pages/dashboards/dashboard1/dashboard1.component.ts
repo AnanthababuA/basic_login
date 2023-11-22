@@ -18,6 +18,13 @@ import { NgForOf } from '@angular/common';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 
+import {MatIconModule} from '@angular/material/icon';
+import { MatNativeDateModule } from '@angular/material/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { CommonServicesService } from 'src/app/services/common-services.service';
+
+
 interface topcards {
   id: number;
   icon: string;
@@ -41,11 +48,55 @@ interface topcards {
     AppProfileCardComponent,
     // AppMyContactsComponent,
     AppActivityTimelineComponent,
+    MatIconModule, MatNativeDateModule, CommonModule, MatCardModule
   ],
   templateUrl: './dashboard1.component.html',
 })
 export class AppDashboard1Component {
-  constructor() {}
+
+
+  reg_count: any;
+  policy_ver: any;
+  patch_ver: any;
+
+
+  constructor(private cs: CommonServicesService) {}
+
+  ngOnInit(): void {
+    // this.onLoad();
+
+
+    this.cs.clientreg().subscribe( (res) => {
+      console.log("res", res);
+      if(res.api_status === true)
+      {
+        this.reg_count = res.reg_count;
+      }
+    }
+
+    );
+
+    this.cs.policyver().subscribe( (res) => {
+      console.log("res1", res)
+      if(res.api_status === true){
+        this.policy_ver = res.latest_policy_version;
+      }
+    }
+
+    );
+
+    this.cs.patchver().subscribe( (res) => {
+      console.log("res2", res)
+      if(res.api_status === true){
+        this.patch_ver = res.latest_patch_version;
+      }
+    }
+
+    );
+
+  
+  }
+
 
   topcards: topcards[] = [
     {

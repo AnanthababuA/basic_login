@@ -1,0 +1,116 @@
+<div class="row">
+    <div class="col-12">
+        <mat-card class="cardWithShadow">
+            <mat-card-content>
+                <mat-button-toggle-group [(ngModel)]="currentRole" style="margin-bottom: 1rem;" (change)="logSelectedValue()">
+                    <mat-button-toggle value="Summary" style="min-width: 140px;">Summary</mat-button-toggle>
+                    <mat-button-toggle value="URL" style="min-width: 140px;">URL</mat-button-toggle>
+                    <mat-button-toggle value="IP" style="min-width: 140px;">IP</mat-button-toggle>
+                </mat-button-toggle-group>
+                
+
+                <!-- Divs to show/hide based on role -->
+                <div *ngIf="currentRole === 'Summary'">
+
+                    <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                        <thead>
+                          <tr>
+                            <th>Policy type</th>
+                            <th>Total policy</th>
+                            <th>Active policy</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span style="display: flex;">
+                                        <i-tabler name="anchor" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                                        <span>
+                                            IP
+                                        </span>
+                                    </span>
+                                </td>
+                                <td>{{policySummary?.IP.total}}</td>
+                                <td>{{policySummary?.IP.addlist}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="display: flex;">
+                                        <i-tabler name="link" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                                        <span>
+                                            URL
+                                        </span>
+                                    </span>
+                                </td>
+                                <td>{{policySummary?.URL.total}}</td>
+                                <td>{{policySummary?.URL.addlist}}</td>
+                            </tr>
+                         
+                        </tbody>
+                      </table>
+
+                </div>
+                <div *ngIf="currentRole === 'URL'">
+                    
+                    <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                        <thead>
+                          <tr>
+                            <th>Sr No</th>
+                            <th>URL</th>
+                            <th>Created ON</th>
+                            <th>Status</th>
+                            <th>Version</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of urlDetails; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ item.value }}</td>
+                            <td>{{ item.updated_on |
+                                date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                            <td>{{ item.status_text }}</td>
+                            <td>{{ item.version }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                </div>
+                <div *ngIf="currentRole === 'IP'">
+
+                    <mat-form-field appearance="outline" class="w-100" color="primary" style="width:300px; display: flex; flex-direction: row; align-items: center; justify-content: flex-end;">
+                        <input matInput type="text" placeholder="Search URL" [(ngModel)]="ipSearchText" (keyup.enter)="ipSearch()"/>
+                        <mat-icon matSuffix style="cursor: pointer; background-color: #f7c878; border-radius: 0.5rem;"
+                          (click)="ipSearch()">
+                          <i-tabler name="search" class="icon-20 d-flex searchIcon"></i-tabler>
+                        </mat-icon>
+                      </mat-form-field>
+
+
+                    <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                        <thead>
+                          <tr>
+                            <th>Sr No</th>
+                            <th>URL</th>
+                            <th>Created ON</th>
+                            <th>Status</th>
+                            <th>Version</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of ipDetails; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ item.value }}</td>
+                            <td>{{ item.updated_on |
+                                date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                            <td>{{ item.status_text }}</td>
+                            <td>{{ item.version }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

@@ -149,4 +149,38 @@ policyStatusChange(policyStatus:any){
   return this.http.post<any>(env.apiHost.concat('/policy/policy-status-change'),policyStatus);
 }
 
+editUnit(unitDetails:any){
+  return this.http.post<any>(env.apiHost.concat('/usermgt/edite-unit'),unitDetails);
+}
+
+deleteUnit(unitDetails:any){
+  return this.http.post<any>(env.apiHost.concat('/usermgt/delete-unit'),unitDetails);
+}
+
+policyUrlDetails(policyUrlDetail:any){
+  return this.http.post<any>(env.apiHost.concat('/policy/url-details'),policyUrlDetail);
+}
+
+policyIpDetails(policyIpDetails:any){
+  return this.http.post<any>(env.apiHost.concat('/policy/ip-details'),policyIpDetails);
+}
+
+
+
+policyver(){
+return this.http.post<any>(env.apiHost.concat('/policy/policy-updated-status'),{});
+
+}
+
+patchver(){
+return this.http.post<any>(env.apiHost.concat('/policy/patch-updated-status'),{});
+
+}
+
+clientreg(): Observable<any> {
+   
+  return this.http.post(env.apiHost.concat('/registration/total-client-reg'), {})
+
+}
+
 }

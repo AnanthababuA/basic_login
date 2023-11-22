@@ -90,6 +90,7 @@ import { ListregclientComponent } from './listregclient/listregclient.component'
 import { RegstatusclientComponent } from './regstatusclient/regstatusclient.component';
 import { GroupsComponent } from './groups/groups.component';
 import { PolicyUpdateComponent } from './policy-update/policy-update.component';
+import { PolicySummaryComponent } from './policy-summary/policy-summary.component';
 
 
 @NgModule({
@@ -158,6 +159,7 @@ import { PolicyUpdateComponent } from './policy-update/policy-update.component';
     RegstatusclientComponent,
     GroupsComponent,
     PolicyUpdateComponent,
+    PolicySummaryComponent,
   ],
   providers: [DatePipe],
 })

@@ -1,31 +1,106 @@
-<mat-card class="  cardWithShadow" style="min-height: 80vh;">
+<mat-card class="  cardWithShadow" >
 
-    <mat-nav-list class="p-x-16" >
+    <mat-nav-list class="p-x-16">
 
-        <button mat-flat-button  class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 0" (click)="AddPolicy(0, 'Summary', 'ADMIN')"> <span class="text-primary" >Summary</span></button>
+        <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
+            [class.border-red]="formNo === 0" (click)="AddPolicy(0, 'Summary', 'ADMIN')">
+            <span class="text-primary" style="display: flex;">
+                <i-tabler name="clipboard-list" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                <span>
+                    Summary
+                </span>
+            </span>
+        </button>
 
 
         <!-- 11111111111111111111111111111111111111111111111111111111111111111111111111111  -->
 
-        <button mat-flat-button  class="rounded m-b-8 bg-light-accent" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 1" (click)="AddPolicy(1, 'URL', 'ADMIN')" > <span class="text-accent" >Add URL</span></button>
+        <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
+            [class.border-red]="formNo === 1" (click)="AddPolicy(1, 'URL', 'ADMIN')"> 
+            <span class="text-primary" style="display: flex;">
+                <i-tabler name="plus" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                <span>
+                    Add URL
+                </span>
+            </span>
+
+            <!-- <span class="text-accent">Add
+                URL</span> -->
+            </button>
 
 
         <!-- 22222222222222222222 -->
 
-        <button mat-flat-button  class="rounded m-b-8 bg-light-success" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 2" (click)="AddPolicy(2, 'IP', 'ADMIN')"> <span class="text-success" >Add IP</span></button>
+        <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
+            [class.border-red]="formNo === 2" (click)="AddPolicy(2, 'IP', 'ADMIN')">
+            <span class="text-primary" style="display: flex;">
+                <i-tabler name="plus" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                <span>
+                    Add IP
+                </span>
+            </span>
+
+             <!-- <span class="text-success">Add
+                IP</span> -->
+            </button>
 
 
         <!-- 33333333333333333333333333  -->
 
-        <button mat-flat-button  class="rounded m-b-8 bg-light-error" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 3" (click)="AddPolicy(3, 'BulkUpload', 'ADMIN')"> <span class="text-error" >Bulk Upload</span></button>
+        <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
+            [class.border-red]="formNo === 3" (click)="AddPolicy(3, 'BulkUpload', 'ADMIN')">
+            <span class="text-primary" style="display: flex;">
+                <i-tabler name="file-upload" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                <span>
+                    Bulk Upload
+                </span>
+            </span>
+
+             <!-- <span
+                class="text-error">Bulk Upload</span> -->
+            </button>
 
         <!-- 44444444444444444444444444444444  -->
 
-        <button mat-flat-button  class="rounded m-b-8 bg-light-warning" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 4" (click)="AddPolicy(4, 'policyUpdate', 'ADMIN')"> <span class="text-warning" >Policy Update</span></button>
+        <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
+            [class.border-red]="formNo === 4" (click)="AddPolicy(4, 'policyUpdate', 'ADMIN')">
 
-        <button mat-flat-button  class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 5" (click)="AddPolicy(5, 'policyVersion', 'ADMIN')"> <span class="text-primary" >Policy Version</span></button>
+            <span class="text-primary" style="display: flex;">
+                <i-tabler name="edit" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                <span>
+                    Policy Update
+                </span>
+            </span>
 
-        <button mat-flat-button  class="rounded m-b-8 bg-light-accent" style="padding: 1.3rem 1rem; margin: 0 10px;" [class.border-red]="formNo === 6" (click)="AddPolicy(6, 'patchVersion', 'ADMIN')"> <span class="text-accent" >Patch Version</span></button>
+             <!-- <span
+                class="text-warning">Policy Update</span> -->
+            </button>
+
+        <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
+            [class.border-red]="formNo === 5" (click)="AddPolicy(5, 'policyVersion', 'ADMIN')"> 
+            <span class="text-primary" style="display: flex;">
+                <i-tabler name="versions" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                <span>
+                    Policy Version
+                </span>
+            </span>
+
+            <!-- <span
+                class="text-primary">Policy Version</span> -->
+            </button>
+
+        <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
+            [class.border-red]="formNo === 6" (click)="AddPolicy(6, 'patchVersion', 'ADMIN')">
+            <span class="text-primary" style="display: flex;">
+                <i-tabler name="versions" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                <span>
+                    Patch Version
+                </span>
+            </span>
+
+             <!-- <span
+                class="text-accent">Patch Version</span> -->
+            </button>
 
 
 
@@ -34,13 +109,19 @@
 
     <!-- <h1>hhhhhhh</h1> -->
 
+   
+
+
+</mat-card>
+
+<mat-card  class="  cardWithShadow">
     <mat-card-content class="p-24 bg-white">
-        <div class="" >
+        <div class="">
 
             <div *ngIf="formNo ==0">
 
 
-                <mat-card class="cardWithShadow">
+                <!-- <mat-card class="cardWithShadow">
                     <mat-card-header class="d-flex">
                         <mat-card-title>Summary</mat-card-title>
                     </mat-card-header>
@@ -99,7 +180,9 @@
 
 
                     </mat-card-content>
-                </mat-card>
+                </mat-card> -->
+
+                <app-policy-summary></app-policy-summary>
 
             </div>
 
@@ -118,7 +201,8 @@
 
                         <form [formGroup]="urlForm">
 
-                            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">URL</mat-label>
+                            <!-- f-s-14 class removed from the label  -->
+                            <mat-label class="mat-subtitle-2  f-w-600 m-b-12 d-block">URL</mat-label>
 
                             <mat-form-field appearance="outline" class="w-100" color="primary">
                                 <input matInput formControlName="url" placeholder="Enter URL" />
@@ -132,7 +216,7 @@
 
                             </mat-form-field>
                             <button mat-flat-button color="primary" class="w-100" type="button" (click)="addUrl()"
-                                style="max-width: fit-content;">
+                                style="max-width: max-content;">
                                 Add URL
                             </button>
 
@@ -203,7 +287,7 @@
                                 </div>
 
                                 <div *ngIf="addedUrls.length ===0">
-                                    <h2 style="margin-left: 20px;">Please add URL</h2>
+                                    <h2 style="margin-left: 20px;">Please Add URL</h2>
 
                                 </div>
 
@@ -233,7 +317,8 @@
                 <div class="row m-t-20">
                     <div class="col-lg-6">
                         <form [formGroup]="ipForm">
-                            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">IP Address</mat-label>
+                            <!-- f-s-14 class removed from label  -->
+                            <mat-label class="mat-subtitle-2 f-w-600 m-b-12 d-block">IP Address</mat-label>
                             <mat-form-field appearance="outline" class="w-100" color="primary">
                                 <input matInput formControlName="ip" placeholder="Enter IP Address" />
                                 <mat-error *ngIf="ipForm.get('ip')?.hasError('pattern') && ipForm.get('ip')?.invalid">
@@ -241,7 +326,7 @@
                                 </mat-error>
                             </mat-form-field>
                             <button mat-flat-button color="primary" class="w-100" type="button" (click)="addIP()"
-                                style="max-width: fit-content;">
+                                style="max-width:  max-content;">
                                 Add IP
                             </button>
                         </form>
@@ -293,7 +378,7 @@
                                 </div>
 
                                 <div *ngIf="addedIPs.length === 0">
-                                    <h2 style="margin-left: 20px;">Please add IP Address</h2>
+                                    <h2 style="margin-left: 20px;">Please Add IP Address</h2>
                                 </div>
                             </div>
                             <div style="display: flex; justify-content: center; padding-bottom: 15px;">
@@ -318,7 +403,7 @@
                             <mat-card-header>
                                 <mat-card-title><strong>Bulk Upload Policies</strong></mat-card-title>
                             </mat-card-header>
-                            <mat-card-content class="b-t-1">
+                            <mat-card-content class="b-t-1" style="margin-bottom:1rem">
 
                                 <p> *Upload only .csv file with policy type and value.</p>
 
@@ -340,21 +425,23 @@
             </div>
 
             <div *ngIf="formNo ==5">
-                <h1 style="display: flex; justify-content: center;">Server Policy Version : {{serverPolicyVersion?.policy_version}}</h1> 
-                <h1 style="display: flex; justify-content: center;">Updated On : {{serverPolicyVersion?.created_on | date:'dd-MM-yyyy HH:mm:ss' }}</h1> 
+                <h1 style="display: flex; justify-content: center;">Server Policy Version :
+                    {{serverPolicyVersion?.policy_version}}</h1>
+                <h1 style="display: flex; justify-content: center;">Updated On : {{serverPolicyVersion?.created_on |
+                    date:'dd-MM-yyyy HH:mm:ss' }}</h1>
             </div>
 
             <div *ngIf="formNo ==6">
-                <h1 style="display: flex; justify-content: center;">Server Patch Id : {{serverPatchVersion?.patchid}}</h1> 
-                <h1 style="display: flex; justify-content: center;">Updated On : {{serverPatchVersion?.updated_on | date:'dd-MM-yyyy HH:mm:ss'}}</h1> 
+                <h1 style="display: flex; justify-content: center;">Server Patch Id : {{serverPatchVersion?.patchid}}
+                </h1>
+                <h1 style="display: flex; justify-content: center;">Updated On : {{serverPatchVersion?.updated_on |
+                    date:'dd-MM-yyyy HH:mm:ss'}}</h1>
             </div>
 
         </div>
     </mat-card-content>
 
-
 </mat-card>
-
 
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">

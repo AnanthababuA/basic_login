@@ -40,7 +40,7 @@
                 </div>
 
                   <mat-form-field appearance="outline" class="w-100">
-                    <input matInput formControlName="unitname" required placeholder="Enter Unit Name" />
+                    <input matInput formControlName="unitname" required placeholder="Enter Unit Name" oninput="this.value = this.value.toUpperCase()" />
                     <mat-icon matPrefix>
                       <i-tabler name="users" class="icon-20 d-flex"></i-tabler>
                     </mat-icon>
@@ -124,7 +124,7 @@
     <!-- End Tab 1 -->
 
     <!-- Tab 2 -->
-    <mat-tab label="Manage Units">
+    <mat-tab label="Unit Details">
       <mat-card-content class="p-24">
 
 
@@ -177,7 +177,7 @@
                     {{ item.unit_name }}
                   </ng-container>
                   <ng-template #editModeTemplate>
-                    <input type="text" [(ngModel)]="item.unit_name"  style="padding: 5px 10px; border-radius: 0.4rem;border: 1px solid gray" />
+                    <input type="text" [(ngModel)]="item.unit_name"  style="padding: 5px 10px; border-radius: 0.4rem;border: 1px solid gray" oninput="this.value = this.value.toUpperCase()"  />
                   </ng-template>
                 </td>
                 <td>
@@ -188,25 +188,39 @@
                     <input type="text" [(ngModel)]="item.unit_desc" style="padding: 5px 10px; border-radius: 0.4rem; border: 1px solid gray;"  />
                   </ng-template>
                 </td>
-                <td>{{ item.created_on }}</td>
+                <td>{{ item.created_on |
+                  date:'dd-MM-yyyy HH:mm:ss' }}</td>
                 <td>{{ item.parent_unit }}</td>
                 <td>
-                  <button class="bg-success f-s-12 p-x-8 p-y-4 rounded text-white"
-                          style="border: none; cursor: pointer;"
-                          (click)="editRow(i)">
-                    {{ editMode[i] ? 'Cancel' : 'Edit' }}
-                  </button>
-                  <!-- <button class="bg-error f-s-12 p-x-8 p-y-4 rounded text-white"
-                          style="border: none; cursor: pointer;"
-                          (click)="deleteRow(i)">
-                    Delete
-                  </button> -->
-                  <button *ngIf="editMode[i]"
-                          class="bg-primary f-s-12 p-x-8 p-y-4 rounded text-white"
-                          style="border: none; cursor: pointer;"
-                          (click)="saveChanges(i)">
-                    Save
-                  </button>
+                  <div style="display: flex;">
+
+                    <button class="bg-success f-s-12 p-x-8 p-y-4 rounded text-white"
+                            style="border: none; cursor: pointer; display:flex; align-items: center;"
+                            (click)="editRow(i)">
+                            <ng-container *ngIf="editMode[i]">
+                              <i-tabler name="x" class="icon-20 d-flex m-x-2"></i-tabler>
+                               Cancel
+                            </ng-container>
+                            <ng-container *ngIf="!editMode[i]">
+                              <i-tabler name="edit" class="icon-20 d-flex  m-x-2"></i-tabler>
+                               Edit
+                            </ng-container>
+                          
+                      <!-- {{ editMode[i] ? `<i-tabler name="trash-filled" class="icon-20 d-flex"></i-tabler> Cancel` : 'Edit' }} -->
+                    </button>
+                    <button class="bg-error f-s-12 p-x-8 p-y-4 rounded text-white m-x-8"
+                            style="border: none; cursor: pointer; display:flex; align-items: center;"
+                            (click)="deleteRow(i)">
+                       <i-tabler name="trash-filled" class="icon-20 d-flex m-x-2"></i-tabler> Delete
+                    </button>
+                    <button *ngIf="editMode[i]"
+                            class="bg-primary f-s-12 p-x-8 p-y-4 rounded text-white"
+                            style="border: none; cursor: pointer; display:flex; align-items: center;"
+                            (click)="saveChanges(i)">
+                            <i-tabler name="send" class="icon-20 d-flex m-x-2"></i-tabler>
+                      Save
+                    </button>
+                  </div>
                 </td>
               </tr>
             </tbody>

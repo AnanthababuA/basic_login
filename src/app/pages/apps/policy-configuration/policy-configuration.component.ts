@@ -200,7 +200,7 @@ export class PolicyConfigurationComponent {
         this.spinner.hide();
 
         this.addedUrls = [];
-
+        
         Swal.fire({
           icon: 'success',
           title: `${res.message}`,
@@ -284,8 +284,9 @@ export class PolicyConfigurationComponent {
       if (res.api_status === true) {
         this.spinner.hide();
 
-        this.addedUrls = [];
+        
 
+        this.addedIPs = []
         Swal.fire({
           icon: 'success',
           title: `${res.message}`,
