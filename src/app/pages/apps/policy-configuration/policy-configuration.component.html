@@ -1,4 +1,4 @@
-<mat-card class="  cardWithShadow" >
+<mat-card class="  cardWithShadow">
 
     <mat-nav-list class="p-x-16">
 
@@ -15,8 +15,8 @@
 
         <!-- 11111111111111111111111111111111111111111111111111111111111111111111111111111  -->
 
-        <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
-            [class.border-red]="formNo === 1" (click)="AddPolicy(1, 'URL', 'ADMIN')"> 
+        <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px; "
+            [class.border-red]="formNo === 1" (click)="AddPolicy(1, 'URL', 'ADMIN')">
             <span class="text-primary" style="display: flex;">
                 <i-tabler name="plus" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
                 <span>
@@ -26,7 +26,7 @@
 
             <!-- <span class="text-accent">Add
                 URL</span> -->
-            </button>
+        </button>
 
 
         <!-- 22222222222222222222 -->
@@ -40,9 +40,9 @@
                 </span>
             </span>
 
-             <!-- <span class="text-success">Add
+            <!-- <span class="text-success">Add
                 IP</span> -->
-            </button>
+        </button>
 
 
         <!-- 33333333333333333333333333  -->
@@ -56,9 +56,9 @@
                 </span>
             </span>
 
-             <!-- <span
+            <!-- <span
                 class="text-error">Bulk Upload</span> -->
-            </button>
+        </button>
 
         <!-- 44444444444444444444444444444444  -->
 
@@ -72,12 +72,12 @@
                 </span>
             </span>
 
-             <!-- <span
+            <!-- <span
                 class="text-warning">Policy Update</span> -->
-            </button>
+        </button>
 
         <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
-            [class.border-red]="formNo === 5" (click)="AddPolicy(5, 'policyVersion', 'ADMIN')"> 
+            [class.border-red]="formNo === 5" (click)="AddPolicy(5, 'policyVersion', 'ADMIN')">
             <span class="text-primary" style="display: flex;">
                 <i-tabler name="versions" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
                 <span>
@@ -87,7 +87,7 @@
 
             <!-- <span
                 class="text-primary">Policy Version</span> -->
-            </button>
+        </button>
 
         <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
             [class.border-red]="formNo === 6" (click)="AddPolicy(6, 'patchVersion', 'ADMIN')">
@@ -98,9 +98,9 @@
                 </span>
             </span>
 
-             <!-- <span
+            <!-- <span
                 class="text-accent">Patch Version</span> -->
-            </button>
+        </button>
 
 
 
@@ -109,12 +109,12 @@
 
     <!-- <h1>hhhhhhh</h1> -->
 
-   
+
 
 
 </mat-card>
 
-<mat-card  class="  cardWithShadow">
+<mat-card class="  cardWithShadow">
     <mat-card-content class="p-24 bg-white">
         <div class="">
 
@@ -216,7 +216,7 @@
 
                             </mat-form-field>
                             <button mat-flat-button color="primary" class="w-100" type="button" (click)="addUrl()"
-                                style="max-width: max-content;">
+                                style="max-width: max-content; margin-top: 10px">
                                 Add URL
                             </button>
 
@@ -326,7 +326,7 @@
                                 </mat-error>
                             </mat-form-field>
                             <button mat-flat-button color="primary" class="w-100" type="button" (click)="addIP()"
-                                style="max-width:  max-content;">
+                                style="max-width:  max-content; margin-top: 10px">
                                 Add IP
                             </button>
                         </form>
@@ -400,16 +400,21 @@
                 <div class="row">
                     <div class="col-lg-6 col-sm-8">
                         <mat-card class="b-1 shadow-none">
-                            <mat-card-header>
-                                <mat-card-title><strong>Bulk Upload Policies</strong></mat-card-title>
+                            <mat-card-header style="display: flex;justify-content: center;margin-bottom: 24px;">
+                                <mat-card-title><strong>
+                                        Bulk Upload Policies
+                                    </strong></mat-card-title>
                             </mat-card-header>
                             <mat-card-content class="b-t-1" style="margin-bottom:1rem">
 
                                 <p> *Upload only .csv file with policy type and value.</p>
 
-                                <input type="file" class="file-upload" accept=".csv" (change)="uploadPolicy($event)"
-                                    id="fileInput">
-                                <label for="fileInput" class="custom-label">Choose a CSV file</label>
+                                <div style="margin-top: 2rem;">
+
+                                    <input type="file" class="file-upload" accept=".csv" (change)="uploadPolicy($event)"
+                                        id="fileInput">
+                                    <label for="fileInput" class="custom-label">Choose a CSV file</label>
+                                </div>
                             </mat-card-content>
                         </mat-card>
                     </div>
@@ -425,15 +430,35 @@
             </div>
 
             <div *ngIf="formNo ==5">
-                <h1 style="display: flex; justify-content: center;">Server Policy Version :
-                    {{serverPolicyVersion?.policy_version}}</h1>
+                <div style="display:flex; justify-content: center;">
+
+                    <h1 style="display: flex; justify-content: center;">Server Policy Version :
+                        {{serverPolicyVersion?.policy_version}}</h1> &nbsp;
+                    <i-tabler name="info-circle-filled" class="icon-48 d-flex"
+                        style="margin-left: 0.2rem; color:#26c6da; cursor: pointer;margin: auto 0;"
+                        (click)="openDialogPolicy()"></i-tabler>
+                </div>
+
                 <h1 style="display: flex; justify-content: center;">Updated On : {{serverPolicyVersion?.created_on |
                     date:'dd-MM-yyyy HH:mm:ss' }}</h1>
+
+
+
             </div>
 
             <div *ngIf="formNo ==6">
-                <h1 style="display: flex; justify-content: center;">Server Patch Id : {{serverPatchVersion?.patchid}}
-                </h1>
+
+                <div style="display:flex; justify-content: center;">
+
+                    <h1 style="display: flex; justify-content: center;">Server Patch Id :
+                        {{serverPatchVersion?.patchid}}
+                    </h1> &nbsp;
+                    <i-tabler name="info-circle-filled" class="icon-48 d-flex"
+                        style="margin-left: 0.2rem; color:#26c6da; cursor: pointer;margin: auto 0;"
+                        (click)="openDialogPatch()"></i-tabler>
+                </div>
+
+
                 <h1 style="display: flex; justify-content: center;">Updated On : {{serverPatchVersion?.updated_on |
                     date:'dd-MM-yyyy HH:mm:ss'}}</h1>
             </div>

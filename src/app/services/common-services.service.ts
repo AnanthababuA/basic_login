@@ -183,4 +183,15 @@ clientreg(): Observable<any> {
 
 }
 
+clientInfo(clientInfo:any): Observable<any> {
+   
+  return this.http.post(env.apiHost.concat('/registration/client-info'), clientInfo)
+
+}
+
+loginfo(){
+  return this.http.post<any>(env.apiHost.concat('/logviewer/get-log-desc'),{});
+
+}
+
 }

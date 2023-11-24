@@ -1,195 +1,54 @@
-<div style="margin-bottom: 70px;"></div>
 
-<mat-card class="cardWithShadow">
-    <mat-card-content class="p-24 text-center">
-      <div class="row justify-content-between m-b-8">
-        <div class="col-lg-5 col-sm-6 d-flex align-items-center">
-          <div>
-            <mat-card-title 
-              >Registered client status</mat-card-title
-            >
-                       
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-4">
-          <mat-form-field appearance="outline" class="w-100 hide-hint">
-            <mat-label>Search Here</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Filter" />
-          </mat-form-field>
-        </div>
-      </div>
-      <div style="margin-bottom: 70px;"></div>
+<div *ngIf="showTable" class="table-container">
 
+  <table datatable [dtOptions]="dtOptions" class="row-border hover ">
+    <thead>
+      <tr>
+        <th>Sr No</th>
+        <th>Gen Id</th>
+        <th>Client Name</th>
+        <th>Mac ID</th>
+        <th>Unit</th>
+        <th>Log</th>
+        <th>Server Log</th>
+        <th>Policy</th>
+        <th>Clam</th>
+        <th>Patch</th>
+        <th>Policy Status</th>
+        <th>Patch Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of clientRegStatus; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.client_id }}</td>
+        <td>{{ item.client_name }}</td>
+        <td>{{ item.client_macid }}</td>
+        <td>{{ item.client_unit }}</td>
 
-  
-      <div class="table-responsive m-t-30">
-        <mat-table [dataSource]="dataSources" matSort  >
-          <ng-container matColumnDef="ID">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="f-w-600 mat-subtitle-1 f-s-16 p-l-0">
-          Gen ID
-        </mat-header-cell>
-        <mat-cell *matCellDef="let row" class="p-l-0">
-          <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
-            <span class="f-s-12">{{ row.client_id }}</span>
-          </div>
-          
-        </mat-cell>
-      </ng-container>
-       
-  
-          <ng-container matColumnDef="ClientName">
-            <mat-header-cell
-              *matHeaderCellDef
-              mat-sort-header
-              class="f-w-600 mat-subtitle-1 f-s-16 p-l-0"
-            >
-              Client Name
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row" class="p-l-0">
+        <td>
+          {{ item.log_date !== 'N/A' ? (item.log_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+        </td>
+        <td>
+          {{ item.es_log_date !== 'N/A' ? (item.es_log_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+        </td>
+        <td>
+          {{ item.policy_date !== 'N/A' ? (item.policy_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+        </td>
+        <td>
+          {{ item.clam_date !== 'N/A' ? (item.clam_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+        </td>
+        <td>
+          {{ item.patch_date !== 'N/A' ? (item.patch_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+        </td>
+        <td>{{ item.policy_status }}</td>
+        <td>{{ item.patch_status }}</td>
 
-                <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
-                    <span class="f-s-12"> {{ row.client_name }} </span>
-                  </div>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="MacID">
-            <mat-header-cell
-              *matHeaderCellDef
-              mat-sort-header
-              class="f-w-600 mat-subtitle-1 f-s-16"
-            >
-              Mac ID
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row" class="p-l-0"> 
-                <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
-                    <span class="f-s-12">{{ row.client_macid }}</span>
-                  </div> </mat-cell>
-          </ng-container>
-          
-          <ng-container matColumnDef="Unit">
-            <mat-header-cell
-              *matHeaderCellDef
-              mat-sort-header
-              class="f-w-600 mat-subtitle-1 f-s-16"
-            >
-            Unit
-        </mat-header-cell>
-            <mat-cell *matCellDef="let row">
-                <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
-                    <span class="f-s-12">{{ row.client_unit }}</span>
-                  </div>
-                
-            </mat-cell>
-          </ng-container>
-          
-          <ng-container matColumnDef="Log">
-            <mat-header-cell
-              *matHeaderCellDef
-              mat-sort-header
-              class="f-w-600 mat-subtitle-1 f-s-16"
-            >
-            Log
-        </mat-header-cell>
-            <mat-cell *matCellDef="let row" class="custom-column-cell">
-                
-                <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
-                    <span class="f-s-12">{{ row.log_date }}</span>
-                  </div>
-                
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="Policy">
-            <mat-header-cell
-              *matHeaderCellDef
-              mat-sort-header
-              class="f-w-600 mat-subtitle-1 f-s-16"
-            >
-            Policy
-        </mat-header-cell>
-            <mat-cell *matCellDef="let row">
-
-                <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
-                    <span class="f-s-12">{{ row.policy_date }}</span>
-                  </div>
-                
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="Clam">
-            <mat-header-cell
-              *matHeaderCellDef
-              mat-sort-header
-              class="f-w-600 mat-subtitle-1 f-s-16"
-            >
-            Clam
-        </mat-header-cell>
-            <mat-cell *matCellDef="let row">
-
-                <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
-                    <span class="f-s-12"> {{ row.clam_date }}</span>
-                  </div>
-              
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="Patch">
-            <mat-header-cell
-              *matHeaderCellDef
-              mat-sort-header
-              class="f-w-600 mat-subtitle-1 f-s-16"
-            >
-            Patch
-        </mat-header-cell>
-            <mat-cell *matCellDef="let row">
-                <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
-                    <span class="f-s-12">{{ row.patch_date }}</span>
-                  </div>
-                  
-            </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="PolicyStatus">
-            <mat-header-cell
-              *matHeaderCellDef
-              mat-sort-header
-              class="f-w-600 mat-subtitle-1 f-s-16"
-            >
-            Policy status
-        </mat-header-cell>
-            <mat-cell *matCellDef="let row">
-                <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
-                    <span class="f-s-12">{{ row.policy_status }}</span>
-                  </div>
-                  
-            </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="PatchStatus">
-            <mat-header-cell
-              *matHeaderCellDef
-              mat-sort-header
-              class="f-w-600 mat-subtitle-1 f-s-16"
-            >
-            Patch status
-        </mat-header-cell>
-            <mat-cell *matCellDef="let row">
-                <div class="d-flex align-items-center gap-12 p-x-8 p-y-16">
-                    <span class="f-s-12">{{ row.patch_status }}</span>
-                  </div>
-                  
-            </mat-cell>
-          </ng-container>
-          
-         
-         
-  
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns"> </mat-row>
-        </mat-table>
-  
-        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
-
-        <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons ></mat-paginator>
-      </div>
-    </mat-card-content>
-  </mat-card>
- 
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
+  <p class="text-white"> {{ loaderStatus }} </p>
+</ngx-spinner>

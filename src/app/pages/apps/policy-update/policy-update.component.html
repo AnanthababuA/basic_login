@@ -53,9 +53,9 @@
             <h2 style="margin-top: 0;">Allowed URLs</h2>
 
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="text" placeholder="Search Allowed URL" [(ngModel)]="blockedSearchText" (keyup.enter)="applyBlockedFilter()"/>
+              <input matInput type="text" placeholder="Search Allowed URL" [(ngModel)]="blockedSearchText" (keyup.enter)="searchBlockedUrl()"/>
               <mat-icon matSuffix style="cursor: pointer; background-color: #f7c878; border-radius: 0.5rem;"
-                (click)="applyBlockedFilter()">
+                (click)="searchBlockedUrl()">
                 <i-tabler name="search" class="icon-20 d-flex searchIcon"></i-tabler>
               </mat-icon>
             </mat-form-field>

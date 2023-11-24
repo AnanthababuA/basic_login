@@ -1,0 +1,116 @@
+<div>
+    <mat-card class="cardWithShadow" style="background-color: #FAF6F0;">
+      <mat-tab-group animationDuration="0ms" #tabGroup (selectedIndexChange)="tabChanged($event)">
+  
+        <mat-tab label="Log Search" style="font-size: 20px !important;">
+          <mat-card-content class="p-24">
+  
+  
+              <div>
+                <mat-card class="cardWithShadow" style="background-color: #ffffff;">
+                  <mat-tab-group >
+                    <mat-tab label="Search Logs" style="font-size: 20px !important;" >
+        
+                      <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+        
+                        <form class="m-t-24" [formGroup]="secondFormGroup">
+                          <div class="row m-t-20">
+            
+                  
+                            <div class="col-lg-2">
+                              <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Unit Name:</mat-label>
+                              <mat-form-field appearance="outline" class="w-100" color="primary">
+                                <mat-select placeholder="Select" formControlName="unitname" required>
+              
+                                  <mat-option *ngFor="let item of unitName" [value]="item.unit_id">
+                                    {{ item.unit_name }}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="secondFormGroup?.get('unitname')?.hasError('required')">
+                                  Unit name is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                  
+                            <div class="col-lg-2">
+                              <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Clients:</mat-label>
+                              <mat-form-field appearance="outline" class="w-100" color="primary">
+                                <mat-select placeholder="Select" formControlName="clienttype" required>
+              
+                                  <mat-option *ngFor="let item of unitType" [value]="item.name">
+                                    {{ item.name }}
+                                  </mat-option>
+                                  
+                                </mat-select>
+                                <mat-error *ngIf="secondFormGroup?.get('clienttype')?.hasError('required')">
+                                  Client name is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+        
+                            <div class="col-lg-2">
+                              <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Logs:</mat-label>
+                              <mat-form-field appearance="outline" class="w-100" color="primary">
+                                <mat-select placeholder="Select" formControlName="logtype" required>
+              
+                                  <mat-option *ngFor="let item of logtypes" [value]="item.name">
+                                    {{ item.name }}
+                                  </mat-option>
+                                  
+                                </mat-select>
+                                <mat-error *ngIf="secondFormGroup?.get('logtype')?.hasError('required')">
+                                  Log name is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+        
+                            <div class="col-lg-2">
+                              <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Log start date</mat-label>
+                              <mat-form-field appearance="outline" class="w-100" color="primary">
+                                <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" formControlName="startDate">
+                                <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                                <mat-datepicker #startDatePicker [startAt]="minDate" (dateChange)="setMinEndDate($event)"></mat-datepicker>
+                              </mat-form-field>
+                            </div>
+                            
+                            <div class="col-lg-2">
+                              <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Log End date</mat-label>
+                              <mat-form-field appearance="outline" class="w-100" color="primary">
+                                <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" formControlName="endDate" [min]="minDate">
+                                <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                                <mat-datepicker #endDatePicker></mat-datepicker>
+                              </mat-form-field>
+                            </div>
+        
+                            <div class="col-lg-2">
+                              <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block"> </mat-label>
+                              <button mat-flat-button color="primary" (click)="performSearch()" class="mat-button mat-button-lg" style="margin-top: 15px;">Search</button>
+                            </div> 
+                          </div>                  
+        
+                        </form>
+                      </div>
+                    </mat-tab>
+        
+                    <mat-tab label="Logs Summary" style="font-size: 20px !important; flex-direction: column !important;">
+            
+                    </mat-tab>
+                </mat-tab-group>
+                </mat-card>
+            
+          </div>
+  
+  
+          </mat-card-content>
+        </mat-tab>
+  
+        <mat-tab label="View Logs">
+  
+        </mat-tab>
+  
+  
+      </mat-tab-group>
+  
+    </mat-card>
+  
+  </div>

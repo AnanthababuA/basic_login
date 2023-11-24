@@ -1,27 +1,27 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import Swal from 'sweetalert2';
-import { CommonServicesService } from 'src/app/services/common-services.service';
+import { Component } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { CommonServicesService } from 'src/app/services/common-services.service';
+import Swal from 'sweetalert2';
+
 @Component({
-  selector: 'app-regstatusclient',
-  templateUrl: './regstatusclient.component.html',
-  styleUrls: ['./regstatusclient.component.scss']
+  selector: 'app-all-server-policy-version',
+  templateUrl: './all-server-policy-version.component.html',
+  styleUrls: ['./all-server-policy-version.component.scss']
 })
-export class RegstatusclientComponent {
+export class AllServerPolicyVersionComponent {
+  allServerPolicy: any;
 
-  clientRegStatus: any;
-  dtOptions: any
+  dtOptions: any;
 
-  showTable : boolean = false;
+  showTable: boolean = false;
 
   loaderStatus: string = 'Loading...';
 
-
-  constructor(private common: CommonServicesService, private spinner: NgxSpinnerService) {
-
-  }
+  constructor(
+    private common: CommonServicesService,
+    private spinner: NgxSpinnerService
+  ) {}
   ngOnInit() {
-
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -56,30 +56,22 @@ export class RegstatusclientComponent {
     };
 
     this.spinner.show();
-    this.common.Registeredstatusclients().subscribe((res) => {
+    this.common.allServerPolicyVersion().subscribe((res) => {
       if (res.api_status === true) {
-
-        this.clientRegStatus = res.data;
-        this.showTable = true
-
+        this.allServerPolicy = res.data;
+        this.showTable = true;
         this.spinner.hide();
-        
-
-      }
-      else {
+      } else {
         this.spinner.hide();
 
         Swal.fire({
-          title: 'Unable to load Date',
+          title: `${res.message}`,
           text: '',
-          icon: 'info'
-        })
-
-      }
+          icon: 'info',
         });
-
-}
-
-
+      }
+    });
+  }
+ 
 
 }

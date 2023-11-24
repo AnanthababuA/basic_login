@@ -211,37 +211,20 @@ export class ManageunitComponent {
   }
 
   unitDetailsAPI(){
-    this.spinner.show;
+    this.spinner.show();
     this.common.UnitDetails().subscribe(
       (res) => {
         console.log('log in111');
 
         if (res.api_status) {
-          this.spinner.hide();
           this.manageUnitDetails = res.data_value;
           console.log('manage unit details', this.manageUnitDetails);
-          // Swal.fire({
-          //   icon: 'success',
-          //   title: `${res.message}`,
-
-          // }).then(() => {
-          //   // this.router.navigate(['dashboard']);
-          // });
-
-          // alert("OTP Generated Successfully\n"+ res.otp);
-          // this.isPopupVisible = 1;
-          // console.log('Form values:', this.generateOTPForm.value.callerName);
-
-          // this.otpValue = res.otp;
-
           this.showEventTable = true;
+          this.spinner.hide();
         } else {
           this.spinner.hide();
-
-          this.showEventTable = true;
-
+          this.showEventTable = false;
           console.log('message', res.message);
-
           Swal.fire({
             icon: 'error',
             title: `${res.message}`,

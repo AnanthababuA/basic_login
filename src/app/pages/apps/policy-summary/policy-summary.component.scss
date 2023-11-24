@@ -1,0 +1,37 @@
+.table-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  .search-div {
+    position: absolute;
+    top: 0;
+   
+    z-index: 1; /* Ensures the search div is above the table */
+ 
+    right: 0;
+  }
+  
+  .fixed-table {
+    width: 100%;
+    table-layout: fixed; /* Fix the table layout */
+    border-collapse: collapse; /* Collapse borders */
+  }
+  
+
+  .mat-mdc-form-field-subscript-wrapper{
+    display: none !important;
+    // width:0px !important;
+  }
+
+//   .dataTables_paginate{
+//     display: none !important;
+//   }
+  
+//   .dataTables_info{
+//     display: none !important;
+  
+//   }
+
+    
+  

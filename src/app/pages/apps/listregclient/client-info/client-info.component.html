@@ -1,0 +1,126 @@
+<div style="margin: 30px;">
+    <!-- <h1 style="display: flex;justify-content: center;">Client Information</h1> -->
+
+    <mat-card class="b-1 shadow-none">
+        <mat-card-header style="padding-bottom: 24px;margin: auto;">
+            <mat-card-title style="font-size: 2rem !important;">Client Information</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="b-t-1" style="padding-bottom: 0;">
+            <div class="row"  style=" border-bottom: 1px solid #a3a3a3;" >
+                <div class="col-sm-6 col-lg-6">
+                    Client Id
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                    {{clientInfo?.client_id}}
+                </div>
+            </div>
+
+            <hr>
+            <div class="row"  style=" border-bottom: 1px solid #a3a3a3;">
+                <div class="col-sm-6 col-lg-6">
+                    Client Name
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                    {{clientInfo?.client_name}}
+                </div>
+            </div>
+
+            <!-- <hr>
+            <div class="row"  style=" border-bottom: 1px solid #a3a3a3;">
+                <div class="col-sm-6 col-lg-6">
+                    Client Unit
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                    {{clientInfo?.client_unit}}
+                </div>
+            </div> -->
+
+            <hr>
+            <div class="row"  style=" border-bottom: 1px solid #a3a3a3;">
+                <div class="col-sm-6 col-lg-6">
+                    MAC Address
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                    {{clientInfo?.client_macid}}
+                </div>
+            </div>
+
+            <hr>
+            <div class="row"  style=" border-bottom: 1px solid #a3a3a3;">
+                <div class="col-sm-6 col-lg-6">
+                    Registered On
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                    <!-- {{clientInfo?.registered_on}} -->
+                    {{ clientInfo?.registered_on !== 'N/A' ? (clientInfo?.registered_on | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+                </div>
+            </div>
+
+            <hr>
+            <div class="row"  style=" border-bottom: 1px solid #a3a3a3;">
+                <div class="col-sm-6 col-lg-6">
+                    Created On
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                    <!-- {{clientInfo?.created_on}} -->
+                    {{ clientInfo?.created_on !== 'N/A' ? (clientInfo?.created_on | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+                </div>
+            </div>
+
+            <hr>
+            <div class="row"  style=" border-bottom: 1px solid #a3a3a3;">
+                <div class="col-sm-6 col-lg-6">
+                    Log Date
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                    <!-- {{clientInfo?.log_date}} -->
+                    {{ clientInfo?.log_date !== 'N/A' ? (clientInfo?.log_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+                </div>
+            </div>
+
+            <hr>
+            <div class="row"  style=" border-bottom: 1px solid #a3a3a3;" >
+                <div class="col-sm-6 col-lg-6">
+                    Server Log
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                    <!-- {{clientInfo?.es_log_date}} -->
+                    {{ clientInfo?.es_log_date !== 'N/A' ? (clientInfo?.es_log_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+                </div>
+            </div>
+
+            <div class="row"  style=" border-bottom: 1px solid #a3a3a3;" >
+                <div class="col-sm-6 col-lg-6">
+                    Patch Updated On 
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                    <!-- {{clientInfo?.patch_date}} -->
+                    {{ clientInfo?.patch_date !== 'N/A' ? (clientInfo?.patch_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+                </div>
+            </div>
+
+            <div class="row"  style=" border-bottom: 1px solid #a3a3a3;" >
+                <div class="col-sm-6 col-lg-6">
+                    Clam Updated On 
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                    <!-- {{clientInfo?.clam_date}} -->
+                    {{ clientInfo?.clam_date !== 'N/A' ? (clientInfo?.clam_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+                </div>
+            </div>
+
+            <div class="row"   >
+                <div class="col-sm-6 col-lg-6">
+                    Policy Updated On 
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                    <!-- {{clientInfo?.policy_date}} -->
+                    {{ clientInfo?.policy_date !== 'N/A' ? (clientInfo?.policy_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+                </div>
+            </div>
+
+
+        </mat-card-content>
+    </mat-card>
+
+</div>

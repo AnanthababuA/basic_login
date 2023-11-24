@@ -59,6 +59,14 @@ export class AppDashboard1Component {
   policy_ver: any;
   patch_ver: any;
 
+  pol_tot_cli: any;
+  pol_upd_cli: any;
+  pat_tol_cli: any;
+  pat_upd_cli: any;
+
+  pol_per_val: any;
+  pat_per_val: any;
+
 
   constructor(private cs: CommonServicesService) {}
 
@@ -80,6 +88,11 @@ export class AppDashboard1Component {
       console.log("res1", res)
       if(res.api_status === true){
         this.policy_ver = res.latest_policy_version;
+        this.pol_tot_cli = res.total_clients;
+        this.pol_upd_cli = res.updated_clients;
+        this.pol_per_val = res.policy_percentage;
+
+
       }
     }
 
@@ -89,6 +102,9 @@ export class AppDashboard1Component {
       console.log("res2", res)
       if(res.api_status === true){
         this.patch_ver = res.latest_patch_version;
+        this.pat_tol_cli = res.total_clients;
+        this.pat_upd_cli = res.updated_clients;
+        this.pat_per_val = res.patch_percentage;
       }
     }
 

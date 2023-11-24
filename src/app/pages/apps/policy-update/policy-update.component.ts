@@ -99,41 +99,83 @@ export class PolicyUpdateComponent {
     );
   }
 
-  applyBlockedFilter() {
-    console.log('blocked url', this.blockedSearchText);
+  searchBlockedUrl() {
+    console.log('serach called', this.blockedSearchText);
 
     const search_term = { search_term: this.blockedSearchText };
 
-    this.spinner.show()
-    this.common.urlDeletion(search_term).subscribe((res: any) => {
+    this.spinner.show();
+    this.common.urlDeletion(search_term).subscribe(
+      (res: any) => {
+        console.log('addion subscribe');
 
-      console.log("addion subscribe");
+        if (res.api_status === true) {
+          this.spinner.hide();
 
-      if (res.api_status === true) {
+          console.log('additon res is  ', res.policy_data);
+
+          this.blockedUrl = res.policy_data;
+
+          this.filteredBlockedUrl = this.blockedUrl;
+        } else {
+          this.spinner.hide();
+
+          Swal.fire({
+            icon: 'error',
+            title: `${res.message}`,
+          });
+        }
+      },
+      (error) => {
         this.spinner.hide();
 
-        console.log("additon res is  ", res.policy_data);
-
-        this.blockedUrl = res.policy_data
-        this.filteredBlockedUrl = this.blockedUrl; // Initially set filteredBlockedUrl to blockedUrl
-
-      } else {
-        this.spinner.hide();
-
-        Swal.fire({
-          icon: 'error',
-          title: `${res.message}`,
-        })
+        // this.es.apiErrorHandler(error);
+        console.log('eerror---', error);
       }
+    );
+  }
 
-    }, error => {
 
-      this.spinner.hide();
+  applyBlockedFilter() {
+    console.log('blocked url', this.blockedSearchText);
 
-      // this.es.apiErrorHandler(error);
-      console.log("eerror---", error);
+    // const search_term = { search_term: this.blockedSearchText };
 
-    })
+    this.filteredBlockedUrl = this.blockedUrl.filter((item: string) => {
+      return item.toLowerCase().includes(this.blockedSearchText.toLowerCase());
+    });
+
+
+    // this.spinner.show()
+    // this.common.urlDeletion(search_term).subscribe((res: any) => {
+
+    //   console.log("addion subscribe");
+
+    //   if (res.api_status === true) {
+    //     this.spinner.hide();
+
+    //     console.log("additon res is  ", res.policy_data);
+
+    //     this.blockedUrl = res.policy_data
+    //     this.filteredBlockedUrl = this.blockedUrl; // Initially set filteredBlockedUrl to blockedUrl
+
+    //   } else {
+    //     this.spinner.hide();
+
+    //     Swal.fire({
+    //       icon: 'error',
+    //       title: `${res.message}`,
+    //     })
+    //   }
+
+    // }, error => {
+
+    //   this.spinner.hide();
+
+    //   // this.es.apiErrorHandler(error);
+    //   console.log("eerror---", error);
+
+    // })
   }
 
   // Add this method in your TypeScript component
@@ -319,7 +361,7 @@ export class PolicyUpdateComponent {
     // Clear selected items array after moving items
     this.selectedBlockedItems = [];
 
-    // this.applyBlockedFilter();
+    this.applyBlockedFilter();
   }
 
   urlUpdate() {

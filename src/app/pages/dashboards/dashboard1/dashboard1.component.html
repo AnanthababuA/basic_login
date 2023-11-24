@@ -1,195 +1,210 @@
+<!-- <app-top-cards></app-top-cards>
+
 <div class="row">
-  <div class="col-lg-2">
-    <mat-card
-      class="cardWithShadow card2 position-relative card-hover"
-      style="cursor: pointer; min-height: 18vh; background-color: #9EB8D9;" 
-    >
-      <mat-card-content class="p-y-24" style="display: inherit;">
-        <div style="display: block; justify-content: center">
-          <span
-            class="icon-56 bg-accent text-white rounded-circle d-flex align-items-center justify-content-center" 
-          >
-            <!-- <mat-icon class="f-s-24">people</mat-icon> -->
-            <mat-icon style="font-size: 25px;"> person_pin_circle</mat-icon>
-          </span>
-          <div style="margin-right: 70px"></div>
-        </div>
-        <mat-card-title style="display: inline-block; text-align: right;"
-          >Registered Clients <br> 
+    <div class="col-lg-8">
+      <app-sales-overview></app-sales-overview>
+    </div>
+    <div class="col-lg-4">
+     <app-our-visitors></app-our-visitors>
+    </div>
+  </div> -->
 
-          <div style="margin-top: 10px; text-align: right; margin-right: 30px;">{{reg_count}}</div>
+  <!-- <p>12345</p> -->
 
-          <!-- <p style="text-align: right; margin-right: 30px;"> 786 </p> -->
-          
-          </mat-card-title
-        >
-
-      </mat-card-content>
-
-      
-      
-    </mat-card>
-
-  </div>
-
-  <div class="col-lg-2">
-    <mat-card
-    class="cardWithShadow card2 position-relative card-hover"
-    style="cursor: pointer; min-height: 18vh; background-color: #9EB8D9;"
-  >
-    <mat-card-content class="p-y-24" style="display: inherit;">
-      <div style="display: block; justify-content: center">
-        <span
-          class="icon-56 bg-accent text-white rounded-circle d-flex align-items-center justify-content-center"
-        >
-        <mat-icon>settings_applications</mat-icon>
-        </span>
-        <div style="margin-right: 70px"></div>
-      </div>
-      <mat-card-title style="display: inline-block; text-align: right;"
-        >
-        <!-- Rules Pushed --> Patch version
-
-         <br> 
-
-        <div style="margin-top: 10px; text-align: right; margin-right: 10px;"> {{patch_ver}}</div>
-        </mat-card-title
-      >
-    </mat-card-content>
-  </mat-card>
-
-  </div>
-
-  <div class="col-lg-2">
-    <mat-card
-    class="cardWithShadow card2 position-relative card-hover"
-    style="cursor: pointer; min-height: 18vh; background-color: #9EB8D9;"
-  >
-    <mat-card-content class="p-y-24" style="display: inherit;">
-      <div style="display: block; justify-content: center">
-        <span
-          class="icon-56 bg-accent text-white rounded-circle d-flex align-items-center justify-content-center"
-        >
-        <mat-icon>assignment_returned</mat-icon>
-        </span>
-        <div style="margin-right: 70px"></div>
-      </div>
-      <mat-card-title style="display: inline-block; text-align: right;"
-        >
-        <!-- ClamAV Pushed  --> Patch Updated
-        <br> 
-        <div style="margin-top: 10px; text-align: right; margin-right: 10px;">23 / 1234 </div>
-        </mat-card-title
-      >
-    </mat-card-content>
-  </mat-card>
-
-  </div>
-
-  <div class="col-lg-2">
-    <mat-card
-    class="cardWithShadow card2 position-relative card-hover"
-    style="cursor: pointer; min-height: 18vh; background-color: #9EB8D9;"
-  >
-    <mat-card-content class="p-y-24" style="display: inherit;">
-      <div style="display: block; justify-content: center">
-        <span
-          class="icon-56 bg-accent text-white rounded-circle d-flex align-items-center justify-content-center"
-        >
-        <mat-icon>assignment_turned_in</mat-icon>
-        </span>
-        <div style="margin-right: 70px"></div>
-      </div>
-      <mat-card-title style="display: inline-block; text-align: right;"
-        >
-        <!-- Patch Updated  --> Policy Version
-        <br> 
-        <div style="margin-top: 10px; text-align: right; margin-right: 10px;">{{policy_ver}}</div>
-        </mat-card-title
-      >
-    </mat-card-content>
-  </mat-card>
-
-  </div>
-
-  <div class="col-lg-2">
-    <mat-card
-    class="cardWithShadow card2 position-relative card-hover"
-    style="cursor: pointer; min-height: 18vh; background-color: #9EB8D9;"
-  >
-    <mat-card-content class="p-y-24" style="display: inherit;">
-      <div style="display: block; justify-content: center">
-        <span
-          class="icon-56 bg-accent text-white rounded-circle d-flex align-items-center justify-content-center"
-        >
-        <mat-icon>autorenew</mat-icon>
-        </span>
-        <div style="margin-right: 70px"></div>
-      </div>
-      <mat-card-title style="display: inline-block; text-align: right;"
-        >
-        <!-- Log Recived  --> Policy Updated
-        <br> 
-        <div style="margin-top: 10px; text-align: right; margin-right: 10px;">523/1234</div>
-        </mat-card-title
-      >
-    </mat-card-content>
-  </mat-card>
-
-  </div>
-
-      <!-- <div class="col-lg-2">
-        <mat-card
+  <div class="row">
+    <div class="col-lg-2">
+      <mat-card
         class="cardWithShadow card2 position-relative card-hover"
-        style="cursor: pointer; min-height: 18vh; background-color: #9EB8D9;"
+        style="cursor: pointer; min-height: 26vh; background-color: #9EB8D9;" 
       >
         <mat-card-content class="p-y-24" style="display: inherit;">
           <div style="display: block; justify-content: center">
             <span
-              class="icon-56 bg-accent text-white rounded-circle d-flex align-items-center justify-content-center"
+              class="bg-accent text-white rounded-circle d-flex align-items-center justify-content-center" style="height: 80px; width: 80px;"
             >
-            <mat-icon>assignment_late</mat-icon>
+              <mat-icon style="font-size: 45px; height: 45px; width: 50px;"> people</mat-icon>
             </span>
             <div style="margin-right: 70px"></div>
           </div>
           <mat-card-title style="display: inline-block; text-align: right;"
-            >Today Alerts <br> 
-            <div style="margin-top: 10px; text-align: right; margin-right: 10px;">6</div>
+            >Registered Clients <br> 
+
+            <div style="margin-top: 30px; text-align: right; margin-right: 30px;">{{reg_count}}</div>
+
+            
             </mat-card-title
           >
+
         </mat-card-content>
-      </mat-card>
 
-  </div> -->
-
-
-
-  <!-- <div class="row">
-    <div class="col">
-      <mat-card class="cardWithShadow" style="height: 400px; width: 730px; background-color: #EBF3E8;"> 
-        <mat-card-title style="margin-top: 5px; margin-left: 10px;">Recent 5 days details</mat-card-title>
         
-        <mat-card-content style="background-color: white; width: 730px; height: 365px;">
-    Clients details
-        </mat-card-content>
+        
       </mat-card>
 
     </div>
 
-    <div class="col">
-      <mat-card class="cardWithShadow" style="height: 400px; width: 700px; background-color: #EBF3E8;"> 
-        <mat-card-title style="margin-top: 5px; margin-left: 10px;">Recent 5 days details</mat-card-title>
-        
-        <mat-card-content style="background-color: white; width: 700px; height: 365px;">
-    Clients details
-        </mat-card-content>
-      </mat-card>
+    <div class="col-lg-2">
+      <mat-card
+      class="cardWithShadow card2 position-relative card-hover"
+      style="cursor: pointer; min-height: 26vh; background-color: #9EB8D9;"
+    >
+      <mat-card-content class="p-y-24" style="display: inherit;">
+        <div style="display: block; justify-content: center">
+          <span
+            class="bg-accent text-white rounded-circle d-flex align-items-center justify-content-center" style="height: 80px; width: 80px;"
+          >
+          <mat-icon style="font-size: 45px; height: 45px; width: 50px;">settings_applications</mat-icon>
+          </span>
+          <div style="margin-right: 70px"></div>
+        </div>
+        <mat-card-title style="display: inline-block; text-align: right;"
+          >
+          <!-- Rules Pushed -->Latest Patch version
+
+           <br> 
+
+          <div style="margin-top: 10px; text-align: right; margin-right: 10px;"> {{patch_ver}}</div>
+          </mat-card-title
+        >
+      </mat-card-content>
+    </mat-card>
 
     </div>
 
-  </div> -->
+    <div class="col-lg-2">
+      <mat-card
+      class="cardWithShadow card2 position-relative card-hover"
+      style="cursor: pointer; min-height: 26vh; background-color: #9EB8D9;"
+    >
+      <mat-card-content class="p-y-24" style="display: inherit;">
+        <div style="display: block; justify-content: center">
+          <span
+            class="bg-accent text-white rounded-circle d-flex align-items-center justify-content-center" style="height: 80px; width: 80px;"
+          >
+          <mat-icon style="font-size: 45px; height: 45px; width: 50px;">assignment_returned</mat-icon>
+          </span>
+          <div style="margin-right: 70px"></div>
+        </div>
+        <mat-card-title style="display: inline-block; text-align: right;"
+          >
+          <!-- ClamAV Pushed  --> Patch Updated
+          <br> 
+          <div style="margin-top: 30px; text-align: right; margin-right: 10px;">{{pat_upd_cli}}/{{pat_tol_cli}} </div> <br>
+          <div> {{ pol_per_val }} </div>
+          </mat-card-title
+        >
+      </mat-card-content>
+    </mat-card>
 
+    </div>
+
+    <div class="col-lg-2">
+      <mat-card
+      class="cardWithShadow card2 position-relative card-hover"
+      style="cursor: pointer; min-height: 26vh; background-color: #9EB8D9;"
+    >
+      <mat-card-content class="p-y-24" style="display: inherit;">
+        <div style="display: block; justify-content: center">
+          <span
+            class="bg-accent text-white rounded-circle d-flex align-items-center justify-content-center" style="height: 80px; width: 80px;"
+          >
+          <mat-icon style="font-size: 45px; height: 45px; width: 50px;">assignment_turned_in</mat-icon>
+          </span>
+          <div style="margin-right: 70px"></div>
+        </div>
+        <mat-card-title style="display: inline-block; text-align: right;"
+          >
+          <!-- Patch Updated  -->Latest Policy Version
+          <br> 
+          <div style="margin-top: 10px; text-align: right; margin-right: 10px;">{{policy_ver}}</div>
+          </mat-card-title
+        >
+      </mat-card-content>
+    </mat-card>
+
+    </div>
+
+    <div class="col-lg-2">
+      <mat-card
+      class="cardWithShadow card2 position-relative card-hover"
+      style="cursor: pointer; min-height: 26vh; background-color: #9EB8D9;"
+    >
+      <mat-card-content class="p-y-24" style="display: inherit;">
+        <div style="display: block; justify-content: center">
+          <span
+            class="bg-accent text-white rounded-circle d-flex align-items-center justify-content-center" style="height: 80px; width: 80px;"
+          >
+          <mat-icon style="font-size: 45px; height: 45px; width: 50px;">autorenew</mat-icon>
+          </span>
+          <div style="margin-right: 70px"></div>
+        </div>
+        <mat-card-title style="display: inline-block; text-align: right;"
+          >
+          <!-- Log Recived  --> Policy Updated
+          <br> 
+          <div style="margin-top: 30px; text-align: right; margin-right: 10px;">{{pol_upd_cli}}/{{pol_tot_cli}}</div> <br>
+
+          <div> {{ pat_per_val }} </div>
+
+          </mat-card-title
+        >
+      </mat-card-content>
+    </mat-card>
+
+    </div>
+
+        <!-- <div class="col-lg-2">
+          <mat-card
+          class="cardWithShadow card2 position-relative card-hover"
+          style="cursor: pointer; min-height: 18vh; background-color: #9EB8D9;"
+        >
+          <mat-card-content class="p-y-24" style="display: inherit;">
+            <div style="display: block; justify-content: center">
+              <span
+                class="icon-56 bg-accent text-white rounded-circle d-flex align-items-center justify-content-center"
+              >
+              <mat-icon>assignment_late</mat-icon>
+              </span>
+              <div style="margin-right: 70px"></div>
+            </div>
+            <mat-card-title style="display: inline-block; text-align: right;"
+              >Today Alerts <br> 
+              <div style="margin-top: 10px; text-align: right; margin-right: 10px;">6</div>
+              </mat-card-title
+            >
+          </mat-card-content>
+        </mat-card>
+
+    </div> -->
 
   
 
-</div>
+    <!-- <div class="row">
+      <div class="col">
+        <mat-card class="cardWithShadow" style="height: 400px; width: 730px; background-color: #EBF3E8;"> 
+          <mat-card-title style="margin-top: 5px; margin-left: 10px;">Recent 5 days details</mat-card-title>
+          
+          <mat-card-content style="background-color: white; width: 730px; height: 365px;">
+      Clients details
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+
+      <div class="col">
+        <mat-card class="cardWithShadow" style="height: 400px; width: 700px; background-color: #EBF3E8;"> 
+          <mat-card-title style="margin-top: 5px; margin-left: 10px;">Recent 5 days details</mat-card-title>
+          
+          <mat-card-content style="background-color: white; width: 700px; height: 365px;">
+      Clients details
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+  
+    </div> -->
+
+
+    
+
+  </div>

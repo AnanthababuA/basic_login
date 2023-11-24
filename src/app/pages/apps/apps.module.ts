@@ -91,7 +91,12 @@ import { RegstatusclientComponent } from './regstatusclient/regstatusclient.comp
 import { GroupsComponent } from './groups/groups.component';
 import { PolicyUpdateComponent } from './policy-update/policy-update.component';
 import { PolicySummaryComponent } from './policy-summary/policy-summary.component';
+import { AllServerPolicyVersionComponent } from './all-server-policy-version/all-server-policy-version.component';
+import { AllServerPatchVersionComponent } from './all-server-patch-version/all-server-patch-version.component';
+import { ClientInfoComponent } from './listregclient/client-info/client-info.component';
+import { LogViewerComponent } from './log-viewer/log-viewer.component';
 
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   imports: [
@@ -106,7 +111,7 @@ import { PolicySummaryComponent } from './policy-summary/policy-summary.componen
     DragDropModule,
     NgxPaginationModule,
     HttpClientModule,
-    AngularEditorModule,NgxSpinnerModule,
+    AngularEditorModule,NgxSpinnerModule,MatDatepickerModule,
     // CalendarModule.forRoot({
     //   provide: DateAdapter,
     //   useFactory: adapterFactory,
@@ -160,6 +165,10 @@ import { PolicySummaryComponent } from './policy-summary/policy-summary.componen
     GroupsComponent,
     PolicyUpdateComponent,
     PolicySummaryComponent,
+    AllServerPolicyVersionComponent,
+    AllServerPatchVersionComponent,
+    ClientInfoComponent,
+    LogViewerComponent,
   ],
   providers: [DatePipe],
 })

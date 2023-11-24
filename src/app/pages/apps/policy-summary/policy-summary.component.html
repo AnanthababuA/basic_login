@@ -51,62 +51,99 @@
 
                 </div>
                 <div *ngIf="currentRole === 'URL'">
+
+                    <div style="display:flex;">
+
+                        <div style="margin-bottom: 10px;">Total Entries: {{totalEntries}}</div>
+                        <span class="hintText" style="font-size: 0.7rem; margin-left: 10px; color: gray;">* Maximum 100 entries displayed
+                        </span>
+                    </div>
                     
-                    <table datatable [dtOptions]="dtOptions" class="row-border hover">
-                        <thead>
-                          <tr>
-                            <th>Sr No</th>
-                            <th>URL</th>
-                            <th>Created ON</th>
-                            <th>Status</th>
-                            <th>Version</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let item of urlDetails; let i = index">
-                            <td>{{ i + 1 }}</td>
-                            <td>{{ item.value }}</td>
-                            <td>{{ item.updated_on |
-                                date:'dd-MM-yyyy HH:mm:ss'}}</td>
-                            <td>{{ item.status_text }}</td>
-                            <td>{{ item.version }}</td>
-                          </tr>
-                        </tbody>
-                      </table>
+
+                    <div  class="table-container">
+
+                        <span class="search-div" style="display: flex; flex-direction: row-reverse; margin-top: -13px; ">
+                            <mat-form-field appearance="outline" class="w-100" color="primary" style="width:300px; display: flex; flex-direction: row; align-items: center; justify-content: flex-end;">
+                                <input matInput type="text" placeholder="Search URL" [(ngModel)]="urlSearchText" (keyup.enter)="urlSearch()"/>
+                                <mat-icon matSuffix style="cursor: pointer; background-color: #f7c878; border-radius: 0.5rem;"
+                                  (click)="urlSearch()">
+                                  <i-tabler name="search" class="icon-20 d-flex searchIcon"></i-tabler>
+                                </mat-icon>
+                              </mat-form-field>
+                        </span>
+                        
+                        <table datatable [dtOptions]="dtOptions" class="row-border hover  fixed-table" >
+                            <thead>
+                              <tr>
+                                <th>Sr No</th>
+                                <th>URL</th>
+                                <th>Created On</th>
+                                <th>Status</th>
+                                <th>Version</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let item of urlDetails; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ item.value }}</td>
+                                <td>{{ item.updated_on |
+                                    date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                                <td>{{ item.status_text }}</td>
+                                <td>{{ item.version }}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          
+                    </div>
 
                 </div>
                 <div *ngIf="currentRole === 'IP'">
 
-                    <mat-form-field appearance="outline" class="w-100" color="primary" style="width:300px; display: flex; flex-direction: row; align-items: center; justify-content: flex-end;">
-                        <input matInput type="text" placeholder="Search URL" [(ngModel)]="ipSearchText" (keyup.enter)="ipSearch()"/>
-                        <mat-icon matSuffix style="cursor: pointer; background-color: #f7c878; border-radius: 0.5rem;"
-                          (click)="ipSearch()">
-                          <i-tabler name="search" class="icon-20 d-flex searchIcon"></i-tabler>
-                        </mat-icon>
-                      </mat-form-field>
+                    <div style="display:flex;">
 
+                        <div style="margin-bottom: 10px;">Total Entries: {{totalEntries}}</div>
+                        <span class="hintText" style="font-size: 0.7rem; margin-left: 10px; color: gray;">* Maximum 100 entries displayed
+                        </span>
+                    </div>
 
-                    <table datatable [dtOptions]="dtOptions" class="row-border hover">
-                        <thead>
-                          <tr>
-                            <th>Sr No</th>
-                            <th>URL</th>
-                            <th>Created ON</th>
-                            <th>Status</th>
-                            <th>Version</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let item of ipDetails; let i = index">
-                            <td>{{ i + 1 }}</td>
-                            <td>{{ item.value }}</td>
-                            <td>{{ item.updated_on |
-                                date:'dd-MM-yyyy HH:mm:ss'}}</td>
-                            <td>{{ item.status_text }}</td>
-                            <td>{{ item.version }}</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    <div class="table-container">
+                        <!-- style="display: flex; flex-direction: row-reverse;" -->
+                        <div class="search-div" style="display: flex; flex-direction: row-reverse; margin-top: -13px;" >
+                            <mat-form-field appearance="outline" class="w-100" color="primary" style="width:300px; display: flex; flex-direction: row; align-items: center; justify-content: flex-end;">
+                                <input matInput type="text" placeholder="Search IP" [(ngModel)]="ipSearchText" (keyup.enter)="ipSearch()"/>
+                                <mat-icon matSuffix style="cursor: pointer; background-color: #f7c878; border-radius: 0.5rem;"
+                                  (click)="ipSearch()">
+                                  <i-tabler name="search" class="icon-20 d-flex searchIcon"></i-tabler>
+                                </mat-icon>
+                                <mat-hint style="display: none;"></mat-hint>
+                              </mat-form-field>
+                        </div>
+    
+                        
+    
+                        <table datatable [dtOptions]="dtOptions" class="row-border hover fixed-table">
+                            <thead>
+                              <tr>
+                                <th>Sr No</th>
+                                <th>IP</th>
+                                <th>Created On</th>
+                                <th>Status</th>
+                                <th>Version</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let item of ipDetails; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ item.value }}</td>
+                                <td>{{ item.updated_on |
+                                    date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                                <td>{{ item.status_text }}</td>
+                                <td>{{ item.version }}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          
+                    </div>
 
                 </div>
 

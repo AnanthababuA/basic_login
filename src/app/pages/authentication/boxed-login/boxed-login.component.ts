@@ -145,7 +145,7 @@ export class AppBoxedLoginComponent {
         } else {
           this.spinner.hide();
           // console.log("message", res.message);
-          this.loginError = 'Invalid login ID  or password.';
+          this.loginError = 'Invalid login Username or password.';
         }
 
       })

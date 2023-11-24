@@ -41,11 +41,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-size: 20px !important;
   }
   .hide-menu{
-    font-size: 20px !important;
+    height: 24px;
   }
-  .mat-mdc-list-item-unscoped-content{
-    font-size: 30px !important;
+
+  .hintText{
+    font-size: 1rem !important;
   }
+
+  .dataTables_length{
+    margin-top: 9px;
+  }
+  
+  .dataTables_filter{
+    margin-top: 9px;
+  } 
 
   
 }

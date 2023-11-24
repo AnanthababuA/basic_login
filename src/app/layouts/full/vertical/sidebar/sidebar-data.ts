@@ -41,5 +41,10 @@ export const navItems: NavItem[] = [
     iconName: 'users-group',
     route: 'apps/groups',
   },
+  {
+    displayName: 'Log Viewer',
+    iconName: 'brand-github-copilot',
+    route: 'apps/logViewer',
+  },
   
 ];

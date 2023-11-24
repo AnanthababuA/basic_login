@@ -7,6 +7,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { ClientAdministraionComponent } from '../client-administraion/client-administraion.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AllServerPolicyVersionComponent } from '../all-server-policy-version/all-server-policy-version.component';
+import { AllServerPatchVersionComponent } from '../all-server-patch-version/all-server-patch-version.component';
 
 
 
@@ -67,7 +71,7 @@ export class PolicyConfigurationComponent {
   ipDataSource: MatTableDataSource<string> = new MatTableDataSource();
   serverPolicyVersion: any
   serverPatchVersion:any
-  constructor( private fb: FormBuilder, private common: CommonServicesService, private spinner: NgxSpinnerService, private ts: TokenStorageService) {
+  constructor( private fb: FormBuilder, private common: CommonServicesService, private spinner: NgxSpinnerService, private ts: TokenStorageService, public dialog: MatDialog) {
     // this.notes = this.noteService.getNotes();
 
     this.policyForm = this.fb.group({
@@ -101,6 +105,19 @@ export class PolicyConfigurationComponent {
 
 
   }
+
+  // openDialog(
+  //   enterAnimationDuration: string,
+  //   exitAnimationDuration: string
+  // ): void {
+  //   this.dialog.open(ClientAdministraionComponent, {
+  //     // width: '290px',
+  //     enterAnimationDuration,
+  //     exitAnimationDuration,
+  //   });
+  // }
+
+ 
 
   // addUrl() {
   //   const urlControl = this.urlForm.get('url');
@@ -764,6 +781,25 @@ export class PolicyConfigurationComponent {
 
     }
 
+  }
+
+  // pop up in the policy version control 
+  // AllServerPolicyVersionComponent
+  // AllServerPatchVersionComponent
+  openDialogPolicy() {
+    const dialogRef = this.dialog.open(AllServerPolicyVersionComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openDialogPatch() {
+    const dialogRef = this.dialog.open(AllServerPatchVersionComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
   
 }

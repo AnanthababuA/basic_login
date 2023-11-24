@@ -27,6 +27,7 @@ import { PolicyConfigurationComponent } from './policy-configuration/policy-conf
 import { ListregclientComponent } from './listregclient/listregclient.component';
 import { RegstatusclientComponent } from './regstatusclient/regstatusclient.component';
 import { GroupsComponent } from './groups/groups.component';
+import { LogViewerComponent } from './log-viewer/log-viewer.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -48,7 +49,7 @@ export const AppsRoutes: Routes = [
         path: 'manageunit',
         component: ManageunitComponent,
         data: {
-          title: 'Create Unit',
+          title: 'Manage Unit',
           urls: [
             { title: 'Dashboard', url: '/dashboards/dashboard1' },
             { title: 'Unit' },
@@ -71,7 +72,7 @@ export const AppsRoutes: Routes = [
         path: 'policyConfiguration',
         component: PolicyConfigurationComponent,
         data: {
-          title: 'Policy Configuration',
+          title: 'Manage Policy',
           urls: [
             { title: 'Dashboard', url: '/dashboards/dashboard1' },
             { title: 'Policy Configuration' },
@@ -91,17 +92,17 @@ export const AppsRoutes: Routes = [
         },
       },
       
-      // {
-      //   path: 'chat',
-      //   component: AppChatComponent,
-      //   data: {
-      //     title: 'Chat',
-      //     urls: [
-      //       { title: 'Dashboard', url: '/dashboards/dashboard1' },
-      //       { title: 'Chat' },
-      //     ],
-      //   },
-      // },
+      {
+        path: 'logViewer',
+        component: LogViewerComponent,
+        data: {
+          title: 'Log Viewer',
+          urls: [
+            { title: 'Dashboard', url: '/dashboards/dashboard1' },
+            { title: 'Log Viewer' },
+          ],
+        },
+      },
       // {
       //   path: 'calendar',
       //   component: AppFullcalendarComponent,
@@ -276,7 +277,7 @@ export const AppsRoutes: Routes = [
         path: 'clientAdministration',
         component: ClientAdministraionComponent,
         data: {
-          title: 'Client Administration',
+          title: 'Manage Client',
           urls: [
             { title: 'Dashboard', url: '/dashboards/dashboard1' },
             { title: 'clientAdministration' },
