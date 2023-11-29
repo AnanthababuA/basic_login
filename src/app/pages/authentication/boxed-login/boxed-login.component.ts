@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
+import { CommonServicesService } from 'src/app/services/common-services.service';
 
 
 
@@ -27,16 +28,18 @@ export class AppBoxedLoginComponent {
 
 
 
-  constructor(private fb: FormBuilder, private settings: CoreService, private router: Router, private auth: AuthService, private tokenStorage: TokenStorageService, private spinner: NgxSpinnerService) {
+  constructor(private fb: FormBuilder, private settings: CoreService, private router: Router, private auth: AuthService, private tokenStorage: TokenStorageService, private spinner: NgxSpinnerService,private common: CommonServicesService,) {
 
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      // captcha:  ['', Validators.required]
+      
     })
   }
 
   ngOnInit(): void {
+
+    localStorage.clear();
 
     this.auth.getVersionNumber().subscribe((data: any) => {
 
@@ -52,7 +55,7 @@ export class AppBoxedLoginComponent {
 
       this.spinner.hide();
 
-      // this.es.apiErrorHandler(error);
+      this.common.apiErrorHandler(error);
       console.log("eerror---", error);
 
 
@@ -77,38 +80,21 @@ export class AppBoxedLoginComponent {
   }
 
   submit() {
-    // console.log(this.form.value);
-    // this.router.navigate(['/dashboards/dashboard1']);
-
-    // console.log("spinner show..");
+    
     
 
     this.spinner.show();
 
-    // Use setTimeout to give the spinner time to render
-    // setTimeout(() => {
-    //   console.log("spinner hide..");
-    //   this.spinner.hide();
-    // }, 0);
-
-
-    // console.log("spinner hide..");
-
-
-    // console.log(this.loginForm.value)
+    
 
     if (this.loginForm.valid) {
 
       this.spinner.show();
 
       this.auth.login(this.loginForm.value).subscribe((res) => {
-        // console.log("log in111");
 
         if (res.api_status) {
-          // console.log("log in", res);
-          // console.log("res.access: ",res.access);
-          // console.log("res.refresh: ", res.refresh);
-          // console.log("res.username:55555555 ", res.username);
+         
 
           this.spinner.hide();
 
@@ -119,18 +105,7 @@ export class AppBoxedLoginComponent {
           this.tokenStorage.saveUser(res.username);
 
 
-
-          // console.log("res.refresh: ", res.user_type);
-
-
-          // this.router.navigate(['dashboard']);
-
-          // setTimeout(() => {
-          //   this.router.navigate(['/dashboards/dashboard1']);
-          // }, 2000); 
-
           this.router.navigate(['/dashboards/dashboard']);
-          // this.spinner.hide();
           Swal.fire({
             icon: 'success',
             title: 'Welcome to ISOC',
@@ -152,8 +127,6 @@ export class AppBoxedLoginComponent {
 
     } else {
       this.spinner.hide();
-
-      // console.log("invalid form");
 
     }
 

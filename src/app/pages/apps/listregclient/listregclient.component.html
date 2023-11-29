@@ -1,47 +1,54 @@
-<div *ngIf="showTable">
 
-  <table datatable [dtOptions]="dtOptions" class="row-border hover">
-    <thead>
-      <tr>
-        <th>Sr No</th>
-        <th>ID</th>
-        <th>Client Name</th>
-        <th>Mac ID</th>
-        <th>Unit</th>
-        <th>IP</th>
-        <th>Last Communication Time</th>
-        <th>Client Registration Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of listOfRegClient; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>
-          <div style="display:flex">
+<mat-card  class="  cardWithShadow">
+  <mat-card-content class="p-24 bg-white">
 
-            <span>
-  
-              {{ item.client_id }}
-            </span>
-            <i-tabler name="info-circle-filled" class="icon-20 d-flex" style="margin-left: 0.2rem; color:#26c6da; cursor: pointer;" (click)="rowInfo(item)"></i-tabler>
-          </div>
+    <div *ngIf="showTable">
+    
+      <table datatable [dtOptions]="dtOptions" class="row-border hover">
+        <thead>
+          <tr>
+            <th>Sr No</th>
+            <th>ID</th>
+            <th>Client Name</th>
+            <th>Mac ID</th>
+            <th>Unit</th>
+            <th>IP</th>
+            <th>Last Communication Time</th>
+            <th>Client Registration Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listOfRegClient; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>
+              <div style="display:flex">
+    
+                <span>
+      
+                  {{ item.client_id }}
+                </span>
+                <i-tabler name="info-circle-filled" class="icon-20 d-flex" style="margin-left: 0.2rem; color:#26c6da; cursor: pointer;" (click)="rowInfo(item)"></i-tabler>
+              </div>
+    
+            </td>
+            <td>{{ item.client_name }}</td>
+            <td>{{ item.client_macid }}</td>
+            <td>{{ item.client_unit }}</td>
+            <td>{{ item.client_publicip }}</td>
+    
+            <td>
+              {{ item.last_communication !== 'N/A' ? (item.last_communication | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+            </td>
+            <td>
+              {{ item.client_reg_time !== 'N/A' ? (item.client_reg_time | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>
 
-        </td>
-        <td>{{ item.client_name }}</td>
-        <td>{{ item.client_macid }}</td>
-        <td>{{ item.client_unit }}</td>
-        <td>{{ item.client_publicip }}</td>
-
-        <td>
-          {{ item.last_communication !== 'N/A' ? (item.last_communication | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
-        </td>
-        <td>
-          {{ item.client_reg_time !== 'N/A' ? (item.client_reg_time | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
   <p class="text-white"> {{ loaderStatus }} </p>

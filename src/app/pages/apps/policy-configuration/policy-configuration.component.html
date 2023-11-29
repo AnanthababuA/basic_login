@@ -114,359 +114,416 @@
 
 </mat-card>
 
-<mat-card class="  cardWithShadow">
+<!-- <mat-card class="  cardWithShadow">
     <mat-card-content class="p-24 bg-white">
-        <div class="">
+        <div class=""> -->
 
             <div *ngIf="formNo ==0">
+                        <!-- <mat-card class="  cardWithShadow">
+                            <mat-card-content class="p-24 bg-white"> -->
 
-
-                <!-- <mat-card class="cardWithShadow">
-                    <mat-card-header class="d-flex">
-                        <mat-card-title>Summary</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-
-
-                        <div class="table-responsive m-t-30">
-                            <table class="w-100">
-                                <thead>
-                                    <tr>
-                                        <th class="f-w-600 mat-subtitle-1 f-s-14 p-l-0"
-                                            style="border-bottom: 1px solid #ddd;">Policy type</th>
-                                        <th class="f-w-600 mat-subtitle-1 f-s-14"
-                                            style="border-bottom: 1px solid #ddd;">Total policy</th>
-                                        <th class="f-w-600 mat-subtitle-1 f-s-14"
-                                            style="border-bottom: 1px solid #ddd;">Active policy</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="p-l-0 d-flex justify-content-center"
-                                            style="border-bottom: 1px solid #ddd;">
-                                            <div class="d-flex align-items-center">
-                                                <div class="m-l-16">
-                                                    <h6 class="mat-subtitle-1 f-s-14 f-w-600">IP</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="mat-body-1 text-center" style="border-bottom: 1px solid #ddd;">
-                                            <span>{{policySummary?.IP.total}}</span>
-                                        </td>
-                                        <td class="mat-body-1 text-center" style="border-bottom: 1px solid #ddd;">
-                                            <span>{{policySummary?.IP.addlist}}</span>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="p-l-0 d-flex justify-content-center"
-                                            style="border-bottom: 1px solid #ddd;">
-                                            <div class="d-flex align-items-center">
-                                                <div class="m-l-16">
-                                                    <h6 class="mat-subtitle-1 f-s-14 f-w-600">URL</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="mat-body-1 text-center" style="border-bottom: 1px solid #ddd;">
-                                            {{policySummary?.URL.total}}
-                                        </td>
-                                        <td class="mat-body-1 text-center" style="border-bottom: 1px solid #ddd;">
-                                            <span>{{policySummary?.URL.addlist}}</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-
-                    </mat-card-content>
+                        <app-policy-summary></app-policy-summary>
+        
+                    <!-- </mat-card-content>
                 </mat-card> -->
-
-                <app-policy-summary></app-policy-summary>
-
-            </div>
-
-            <div *ngIf="formNo ==1">
-
-
-                <div class="d-flex">
-                    <div><strong>Policy Author:&nbsp;&nbsp;&nbsp;</strong> </div>
-                    <div>{{userName}}</div>
-                </div>
-
-                <div class="row m-t-20">
-
-
-                    <div class="col-lg-6">
-
-                        <form [formGroup]="urlForm">
-
-                            <!-- f-s-14 class removed from the label  -->
-                            <mat-label class="mat-subtitle-2  f-w-600 m-b-12 d-block">URL</mat-label>
-
-                            <mat-form-field appearance="outline" class="w-100" color="primary">
-                                <input matInput formControlName="url" placeholder="Enter URL" />
-                                <mat-icon matPrefix>
-                                    <i-tabler name="chart-donut-3" class="icon-20 d-flex"></i-tabler>
-                                </mat-icon>
-                                <mat-error
-                                    *ngIf="urlForm.get('url')?.hasError('pattern') && urlForm.get('url')?.invalid">
-                                    Enter valid url
-                                </mat-error>
-
-                            </mat-form-field>
-                            <button mat-flat-button color="primary" class="w-100" type="button" (click)="addUrl()"
-                                style="max-width: max-content; margin-top: 10px">
-                                Add URL
-                            </button>
-
-                        </form>
-
-
-
                     </div>
 
-                    <div class="col-lg-6">
 
-                        <div
-                            style="border-radius: 2rem; box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2); padding-top: 12px;">
+                    <div *ngIf="formNo ==1">
+                        <mat-card class="  cardWithShadow">
+                            <mat-card-content class="p-24 bg-white">
 
 
-
-                            <div style=" min-height: 300px;">
-
-                                <div *ngIf="addedUrls.length > 0" style="max-height: 500px; overflow: auto;">
-
-                                    <mat-card-content>
-                                        <div class="table-responsive m-t-30">
-                                            <table mat-table [dataSource]="dataSource" class="w-100">
-
-                                                <ng-container matColumnDef="serialNumber">
-                                                    <th mat-header-cell *matHeaderCellDef
-                                                        class="f-w-600 mat-subtitle-1 f-s-14">
-                                                        Sr. No.
-                                                    </th>
-                                                    <td mat-cell *matCellDef="let i = index" class="mat-body-1">
-                                                        {{ i + 1 }}
-                                                    </td>
-                                                </ng-container>
-
-                                                <!-- URL Column -->
-                                                <ng-container matColumnDef="URL">
-                                                    <th mat-header-cell *matHeaderCellDef
-                                                        class="f-w-600 mat-subtitle-1 f-s-14">
-                                                        URL
-                                                    </th>
-                                                    <td mat-cell *matCellDef="let url" class="mat-body-1">
-                                                        {{ url }}
-                                                    </td>
-                                                </ng-container>
-
-                                                <!-- Button Column -->
-                                                <ng-container matColumnDef="action">
-                                                    <th mat-header-cell *matHeaderCellDef
-                                                        class="f-w-600 mat-subtitle-1 f-s-14">
-                                                        Action
-                                                    </th>
-                                                    <td mat-cell *matCellDef="let url" class="mat-body-1">
-                                                        <button mat-flat-button color="warn" type="button"
-                                                            (click)="deleteUrl(url)">Delete</button>
-                                                    </td>
-                                                </ng-container>
-
-                                                <!-- Header and Row Definitions -->
-                                                <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
-                                                <tr mat-row
-                                                    *matRowDef="let row; columns: ['serialNumber', 'URL', 'action']">
-                                                </tr>
-                                                <!-- <tr mat-row *matRowDef="let url; columns: displayedColumns1"></tr> -->
-                                            </table>
-                                        </div>
-                                    </mat-card-content>
-
-                                </div>
-
-                                <div *ngIf="addedUrls.length ===0">
-                                    <h2 style="margin-left: 20px;">Please Add URL</h2>
-
-                                </div>
-
+                        <div class="d-flex">
+                            <div><strong>Policy Author:&nbsp;&nbsp;&nbsp;</strong> </div>
+                            <div>{{userName}}</div>
+                        </div>
+        
+                        <div class="row m-t-20">
+        
+        
+                            <div class="col-lg-6">
+        
+                                <form [formGroup]="urlForm">
+        
+                                    <!-- f-s-14 class removed from the label  -->
+                                    <mat-label class="mat-subtitle-2  f-w-600 m-b-12 d-block">URL</mat-label>
+        
+                                    <mat-form-field appearance="outline" class="w-100" color="primary">
+                                        <input matInput formControlName="url" placeholder="Enter URL" />
+                                        <mat-icon matPrefix>
+                                            <i-tabler name="chart-donut-3" class="icon-20 d-flex"></i-tabler>
+                                        </mat-icon>
+                                        <mat-error
+                                            *ngIf="urlForm.get('url')?.hasError('pattern') && urlForm.get('url')?.invalid">
+                                            Enter valid url
+                                        </mat-error>
+        
+                                    </mat-form-field>
+                                    <button mat-flat-button color="primary" class="w-100" type="button" (click)="addUrl()"
+                                        style="max-width: max-content; margin-top: 10px">
+                                        Add URL
+                                    </button>
+        
+                                </form>
+        
+        
+        
                             </div>
-                            <div style="display: flex; justify-content: center; padding-bottom: 15px;">
-                                <button mat-flat-button color="accent" type="button" (click)="submitUrls()"
-                                    [disabled]="addedUrls.length === 0">Submit URLs</button>
+        
+                            <div class="col-lg-6">
+        
+                                <div
+                                    style="border-radius: 2rem; box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2); padding-top: 12px;">
+        
+        
+        
+                                    <div style=" min-height: 300px;">
+        
+                                        <div *ngIf="addedUrls.length > 0" style="max-height: 500px; overflow: auto;">
+        
+                                            <mat-card-content>
+                                                <div class="table-responsive m-t-30 addItemTable">
+                                                    <table mat-table [dataSource]="dataSource" class="w-100">
+        
+                                                        <ng-container matColumnDef="serialNumber">
+                                                            <th mat-header-cell *matHeaderCellDef
+                                                                class="f-w-600 mat-subtitle-1 f-s-14">
+                                                                Sr. No.
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let i = index" class="mat-body-1">
+                                                                {{ i + 1 }}
+                                                            </td>
+                                                        </ng-container>
+        
+                                                        <!-- URL Column -->
+                                                        <ng-container matColumnDef="URL">
+                                                            <th mat-header-cell *matHeaderCellDef
+                                                                class="f-w-600 mat-subtitle-1 f-s-14">
+                                                                URL
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let url" class="mat-body-1">
+                                                                {{ url }}
+                                                            </td>
+                                                        </ng-container>
+        
+                                                        <!-- Button Column -->
+                                                        <ng-container matColumnDef="action">
+                                                            <th mat-header-cell *matHeaderCellDef
+                                                                class="f-w-600 mat-subtitle-1 f-s-14">
+                                                                Action
+                                                            </th>
+                                                            <td mat-cell *matCellDef="let url" class="mat-body-1">
+                                                                <button mat-flat-button color="warn" type="button"
+                                                                    (click)="deleteUrl(url)">Delete</button>
+                                                            </td>
+                                                        </ng-container>
+        
+                                                        <!-- Header and Row Definitions -->
+                                                        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                                                        <tr mat-row
+                                                            *matRowDef="let row; columns: ['serialNumber', 'URL', 'action']">
+                                                        </tr>
+                                                        <!-- <tr mat-row *matRowDef="let url; columns: displayedColumns1"></tr> -->
+                                                    </table>
+                                                </div>
+                                            </mat-card-content>
+        
+                                        </div>
+        
+                                        <div *ngIf="addedUrls.length ===0">
+                                            <h2 style="margin-left: 20px;">Please Add URL</h2>
+        
+                                        </div>
+        
+                                    </div>
+                                    <div style="display: flex; justify-content: center; padding-bottom: 15px;">
+                                        <button mat-flat-button color="accent" type="button" (click)="submitUrls()"
+                                            [disabled]="addedUrls.length === 0">Submit URLs</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-
-            <div *ngIf="formNo ==2">
-
-
-                <div class="d-flex">
-                    <div><strong>Policy Author:&nbsp;&nbsp;&nbsp;</strong> </div>
-                    <div>{{userName}}</div>
-                </div>
-
-                <!-- new form from the url  -->
-                <!-- IP Address Section -->
-                <div class="row m-t-20">
-                    <div class="col-lg-6">
-                        <form [formGroup]="ipForm">
-                            <!-- f-s-14 class removed from label  -->
-                            <mat-label class="mat-subtitle-2 f-w-600 m-b-12 d-block">IP Address</mat-label>
-                            <mat-form-field appearance="outline" class="w-100" color="primary">
-                                <input matInput formControlName="ip" placeholder="Enter IP Address" />
-                                <mat-error *ngIf="ipForm.get('ip')?.hasError('pattern') && ipForm.get('ip')?.invalid">
-                                    Enter a valid IP address
-                                </mat-error>
-                            </mat-form-field>
-                            <button mat-flat-button color="primary" class="w-100" type="button" (click)="addIP()"
-                                style="max-width:  max-content; margin-top: 10px">
-                                Add IP
-                            </button>
-                        </form>
+        
+        
+        
+                    </mat-card-content>
+                </mat-card>
                     </div>
 
-                    <!-- Display Section for Added IPs -->
-                    <div class="col-lg-6">
-                        <div
-                            style="border-radius: 2rem; box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2); padding-top: 12px;">
-                            <div style="min-height: 300px;">
-                                <div *ngIf="addedIPs.length > 0" style="max-height: 500px; overflow: auto;">
-                                    <mat-card-content>
-                                        <div class="table-responsive m-t-30">
-                                            <table mat-table [dataSource]="ipDataSource" class="w-100">
 
-                                                <!-- Serial Number Column -->
-                                                <ng-container matColumnDef="serialNumber">
-                                                    <th mat-header-cell *matHeaderCellDef
-                                                        class="f-w-600 mat-subtitle-1 f-s-14">Sr. No.</th>
-                                                    <td mat-cell *matCellDef="let i = index" class="mat-body-1">{{ i + 1
-                                                        }}</td>
-                                                </ng-container>
+                    
+                    <div *ngIf="formNo ==2">
+                        <mat-card class="  cardWithShadow">
+                            <mat-card-content class="p-24 bg-white">
 
-                                                <!-- IP Address Column -->
-                                                <ng-container matColumnDef="IP">
-                                                    <th mat-header-cell *matHeaderCellDef
-                                                        class="f-w-600 mat-subtitle-1 f-s-14">IP Address</th>
-                                                    <td mat-cell *matCellDef="let ip" class="mat-body-1">{{ ip }}</td>
-                                                </ng-container>
 
-                                                <!-- Button Column -->
-                                                <ng-container matColumnDef="action">
-                                                    <th mat-header-cell *matHeaderCellDef
-                                                        class="f-w-600 mat-subtitle-1 f-s-14">Action</th>
-                                                    <td mat-cell *matCellDef="let ip" class="mat-body-1">
-                                                        <button mat-flat-button color="warn" type="button"
-                                                            (click)="deleteIP(ip)">Delete</button>
-                                                    </td>
-                                                </ng-container>
-
-                                                <!-- Header and Row Definitions -->
-                                                <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
-                                                <tr mat-row
-                                                    *matRowDef="let row; columns: ['serialNumber', 'IP', 'action']">
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </mat-card-content>
-                                </div>
-
-                                <div *ngIf="addedIPs.length === 0">
-                                    <h2 style="margin-left: 20px;">Please Add IP Address</h2>
-                                </div>
+                        <div class="d-flex">
+                            <div><strong>Policy Author:&nbsp;&nbsp;&nbsp;</strong> </div>
+                            <div>{{userName}}</div>
+                        </div>
+        
+                        <!-- new form from the url  -->
+                        <!-- IP Address Section -->
+                        <div class="row m-t-20">
+                            <div class="col-lg-6">
+                                <form [formGroup]="ipForm">
+                                    <!-- f-s-14 class removed from label  -->
+                                    <mat-label class="mat-subtitle-2 f-w-600 m-b-12 d-block">IP Address</mat-label>
+                                    <mat-form-field appearance="outline" class="w-100" color="primary">
+                                        <input matInput formControlName="ip" placeholder="Enter IP Address" />
+                                        <mat-error *ngIf="ipForm.get('ip')?.hasError('pattern') && ipForm.get('ip')?.invalid">
+                                            Enter a valid IP address
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <button mat-flat-button color="primary" class="w-100" type="button" (click)="addIP()"
+                                        style="max-width:  max-content; margin-top: 10px">
+                                        Add IP
+                                    </button>
+                                </form>
                             </div>
-                            <div style="display: flex; justify-content: center; padding-bottom: 15px;">
-                                <button mat-flat-button color="accent" type="button" (click)="submitIPs()"
-                                    [disabled]="addedIPs.length === 0">Submit IPs</button>
+        
+                            <!-- Display Section for Added IPs -->
+                            <div class="col-lg-6">
+                                <div
+                                    style="border-radius: 2rem; box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2); padding-top: 12px;">
+                                    <div style="min-height: 300px;">
+                                        <div *ngIf="addedIPs.length > 0" style="max-height: 500px; overflow: auto;">
+                                            <mat-card-content>
+                                                <div class="table-responsive m-t-30 addItemTable">
+                                                    <table mat-table [dataSource]="ipDataSource" class="w-100">
+        
+                                                        <!-- Serial Number Column -->
+                                                        <ng-container matColumnDef="serialNumber">
+                                                            <th mat-header-cell *matHeaderCellDef
+                                                                class="f-w-600 mat-subtitle-1 f-s-14">Sr. No.</th>
+                                                            <td mat-cell *matCellDef="let i = index" class="mat-body-1">{{ i + 1
+                                                                }}</td>
+                                                        </ng-container>
+        
+                                                        <!-- IP Address Column -->
+                                                        <ng-container matColumnDef="IP">
+                                                            <th mat-header-cell *matHeaderCellDef
+                                                                class="f-w-600 mat-subtitle-1 f-s-14">IP Address</th>
+                                                            <td mat-cell *matCellDef="let ip" class="mat-body-1">{{ ip }}</td>
+                                                        </ng-container>
+        
+                                                        <!-- Button Column -->
+                                                        <ng-container matColumnDef="action">
+                                                            <th mat-header-cell *matHeaderCellDef
+                                                                class="f-w-600 mat-subtitle-1 f-s-14">Action</th>
+                                                            <td mat-cell *matCellDef="let ip" class="mat-body-1">
+                                                                <button mat-flat-button color="warn" type="button"
+                                                                    (click)="deleteIP(ip)">Delete</button>
+                                                            </td>
+                                                        </ng-container>
+        
+                                                        <!-- Header and Row Definitions -->
+                                                        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                                                        <tr mat-row
+                                                            *matRowDef="let row; columns: ['serialNumber', 'IP', 'action']">
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </mat-card-content>
+                                        </div>
+        
+                                        <div *ngIf="addedIPs.length === 0">
+                                            <h2 style="margin-left: 20px;">Please Add IP Address</h2>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; justify-content: center; padding-bottom: 15px;">
+                                        <button mat-flat-button color="accent" type="button" (click)="submitIPs()"
+                                            [disabled]="addedIPs.length === 0">Submit IPs</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-
-
-
-            </div>
-
-            <div *ngIf="formNo ==3">
-
-
-                <div class="row">
-                    <div class="col-lg-6 col-sm-8">
-                        <mat-card class="b-1 shadow-none">
-                            <mat-card-header style="display: flex;justify-content: center;margin-bottom: 24px;">
-                                <mat-card-title><strong>
-                                        Bulk Upload Policies
-                                    </strong></mat-card-title>
-                            </mat-card-header>
-                            <mat-card-content class="b-t-1" style="margin-bottom:1rem">
-
-                                <p> *Upload only .csv file with policy type and value.</p>
-
-                                <div style="margin-top: 2rem;">
-
-                                    <input type="file" class="file-upload" accept=".csv" (change)="uploadPolicy($event)"
-                                        id="fileInput">
-                                    <label for="fileInput" class="custom-label">Choose a CSV file</label>
-                                </div>
-                            </mat-card-content>
-                        </mat-card>
+        
+        
+        
+        
+                    </mat-card-content>
+                </mat-card>
                     </div>
 
-                </div>
+                    <div *ngIf="formNo ==3">
+        
+        
+                        <div class="row">
+            
+                            <div  class="col-lg-6 col-sm-6"  style="display: flex;">
+            
+                                <mat-card class="flex-fill">
+                                    <mat-card-header style="display: flex;justify-content: center;margin-bottom: 24px;">
+                                        <mat-card-title><strong>
+                                                Bulk Upload Policies
+                                            </strong></mat-card-title>
+                                    </mat-card-header>
 
+                                    <div class="flex-fill" style="display: flex; flex-direction: column;">
+                                    <mat-card-content class="b-t-1 flex-fill" style="margin-bottom: 1rem; display: flex; flex-direction: column; justify-content: center;">
+                    
 
-            </div>
+                                            <p style="display: flex;
+                                            justify-content: center;"> *Upload only .csv file with policytype and value.</p>
+                        
+                                            <div style=" display:flex; justify-content: center">
+                        
+                                                <input type="file" class="file-upload" accept=".csv" (change)="uploadPolicy($event)"
+                                                    id="fileInput">
+                                                <label for="fileInput" class="custom-label" style="display: flex">
+                                                    <i-tabler name="file-spreadsheet" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                                                    Choose a CSV file</label>
+                                            </div>
+                                            
+                                        </mat-card-content>
+                                    </div>
+                                </mat-card>
+                            </div>
+            
+                
+                            <div  class="col-lg-6 col-sm-6" style="display: flex;">
+                                
+                                <mat-card class="flex-fill">
+                                    <mat-card-header style="display: flex;justify-content: center;margin-bottom: 24px;">
+                                        <mat-card-title><strong>
+                                                Sample CSV
+                                            </strong></mat-card-title>
+                                    </mat-card-header>
+                                    <mat-card-content class="b-t-1" style="margin-bottom:1rem">
+                    
+                                        <div style="display:flex; justify-content:space-evenly;margin: 1rem auto;">
+                                            
+                                            <img src="../../../../assets/images/sample_url_google_file.png" alt="Sample image not found" style="border-radius: 1rem;box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);">
+                                            <img src="../../../../assets/images/sample_ip_goolge_file.png" alt="Sample image not found" style="border-radius: 1rem;box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);">
+                                        </div>
+                                        <button (click)="downloadCSV()" 
+                                        style="background-color: #007bff;
+                                        color: #fff;
+                                        padding: 10px;
+                                        cursor: pointer;
+                                        border-radius: 1rem;
+                                        border: none;
+                                        font-weight: initial;
+                                        font-size: 20px;
+                                        margin: auto;
+                                        display: flex;">
+                                            Download Sample Template
+                                          </button>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                        </div>
+                      
+                           
+                    
+                            <!-- for download csv  -->
+                            <div>
+                    
+                                <table id="myTable" style="display: none">
+                                    <thead>
+                                      <tr>
+                                        <th>policytype</th>
+                                        <th>value</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <!-- <tr>
+                                        <td>url</td>
+                                        <td>facebook.com</td>
+                                      </tr>
+                                      <tr>
+                                        <td>ip</td>
+                                        <td>10.56.120.5</td>
+                                      </tr> -->
+                                     
+                                    </tbody>
+                                  </table>
+                            </div>
+                    
+                       
+                    
+                    
+                    </div>
 
             <div *ngIf="formNo ==4">
+                        <!-- <mat-card class="  cardWithShadow">
+                            <mat-card-content class="p-24 bg-white"> -->
 
-                <app-policy-update></app-policy-update>
-            </div>
-
-            <div *ngIf="formNo ==5">
-                <div style="display:flex; justify-content: center;">
-
-                    <h1 style="display: flex; justify-content: center;">Server Policy Version :
-                        {{serverPolicyVersion?.policy_version}}</h1> &nbsp;
-                    <i-tabler name="info-circle-filled" class="icon-48 d-flex"
-                        style="margin-left: 0.2rem; color:#26c6da; cursor: pointer;margin: auto 0;"
-                        (click)="openDialogPolicy()"></i-tabler>
-                </div>
-
-                <h1 style="display: flex; justify-content: center;">Updated On : {{serverPolicyVersion?.created_on |
-                    date:'dd-MM-yyyy HH:mm:ss' }}</h1>
+                        <app-policy-update></app-policy-update>
+                    <!-- </mat-card-content>
+                </mat-card> -->
+                    </div>
 
 
+                    <div *ngIf="formNo ==5">
+                        <mat-card class="  cardWithShadow">
+                            <mat-card-content class="p-24 bg-white">
+                        <div style="display:flex; justify-content: center;">
+        
+                            <h1 style="display: flex; justify-content: center;">Server Policy Version :
+                                {{serverPolicyVersion?.policy_version}}</h1> &nbsp;
+                            <i-tabler name="info-circle-filled" class="icon-48 d-flex"
+                                style="margin-left: 0.2rem; color:#26c6da; cursor: pointer;margin: auto 0;"
+                                (click)="openDialogPolicy()"></i-tabler>
+                        </div>
+        
+                        <h1 style="display: flex; justify-content: center;">Updated On : {{serverPolicyVersion?.created_on |
+                            date:'dd-MM-yyyy HH:mm:ss' }}</h1>
+        
+        
+        
+                        </mat-card-content>
+                    </mat-card>
+                    </div>
+        
 
-            </div>
 
-            <div *ngIf="formNo ==6">
+                    <div *ngIf="formNo ==6">
+                        <mat-card class="  cardWithShadow">
+                            <mat-card-content class="p-24 bg-white">
 
-                <div style="display:flex; justify-content: center;">
+                        <div style="display:flex; justify-content: center;">
+        
+                            <h1 style="display: flex; justify-content: center;">Server Patch Id :
+                                {{serverPatchVersion?.patchid}}
+                            </h1> &nbsp;
+                            <i-tabler name="info-circle-filled" class="icon-48 d-flex"
+                                style="margin-left: 0.2rem; color:#26c6da; cursor: pointer;margin: auto 0;"
+                                (click)="openDialogPatch()"></i-tabler>
+                        </div>
+        
+        
+                        <h1 style="display: flex; justify-content: center;">Updated On : {{serverPatchVersion?.updated_on |
+                            date:'dd-MM-yyyy HH:mm:ss'}}</h1>
+                        </mat-card-content>
+                    </mat-card>
+                    </div>
 
-                    <h1 style="display: flex; justify-content: center;">Server Patch Id :
-                        {{serverPatchVersion?.patchid}}
-                    </h1> &nbsp;
-                    <i-tabler name="info-circle-filled" class="icon-48 d-flex"
-                        style="margin-left: 0.2rem; color:#26c6da; cursor: pointer;margin: auto 0;"
-                        (click)="openDialogPatch()"></i-tabler>
-                </div>
 
+           
 
-                <h1 style="display: flex; justify-content: center;">Updated On : {{serverPatchVersion?.updated_on |
-                    date:'dd-MM-yyyy HH:mm:ss'}}</h1>
-            </div>
+            
 
-        </div>
+            
+
+            
+
+           
+
+            
+            
+
+        <!-- </div>
     </mat-card-content>
 
-</mat-card>
+</mat-card> -->
+
+
+
+       
+
 
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">

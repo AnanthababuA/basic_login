@@ -93,7 +93,7 @@ export class PolicyUpdateComponent {
       (error) => {
         this.spinner.hide();
 
-        // this.es.apiErrorHandler(error);
+        this.common.apiErrorHandler(error);
         console.log('eerror---', error);
       }
     );
@@ -129,7 +129,7 @@ export class PolicyUpdateComponent {
       (error) => {
         this.spinner.hide();
 
-        // this.es.apiErrorHandler(error);
+        this.common.apiErrorHandler(error);
         console.log('eerror---', error);
       }
     );
@@ -172,7 +172,7 @@ export class PolicyUpdateComponent {
 
     //   this.spinner.hide();
 
-    //   // this.es.apiErrorHandler(error);
+    //   this.common.apiErrorHandler(error);
     //   console.log("eerror---", error);
 
     // })
@@ -226,7 +226,7 @@ export class PolicyUpdateComponent {
       (error) => {
         this.spinner.hide();
 
-        // this.es.apiErrorHandler(error);
+        this.common.apiErrorHandler(error);
         console.log('eerror---', error);
       }
     );
@@ -257,7 +257,7 @@ export class PolicyUpdateComponent {
       (error) => {
         this.spinner.hide();
 
-        // this.es.apiErrorHandler(error);
+        this.common.apiErrorHandler(error);
         console.log('eerror---', error);
       }
     );
@@ -408,7 +408,7 @@ export class PolicyUpdateComponent {
           (error) => {
             this.spinner.hide();
 
-            // this.es.apiErrorHandler(error);
+            this.common.apiErrorHandler(error);
             console.log('eerror---', error);
           }
         );
@@ -443,7 +443,7 @@ export class PolicyUpdateComponent {
       (error) => {
         this.spinner.hide();
 
-        // this.es.apiErrorHandler(error);
+        this.common.apiErrorHandler(error);
         console.log('eerror---', error);
       }
     );
@@ -474,7 +474,7 @@ export class PolicyUpdateComponent {
       (error) => {
         this.spinner.hide();
 
-        // this.es.apiErrorHandler(error);
+        this.common.apiErrorHandler(error);
         console.log('eerror---', error);
       }
     );
@@ -663,7 +663,7 @@ export class PolicyUpdateComponent {
           (error) => {
             this.spinner.hide();
 
-            // this.es.apiErrorHandler(error);
+            this.common.apiErrorHandler(error);
             console.log('eerror---', error);
           }
         );

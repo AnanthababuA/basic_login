@@ -19,10 +19,10 @@
   }
   
 
-  .mat-mdc-form-field-subscript-wrapper{
-    display: none !important;
-    // width:0px !important;
-  }
+  // .mat-mdc-form-field-subscript-wrapper{
+  //   display: none !important;
+  //   // width:0px !important;
+  // }
 
 //   .dataTables_paginate{
 //     display: none !important;
@@ -33,5 +33,21 @@
   
 //   }
 
+// ngx-spinner {
+//   /* Add styles to position the spinner as needed */
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   // border: 2px solid red;
+//   // opacity: ;
+//   /* Add other styles as required */
+// }
+
+.spinner{
+  position: relative;
+  // opacity: 0.5;
+  // background-color: rgba(0, 0, 0, 0.4);
+}
     
   

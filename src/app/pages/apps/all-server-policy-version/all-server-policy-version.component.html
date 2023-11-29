@@ -16,7 +16,7 @@
                 <tr *ngFor="let item of allServerPolicy; let i = index">
                     <td>{{ i + 1 }}</td>
 
-                    <td>{{ item.versionid }}</td>
+                    <td>{{ item.policy_version }}</td>
 
                     <td>
                         {{ item.created_on !== 'N/A' ? (item.created_on | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
@@ -26,6 +26,10 @@
             </tbody>
         </table>
     </div>
+    <button mat-flat-button color="primary" mat-dialog-close cdkFocusInitial style="margin: auto;
+    display: flex;margin-top: 1rem;">
+        Ok
+    </button>
 
 </div>
 

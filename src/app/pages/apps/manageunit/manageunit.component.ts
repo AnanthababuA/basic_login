@@ -47,7 +47,6 @@ export class ManageunitComponent {
 
   deleteUnit = {
     unit_id: '',
-    
   };
 
   secondFormGroup = this._formBuilder.group({
@@ -99,6 +98,7 @@ export class ManageunitComponent {
   dtElement!: DataTableDirective;
 
   ngOnInit(): void {
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -114,62 +114,53 @@ export class ManageunitComponent {
       buttons: [
         {
           extend: 'copy',
-          text: `<span style="display:flex; align-items: center;"> Copy</span>`,
-          className:
-            'bg-success rounded btn-sm btn btn-warning m-x-6 text-dark',
+          text: `<span style="display:flex; align-items: center;font-weight: initial;color: black;">
+          <svg style="margin-right: 5px;" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" /><path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" /></svg>
+            Copy</span>`,
+          className: 'bg-success f-s-12 p-x-8 p-y-4 m-x-8  m-x-8 rounded text-white',
         },
         {
           extend: 'print',
-          text: ' <span style="display:flex; align-items: center;"> Print</span>',
-          className:
-            ' bg-warning rounded btn-sm btn btn-primary mx-2 text-dark',
+          text: `<span style="display:flex; align-items: center;font-weight: initial;color: black;">
+          <svg style="margin-right: 5px;" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-printer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" /><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /><path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" /></svg>
+           Print</span>`,
+          className: ' bg-warning f-s-12 p-x-8 p-y-4 rounded text-white',
         },
-
-        // {
-        //   extend: 'excel',
-        //   text: '<i class="mdi mdi-printer"></i> Excel',
-        //   className: ' bg-primary rounded btn-sm btn btn-primary mx-2 text-dark',
-        // },
-
         {
           extend: 'csv',
-          text: '<span style="display:flex; align-items: center;"> CSV</span>',
-          className: 'bg-error rounded btn-sm btn btn-success  text-dark',
+          text: `<span style="display:flex; align-items: center;font-weight: initial;color: black;color: black;"> 
+          <svg style="margin-right: 5px;" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-spreadsheet" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M8 11h8v7h-8z" /><path d="M8 15h8" /><path d="M11 11v7" /></svg>
+          CSV</span>`,
+          className: 'bg-error f-s-12 p-x-8 p-y-4 rounded text-white',
         },
       ],
     };
 
-    // for (let i = 1; i <= 20; i++) {
-    //   this.dummyData.push({
-    //     id: i,
-    //     firstName: `First Name ${i}`,
-    //     lastName: `Last Name ${i}`,
-    //   });
-    // }
 
-    console.log('in ng init');
+
 
     this.unitNameLocalAdminfun();
 
-    // this.unitTypeLocalAdminfun()
+    
 
     // Initialize editMode array with 'false' for each row initially
     this.editMode = new Array(this.manageUnitDetails.length).fill(false);
   }
 
   unitNameLocalAdminfun() {
-    console.log();
+    // console.log();
     this.spinner.show();
+    this.unitName = '';
     this.common.unitNameLocalAdmin().subscribe(
       (res: any) => {
-        console.log('in the unit name subscribe');
+        // console.log('in the unit name subscribe');
 
         if (res.api_status === true) {
           this.spinner.hide();
 
           this.unitName = res.data;
 
-          console.log('unit Name: ', this.unitName);
+          // console.log('unit Name: ', this.unitName);
           this.spinner.hide();
         } else {
           this.spinner.hide();
@@ -182,25 +173,23 @@ export class ManageunitComponent {
       (error) => {
         this.spinner.hide();
 
-        // this.es.apiErrorHandler(error);
-        console.log('eerror---', error);
+        this.common.apiErrorHandler(error);
+        // console.log('eerror---', error);
+        // this.common.apiErrorHandler(error);
       }
     );
   }
 
   tabChanged(event: any) {
-    console.log('tab changed', event);
+    // console.log('tab changed', event);
     if (event === 1) {
-      console.log('mange unit call');
+      // console.log('mange unit call');
       this.showEventTable = false;
-      this.unitDetailsAPI()
-    
-
+      this.unitDetailsAPI();
     }
     // You can handle the tab change event here if needed
   }
 
-  
   /**
    * Set the paginator and sort after the view init since this component will
    * be able to query its view for the initialized paginator and sort.
@@ -210,21 +199,21 @@ export class ManageunitComponent {
     this.dataSource.sort = this.sort;
   }
 
-  unitDetailsAPI(){
+  unitDetailsAPI() {
     this.spinner.show();
     this.common.UnitDetails().subscribe(
       (res) => {
-        console.log('log in111');
+        // console.log('log in111');
 
         if (res.api_status) {
           this.manageUnitDetails = res.data_value;
-          console.log('manage unit details', this.manageUnitDetails);
+          // console.log('manage unit details', this.manageUnitDetails);
           this.showEventTable = true;
           this.spinner.hide();
         } else {
           this.spinner.hide();
           this.showEventTable = false;
-          console.log('message', res.message);
+          // console.log('message', res.message);
           Swal.fire({
             icon: 'error',
             title: `${res.message}`,
@@ -234,7 +223,7 @@ export class ManageunitComponent {
       (err) => {
         this.spinner.hide();
 
-        console.log('unable to log in', err);
+        // console.log('unable to log in', err);
         // this.common.apiErrorHandler(err);
       }
     );
@@ -250,28 +239,28 @@ export class ManageunitComponent {
       // Store original values before editing starts
       this.originalValues[index] = {
         unit_name: this.manageUnitDetails[index].unit_name,
-        unit_desc: this.manageUnitDetails[index].unit_desc
+        unit_desc: this.manageUnitDetails[index].unit_desc,
       };
     } else {
       // Revert changes on cancel
-      this.manageUnitDetails[index].unit_name = this.originalValues[index].unit_name;
-      this.manageUnitDetails[index].unit_desc = this.originalValues[index].unit_desc;
+      this.manageUnitDetails[index].unit_name =
+        this.originalValues[index].unit_name;
+      this.manageUnitDetails[index].unit_desc =
+        this.originalValues[index].unit_desc;
     }
   }
-
-
 
   // Create a method to save changes when 'Save' is clicked
   saveChanges(index: number) {
     // Save changes made to the row here, for example:
-    console.log('Updated Unit Name:', this.manageUnitDetails[index].unit_name);
-    console.log('Updated Unit Desc:', this.manageUnitDetails[index].unit_desc);
-    console.log('Updated Unit Desc:', this.manageUnitDetails[index].unit_id);
+    // console.log('Updated Unit Name:', this.manageUnitDetails[index].unit_name);
+    // console.log('Updated Unit Desc:', this.manageUnitDetails[index].unit_desc);
+    // console.log('Updated Unit Desc:', this.manageUnitDetails[index].unit_id);
 
     this.unitDetails.unit_id = this.manageUnitDetails[index].unit_id;
     this.unitDetails.unit_name = this.manageUnitDetails[index].unit_name;
     this.unitDetails.unit_desc = this.manageUnitDetails[index].unit_desc;
-    console.log('res is', this.unitDetails);
+    // console.log('res is', this.unitDetails);
     this.editUnitApi();
 
     // Toggle back to view mode after saving changes
@@ -291,23 +280,13 @@ export class ManageunitComponent {
       confirmButtonText: 'Delete',
       denyButtonText: `Cancel`,
     }).then((result) => {
-
       if (result.isConfirmed) {
-
-    this.deleteUnitApi()
-     
-
+        this.deleteUnitApi();
       } else if (result.isDenied) {
-
-        Swal.fire('Upload file cancelled', '', 'info')
-
+        Swal.fire('Upload file cancelled', '', 'info');
       }
-    })
+    });
 
-
-
-
-    
     // this.deleteUnitApi()
     // Additional logic for deleting the row...
 
@@ -320,33 +299,33 @@ export class ManageunitComponent {
   }
 
   submit() {
-    console.log('submit');
-    console.log('secondform====', this.secondFormGroup);
+    // console.log('submit');
+    // console.log('secondform====', this.secondFormGroup);
 
     // const unitnameValue = this.secondFormGroup?.get('unitname')?.value;
     // const unitdescValue = this.secondFormGroup?.get('unitdesc')?.value;
 
-    // console.log('unitname:', unitnameValue);
-    // console.log('unitdesc:', unitdescValue);
+    // // console.log('unitname:', unitnameValue);
+    // // console.log('unitdesc:', unitdescValue);
 
     if (this.secondFormGroup.valid) {
       // Both fields are filled; perform the submission
-      console.log('Submit data:', this.secondFormGroup.value);
+      // console.log('Submit data:', this.secondFormGroup.value);
       this.params = this.secondFormGroup.value;
-      console.log('paramsss', this.params);
+      // console.log('paramsss', this.params);
 
       this.spinner.show();
       this.common.createUnit(this.secondFormGroup.value).subscribe(
         (res) => {
           // this.spinner.hide();
 
-          console.log('log in111');
+          // console.log('log in111');
           this.unitNameLocalAdminfun();
 
           if (res.api_status) {
             this.spinner.hide();
 
-            console.log('otp', res);
+            // console.log('otp', res);
 
             Swal.fire({
               icon: 'success',
@@ -357,7 +336,7 @@ export class ManageunitComponent {
 
             // alert("OTP Generated Successfully\n"+ res.otp);
             // this.isPopupVisible = 1;
-            // console.log('Form values:', this.generateOTPForm.value.callerName);
+            // // console.log('Form values:', this.generateOTPForm.value.callerName);
 
             // this.otpValue = res.otp;
             this.spinner.hide();
@@ -368,13 +347,13 @@ export class ManageunitComponent {
               icon: 'error',
               title: `${res.message}`,
             });
-            console.log('message', res.message);
+            // console.log('message', res.message);
           }
         },
         (err) => {
           this.spinner.hide();
 
-          console.log('unable to log in', err);
+          // console.log('unable to log in', err);
           // this.common.apiErrorHandler(err);
         }
       );
@@ -397,11 +376,11 @@ export class ManageunitComponent {
   }
 
   editUnitApi() {
-    console.log();
+    // console.log();
     this.spinner.show();
     this.common.editUnit(this.unitDetails).subscribe(
       (res: any) => {
-        console.log('in the unit name subscribe');
+        // console.log('in the unit name subscribe');
 
         if (res.api_status === true) {
           this.spinner.hide();
@@ -411,7 +390,7 @@ export class ManageunitComponent {
             icon: 'success',
             title: `${res.message}`,
           });
-          // console.log("unit Name: ", this.unitName);
+          // // console.log("unit Name: ", this.unitName);
           this.spinner.hide();
         } else {
           this.spinner.hide();
@@ -424,29 +403,29 @@ export class ManageunitComponent {
       (error) => {
         this.spinner.hide();
 
-        // this.es.apiErrorHandler(error);
-        console.log('eerror---', error);
+        this.common.apiErrorHandler(error);
+        // console.log('eerror---', error);
       }
     );
   }
 
   deleteUnitApi() {
-    console.log();
+    // console.log();
     this.spinner.show();
     this.common.deleteUnit(this.deleteUnit).subscribe(
       (res: any) => {
-        console.log('in the unit name subscribe');
+        // console.log('in the unit name subscribe');
 
         if (res.api_status === true) {
           this.spinner.hide();
-          this.unitDetailsAPI()
+          this.unitDetailsAPI();
 
           // this.unitName = res.data
           Swal.fire({
             icon: 'success',
             title: `${res.message}`,
           });
-          // console.log("unit Name: ", this.unitName);
+          // // console.log("unit Name: ", this.unitName);
           this.spinner.hide();
         } else {
           this.spinner.hide();
@@ -459,8 +438,8 @@ export class ManageunitComponent {
       (error) => {
         this.spinner.hide();
 
-        // this.es.apiErrorHandler(error);
-        console.log('eerror---', error);
+        this.common.apiErrorHandler(error);
+        // console.log('eerror---', error);
       }
     );
   }

@@ -143,7 +143,7 @@ this.policyValue = this.policyForm.value.policyvalue
     
           this.spinner.hide();
     
-          // this.es.apiErrorHandler(error);
+          this.common.apiErrorHandler(error);
           console.log("eerror---", error);
     
     
@@ -188,7 +188,7 @@ console.log("--",this.policyForm.value.policyvalue);
     
           this.spinner.hide();
     
-          // this.es.apiErrorHandler(error);
+          this.common.apiErrorHandler(error);
           console.log("eerror---", error);
     
     

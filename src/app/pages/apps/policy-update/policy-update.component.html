@@ -9,7 +9,7 @@
           <div class="col-lg-3 col-sm-5">
             <div>
               <h2 style="margin-top: 0;">Blocked URLs</h2>
-              <mat-form-field appearance="outline" class="w-100" color="primary">
+              <mat-form-field appearance="outline" class="w-100" color="primary" style=" ">
                 <input matInput type="text" placeholder="Search Blocked URL" [(ngModel)]="searchText" (keyup.enter)="searchAllowedUrl()"/>
                 <mat-icon matSuffix style="cursor: pointer; background-color: #f7c878; border-radius: 0.5rem;"
                   (click)="searchAllowedUrl()">
@@ -52,7 +52,7 @@
 
             <h2 style="margin-top: 0;">Allowed URLs</h2>
 
-            <mat-form-field appearance="outline" class="w-100" color="primary">
+            <mat-form-field appearance="outline" class="w-100" color="primary" style=" ">
               <input matInput type="text" placeholder="Search Allowed URL" [(ngModel)]="blockedSearchText" (keyup.enter)="searchBlockedUrl()"/>
               <mat-icon matSuffix style="cursor: pointer; background-color: #f7c878; border-radius: 0.5rem;"
                 (click)="searchBlockedUrl()">
@@ -180,7 +180,7 @@
           <div class="col-lg-3 col-sm-5">
             <div>
               <h2 style="margin-top: 0;">Blocked IPs</h2>
-              <mat-form-field appearance="outline" class="w-100" color="primary">
+              <mat-form-field appearance="outline" class="w-100" color="primary" style=" ">
                 <input matInput type="text" placeholder="Search Blocked IP" [(ngModel)]="searchTextForAllowedIPs" (keyup.enter)="searchAllowedIP()" />
                 <mat-icon matSuffix style="cursor: pointer; background-color: #f7c878; border-radius: 0.5rem;"
                   (click)="searchAllowedIP()">
@@ -223,7 +223,7 @@
 
             <h2 style="margin-top: 0;">Allowed IPs</h2>
 
-            <mat-form-field appearance="outline" class="w-100" color="primary">
+            <mat-form-field appearance="outline" class="w-100" color="primary" style=" ">
               <input matInput type="text" placeholder="Search Allowed IP" [(ngModel)]="searchTextForBlockedIPs" (keyup.enter)="applyBlockedIPFilter()" />
               <mat-icon matSuffix style="cursor: pointer; background-color: #f7c878; border-radius: 0.5rem;"
                 (click)="applyBlockedIPFilter()">

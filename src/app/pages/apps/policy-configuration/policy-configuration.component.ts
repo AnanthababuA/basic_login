@@ -89,13 +89,11 @@ export class PolicyConfigurationComponent {
       policytype: [''],
     })
 
-    // this.urlForm = this.fb.group({
-    //   url: ['', Validators.required]
-    // });
+
 
     this.urlForm = this.fb.group({
-      // url: ['']
-      url: ['', [Validators.pattern(/.*\..*/)]],
+     
+      url: ['', [ Validators.pattern(/^[^.]*\.[^.]+$/)]],
 
     });
 
@@ -106,50 +104,8 @@ export class PolicyConfigurationComponent {
 
   }
 
-  // openDialog(
-  //   enterAnimationDuration: string,
-  //   exitAnimationDuration: string
-  // ): void {
-  //   this.dialog.open(ClientAdministraionComponent, {
-  //     // width: '290px',
-  //     enterAnimationDuration,
-  //     exitAnimationDuration,
-  //   });
-  // }
-
- 
-
-  // addUrl() {
-  //   const urlControl = this.urlForm.get('url');
-
-  //   if (urlControl && urlControl.valid) {
-  //     const newUrl = urlControl.value;
-  //     this.addedUrls.push(newUrl);
-  //     this.urlForm.reset();
-  //   }
-  // }
-
-  // addUrl() {
-  //   const urlControl = this.urlForm.get('url');
-
-  //   if (urlControl && urlControl.valid) {
-  //     const newUrl = { url: urlControl.value, id: this.nextId++ };
-  //     this.addedUrls.push(newUrl);
-  //     this.urlForm.reset();
-  //   }
-  // }
 
 
-  // addUrl() {
-  //   const urlControl = this.urlForm.get('url');
-
-  //   if (urlControl && urlControl.valid) {
-  //     const newUrl = urlControl.value;
-  //     this.addedUrls.push(newUrl);
-  //     this.dataSource.data = this.addedUrls; // Update dataSource
-  //     this.urlForm.reset();
-  //   }
-  // }
 
   addUrl() {
     const urlControl = this.urlForm.get('url');
@@ -237,7 +193,7 @@ export class PolicyConfigurationComponent {
 
       this.spinner.hide();
 
-      // this.es.apiErrorHandler(error);
+      this.common.apiErrorHandler(error);
       console.log("eerror---", error);
 
 
@@ -323,7 +279,7 @@ export class PolicyConfigurationComponent {
 
       this.spinner.hide();
 
-      // this.es.apiErrorHandler(error);
+      this.common.apiErrorHandler(error);
       console.log("eerror---", error);
 
 
@@ -407,7 +363,7 @@ export class PolicyConfigurationComponent {
 
       this.spinner.hide();
 
-      // this.es.apiErrorHandler(error);
+      this.common.apiErrorHandler(error);
       console.log("eerror---", error);
 
 
@@ -499,7 +455,7 @@ export class PolicyConfigurationComponent {
 
       this.spinner.hide();
 
-      // this.es.apiErrorHandler(error);
+      this.common.apiErrorHandler(error);
       console.log("eerror---", error);
 
 
@@ -540,7 +496,7 @@ export class PolicyConfigurationComponent {
 
       this.spinner.hide();
 
-      // this.es.apiErrorHandler(error);
+      this.common.apiErrorHandler(error);
       console.log("eerror---", error);
 
 
@@ -586,7 +542,7 @@ export class PolicyConfigurationComponent {
 
       this.spinner.hide();
 
-      // this.es.apiErrorHandler(error);
+      this.common.apiErrorHandler(error);
       console.log("eerror---", error);
 
 
@@ -633,7 +589,7 @@ export class PolicyConfigurationComponent {
 
       this.spinner.hide();
 
-      // this.es.apiErrorHandler(error);
+      this.common.apiErrorHandler(error);
       console.log("eerror---", error);
 
 
@@ -697,7 +653,7 @@ export class PolicyConfigurationComponent {
         (navigator as any).msSaveBlob(blob, 'sample.csv');
       } else {
         link.href = URL.createObjectURL(blob);
-        link.download = 'table.csv';
+        link.download = 'sample_csv.csv';
         link.style.display = 'none';
         document.body.appendChild(link);
         link.click();
@@ -725,7 +681,7 @@ export class PolicyConfigurationComponent {
     if (file) {
 
       Swal.fire({
-        title: 'Do you want to Upload question paper file?',
+        title: 'Do you want to Upload CSV file?',
         text: file.name,
         showDenyButton: true,
         // showCancelButton: true,
@@ -768,12 +724,12 @@ export class PolicyConfigurationComponent {
 
             this.spinner.hide();
 
-            // this.es.apiErrorHandler(error);
+            this.common.apiErrorHandler(error);
           })
 
         } else if (result.isDenied) {
 
-          Swal.fire('Upload file cancelled', '', 'info')
+          Swal.fire('Upload file cancel', '', 'info')
 
         }
       })
@@ -801,5 +757,7 @@ export class PolicyConfigurationComponent {
       console.log(`Dialog result: ${result}`);
     });
   }
+
+
   
 }

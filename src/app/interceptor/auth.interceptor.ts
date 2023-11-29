@@ -197,6 +197,13 @@ export class AuthInterceptor implements HttpInterceptor {
       this.http.post<any>(env.apiHost.concat('/registration/token/verify'), { token: token }).subscribe((res) => {
 
         console.log("verify response",res)
+        if(res.data){
+          console.log("token not valid");
+        this.router.navigate(['/authentication/login'])
+          
+        }else{
+          console.log("valid token ");
+        }
 
       }, catchError => {
 

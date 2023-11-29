@@ -51,6 +51,7 @@ interface topcards {
     MatIconModule, MatNativeDateModule, CommonModule, MatCardModule
   ],
   templateUrl: './dashboard1.component.html',
+  styleUrls: ['./dashboard1.component.scss'],
 })
 export class AppDashboard1Component {
 
