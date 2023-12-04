@@ -12,27 +12,20 @@ import { MatDialog } from '@angular/material/dialog';
 import { AllServerPolicyVersionComponent } from '../all-server-policy-version/all-server-policy-version.component';
 import { AllServerPatchVersionComponent } from '../all-server-patch-version/all-server-patch-version.component';
 
-
-
 @Component({
   selector: 'app-policy-configuration',
   templateUrl: './policy-configuration.component.html',
-  styleUrls: ['./policy-configuration.component.scss']
+  styleUrls: ['./policy-configuration.component.scss'],
 })
-
-
 export class PolicyConfigurationComponent {
-
-  
-  policySummary: any
+  policySummary: any;
 
   policyForm: FormGroup;
   policyFormURL: FormGroup;
 
+  policyTypes: any = 'URL';
 
-  policyTypes: any = "URL"
-
-  policyValue: any
+  policyValue: any;
   userName = this.ts.getUser();
 
   loaderStatus: string = 'Loading...';
@@ -51,7 +44,6 @@ export class PolicyConfigurationComponent {
     { colorName: 'success' },
   ];
 
-
   // urlForm: FormGroup;
   // addedUrls: string[] = [];
 
@@ -65,47 +57,42 @@ export class PolicyConfigurationComponent {
 
   dataSource: MatTableDataSource<string> = new MatTableDataSource();
 
-
   addedIPs: string[] = [];
   ipForm: FormGroup;
   ipDataSource: MatTableDataSource<string> = new MatTableDataSource();
-  serverPolicyVersion: any
-  serverPatchVersion:any
-  constructor( private fb: FormBuilder, private common: CommonServicesService, private spinner: NgxSpinnerService, private ts: TokenStorageService, public dialog: MatDialog) {
+  serverPolicyVersion: any;
+  serverPatchVersion: any;
+  constructor(
+    private fb: FormBuilder,
+    private common: CommonServicesService,
+    private spinner: NgxSpinnerService,
+    private ts: TokenStorageService,
+    public dialog: MatDialog
+  ) {
     // this.notes = this.noteService.getNotes();
 
     this.policyForm = this.fb.group({
       policyvalue: ['', Validators.required],
       policytype: [''],
-    })
+    });
 
     // this.policyForm = this.fb.group({
     //   policyvalues: this.fb.array([this.createPolicyControl()])
     // });
 
-
     this.policyFormURL = this.fb.group({
       policyvalue: ['', Validators.required],
       policytype: [''],
-    })
-
-
+    });
 
     this.urlForm = this.fb.group({
-     
-      url: ['', [ Validators.pattern(/^[^.]*\.[^.]+$/)]],
-
+      url: ['', [Validators.pattern(/^[^.]*\.[^.]+$/)]],
     });
 
     this.ipForm = this.fb.group({
       ip: ['', [Validators.pattern(/^(\d{1,3}\.){3}\d{1,3}$/)]], // Pattern for IPv4 addresses
     });
-
-
   }
-
-
-
 
   addUrl() {
     const urlControl = this.urlForm.get('url');
@@ -123,8 +110,8 @@ export class PolicyConfigurationComponent {
         Swal.fire({
           icon: 'error',
           title: `URL Already added`,
-        })
-        console.log('URL already exists.');
+        });
+        // console.log('URL already exists.');
         // You might want to show a message to the user indicating the URL already exists
       }
 
@@ -132,80 +119,60 @@ export class PolicyConfigurationComponent {
     }
   }
 
-
-
-
-
   // deleteUrl(id: number) {
   //   this.addedUrls = this.addedUrls.filter(url => url.id !== id);
   // }
 
   deleteUrl(url: string) {
-    this.addedUrls = this.addedUrls.filter(u => u !== url);
+    this.addedUrls = this.addedUrls.filter((u) => u !== url);
 
     this.dataSource.data = this.addedUrls; // Update dataSource
   }
-
-
-
 
   displayedColumns1: string[] = ['serialNumber', 'URL', 'action'];
 
   submitUrls() {
     // Implement your logic to submit the URLs
-    console.log('Submitted URLs:', this.addedUrls);
+    // console.log('Submitted URLs:', this.addedUrls);
 
-    this.policyForm.value.policytype = this.policyTypes
-    console.log("submit called", this.policyForm.value);
+    this.policyForm.value.policytype = this.policyTypes;
+    // console.log("submit called", this.policyForm.value);
 
+    this.policyValue = this.addedUrls;
 
-    this.policyValue = this.addedUrls
+    // console.log();
+    this.spinner.show();
+    this.common.addPolicy(this.policyValue, this.policyTypes).subscribe(
+      (res: any) => {
+        // console.log("in the unit name subscribe");
 
+        if (res.api_status === true) {
+          this.spinner.hide();
 
-    console.log();
-    this.spinner.show()
-    this.common.addPolicy(this.policyValue, this.policyTypes).subscribe((res: any) => {
+          this.addedUrls = [];
 
-      console.log("in the unit name subscribe");
+          Swal.fire({
+            icon: 'success',
+            title: `${res.message}`,
+            text: `Current Policy Version: ${res.current_policy_version}`,
+          });
+        } else {
+          this.spinner.hide();
 
-
-      if (res.api_status === true) {
+          Swal.fire({
+            icon: 'error',
+            title: `${res.message}`,
+          });
+        }
+      },
+      (error) => {
         this.spinner.hide();
 
-        this.addedUrls = [];
-        
-        Swal.fire({
-          icon: 'success',
-          title: `${res.message}`,
-        })
-
-      } else {
-        this.spinner.hide();
-
-
-        Swal.fire({
-          icon: 'error',
-          title: `${res.message}`,
-        })
+        this.common.apiErrorHandler(error);
+        // console.log("eerror---", error);
       }
-
-    }, error => {
-
-      this.spinner.hide();
-
-      this.common.apiErrorHandler(error);
-      console.log("eerror---", error);
-
-
-    })
-
-
-
-
-
-
+    );
   }
-
 
   addIP() {
     const ipControl = this.ipForm.get('ip');
@@ -221,7 +188,7 @@ export class PolicyConfigurationComponent {
           icon: 'error',
           title: `IP Address Already added`,
         });
-        console.log('IP Address already exists.');
+        // console.log('IP Address already exists.');
       }
 
       this.ipForm.reset();
@@ -229,67 +196,52 @@ export class PolicyConfigurationComponent {
   }
 
   deleteIP(ip: string) {
-    this.addedIPs = this.addedIPs.filter(existingIP => existingIP !== ip);
+    this.addedIPs = this.addedIPs.filter((existingIP) => existingIP !== ip);
     this.ipDataSource.data = this.addedIPs;
   }
 
   displayedColumns2: string[] = ['serialNumber', 'IP', 'action'];
 
   submitIPs() {
-    console.log('Submitted IPs:', this.addedIPs);
+    // console.log('Submitted IPs:', this.addedIPs);
 
-
-    
     // this.policyForm.value.policytype = this.policyTypes
-    console.log("submit called", this.policyForm.value);
+    // console.log("submit called", this.policyForm.value);
 
+    this.policyValue = this.addedIPs;
 
-    this.policyValue = this.addedIPs
+    // console.log();
+    this.spinner.show();
+    this.common.addPolicy(this.policyValue, this.policyTypes).subscribe(
+      (res: any) => {
+        // console.log("in the unit name subscribe");
 
+        if (res.api_status === true) {
+          this.spinner.hide();
 
-    console.log();
-    this.spinner.show()
-    this.common.addPolicy(this.policyValue, this.policyTypes).subscribe((res: any) => {
+          this.addedIPs = [];
+          Swal.fire({
+            icon: 'success',
+            title: `${res.message}`,
+            text: `Current Policy Version: ${res.current_policy_version}`,
+          });
+        } else {
+          this.spinner.hide();
 
-      console.log("in the unit name subscribe");
-
-
-      if (res.api_status === true) {
+          Swal.fire({
+            icon: 'error',
+            title: `${res.message}`,
+          });
+        }
+      },
+      (error) => {
         this.spinner.hide();
 
-        
-
-        this.addedIPs = []
-        Swal.fire({
-          icon: 'success',
-          title: `${res.message}`,
-        })
-
-      } else {
-        this.spinner.hide();
-
-
-        Swal.fire({
-          icon: 'error',
-          title: `${res.message}`,
-        })
+        this.common.apiErrorHandler(error);
+        // console.log("eerror---", error);
       }
-
-    }, error => {
-
-      this.spinner.hide();
-
-      this.common.apiErrorHandler(error);
-      console.log("eerror---", error);
-
-
-    })
-
-
-
-
+    );
   }
-
 
   // createPolicyControl(): FormGroup {
   //   return this.fb.group({
@@ -306,7 +258,6 @@ export class PolicyConfigurationComponent {
   //   policyArray.push(this.createPolicyControl());
   // }
 
-
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     // this.notes = this.filter(filterValue);
@@ -318,7 +269,6 @@ export class PolicyConfigurationComponent {
   //     .filter((x) => x.title.toLowerCase().indexOf(v.toLowerCase()) !== -1);
   // }
 
-
   isOver(): boolean {
     return window.matchMedia(`(max-width: 960px)`).matches;
   }
@@ -326,48 +276,28 @@ export class PolicyConfigurationComponent {
   ngOnInit(): void {
     // this.onLoad();
 
-
     this.policySummaryAPI();
-
-
   }
 
-  policySummaryAPI(){
-
-
+  policySummaryAPI() {
     this.spinner.show();
 
-    this.common.policySummary().subscribe((res: any) => {
+    this.policySummary = '';
+    this.common.policySummary().subscribe(
+      (res: any) => {
+        this.spinner.hide();
 
-      this.spinner.hide();
+        if (res.api_status === true) {
+          this.policySummary = res.data;
+        }
+      },
+      (error) => {
+        this.spinner.hide();
 
-      if (res.api_status === true) {
-
-        this.policySummary = res.data
-
-        // dataSource1 = PRODUCT_DATA;
-
-        console.log("policy summary", this.policySummary);
-
-        console.log("policy summary-ip", this.policySummary.IP);
-
-        console.log("policy summary-ip-total", this.policySummary.IP.total);
-
-        // this.dataSource1 = PRODUCT_DATA;
-
-
-
+        this.common.apiErrorHandler(error);
+        // console.log("eerror---", error);
       }
-
-    }, error => {
-
-      this.spinner.hide();
-
-      this.common.apiErrorHandler(error);
-      console.log("eerror---", error);
-
-
-    })
+    );
   }
   // onLoad(): void {
   //   this.selectedNote = this.notes[0];
@@ -398,207 +328,177 @@ export class PolicyConfigurationComponent {
   //   });
   // }
 
-  formNo: any = 0
+  formNo: any = 0;
 
   AddPolicy(i: any, policy: any, autor: any) {
-    console.log("Add url clicked", i, policy, autor);
-    this.formNo = i
-    this.policyTypes = policy
-    if(i ===0){
-      console.log("summary page called");
+    // console.log("Add url clicked", i, policy, autor);
+    this.formNo = i;
+    this.policyTypes = policy;
+    if (i === 0) {
+      // console.log("summary page called");
       this.policySummaryAPI();
     }
 
-    if(i===5){
-      this.serverPolicyVersionAPi()
+    if (i === 5) {
+      this.serverPolicyVersionAPi();
     }
 
-    if(i===6){
-      this.serverPatchVersionAPi()
+    if (i === 6) {
+      this.serverPatchVersionAPi();
     }
-    
-    console.log("fornNo", this.formNo);
-    
+
+    // console.log("fornNo", this.formNo);
   }
 
+  serverPolicyVersionAPi() {
+    // console.log("serverPolicyVersionAPi fun",);
 
-  serverPolicyVersionAPi(){
-    console.log("serverPolicyVersionAPi fun",);
+    this.spinner.show();
+    this.serverPolicyVersion = '';
+    this.common.serverPolicyVersion().subscribe(
+      (res: any) => {
+        // // console.log("in the unit name subscribe");
 
-    this.spinner.show()
-    this.common.serverPolicyVersion().subscribe((res: any) => {
+        if (res.api_status === true) {
+          this.spinner.hide();
+          this.serverPolicyVersion = res.data[0];
+          // console.log("serverPolicyVersionAPi",this.serverPolicyVersion);
 
-      // console.log("in the unit name subscribe");
+          // Swal.fire({
+          //   icon: 'success',
+          //   title: `${res.message}`,
+          // })
+        } else {
+          this.spinner.hide();
 
-
-      if (res.api_status === true) {
+          // Swal.fire({
+          //   icon: 'error',
+          //   title: `${res.message}`,
+          // })
+        }
+      },
+      (error) => {
         this.spinner.hide();
-        this.serverPolicyVersion = res.data[0]
-        console.log("serverPolicyVersionAPi",this.serverPolicyVersion);
-        
-        // Swal.fire({
-        //   icon: 'success',
-        //   title: `${res.message}`,
-        // })
 
-      } else {
-        this.spinner.hide();
-
-
-        // Swal.fire({
-        //   icon: 'error',
-        //   title: `${res.message}`,
-        // })
+        this.common.apiErrorHandler(error);
+        // console.log("eerror---", error);
       }
-
-    }, error => {
-
-      this.spinner.hide();
-
-      this.common.apiErrorHandler(error);
-      console.log("eerror---", error);
-
-
-    })
-
+    );
   }
 
-  serverPatchVersionAPi(){
-    console.log("serverPolicyVersionAPi fun",);
+  serverPatchVersionAPi() {
+    // console.log("serverPolicyVersionAPi fun",);
 
-    this.spinner.show()
-    this.common.serverPatchVersion().subscribe((res: any) => {
+    this.spinner.show();
+    this.serverPatchVersion = '';
+    this.common.serverPatchVersion().subscribe(
+      (res: any) => {
+        // // console.log("in the unit name subscribe");
 
-      // console.log("in the unit name subscribe");
+        if (res.api_status === true) {
+          this.spinner.hide();
+          this.serverPatchVersion = res.data[0];
+          // console.log("serverPolicyVersionAPi",this.serverPatchVersion);
 
+          // Swal.fire({
+          //   icon: 'success',
+          //   title: `${res.message}`,
+          // })
+        } else {
+          this.spinner.hide();
 
-      if (res.api_status === true) {
+          // Swal.fire({
+          //   icon: 'error',
+          //   title: `${res.message}`,
+          // })
+        }
+      },
+      (error) => {
         this.spinner.hide();
-        this.serverPatchVersion = res.data[0]
-        console.log("serverPolicyVersionAPi",this.serverPatchVersion);
-        
-        // Swal.fire({
-        //   icon: 'success',
-        //   title: `${res.message}`,
-        // })
 
-      } else {
-        this.spinner.hide();
-
-
-        // Swal.fire({
-        //   icon: 'error',
-        //   title: `${res.message}`,
-        // })
+        this.common.apiErrorHandler(error);
+        // console.log("eerror---", error);
       }
-
-    }, error => {
-
-      this.spinner.hide();
-
-      this.common.apiErrorHandler(error);
-      console.log("eerror---", error);
-
-
-    })
-
+    );
   }
-
 
   submitt() {
-    this.policyForm.value.policytype = this.policyTypes
-    console.log("submit called", this.policyForm.value);
+    this.policyForm.value.policytype = this.policyTypes;
+    // console.log("submit called", this.policyForm.value);
 
+    this.policyValue = this.policyForm.value;
 
-    this.policyValue = this.policyForm.value
+    // console.log();
+    this.spinner.show();
+    this.common.addPolicy(this.policyValue, this.policyTypes).subscribe(
+      (res: any) => {
+        // console.log("in the unit name subscribe");
 
+        if (res.api_status === true) {
+          this.spinner.hide();
 
-    console.log();
-    this.spinner.show()
-    this.common.addPolicy(this.policyValue, this.policyTypes).subscribe((res: any) => {
+          Swal.fire({
+            icon: 'success',
+            title: `${res.message}`,
+          });
+        } else {
+          this.spinner.hide();
 
-      console.log("in the unit name subscribe");
-
-
-      if (res.api_status === true) {
+          Swal.fire({
+            icon: 'error',
+            title: `${res.message}`,
+          });
+        }
+      },
+      (error) => {
         this.spinner.hide();
 
-        Swal.fire({
-          icon: 'success',
-          title: `${res.message}`,
-        })
-
-      } else {
-        this.spinner.hide();
-
-
-        Swal.fire({
-          icon: 'error',
-          title: `${res.message}`,
-        })
+        this.common.apiErrorHandler(error);
+        // console.log("eerror---", error);
       }
-
-    }, error => {
-
-      this.spinner.hide();
-
-      this.common.apiErrorHandler(error);
-      console.log("eerror---", error);
-
-
-    })
-
-
+    );
   }
 
   submitt2() {
-    this.policyFormURL.value.policytype = this.policyTypes
-    console.log("submit called", this.policyForm.value);
+    this.policyFormURL.value.policytype = this.policyTypes;
+    // console.log("submit called", this.policyForm.value);
 
+    this.policyValue = this.policyFormURL.value.policyvalue;
 
-    this.policyValue = this.policyFormURL.value.policyvalue
+    // console.log("--", this.policyForm.value.policyvalue);
 
-    console.log("--", this.policyForm.value.policyvalue);
+    // console.log();
+    this.spinner.show();
+    this.common.addPolicy(this.policyValue, this.policyTypes).subscribe(
+      (res: any) => {
+        // console.log("in the unit name subscribe");
 
-    console.log();
-    this.spinner.show()
-    this.common.addPolicy(this.policyValue, this.policyTypes).subscribe((res: any) => {
+        if (res.api_status === true) {
+          this.spinner.hide();
 
-      console.log("in the unit name subscribe");
+          Swal.fire({
+            icon: 'success',
+            title: `${res.message}`,
+          });
+        } else {
+          this.spinner.hide();
 
-
-      if (res.api_status === true) {
+          Swal.fire({
+            icon: 'error',
+            title: `${res.message}`,
+          });
+        }
+      },
+      (error) => {
         this.spinner.hide();
 
-        Swal.fire({
-          icon: 'success',
-          title: `${res.message}`,
-        })
-
-      } else {
-        this.spinner.hide();
-
-
-        Swal.fire({
-          icon: 'error',
-          title: `${res.message}`,
-        })
+        this.common.apiErrorHandler(error);
+        // console.log("eerror---", error);
       }
-
-    }, error => {
-
-      this.spinner.hide();
-
-      this.common.apiErrorHandler(error);
-      console.log("eerror---", error);
-
-
-    })
-
-
+    );
   }
 
-  selectedFileName: any
+  selectedFileName: any;
 
   onFileSelected(event: any) {
     const fileInput = event.target;
@@ -613,7 +513,6 @@ export class PolicyConfigurationComponent {
         if (uploadFileNameElement) {
           uploadFileNameElement.style.color = 'green';
         }
-
       } else {
         this.selectedFileName = 'select csv file';
 
@@ -621,7 +520,6 @@ export class PolicyConfigurationComponent {
         if (uploadFileNameElement) {
           uploadFileNameElement.style.color = 'red';
         }
-
       }
     } else {
       this.selectedFileName = 'No file selected';
@@ -646,7 +544,9 @@ export class PolicyConfigurationComponent {
         csv.push(row.join(','));
       }
 
-      const blob = new Blob([csv.join('\n')], { type: 'text/csv;charset=utf-8;' });
+      const blob = new Blob([csv.join('\n')], {
+        type: 'text/csv;charset=utf-8;',
+      });
       const link = document.createElement('a');
 
       if ((navigator as any).msSaveBlob) {
@@ -664,22 +564,19 @@ export class PolicyConfigurationComponent {
 
   // uploadPolicy(i: any){
 
-  //   console.log("upload policy",i);
+  //   // console.log("upload policy",i);
 
   // }
 
   uploadPolicy(event: any) {
+    // console.log("upload policy", event);
 
-
-    console.log("upload policy", event);
-
-    let file = event.target.files[0]
+    let file = event.target.files[0];
 
     event.target.value = '';
-    console.log("file", file);
+    // console.log("file", file);
 
     if (file) {
-
       Swal.fire({
         title: 'Do you want to Upload CSV file?',
         text: file.name,
@@ -688,65 +585,55 @@ export class PolicyConfigurationComponent {
         confirmButtonText: 'Upload',
         denyButtonText: `Cancel`,
       }).then((result) => {
-
         if (result.isConfirmed) {
-
           const formData = new FormData();
 
-          formData.append("archive", file);
+          formData.append('archive', file);
           // formData.append("event_id", eventId);
           // formData.append("participant_pk", participant_pk)
 
           this.spinner.show();
 
-          this.common.policyBulkUpload(formData).subscribe((res) => {
+          this.common.policyBulkUpload(formData).subscribe(
+            (res) => {
+              this.spinner.hide();
 
-            this.spinner.hide();
+              if (res.api_status) {
+                Swal.fire({
+                  icon: 'success',
+                  title: `${res.message}`,
+                  html: ` Updated: ${res.updated} <br> Duplicates: ${res.duplicates} <br> Current Policy Version: ${res.current_policy_version}`,
+                });
+              } else {
+                Swal.fire({
+                  title: 'Error',
+                  text: res.message,
+                  icon: 'error',
+                  confirmButtonText: 'Ok',
+                });
+              }
+            },
+            (error) => {
+              this.spinner.hide();
 
-            if (res.api_status) {
-
-              Swal.fire('QP uploaded successfully', '', 'success').then((result) => {
-
-                // this.loadEvents()
-
-              });
-
-            } else {
-              Swal.fire({
-                title: 'Error',
-                text: res.message,
-                icon: 'error',
-                confirmButtonText: 'Ok'
-              })
+              this.common.apiErrorHandler(error);
             }
-
-          }, (error) => {
-
-            this.spinner.hide();
-
-            this.common.apiErrorHandler(error);
-          })
-
+          );
         } else if (result.isDenied) {
-
-          Swal.fire('Upload file cancel', '', 'info')
-
+          Swal.fire('Upload file cancel', '', 'info');
         }
-      })
-
-
+      });
     }
-
   }
 
-  // pop up in the policy version control 
+  // pop up in the policy version control
   // AllServerPolicyVersionComponent
   // AllServerPatchVersionComponent
   openDialogPolicy() {
     const dialogRef = this.dialog.open(AllServerPolicyVersionComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
     });
   }
 
@@ -754,10 +641,7 @@ export class PolicyConfigurationComponent {
     const dialogRef = this.dialog.open(AllServerPatchVersionComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
     });
   }
-
-
-  
 }

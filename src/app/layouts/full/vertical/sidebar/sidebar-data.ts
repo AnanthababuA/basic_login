@@ -46,5 +46,10 @@ export const navItems: NavItem[] = [
     iconName: 'brand-github-copilot',
     route: 'apps/logViewer',
   },
+  {
+    displayName: 'Hierarchy Chart',
+    iconName: 'hierarchy-3',
+    route: 'apps/hierarchyChart',
+  },
   
 ];

@@ -38,7 +38,7 @@
           </div>
     
           <mat-form-field appearance="outline" class="w-100" color="primary">
-            <input matInput type="tel" formControlName="contact_number" placeholder="Enter Contact Number" required />
+            <input matInput type="tel" formControlName="contact_number" placeholder="Enter Contact Number" required  />
     
             <mat-icon matPrefix>
               <i-tabler name="phone" class="icon-20 d-flex"></i-tabler>
@@ -74,7 +74,7 @@
               Designation is required
             </mat-error>
             <mat-error *ngIf="genOtpForm.get('designation')?.hasError('pattern') && genOtpForm.get('designation')?.invalid">
-              Designation must contain inimum 5 characters & Special character not allowed
+              Designation must contain minimum 5 characters & Special character not allowed
             </mat-error>
           </mat-form-field>
         </div>
@@ -101,7 +101,7 @@
         </div>
       </div>
 
-      <div class="m-t-12">
+      <div class="" style="margin-top:20px">
         <button mat-flat-button color="primary" type="submit" [disabled]="!genOtpForm.valid">Generate OTP</button>
         <button mat-flat-button color="warn" class="m-l-8" type="reset">Reset</button>
 

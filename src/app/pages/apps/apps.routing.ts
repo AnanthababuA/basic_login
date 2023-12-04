@@ -28,6 +28,7 @@ import { ListregclientComponent } from './listregclient/listregclient.component'
 import { RegstatusclientComponent } from './regstatusclient/regstatusclient.component';
 import { GroupsComponent } from './groups/groups.component';
 import { LogViewerComponent } from './log-viewer/log-viewer.component';
+import { HierarchyChartComponent } from './hierarchy-chart/hierarchy-chart.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -103,17 +104,17 @@ export const AppsRoutes: Routes = [
           ],
         },
       },
-      // {
-      //   path: 'calendar',
-      //   component: AppFullcalendarComponent,
-      //   data: {
-      //     title: 'Calendar',
-      //     urls: [
-      //       { title: 'Dashboard', url: '/dashboards/dashboard1' },
-      //       { title: 'Calendar' },
-      //     ],
-      //   },
-      // },
+      {
+        path: 'hierarchyChart',
+        component: HierarchyChartComponent,
+        data: {
+          title: 'HierarchyvChart',
+          urls: [
+            { title: 'Dashboard', url: '/dashboards/dashboard1' },
+            { title: 'HierarchyvChart' },
+          ],
+        },
+      },
       // {
       //   path: 'notes',
       //   component: AppNotesComponent,

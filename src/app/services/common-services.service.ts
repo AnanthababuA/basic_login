@@ -1,88 +1,81 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment as env } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CommonServicesService {
+  private triggerClientStatus = new Subject<number>();
+  triggerClientStatus$ = this.triggerClientStatus.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
+
+  triggerClientStatusFunction(status: number) {
+    this.triggerClientStatus.next(status);
+    console.log(' in service --0');
+  }
 
   apiErrorHandler(error: any) {
-
     console.error(error);
-  
+
     if (error.status === 500) {
-  
       // Swal.alert('Server Error', 'Please contact the server administrator', 'error');
       Swal.fire({
         title: 'Server Error',
         html: 'There is some error, Try after some time.<br>If problem persists contact the administrator',
         icon: 'error',
       }).then((result) => {
-  
-          this.router.navigate(['/authentication/login']);
-          
+        this.router.navigate(['/authentication/login']);
       });
-  
     }
-  
   }
-  
 
   createUnit(createUnit: any): Observable<any> {
-   
-    return this.http.post(env.apiHost.concat('/registration/create-unit'), createUnit)
-
+    return this.http.post(
+      env.apiHost.concat('/registration/create-unit'),
+      createUnit
+    );
   }
 
   createLocalAdmin(createLocalUnit: any): Observable<any> {
-   
-    return this.http.post(env.apiHost.concat('/usermgt/ladmin-creation'), createLocalUnit)
-
+    return this.http.post(
+      env.apiHost.concat('/usermgt/ladmin-creation'),
+      createLocalUnit
+    );
   }
 
   updateLocalAdmin(createLocalUnit: any): Observable<any> {
-   
-    return this.http.post(env.apiHost.concat('/registration/updateLocalUnit'), createLocalUnit)
-
+    return this.http.post(
+      env.apiHost.concat('/registration/updateLocalUnit'),
+      createLocalUnit
+    );
   }
 
   unitNameLocalAdmin(): Observable<any> {
-   
-    return this.http.post(env.apiHost.concat('/usermgt/get-unit-details'), {})
-
+    return this.http.post(env.apiHost.concat('/usermgt/get-unit-details'), {});
   }
 
   unitTypeLocalAdmin(): Observable<any> {
-   
-    return this.http.post(env.apiHost.concat('/usermgt/get-user-type'), {})
-
+    return this.http.post(env.apiHost.concat('/usermgt/get-user-type'), {});
   }
 
   UnitDetails(): Observable<any> {
-   
-    return this.http.post(env.apiHost.concat('/usermgt/unit-details'), {})
-
+    return this.http.post(env.apiHost.concat('/usermgt/unit-details'), {});
   }
 
   policySummary(): Observable<any> {
-   
-    return this.http.post(env.apiHost.concat('/policy/policy-summary'), {})
-
+    return this.http.post(env.apiHost.concat('/policy/policy-summary'), {});
   }
 
   // addPolicy(policyDeail: any): Observable<any> {
-   
+
   //   return this.http.post(env.apiHost.concat('/policy/policy-add'), policyDeail)
 
   // }
-
 
   addPolicy(policyvalue: any, policytype: any): Observable<any> {
     const requestBody = {
@@ -90,108 +83,240 @@ export class CommonServicesService {
       policytype: policytype,
     };
 
-    return this.http.post(env.apiHost.concat('/policy/policy-add'), requestBody)
-
+    return this.http.post(
+      env.apiHost.concat('/policy/policy-add'),
+      requestBody
+    );
 
     // Assuming you are making a POST request to your API
     // return this.http.post<any>(`${this.apiUrl}/add-policy`, requestBody);
   }
-// }
+  // }
 
+  Registeredclients() {
+    return this.http.post<any>(
+      env.apiHost.concat('/registration/client-reg-list'),
+      {}
+    );
+  }
+  Registeredstatusclients() {
+    return this.http.post<any>(
+      env.apiHost.concat('/registration/client-status-list'),
+      {}
+    );
+  }
 
-  Registeredclients(){
-    return this.http.post<any>(env.apiHost.concat('/registration/client-reg-list'),{});
+  policyBulkUpload(formData: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/policy-bulk'),
+      formData
+    );
+  }
 
-}
-Registeredstatusclients(){
-  return this.http.post<any>(env.apiHost.concat('/registration/client-status-list'),{});
-  
-}
+  urlAddition(search_term: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/url-addition'),
+      search_term
+    );
+  }
 
-policyBulkUpload(formData: any){
-  return this.http.post<any>(env.apiHost.concat('/policy/policy-bulk'),formData);
-  
-}
+  urlDeletion(search_term: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/url-deletion'),
+      search_term
+    );
+  }
 
-urlAddition(search_term:any){
-  return this.http.post<any>(env.apiHost.concat('/policy/url-addition'),search_term);
-}
+  ipAddition(search_term: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/ip-addition'),
+      search_term
+    );
+  }
 
-urlDeletion(search_term:any){
-  return this.http.post<any>(env.apiHost.concat('/policy/url-deletion'),search_term);
-}
+  ipDeletion(search_term: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/ip-deletion'),
+      search_term
+    );
+  }
 
-ipAddition(search_term:any){
-  return this.http.post<any>(env.apiHost.concat('/policy/ip-addition'),search_term);
-}
+  serverPolicyVersion() {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/server-policy-version'),
+      {}
+    );
+  }
 
-ipDeletion(search_term:any){
-  return this.http.post<any>(env.apiHost.concat('/policy/ip-deletion'),search_term);
-}
+  serverPatchVersion() {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/server-patch-version'),
+      {}
+    );
+  }
 
-serverPolicyVersion(){
-  return this.http.post<any>(env.apiHost.concat('/policy/server-policy-version'),{});
-}
+  allServerPolicyVersion() {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/all-server-policy-version'),
+      {}
+    );
+  }
 
-serverPatchVersion(){
-  return this.http.post<any>(env.apiHost.concat('/policy/server-patch-version'),{});
-}
+  allServerPatchVersion() {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/all-server-patch-version'),
+      {}
+    );
+  }
 
-allServerPolicyVersion(){
-  return this.http.post<any>(env.apiHost.concat('/policy/all-server-policy-version'),{});
-}
+  policyStatusChange(policyStatus: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/policy-status-change'),
+      policyStatus
+    );
+  }
 
-allServerPatchVersion(){
-  return this.http.post<any>(env.apiHost.concat('/policy/all-server-patch-version'),{});
-}
+  editUnit(unitDetails: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/usermgt/edite-unit'),
+      unitDetails
+    );
+  }
 
-policyStatusChange(policyStatus:any){
-  return this.http.post<any>(env.apiHost.concat('/policy/policy-status-change'),policyStatus);
-}
+  deleteUnit(unitDetails: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/usermgt/delete-unit'),
+      unitDetails
+    );
+  }
 
-editUnit(unitDetails:any){
-  return this.http.post<any>(env.apiHost.concat('/usermgt/edite-unit'),unitDetails);
-}
+  policyUrlDetails(policyUrlDetail: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/url-details'),
+      policyUrlDetail
+    );
+  }
 
-deleteUnit(unitDetails:any){
-  return this.http.post<any>(env.apiHost.concat('/usermgt/delete-unit'),unitDetails);
-}
+  policyIpDetails(policyIpDetails: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/ip-details'),
+      policyIpDetails
+    );
+  }
 
-policyUrlDetails(policyUrlDetail:any){
-  return this.http.post<any>(env.apiHost.concat('/policy/url-details'),policyUrlDetail);
-}
+  policyver() {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/policy-updated-status'),
+      {}
+    );
+  }
 
-policyIpDetails(policyIpDetails:any){
-  return this.http.post<any>(env.apiHost.concat('/policy/ip-details'),policyIpDetails);
-}
+  patchver() {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/patch-updated-status'),
+      {}
+    );
+  }
 
+  clientreg(): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/total-client-reg'),
+      {}
+    );
+  }
 
+  logReceivedDashboard(): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/log-received-dash'),
+      {}
+    );
+  }
 
-policyver(){
-return this.http.post<any>(env.apiHost.concat('/policy/policy-updated-status'),{});
+  clamAvUpdatedDashboard(): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/clamav-updated-dash'),
+      {}
+    );
+  }
 
-}
+  clientInfo(clientInfo: any): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/client-info'),
+      clientInfo
+    );
+  }
 
-patchver(){
-return this.http.post<any>(env.apiHost.concat('/policy/patch-updated-status'),{});
+  loginfo() {
+    return this.http.post<any>(
+      env.apiHost.concat('/logviewer/get-log-desc'),
+      {}
+    );
+  }
 
-}
+  dashboardOTPStatus(dateRange: any): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/otp-stats-dash'),
+      dateRange
+    );
+  }
 
-clientreg(): Observable<any> {
-   
-  return this.http.post(env.apiHost.concat('/registration/total-client-reg'), {})
+  dashboardPatchUpdateDetails(): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/policy/patch-updated-details'),
+      {}
+    );
+  }
 
-}
+  dashboardPoliccyUpdateDetails(): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/policy/policy-updated-details'),
+      {}
+    );
+  }
 
-clientInfo(clientInfo:any): Observable<any> {
-   
-  return this.http.post(env.apiHost.concat('/registration/client-info'), clientInfo)
+  dashboardClamAvUpdateDetails(): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/clamav-updated-details'),
+      {}
+    );
+  }
 
-}
+  dashboardLogReceivedDetails(): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/log-received-details'),
+      {}
+    );
+  }
 
-loginfo(){
-  return this.http.post<any>(env.apiHost.concat('/logviewer/get-log-desc'),{});
+  dashboardRegistrationStatus(dateRange: any): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/reg-stats-dash'),
+      dateRange
+    );
+  }
 
-}
+  listofclients(params: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/logviewer/client-lists'),
+      params
+    );
+  }
 
+  hierarchy(): Observable<any> {
+    return this.http.post(env.apiHost.concat('/usermgt/unit-hierarchy'), {});
+  }
+
+  deletedClientList(): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/delete-client-list'),
+      {}
+    );
+  }
+
+  deletedClient(clientData: any): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/delete-client'),
+      clientData
+    );
+  }
 }

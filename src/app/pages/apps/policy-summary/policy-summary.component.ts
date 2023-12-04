@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewEncapsulation,
+  ViewChild,
+} from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonServicesService } from 'src/app/services/common-services.service';
@@ -32,9 +38,11 @@ export class PolicySummaryComponent {
     search_term: '',
   };
 
-  totalEntries: any
+  // summary icon = {ip: "icon"}
 
-  loaderStatus: string = 'Loading Details...';
+  totalEntries: any;
+
+  loaderStatus: string = 'Loading ...';
 
   showURLDetails: boolean = false;
 
@@ -91,22 +99,22 @@ export class PolicySummaryComponent {
   }
 
   logSelectedValue() {
-    console.log('Selected value:', this.currentRole);
+    // console.log('Selected value:', this.currentRole);
     if (this.currentRole === 'Summary') {
-      console.log('summary');
+      // console.log('summary');
       this.policySummaryAPI();
     }
 
     if (this.currentRole === 'URL') {
-      console.log('url');
+      // console.log('url');
       this.urlIpInput.search_term = '';
       this.urlDetails = '';
-      this.showURLDetails = false
+      this.showURLDetails = false;
       this.policyUrlDetailsAPI(this.urlIpInput);
     }
 
     if (this.currentRole === 'IP') {
-      console.log('ip');
+      // console.log('ip');
       this.policyIpDetailsAPI(this.urlIpInput);
     }
   }
@@ -114,59 +122,71 @@ export class PolicySummaryComponent {
   policySummaryAPI() {
     this.spinner.show();
 
+    this.policySummary = '';
     this.common.policySummary().subscribe(
       (res: any) => {
         this.spinner.hide();
 
         if (res.api_status === true) {
-          this.policySummary = res.data;
+          //           this.policySummary = res.data;
+          // console.log(this.policySummary);
 
-          // dataSource1 = PRODUCT_DATA;
+          const dataFromAPI = res.data;
 
-          console.log('policy summary', this.policySummary);
+          // Modifying the received data to add the 'icon' property
+          dataFromAPI.forEach((item: any) => {
+            // Logic to assign icons based on policy_type
+            // Example logic:
+            if (item.policy_type === 'IP') {
+              item.icon = 'anchor';
+            } else if (item.policy_type === 'URL') {
+              item.icon = 'link';
+            }
+          });
 
-          console.log('policy summary-ip', this.policySummary.IP);
+          // Assigning the modified data to this.policySummary
+          this.policySummary = dataFromAPI;
 
-          console.log('policy summary-ip-total', this.policySummary.IP.total);
+          console.log('icon', this.policySummary);
 
-          // this.dataSource1 = PRODUCT_DATA;
+          this.refreshDataTable();
         }
       },
       (error) => {
         this.spinner.hide();
 
         this.common.apiErrorHandler(error);
-        console.log('eerror---', error);
+        // console.log('eerror---', error);
       }
     );
   }
 
-
   policyUrlDetailsAPI(serachTerm: any) {
     this.spinner.show();
 
+    this.showURLDetails = false;
+    this.urlDetails = '';
+    this.totalEntries = '';
     this.common.policyUrlDetails(serachTerm).subscribe(
       (res: any) => {
         this.spinner.hide();
 
         if (res.api_status === true) {
           this.showURLDetails = true;
-          // this.urlDetails = {};
           this.urlDetails = res.data;
-          // dataSource1 = PRODUCT_DATA;
 
-          this.totalEntries=res.total_count
+          this.totalEntries = res.total_count;
 
           this.refreshDataTable();
 
-          console.log('url details', this.urlDetails);
+          // console.log('url details', this.urlDetails);
         }
       },
       (error) => {
         this.spinner.hide();
 
         this.common.apiErrorHandler(error);
-        console.log('eerror---', error);
+        // console.log('eerror---', error);
       }
     );
   }
@@ -174,33 +194,35 @@ export class PolicySummaryComponent {
   policyIpDetailsAPI(serachTerm: any) {
     this.spinner.show();
 
+    this.ipDetails = '';
+    this.totalEntries = '';
+    this.ipDetails = '';
     this.common.policyIpDetails(serachTerm).subscribe(
       (res: any) => {
         this.spinner.hide();
 
         if (res.api_status === true) {
           this.ipDetails = res.data;
-          this.totalEntries=res.total_count
+          this.totalEntries = res.total_count;
 
           this.refreshDataTable();
 
-
           // dataSource1 = PRODUCT_DATA;
 
-          console.log('ipDetails details', this.ipDetails);
+          // console.log('ipDetails details', this.ipDetails);
         }
       },
       (error) => {
         this.spinner.hide();
 
         this.common.apiErrorHandler(error);
-        console.log('eerror---', error);
+        // console.log('eerror---', error);
       }
     );
   }
 
   ipSearch() {
-    console.log('ipserach', this.ipSearchText);
+    // console.log('ipserach', this.ipSearchText);
 
     this.urlIpInput.search_term = this.ipSearchText;
 
@@ -208,13 +230,12 @@ export class PolicySummaryComponent {
   }
 
   urlSearch() {
-    console.log('ipserach', this.urlSearchText);
+    // console.log('ipserach', this.urlSearchText);
 
     this.urlIpInput.search_term = this.urlSearchText;
 
     this.policyUrlDetailsAPI(this.urlIpInput);
   }
-
 
   refreshDataTable() {
     if (this.datatableElement.dtInstance) {
@@ -230,7 +251,7 @@ export class PolicySummaryComponent {
       pagingType: 'full_numbers',
       pageLength: 10,
       processing: true,
-      
+
       searching: false,
       language: {
         searchPlaceholder: 'Search here',
@@ -273,5 +294,4 @@ export class PolicySummaryComponent {
       }
     });
   }
-
 }

@@ -67,6 +67,8 @@ export class ListregclientComponent {
     };
 
     this.spinner.show();
+    this.listOfRegClient = '';
+        this.showTable = false;
     this.common.Registeredclients().subscribe((res) => {
       if (res.api_status === true) {
         this.listOfRegClient = res.data;
@@ -84,7 +86,6 @@ export class ListregclientComponent {
     });
   }
 rowInfo(i: any) {
-    console.log('row', i);
     const info = { client_id: i.client_id };
      this.clientInfoApi(info);
 
@@ -99,20 +100,18 @@ rowInfo(i: any) {
     const dialogRef = this.dialog.open(ClientInfoComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 
   clientInfoApi(info: any) {
     this.spinner.show();
+    localStorage.removeItem('clientId');
     this.common.clientInfo(info).subscribe(
       (res: any) => {
-        console.log('in the unit name subscribe');
 
         if (res.api_status === true) {
           this.spinner.hide();
 
-          console.log('res is ---', res.data);
 
           localStorage.setItem('clientId', JSON.stringify(res));
           this.openDialogPatch();
@@ -133,4 +132,6 @@ rowInfo(i: any) {
       }
     );
   }
+
+
 }

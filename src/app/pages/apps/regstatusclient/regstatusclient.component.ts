@@ -60,6 +60,8 @@ export class RegstatusclientComponent {
     };
 
     this.spinner.show();
+    this.clientRegStatus = '';
+        this.showTable = false
     this.common.Registeredstatusclients().subscribe((res) => {
       if (res.api_status === true) {
 

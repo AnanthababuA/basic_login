@@ -5,7 +5,8 @@
         <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
             [class.border-red]="formNo === 0" (click)="AddPolicy(0, 'Summary', 'ADMIN')">
             <span class="text-primary" style="display: flex;">
-                <i-tabler name="clipboard-list" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                <i-tabler name="clipboard-list" class="icon-20 d-flex" style="margin-right: 0.2rem; margin-top: auto;
+margin-bottom: auto;"></i-tabler>
                 <span>
                     Summary
                 </span>
@@ -13,93 +14,89 @@
         </button>
 
 
-        <!-- 11111111111111111111111111111111111111111111111111111111111111111111111111111  -->
 
         <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px; "
             [class.border-red]="formNo === 1" (click)="AddPolicy(1, 'URL', 'ADMIN')">
             <span class="text-primary" style="display: flex;">
-                <i-tabler name="plus" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                <i-tabler name="plus" class="icon-20 d-flex" style="margin-right: 0.2rem; margin-top: auto;
+margin-bottom: auto;"></i-tabler>
                 <span>
                     Add URL
                 </span>
             </span>
 
-            <!-- <span class="text-accent">Add
-                URL</span> -->
+           
         </button>
 
 
-        <!-- 22222222222222222222 -->
 
         <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
             [class.border-red]="formNo === 2" (click)="AddPolicy(2, 'IP', 'ADMIN')">
             <span class="text-primary" style="display: flex;">
-                <i-tabler name="plus" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                <i-tabler name="plus" class="icon-20 d-flex" style="margin-right: 0.2rem; margin-top: auto;
+margin-bottom: auto;"></i-tabler>
                 <span>
                     Add IP
                 </span>
             </span>
 
-            <!-- <span class="text-success">Add
-                IP</span> -->
+           
         </button>
 
 
-        <!-- 33333333333333333333333333  -->
 
         <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
             [class.border-red]="formNo === 3" (click)="AddPolicy(3, 'BulkUpload', 'ADMIN')">
             <span class="text-primary" style="display: flex;">
-                <i-tabler name="file-upload" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                <i-tabler name="file-upload" class="icon-20 d-flex" style="margin-right: 0.2rem; margin-top: auto;
+margin-bottom: auto;"></i-tabler>
                 <span>
                     Bulk Upload
                 </span>
             </span>
 
-            <!-- <span
-                class="text-error">Bulk Upload</span> -->
+          
         </button>
 
-        <!-- 44444444444444444444444444444444  -->
 
         <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
             [class.border-red]="formNo === 4" (click)="AddPolicy(4, 'policyUpdate', 'ADMIN')">
 
             <span class="text-primary" style="display: flex;">
-                <i-tabler name="edit" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                <i-tabler name="edit" class="icon-20 d-flex" style="margin-right: 0.2rem; margin-top: auto;
+margin-bottom: auto;"></i-tabler>
                 <span>
                     Policy Update
                 </span>
             </span>
 
-            <!-- <span
-                class="text-warning">Policy Update</span> -->
+            
         </button>
 
         <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
             [class.border-red]="formNo === 5" (click)="AddPolicy(5, 'policyVersion', 'ADMIN')">
             <span class="text-primary" style="display: flex;">
-                <i-tabler name="versions" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                <i-tabler name="versions" class="icon-20 d-flex" style="margin-right: 0.2rem; margin-top: auto;
+margin-bottom: auto;"></i-tabler>
                 <span>
                     Policy Version
                 </span>
             </span>
 
-            <!-- <span
-                class="text-primary">Policy Version</span> -->
+           
         </button>
 
         <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
             [class.border-red]="formNo === 6" (click)="AddPolicy(6, 'patchVersion', 'ADMIN')">
             <span class="text-primary" style="display: flex;">
-                <i-tabler name="versions" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                <i-tabler name="versions" class="icon-20 d-flex" style="margin-right: 0.2rem; margin-top: auto;
+margin-bottom: auto;"></i-tabler>
                 <span>
                     Patch Version
                 </span>
             </span>
 
-            <!-- <span
-                class="text-accent">Patch Version</span> -->
+            
         </button>
 
 
@@ -107,25 +104,20 @@
     </mat-nav-list>
 
 
-    <!-- <h1>hhhhhhh</h1> -->
 
 
 
 
 </mat-card>
 
-<!-- <mat-card class="  cardWithShadow">
-    <mat-card-content class="p-24 bg-white">
-        <div class=""> -->
+
 
             <div *ngIf="formNo ==0">
-                        <!-- <mat-card class="  cardWithShadow">
-                            <mat-card-content class="p-24 bg-white"> -->
+                      
 
                         <app-policy-summary></app-policy-summary>
         
-                    <!-- </mat-card-content>
-                </mat-card> -->
+                  
                     </div>
 
 
@@ -263,7 +255,6 @@
                             <div>{{userName}}</div>
                         </div>
         
-                        <!-- new form from the url  -->
                         <!-- IP Address Section -->
                         <div class="row m-t-20">
                             <div class="col-lg-6">
@@ -373,7 +364,8 @@
                                                 <input type="file" class="file-upload" accept=".csv" (change)="uploadPolicy($event)"
                                                     id="fileInput">
                                                 <label for="fileInput" class="custom-label" style="display: flex">
-                                                    <i-tabler name="file-spreadsheet" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+                                                    <i-tabler name="file-spreadsheet" class="icon-20 d-flex" style="margin-right: 0.2rem; margin-top: auto;
+margin-bottom: auto;"></i-tabler>
                                                     Choose a CSV file</label>
                                             </div>
                                             
@@ -448,12 +440,10 @@
                     </div>
 
             <div *ngIf="formNo ==4">
-                        <!-- <mat-card class="  cardWithShadow">
-                            <mat-card-content class="p-24 bg-white"> -->
+                       
 
                         <app-policy-update></app-policy-update>
-                    <!-- </mat-card-content>
-                </mat-card> -->
+                   
                     </div>
 
 
@@ -462,14 +452,14 @@
                             <mat-card-content class="p-24 bg-white">
                         <div style="display:flex; justify-content: center;">
         
-                            <h1 style="display: flex; justify-content: center;">Server Policy Version :
+                            <h1 style="display: flex; justify-content: center;margin: 0;">Server Policy Version :
                                 {{serverPolicyVersion?.policy_version}}</h1> &nbsp;
                             <i-tabler name="info-circle-filled" class="icon-48 d-flex"
                                 style="margin-left: 0.2rem; color:#26c6da; cursor: pointer;margin: auto 0;"
                                 (click)="openDialogPolicy()"></i-tabler>
                         </div>
         
-                        <h1 style="display: flex; justify-content: center;">Updated On : {{serverPolicyVersion?.created_on |
+                        <h1 style="display: flex; justify-content: center;margin: 0;">Updated On : {{serverPolicyVersion?.created_on |
                             date:'dd-MM-yyyy HH:mm:ss' }}</h1>
         
         
@@ -486,7 +476,7 @@
 
                         <div style="display:flex; justify-content: center;">
         
-                            <h1 style="display: flex; justify-content: center;">Server Patch Id :
+                            <h1 style="display: flex; justify-content: center;margin: 0;">Server Patch Id :
                                 {{serverPatchVersion?.patchid}}
                             </h1> &nbsp;
                             <i-tabler name="info-circle-filled" class="icon-48 d-flex"
@@ -495,35 +485,11 @@
                         </div>
         
         
-                        <h1 style="display: flex; justify-content: center;">Updated On : {{serverPatchVersion?.updated_on |
+                        <h1 style="display: flex; justify-content: center;margin: 0;">Updated On : {{serverPatchVersion?.updated_on |
                             date:'dd-MM-yyyy HH:mm:ss'}}</h1>
                         </mat-card-content>
                     </mat-card>
                     </div>
-
-
-           
-
-            
-
-            
-
-            
-
-           
-
-            
-            
-
-        <!-- </div>
-    </mat-card-content>
-
-</mat-card> -->
-
-
-
-       
-
 
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">

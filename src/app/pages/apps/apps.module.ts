@@ -97,6 +97,15 @@ import { ClientInfoComponent } from './listregclient/client-info/client-info.com
 import { LogViewerComponent } from './log-viewer/log-viewer.component';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { HierarchyChartComponent } from './hierarchy-chart/hierarchy-chart.component';
+
+
+import { OrganizationChartModule } from 'primeng/organizationchart';
+import { DeletedClientListComponent } from './client-administraion/deleted-client-list/deleted-client-list.component';
+import { DeletedClientComponent } from './client-administraion/deleted-client/deleted-client.component';
+import { DeleteClientFormComponent } from './client-administraion/deleted-client/delete-client-form/delete-client-form.component';
+// import { DeleteClientFormComponent } from './client-administraion/deletedClient/delete-client-form/delete-client-form.component';
+
 
 @NgModule({
   imports: [
@@ -111,7 +120,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     DragDropModule,
     NgxPaginationModule,
     HttpClientModule,
-    AngularEditorModule,NgxSpinnerModule,MatDatepickerModule,
+    AngularEditorModule,NgxSpinnerModule,MatDatepickerModule,OrganizationChartModule,
     // CalendarModule.forRoot({
     //   provide: DateAdapter,
     //   useFactory: adapterFactory,
@@ -169,6 +178,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     AllServerPatchVersionComponent,
     ClientInfoComponent,
     LogViewerComponent,
+    HierarchyChartComponent,
+    DeletedClientListComponent,
+    DeletedClientComponent,
+    DeleteClientFormComponent,
+    
   ],
   providers: [DatePipe],
 })

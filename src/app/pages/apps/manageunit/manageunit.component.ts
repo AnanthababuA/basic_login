@@ -61,8 +61,7 @@ export class ManageunitComponent {
     unitid: ['', Validators.required],
   });
 
-  //   constructor(private _formBuilder: FormBuilder) {}
-  // }
+
 
   displayedColumns = ['id', 'name', 'progress', 'color', 'color2'];
   dataSource: MatTableDataSource<UserData>;
@@ -153,14 +152,12 @@ export class ManageunitComponent {
     this.unitName = '';
     this.common.unitNameLocalAdmin().subscribe(
       (res: any) => {
-        // console.log('in the unit name subscribe');
 
         if (res.api_status === true) {
           this.spinner.hide();
 
           this.unitName = res.data;
 
-          // console.log('unit Name: ', this.unitName);
           this.spinner.hide();
         } else {
           this.spinner.hide();
@@ -174,16 +171,13 @@ export class ManageunitComponent {
         this.spinner.hide();
 
         this.common.apiErrorHandler(error);
-        // console.log('eerror---', error);
-        // this.common.apiErrorHandler(error);
+        
       }
     );
   }
 
   tabChanged(event: any) {
-    // console.log('tab changed', event);
     if (event === 1) {
-      // console.log('mange unit call');
       this.showEventTable = false;
       this.unitDetailsAPI();
     }
@@ -201,15 +195,18 @@ export class ManageunitComponent {
 
   unitDetailsAPI() {
     this.spinner.show();
+    this.manageUnitDetails = [];
+    this.showEventTable = false;
     this.common.UnitDetails().subscribe(
       (res) => {
         // console.log('log in111');
 
         if (res.api_status) {
+
           this.manageUnitDetails = res.data_value;
-          // console.log('manage unit details', this.manageUnitDetails);
           this.showEventTable = true;
           this.spinner.hide();
+
         } else {
           this.spinner.hide();
           this.showEventTable = false;
@@ -283,7 +280,7 @@ export class ManageunitComponent {
       if (result.isConfirmed) {
         this.deleteUnitApi();
       } else if (result.isDenied) {
-        Swal.fire('Upload file cancelled', '', 'info');
+        Swal.fire('Deleting file cancelled', '', 'info');
       }
     });
 

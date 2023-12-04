@@ -10,5 +10,9 @@ import { DashboardsRoutes } from './dashboards.routing';
 @NgModule({
   imports: [RouterModule.forChild(DashboardsRoutes)],
   providers: [DatePipe],
+  declarations: [
+   
+  
+  ],
 })
 export class DashboardsModule {}

@@ -1,0 +1,70 @@
+<div >
+
+
+
+<mat-card-content class="p-24">
+    <mat-card-content class="p-24">
+
+        <div>
+           <strong>Client ID: </strong> {{clientInfo.client_id}}
+        </div>
+        <div>
+            <strong>Client Name: </strong> {{clientInfo.client_name}}
+        </div>
+        <div>
+            <strong>Client Unit: </strong>{{clientInfo.client_unit}}
+        </div>
+        
+
+        <form class="m-t-24" [formGroup]="deleteClient">
+            <!-- <ng-template matStepLabel>Create Group</ng-template> -->
+            <div>
+
+
+
+
+                <div style="display: flex;">
+
+                    <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">
+                        Remark
+                    </mat-label>
+                    <span style=" margin-left: 10px; color: gray;">* Maximum 200 character's
+                    </span>
+                </div>
+                <mat-form-field appearance="outline" class="w-100 custom-form-field">
+                    <textarea matInput formControlName="remark" rows="5" required placeholder="Enter Remark"></textarea>
+
+                    <mat-icon matPrefix>
+                        <i-tabler name="notebook" class="icon-20 d-flex"></i-tabler>
+                    </mat-icon>
+                    <!-- <input matInput formControlName="remark" required /> -->
+                    <mat-error *ngIf="deleteClient?.get('remark')?.hasError('required')">
+                        Remark is required
+                    </mat-error>
+
+                    <mat-error
+                        *ngIf="deleteClient.get('remark')?.hasError('pattern') && deleteClient.get('remark')?.invalid">
+                        Remark should be maximum 200 characters
+                    </mat-error>
+
+
+                </mat-form-field>
+            </div>
+            <div class="m-t-12">
+                <button mat-flat-button color="primary" (click)="submit()"
+                    [disabled]="deleteClient.invalid">Delete Client</button>
+                <button mat-flat-button color="warn" class="m-l-8" type="reset">Reset</button>
+
+                <!-- style="margin: auto;display: flex;" -->
+                <button mat-flat-button color="warn"class="m-l-8"  mat-dialog-close cdkFocusInitial 
+               
+                >
+                   Cancel 
+                </button>
+
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card-content>
+
+</div>

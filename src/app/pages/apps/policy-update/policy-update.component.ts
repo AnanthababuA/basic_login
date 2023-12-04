@@ -48,7 +48,7 @@ export class PolicyUpdateComponent {
   ) {}
 
   ngOnInit(): void {
-    console.log('in ng init');
+    // console.log('in ng init');
 
     this.urlAddtionApi();
     this.urlDeletionApi();
@@ -64,19 +64,22 @@ export class PolicyUpdateComponent {
   }
 
   searchAllowedUrl() {
-    console.log('serach called', this.searchText);
+    // console.log('serach called', this.searchText);
 
     const search_term = { search_term: this.searchText };
 
     this.spinner.show();
+    this.allowedUrl = [];
+
+    this.filteredAllowedUrl = [];
     this.common.urlAddition(search_term).subscribe(
       (res: any) => {
-        console.log('addion subscribe');
+        // console.log('addion subscribe');
 
         if (res.api_status === true) {
           this.spinner.hide();
 
-          console.log('additon res is  ', res.policy_data);
+          // console.log('additon res is  ', res.policy_data);
 
           this.allowedUrl = res.policy_data;
 
@@ -94,25 +97,28 @@ export class PolicyUpdateComponent {
         this.spinner.hide();
 
         this.common.apiErrorHandler(error);
-        console.log('eerror---', error);
+        // console.log('eerror---', error);
       }
     );
   }
 
   searchBlockedUrl() {
-    console.log('serach called', this.blockedSearchText);
+    // console.log('serach called', this.blockedSearchText);
 
     const search_term = { search_term: this.blockedSearchText };
 
     this.spinner.show();
+    this.blockedUrl = [];
+
+    this.filteredBlockedUrl = [];
     this.common.urlDeletion(search_term).subscribe(
       (res: any) => {
-        console.log('addion subscribe');
+        // console.log('addion subscribe');
 
         if (res.api_status === true) {
           this.spinner.hide();
 
-          console.log('additon res is  ', res.policy_data);
+          // console.log('additon res is  ', res.policy_data);
 
           this.blockedUrl = res.policy_data;
 
@@ -130,14 +136,13 @@ export class PolicyUpdateComponent {
         this.spinner.hide();
 
         this.common.apiErrorHandler(error);
-        console.log('eerror---', error);
+        // console.log('eerror---', error);
       }
     );
   }
 
-
   applyBlockedFilter() {
-    console.log('blocked url', this.blockedSearchText);
+    // console.log('blocked url', this.blockedSearchText);
 
     // const search_term = { search_term: this.blockedSearchText };
 
@@ -145,16 +150,15 @@ export class PolicyUpdateComponent {
       return item.toLowerCase().includes(this.blockedSearchText.toLowerCase());
     });
 
-
     // this.spinner.show()
     // this.common.urlDeletion(search_term).subscribe((res: any) => {
 
-    //   console.log("addion subscribe");
+    //   // console.log("addion subscribe");
 
     //   if (res.api_status === true) {
     //     this.spinner.hide();
 
-    //     console.log("additon res is  ", res.policy_data);
+    //     // console.log("additon res is  ", res.policy_data);
 
     //     this.blockedUrl = res.policy_data
     //     this.filteredBlockedUrl = this.blockedUrl; // Initially set filteredBlockedUrl to blockedUrl
@@ -173,7 +177,7 @@ export class PolicyUpdateComponent {
     //   this.spinner.hide();
 
     //   this.common.apiErrorHandler(error);
-    //   console.log("eerror---", error);
+    //   // console.log("eerror---", error);
 
     // })
   }
@@ -188,12 +192,12 @@ export class PolicyUpdateComponent {
   }
 
   tabChanged(event: any) {
-    console.log('tab changed', event);
+    // console.log('tab changed', event);
     if (event === 0) {
-      console.log('Url clikced');
+      // console.log('Url clikced');
       this.submitchanges = [];
     } else if (event === 1) {
-      console.log('ip clicked');
+      // console.log('ip clicked');
       this.submitchanges = [];
 
       this.ipAddtionApi();
@@ -203,14 +207,16 @@ export class PolicyUpdateComponent {
 
   urlAddtionApi() {
     this.spinner.show();
+    this.allowedUrl = [];
+    this.filteredAllowedUrl = [];
     this.common.urlAddition(this.searchText).subscribe(
       (res: any) => {
-        console.log('addion subscribe');
+        // console.log('addion subscribe');
 
         if (res.api_status === true) {
           this.spinner.hide();
 
-          console.log('additon res is  ', res.policy_data);
+          // console.log('additon res is  ', res.policy_data);
 
           this.allowedUrl = res.policy_data;
           this.filteredAllowedUrl = this.allowedUrl;
@@ -227,21 +233,23 @@ export class PolicyUpdateComponent {
         this.spinner.hide();
 
         this.common.apiErrorHandler(error);
-        console.log('eerror---', error);
+        // console.log('eerror---', error);
       }
     );
   }
 
   urlDeletionApi() {
     this.spinner.show();
+    this.blockedUrl = [];
+    this.filteredBlockedUrl = [];
     this.common.urlDeletion(this.blockedSearchText).subscribe(
       (res: any) => {
-        console.log('addion subscribe');
+        // console.log('addion subscribe');
 
         if (res.api_status === true) {
           this.spinner.hide();
 
-          console.log('additon res is  ', res.policy_data);
+          // console.log('additon res is  ', res.policy_data);
 
           this.blockedUrl = res.policy_data;
           this.filteredBlockedUrl = this.blockedUrl; // Initially set filteredBlockedUrl to blockedUrl
@@ -258,7 +266,7 @@ export class PolicyUpdateComponent {
         this.spinner.hide();
 
         this.common.apiErrorHandler(error);
-        console.log('eerror---', error);
+        // console.log('eerror---', error);
       }
     );
   }
@@ -354,8 +362,8 @@ export class PolicyUpdateComponent {
           this.submitchanges.push({ value: selectedItem, status: 0 });
         }
 
-        console.log('Allowed URLs:', this.allowedUrl);
-        console.log('Blocked URLs:', this.blockedUrl);
+        // console.log('Allowed URLs:', this.allowedUrl);
+        // console.log('Blocked URLs:', this.blockedUrl);
       }
     }
     // Clear selected items array after moving items
@@ -365,10 +373,10 @@ export class PolicyUpdateComponent {
   }
 
   urlUpdate() {
-    //   console.log("selectedBlockedItems...", this.submitchanges);
+    //   // console.log("selectedBlockedItems...", this.submitchanges);
     const policyType = 'URL'; // Set the policy type
     const formattedData = { policy_type: policyType, data: this.submitchanges };
-    console.log('URL request parameter...', formattedData);
+    // console.log('URL request parameter...', formattedData);
 
     Swal.fire({
       title: 'Do you want to do the changes',
@@ -379,12 +387,12 @@ export class PolicyUpdateComponent {
       denyButtonText: `Cancel`,
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log('log updated in the db');
+        // console.log('log updated in the db');
 
         this.spinner.show();
         this.common.policyStatusChange(formattedData).subscribe(
           (res: any) => {
-            console.log('addion subscribe');
+            // console.log('addion subscribe');
 
             if (res.api_status === true) {
               this.spinner.hide();
@@ -395,7 +403,7 @@ export class PolicyUpdateComponent {
 
               this.urlAddtionApi();
               this.urlDeletionApi();
-              this.submitchanges = []
+              this.submitchanges = [];
             } else {
               this.spinner.hide();
 
@@ -409,7 +417,7 @@ export class PolicyUpdateComponent {
             this.spinner.hide();
 
             this.common.apiErrorHandler(error);
-            console.log('eerror---', error);
+            // console.log('eerror---', error);
           }
         );
       } else if (result.isDenied) {
@@ -420,14 +428,16 @@ export class PolicyUpdateComponent {
 
   ipAddtionApi() {
     this.spinner.show();
+    this.ipAllowed = [];
+    this.filteredAllowedIPs = [];
     this.common.ipAddition(this.searchText).subscribe(
       (res: any) => {
-        console.log('ip additon');
+        // console.log('ip additon');
 
         if (res.api_status === true) {
           this.spinner.hide();
 
-          console.log('additon res is  ', res.policy_data);
+          // console.log('additon res is  ', res.policy_data);
 
           this.ipAllowed = res.policy_data;
           this.filteredAllowedIPs = this.ipAllowed;
@@ -444,21 +454,23 @@ export class PolicyUpdateComponent {
         this.spinner.hide();
 
         this.common.apiErrorHandler(error);
-        console.log('eerror---', error);
+        // console.log('eerror---', error);
       }
     );
   }
 
   ipDeletionApi() {
     this.spinner.show();
+    this.ipBlocked = [];
+    this.filteredBlockedIPs = [];
     this.common.ipDeletion(this.blockedSearchText).subscribe(
       (res: any) => {
-        console.log('ip Deletion');
+        // console.log('ip Deletion');
 
         if (res.api_status === true) {
           this.spinner.hide();
 
-          console.log('additon res is  ', res.policy_data);
+          // console.log('additon res is  ', res.policy_data);
 
           this.ipBlocked = res.policy_data;
           this.filteredBlockedIPs = this.ipBlocked; // Initially set filteredBlockedUrl to blockedUrl
@@ -475,7 +487,7 @@ export class PolicyUpdateComponent {
         this.spinner.hide();
 
         this.common.apiErrorHandler(error);
-        console.log('eerror---', error);
+        // console.log('eerror---', error);
       }
     );
   }
@@ -560,8 +572,8 @@ export class PolicyUpdateComponent {
           this.submitchanges.push({ value: selectedItem, status: 0 });
         }
 
-        console.log('Allowed IPs:', this.ipAllowed);
-        console.log('Blocked IPs:', this.ipBlocked);
+        // console.log('Allowed IPs:', this.ipAllowed);
+        // console.log('Blocked IPs:', this.ipBlocked);
       }
     }
 
@@ -578,19 +590,21 @@ export class PolicyUpdateComponent {
   }
 
   applyBlockedIPFilter() {
-    console.log('blocked IP', this.searchTextForBlockedIPs);
+    // console.log('blocked IP', this.searchTextForBlockedIPs);
 
     const search_term = { search_term: this.searchTextForBlockedIPs };
 
     this.spinner.show();
+    this.ipBlocked = [];
+    this.filteredBlockedIPs = [];
     // Assuming you have a similar method to retrieve IP data based on search term
     this.common.ipDeletion(search_term).subscribe(
       (res: any) => {
-        console.log('addition subscribe');
+        // console.log('addition subscribe');
 
         if (res.api_status === true) {
           this.spinner.hide();
-          console.log('addition res is ', res.policy_data);
+          // console.log('addition res is ', res.policy_data);
 
           // Assuming res.policy_data contains IP data retrieved from the API
           this.ipBlocked = res.policy_data;
@@ -605,7 +619,7 @@ export class PolicyUpdateComponent {
       },
       (error) => {
         this.spinner.hide();
-        console.log('error---', error);
+        // console.log('error---', error);
         // Handle error cases as per your application's requirements
       }
     );
@@ -624,7 +638,7 @@ export class PolicyUpdateComponent {
   ipUpdate() {
     const policyType = 'IP'; // Set the policy type for IP addresses
     const formattedData = { policy_type: policyType, data: this.submitchanges };
-    console.log('IP request parameter...', formattedData);
+    // console.log('IP request parameter...', formattedData);
 
     Swal.fire({
       title: 'Do you want to update the changes?',
@@ -634,23 +648,23 @@ export class PolicyUpdateComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform the action to update IP-related changes in the database
-        console.log('Updating changes for IP in the database...');
+        // console.log('Updating changes for IP in the database...');
 
         this.spinner.show();
         this.common.policyStatusChange(formattedData).subscribe(
           (res: any) => {
-            console.log('addion subscribe');
+            // console.log('addion subscribe');
 
             if (res.api_status === true) {
               this.spinner.hide();
-             
+
               Swal.fire({
                 icon: 'success',
                 title: `${res.data}`,
               });
               this.ipAddtionApi();
               this.ipDeletionApi();
-              this.submitchanges = []
+              this.submitchanges = [];
             } else {
               this.spinner.hide();
 
@@ -664,10 +678,9 @@ export class PolicyUpdateComponent {
             this.spinner.hide();
 
             this.common.apiErrorHandler(error);
-            console.log('eerror---', error);
+            // console.log('eerror---', error);
           }
         );
-
       } else if (result.isDenied) {
         Swal.fire('IP update cancelled', '', 'info');
       }
@@ -675,19 +688,21 @@ export class PolicyUpdateComponent {
   }
 
   searchAllowedIP() {
-    console.log('search called for IP', this.searchTextForAllowedIPs);
+    // console.log('search called for IP', this.searchTextForAllowedIPs);
 
     const search_term = { search_term: this.searchTextForAllowedIPs };
 
     this.spinner.show();
+    this.ipAllowed = [];
+    this.filteredAllowedIPs = [];
     // Assuming you have a similar method to retrieve IP data based on search term
     this.common.ipAddition(search_term).subscribe(
       (res: any) => {
-        console.log('addition subscribe for IP');
+        // console.log('addition subscribe for IP');
 
         if (res.api_status === true) {
           this.spinner.hide();
-          console.log('addition res for IP is ', res.policy_data);
+          // console.log('addition res for IP is ', res.policy_data);
 
           // Assuming res.policy_data contains IP data retrieved from the API
           this.ipAllowed = res.policy_data;
@@ -702,7 +717,7 @@ export class PolicyUpdateComponent {
       },
       (error) => {
         this.spinner.hide();
-        console.log('error---', error);
+        // console.log('error---', error);
         // Handle errors as needed
       }
     );

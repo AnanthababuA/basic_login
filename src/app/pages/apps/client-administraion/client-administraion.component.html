@@ -1,11 +1,15 @@
-<div class="row justify-content-center " id="clientPageTitle">
+<div id="clientPageTitle">
+
+
+
+<div class="row justify-content-center " >
   <div class="col-sm-6 col-lg-4">
-    <mat-card class="cardWithShadow card2 position-relative card-hover" style="min-height:30vh; cursor: pointer;" (click)="clientStatus(1)">
+    <mat-card #registeredClientsBtn class="cardWithShadow card2 position-relative card-hover" style="min-height:30vh; cursor: pointer;" (click)="clientStatus(1)">
       <mat-card-content style="margin: auto;">
         <div style="display:flex; justify-content: center;">
           <span class=" bg-accent rounded-circle" style="padding:10px">
 
-            <mat-icon  style="font-size:80px !important; height:80px; width:80px; color:white">list_alt</mat-icon>
+            <mat-icon  style="font-size:80px !important; height:80px; width:80px; color:white;display: flex; ">list_alt</mat-icon>
           </span>
         </div>
         <mat-card-title style="display: flex; justify-content: center; margin-top:10px">List Of Registered Clients</mat-card-title>
@@ -19,23 +23,67 @@
         <div style="display:flex; justify-content: center;">
           <span class=" bg-accent rounded-circle" style="padding:10px">
 
-            <mat-icon  style="font-size:80px !important; height:80px; width:80px; color:white">insert_chart</mat-icon>
+            <mat-icon  style="font-size:80px !important; height:80px; width:80px; color:white; display: flex;">insert_chart</mat-icon>
           </span>
         </div>
         <mat-card-title style="display: flex; justify-content: center; margin-top:10px">Registered Client's Status</mat-card-title>
       </mat-card-content>
     </mat-card>
   </div>
+
+
+
+</div>
+
+<div class="row justify-content-center " >
+
+
+  <div class="col-sm-6 col-lg-4">
+    <mat-card class="cardWithShadow card2 position-relative card-hover" style="min-height:30vh; cursor:pointer" (click)="clientStatus(3)">
+      <mat-card-content style="margin: auto;">
+        <div style="display:flex; justify-content: center;">
+          <span class=" bg-accent rounded-circle" style="padding:10px">
+            <i-tabler name="user-minus" class=" d-flex" style="color: white;
+            font-size: 80px;
+            height: 80px;
+            width: 80px;"></i-tabler>
+          </span>
+        </div>
+        <mat-card-title style="display: flex; justify-content: center; margin-top:10px">Delete client</mat-card-title>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col-sm-6 col-lg-4">
+    <mat-card class="cardWithShadow card2 position-relative card-hover" style="min-height:30vh; cursor:pointer" (click)="clientStatus(4)">
+      <mat-card-content style="margin: auto;">
+        <div style="display:flex; justify-content: center;">
+          <span class=" bg-accent rounded-circle" style="padding:10px">
+
+            <i-tabler name="list" class="d-flex" style="color: white;
+            font-size: 80px;
+            height: 80px;
+            width: 80px;"></i-tabler>
+
+          </span>
+        </div>
+        <mat-card-title style="display: flex; justify-content: center; margin-top:10px">List Of Deleted client</mat-card-title>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+</div>
+
 </div>
 
 <div id="clientPageContent" style="display: none;">
 
   <mat-card class="cardWithShadow " >
     <mat-nav-list class="p-x-16">
-      <button mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
+      <button  mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
         [class.border-red]="formNo === 1" (click)="clientStatus(1)">
         <span class="text-primary" style="display: flex;">
-          <i-tabler name="checkup-list" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
+          <i-tabler name="checkup-list" class="icon-20 d-flex" style="margin-right: 0.2rem; margin-top: auto; margin-bottom: auto"></i-tabler>
           <span>
             List Of Registered Clients
           </span>
@@ -46,12 +94,33 @@
         [class.border-red]="formNo === 2" (click)="clientStatus(2)"> 
         <span class="text-primary" style="display: flex;">
           <!-- <i-tabler name="report-analytics" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler> -->
-          <mat-icon style="margin-right: 0.2rem">insert_chart</mat-icon>
+          <mat-icon style="margin-right: 0.2rem;margin-top: auto; margin-bottom: auto">insert_chart</mat-icon>
           <span>
             Registered Client's Status
           </span>
         </span>
       </button>
+
+      <button  mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
+      [class.border-red]="formNo === 3" (click)="clientStatus(3)">
+      <span class="text-primary" style="display: flex;">
+        <i-tabler name="user-minus" class="icon-20 d-flex" style="margin-right: 0.2rem; margin-top: auto; margin-bottom: auto"></i-tabler>
+        <span>
+          Delete client
+        </span>
+      </span>
+    </button>
+
+    <button  mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
+    [class.border-red]="formNo === 4" (click)="clientStatus(4)">
+    <span class="text-primary" style="display: flex;">
+      <i-tabler name="list" class="icon-20 d-flex" style="margin-right: 0.2rem; margin-top: auto; margin-bottom: auto"></i-tabler>
+      <span>
+        List Of Deleted client
+      </span>
+    </span>
+  </button>
+
     </mat-nav-list>
   </mat-card>
   
@@ -60,13 +129,20 @@
         
   
             <div *ngIf="formNo ==1">
-              
               <app-listregclient></app-listregclient>
             </div>
   
             <div *ngIf="formNo ==2">
-              
               <app-regstatusclient></app-regstatusclient>
+            </div>
+
+            <div *ngIf="formNo ==3">
+              <app-deleted-client></app-deleted-client>
+            </div>
+
+            <div *ngIf="formNo ==4">
+              
+              <app-deleted-client-list></app-deleted-client-list>
             </div>
   
     <!-- </mat-card-content>

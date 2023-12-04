@@ -23,7 +23,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                              <tr>
+                              <!-- <tr>
                                   <td>
                                       <span style="display: flex;">
                                           <i-tabler name="anchor" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
@@ -32,8 +32,8 @@
                                           </span>
                                       </span>
                                   </td>
-                                  <td>{{policySummary?.IP.total}}</td>
-                                  <td>{{policySummary?.IP.addlist}}</td>
+                                  <td>{{policySummary?.IP?.total}}</td>
+                                  <td>{{policySummary?.IP?.addlist}}</td>
                               </tr>
                               <tr>
                                   <td>
@@ -44,10 +44,26 @@
                                           </span>
                                       </span>
                                   </td>
-                                  <td>{{policySummary?.URL.total}}</td>
-                                  <td>{{policySummary?.URL.addlist}}</td>
-                              </tr>
+                                  <td>{{policySummary?.URL?.total}}</td>
+                                  <td>{{policySummary?.URL?.addlist}}</td>
+                              </tr> -->
                            
+                              <tr *ngFor="let item of policySummary; ">
+                                <td>
+                                  
+                                  <span style="display: flex;">
+                                    <i-tabler name={{item.icon}} class="icon-20 d-flex" style="margin-right: 0.2rem; margin-top: auto;
+                                    margin-bottom: auto;"></i-tabler>
+                                    <span>
+                                      {{ item.policy_type }}
+                                    </span>
+                                </span>
+
+                                </td>
+                                <td>{{ item.total }}</td>
+                                <td>{{ item.addlist }}</td>
+                              </tr>
+
                           </tbody>
                         </table>
   
@@ -177,6 +193,8 @@
                         Loading Please Wait...
                       </p>
                     </ngx-spinner> -->
+
+
                 </div>
 
             </mat-card-content>

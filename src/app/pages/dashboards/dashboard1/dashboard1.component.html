@@ -1,28 +1,34 @@
 
-<div class="row" style="justify-content: center;">
+<div class="row" style="justify-content: center;margin: 0;">
 
-    <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px">
-      <mat-card-content class="p-24" style="margin: auto;">
+
+    <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px; cursor: pointer;" (click)="regClientCard()">
+      <mat-card-content class="p-24" style="">
         <div class="d-flex align-items-center">
           <span
-            class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:5px"
-          >
-            <mat-icon class="" style="font-size: 45px !important;height: 45px;width: 45px;" >supervised_user_circle</mat-icon>
-          </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class="f-s-20 f-w-500">
-              {{reg_count}}
+          class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:5px"
+        >
+          <mat-icon class="" style="font-size: 45px !important;height: 45px;width: 45px;" >supervised_user_circle</mat-icon>
+        </span>
+          <div class="m-l-12 text-left" style="width: min-content;">
+            <mat-card-title class=" f-w-500 ">
+              Registered clients
+             
+             
             </mat-card-title>
             <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-             <sub style="line-height: 125%;">Registered clients</sub>
+             <sub style="line-height: 125%;display: flex;
+             justify-content: center;">{{reg_count}}  </sub>
+             
             </mat-card-subtitle>
           </div>
         </div>
+       
       </mat-card-content>
     </mat-card>
 
 
-    <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px">
+    <!-- <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px">
       <mat-card-content class="p-24" style="margin: auto;">
         <div class="d-flex align-items-center">
           <span
@@ -40,11 +46,51 @@
           </div>
         </div>
       </mat-card-content>
+    </mat-card> -->
+
+
+
+    <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px; cursor: pointer;"(click)="patchCard()">
+      <mat-card-content class="p-24" style="margin: auto;">
+        <div class="d-flex align-items-center">
+          <span
+            class="icon-56 bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:5px"
+          >
+            <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">settings</mat-icon>
+          </span>
+          <div class="m-l-12 text-left">
+            <mat-card-title class=" f-w-500 ">
+              Patch &nbsp; <span style="font-size: 18px;font-weight: initial; ">Latest: {{patch_ver}}</span>
+             
+            </mat-card-title>
+            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
+             <sub style="line-height: 125%;display: flex;
+             justify-content: center;"> {{pat_upd_cli}}/{{pat_tol_cli}}  </sub>
+             <div>
+              <!-- <div class="progress-bar" [style.height.px]="20" style="margin-top: 6px;">
+                <div [style.width.%]=" pat_per_val?.split('.')[0] " class="progress" style="display: flex;
+                justify-content: center;
+                align-content: center;
+                align-items: center;color: white"><span style="font-size: 14px;font-weight:bold">{{pat_per_val?.split('.')[0]}}%</span> </div>
+              </div> -->
+             </div>
+            </mat-card-subtitle>
+          </div>
+        </div>
+        <div class="progress-bar" [style.height.px]="20" style="margin-top: 6px; ">
+          <!-- pat_per_val.split('.')[0] -->
+          <div [style.width.%]=" pat_per_val?.split('.')[0] " class="progress" 
+          [style.place-content]="pat_per_val?.split('.')[0] < 20  ? 'flex-start' : 'center' "
+          style="display: flex;
+          
+          align-content: center;
+          color: white; background-color: #ffb22b;"><span style="font-size: 14px;font-weight:bold">{{pat_per_val?.split('.')[0]}}%</span> </div>
+        </div>
+      </mat-card-content>
     </mat-card>
 
-  
-
-    <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px">
+    <!-- -----------  -->
+    <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px; cursor: pointer;" (click)="policyCard()">
       <mat-card-content class="p-24" style="margin: auto;">
         <div class="d-flex align-items-center">
           <span
@@ -53,19 +99,30 @@
             <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">assignment_turned_in</mat-icon>
           </span>
           <div class="m-l-12 text-left">
-            <mat-card-title class="f-s-20 f-w-500">
-              {{policy_ver}}&nbsp; &nbsp;  {{pol_upd_cli}}/{{pol_tot_cli}}&nbsp; &nbsp;  {{ pol_per_val }}
+            <mat-card-title class=" f-w-500 ">
+              Policy &nbsp; <span style="font-size: 18px;font-weight: initial; ">Latest:  {{policy_ver}}</span>
+             
             </mat-card-title>
             <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-             <sub style="line-height: 125%;">Latest Policy Version</sub>
+             <sub style="line-height: 125%;display: flex;
+             justify-content: center;"> {{pol_upd_cli}}/{{pol_tot_cli}}  </sub>
+             
             </mat-card-subtitle>
           </div>
+        </div>
+        <div class="progress-bar" [style.height.px]="20" style="margin-top: 6px;           ">
+          <div [style.width.%]=" pol_per_val?.split('.')[0] " class="progress"
+          [style.place-content]=" pol_per_val?.split('.')[0] < 20  ? 'flex-start' : 'center' "
+           style="display: flex;
+         
+          align-content: center;
+          color: white; background-color: #abed5b"><span style="font-size: 14px;font-weight:bold">{{pol_per_val?.split('.')[0]}}%</span> </div>
         </div>
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px">
-      <mat-card-content class="p-24" style="margin: auto;">
+    <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px; cursor: pointer;"(click)="clamAvCard()">
+      <mat-card-content class="p-24" style="">
         <div class="d-flex align-items-center">
           <span
             class="icon-56 bg-accent text-white rounded-circle d-flex align-items-center justify-content-center"  style="padding:5px"
@@ -73,201 +130,69 @@
             <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">assignment_returned</mat-icon>
           </span>
           <div class="m-l-12 text-left">
-            <mat-card-title class="f-s-20 f-w-500">
-              0%
+            <mat-card-title class=" f-w-500 ">
+              ClamAv  
+              <!-- &nbsp; <span style="font-size: 18px;font-weight: initial; ">
+                Latest:  {{clamAvData?.clam_updated_count}}
+              </span> -->
+             
             </mat-card-title>
             <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-             <sub style="line-height: 125%;">ClamAv Pushed</sub>
+             <sub style="line-height: 125%;display: flex;
+             justify-content: center;">{{clamAvData?.clam_updated_count}}/{{clamAvData?.total_reg}}  </sub>
+             
             </mat-card-subtitle>
           </div>
+        </div>
+        <div class="progress-bar" [style.height.px]="20" style="margin-top: 6px;           ">
+          <div [style.width.%]=" clamAvData?.clam_updated_percent?.split('.')[0] " class="progress" 
+          [style.place-content]="clamAvData?.clam_updated_percent?.split('.')[0]  <20  ? 'flex-start' : 'center' "
+          style="display: flex;
+          
+          align-content: center;
+          color: white; background-color: #26c6da ">
+          <span style="font-size: 14px;font-weight:bold"
+          
+          >{{clamAvData?.clam_updated_percent?.split('.')[0]}}%</span> </div>
         </div>
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px">
-      <mat-card-content class="p-24" style="margin: auto;">
+    <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px; cursor: pointer;" (click)="logCard()">
+      <mat-card-content class="p-24" style="">
         <div class="d-flex align-items-center">
           <span
-            class="icon-56 bg-error text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:5px"
-          >
-            <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">autorenew</mat-icon>
-          </span>
+          class="icon-56 bg-error text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:5px"
+        >
+          <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">autorenew</mat-icon>
+        </span>
           <div class="m-l-12 text-left">
-            <mat-card-title class="f-s-20 f-w-500">
-              0
+            <mat-card-title class=" f-w-500 ">
+              Log
+               <!-- &nbsp; 
+              <span style="font-size: 18px;font-weight: initial; ">Latest:  {{logRecievedData?.log_received_count}}</span> -->
+             
             </mat-card-title>
             <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-             <sub style="line-height: 125%;">Log Received</sub>
+             <sub style="line-height: 125%;display: flex;
+             justify-content: center;">{{logRecievedData?.log_received_count}}/{{logRecievedData?.total_reg}}  </sub>
+             
             </mat-card-subtitle>
           </div>
         </div>
-      </mat-card-content>
-    </mat-card>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- *********************************************************************  -->
-
-
-  <div class="row"style='display: none;'>
-    <div class="col-lg-2">
-      <mat-card
-        class="cardWithShadow card2 position-relative card-hover"
-        style="cursor: pointer; min-height: 26vh; background-color: #9EB8D9;" 
-      >
-        <mat-card-content class="p-y-24" style="display: inherit;">
-          <div style="display: block; justify-content: center">
-            <span
-              class="bg-accent text-white rounded-circle d-flex align-items-center justify-content-center" style="height: 70px; width: 70px;"
-            >
-              <mat-icon style="font-size: 40px; height: 40px; width: 45px;"> people</mat-icon>
-            </span>
-            <div style="margin-right: 70px"></div>
-          </div>
-          <mat-card-title style="display: inline-block; text-align: right;"
-            >Registered Clients <br> 
-
-            <div style="margin-top: 30px; text-align: right; margin-right: 30px;">{{reg_count}}</div>
-
-            
-            </mat-card-title
-          >
-
-        </mat-card-content>
-
-        
-        
-      </mat-card>
-
-    </div>
-
-    <div class="col-lg-2">
-      <mat-card
-      class="cardWithShadow card2 position-relative card-hover"
-      style="cursor: pointer; min-height: 26vh; background-color: #9EB8D9;"
-    >
-      <mat-card-content class="p-y-24" style="display: inherit;">
-        <div style="display: block; justify-content: center">
-          <span
-            class="bg-accent text-white rounded-circle d-flex align-items-center justify-content-center" style="height: 80px; width: 80px;"
-          >
-          <mat-icon style="font-size: 40px; height: 40px; width: 45px;">settings_applications</mat-icon>
-          </span>
-          <div style="margin-right: 70px"></div>
+        <div class="progress-bar" [style.height.px]="20" style="margin-top: 6px;">
+          <div [style.width.%]=" logRecievedData?.log_received_percent?.split('.')[0] " 
+          class="progress" 
+          [style.place-content]=" logRecievedData?.log_received_percent?.split('.')[0] < 20  ? 'flex-start' : 'center' "
+          style="display: flex;
+         
+          align-content: center;
+          color: white; background-color: #fc4b6c"><span style="font-size: 14px;font-weight:bold">{{logRecievedData?.log_received_percent?.split('.')[0]}}%</span> </div>
         </div>
-        <mat-card-title style="display: inline-block; text-align: right;"
-          >
-          <!-- Rules Pushed -->Latest Patch version
-
-           <br> 
-
-          <div style="margin-top: 10px; text-align: right; margin-right: 10px;"> {{patch_ver}}</div>
-          </mat-card-title
-        >
       </mat-card-content>
     </mat-card>
-
-    </div>
-
-    <div class="col-lg-2">
-      <mat-card
-      class="cardWithShadow card2 position-relative card-hover"
-      style="cursor: pointer; min-height: 26vh; background-color: #9EB8D9;"
-    >
-      <mat-card-content class="p-y-24" style="display: inherit;">
-        <div style="display: block; justify-content: center">
-          <span
-            class="bg-accent text-white rounded-circle d-flex align-items-center justify-content-center" style="height: 80px; width: 80px;"
-          >
-          <mat-icon style="font-size: 40px; height: 40px; width: 45px;">assignment_returned</mat-icon>
-          </span>
-          <div style="margin-right: 70px"></div>
-        </div>
-        <mat-card-title style="display: inline-block; text-align: right;"
-          >
-          <!-- ClamAV Pushed  --> Patch Updated
-          <br> 
-          <div style="margin-top: 30px; text-align: right; margin-right: 10px;">{{pat_upd_cli}}/{{pat_tol_cli}} </div> <br>
-          <div> {{ pat_per_val }} </div>
-          </mat-card-title
-        >
-      </mat-card-content>
-    </mat-card>
-
-    </div>
-
-    <div class="col-lg-2">
-      <mat-card
-      class="cardWithShadow card2 position-relative card-hover"
-      style="cursor: pointer; min-height: 26vh; background-color: #9EB8D9;"
-    >
-      <mat-card-content class="p-y-24" style="display: inherit;">
-        <div style="display: block; justify-content: center">
-          <span
-            class="bg-accent text-white rounded-circle d-flex align-items-center justify-content-center" style="height: 80px; width: 80px;"
-          >
-          <mat-icon style="font-size: 40px; height: 40px; width: 45px;">assignment_turned_in</mat-icon>
-          </span>
-          <div style="margin-right: 70px"></div>
-        </div>
-        <mat-card-title style="display: inline-block; text-align: right;"
-          >
-          <!-- Patch Updated  -->Latest Policy Version
-          <br> 
-          <div style="margin-top: 10px; text-align: right; margin-right: 10px;">{{policy_ver}}</div>
-          </mat-card-title
-        >
-      </mat-card-content>
-    </mat-card>
-
-    </div>
-
-    <div class="col-lg-2">
-      <mat-card
-      class="cardWithShadow card2 position-relative card-hover"
-      style="cursor: pointer; min-height: 26vh; background-color: #9EB8D9;"
-    >
-      <mat-card-content class="p-y-24" style="display: inherit;">
-        <div style="display: block; justify-content: center">
-          <span
-            class="bg-accent text-white rounded-circle d-flex align-items-center justify-content-center" style="height: 80px; width: 80px;"
-          >
-          <mat-icon style="font-size: 40px; height: 40px; width: 45px;">autorenew</mat-icon>
-          </span>
-          <div style="margin-right: 70px"></div>
-        </div>
-        <mat-card-title style="display: inline-block; text-align: right;"
-          >
-          <!-- Log Recived  --> Policy Updated
-          <br> 
-          <div style="margin-top: 30px; text-align: right; margin-right: 5px;">{{pol_upd_cli}}/{{pol_tot_cli}}</div> <br>
-
-          <div> {{ pol_per_val }} </div>
-
-          </mat-card-title
-        >
-      </mat-card-content>
-    </mat-card>
-
-    </div>
-
 
   </div>
+
+
+  <app-dashboard-charts></app-dashboard-charts>

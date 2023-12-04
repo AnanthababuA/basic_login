@@ -60,6 +60,7 @@ export class LocaladminComponent {
 
   unitNameLocalAdminfun() {
     this.spinner.show();
+    this.unitName = '';
     this.common.unitNameLocalAdmin().subscribe((res: any) => {
       if (res.api_status === true) {
         this.spinner.hide();
@@ -79,6 +80,7 @@ export class LocaladminComponent {
 
   unitTypeLocalAdminfun() {
     this.spinner.show();
+    this.unitType = '';
     this.common.unitTypeLocalAdmin().subscribe((res: any) => {
       if (res.api_status === true) {
         this.spinner.hide();
