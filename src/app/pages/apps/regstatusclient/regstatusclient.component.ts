@@ -76,9 +76,8 @@ export class RegstatusclientComponent {
         this.spinner.hide();
 
         Swal.fire({
-          title: 'Unable to load Date',
-          text: '',
-          icon: 'info'
+          icon: 'error',
+          title: `${res.message}`,
         })
 
       }

@@ -23,14 +23,22 @@
 
 
 
-                <div style="display: flex;">
+                <!-- <div style="display: flex;">
 
                     <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">
                         Remark
+                        <span  style=" margin-left: 10px; color: gray;">* Maximum 200 character's
+                        </span>
                     </mat-label>
-                    <span style=" margin-left: 10px; color: gray;">* Maximum 200 character's
-                    </span>
-                </div>
+                </div> -->
+                <div style="display: flex; margin:0.3rem;">
+
+                    <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12" style="margin: 0 !important;
+                    display: flex !important;
+                    align-items: center !important;">Remarks</mat-label> 
+                    <span class="hintText"
+                      style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* Maximum 200 Characters</span>
+                  </div>
                 <mat-form-field appearance="outline" class="w-100 custom-form-field">
                     <textarea matInput formControlName="remark" rows="5" required placeholder="Enter Remark"></textarea>
 

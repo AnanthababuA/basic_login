@@ -12,7 +12,7 @@
         </span>
           <div class="m-l-12 text-left" style="width: min-content;">
             <mat-card-title class=" f-w-500 ">
-              Registered clients
+              Registered Clients
              
              
             </mat-card-title>
@@ -77,14 +77,15 @@
             </mat-card-subtitle>
           </div>
         </div>
+
         <div class="progress-bar" [style.height.px]="20" style="margin-top: 6px; ">
           <!-- pat_per_val.split('.')[0] -->
-          <div [style.width.%]=" pat_per_val?.split('.')[0] " class="progress" 
-          [style.place-content]="pat_per_val?.split('.')[0] < 20  ? 'flex-start' : 'center' "
+          <div [style.width.%]=" pat_per_val" class="progress" 
+          [style.place-content]="pat_per_val< 20  ? 'flex-start' : 'center' "
           style="display: flex;
           
           align-content: center;
-          color: white; background-color: #ffb22b;"><span style="font-size: 14px;font-weight:bold">{{pat_per_val?.split('.')[0]}}%</span> </div>
+          color: white; background-color: #ffb22b;"><span style="font-size: 14px;font-weight:bold">{{pat_per_val | number:'1.0-0'}}%</span> </div>
         </div>
       </mat-card-content>
     </mat-card>
@@ -111,12 +112,12 @@
           </div>
         </div>
         <div class="progress-bar" [style.height.px]="20" style="margin-top: 6px;           ">
-          <div [style.width.%]=" pol_per_val?.split('.')[0] " class="progress"
-          [style.place-content]=" pol_per_val?.split('.')[0] < 20  ? 'flex-start' : 'center' "
+          <div [style.width.%]=" pol_per_val " class="progress"
+          [style.place-content]=" pol_per_val < 20  ? 'flex-start' : 'center' "
            style="display: flex;
          
           align-content: center;
-          color: white; background-color: #abed5b"><span style="font-size: 14px;font-weight:bold">{{pol_per_val?.split('.')[0]}}%</span> </div>
+          color: white; background-color: #abed5b"><span style="font-size: 14px;font-weight:bold">{{pol_per_val | number:'1.0-0'}}%</span> </div>
         </div>
       </mat-card-content>
     </mat-card>
@@ -145,15 +146,15 @@
           </div>
         </div>
         <div class="progress-bar" [style.height.px]="20" style="margin-top: 6px;           ">
-          <div [style.width.%]=" clamAvData?.clam_updated_percent?.split('.')[0] " class="progress" 
-          [style.place-content]="clamAvData?.clam_updated_percent?.split('.')[0]  <20  ? 'flex-start' : 'center' "
+          <div [style.width.%]=" clamAvData?.clam_updated_percent " class="progress" 
+          [style.place-content]="clamAvData?.clam_updated_percent  <20  ? 'flex-start' : 'center' "
           style="display: flex;
           
           align-content: center;
           color: white; background-color: #26c6da ">
           <span style="font-size: 14px;font-weight:bold"
           
-          >{{clamAvData?.clam_updated_percent?.split('.')[0]}}%</span> </div>
+          >{{clamAvData?.clam_updated_percent  | number:'1.0-0' }}%</span> </div>
         </div>
       </mat-card-content>
     </mat-card>
@@ -181,13 +182,13 @@
           </div>
         </div>
         <div class="progress-bar" [style.height.px]="20" style="margin-top: 6px;">
-          <div [style.width.%]=" logRecievedData?.log_received_percent?.split('.')[0] " 
+          <div [style.width.%]=" logRecievedData?.log_received_percent" 
           class="progress" 
-          [style.place-content]=" logRecievedData?.log_received_percent?.split('.')[0] < 20  ? 'flex-start' : 'center' "
+          [style.place-content]=" logRecievedData?.log_received_percent < 20  ? 'flex-start' : 'center' "
           style="display: flex;
          
           align-content: center;
-          color: white; background-color: #fc4b6c"><span style="font-size: 14px;font-weight:bold">{{logRecievedData?.log_received_percent?.split('.')[0]}}%</span> </div>
+          color: white; background-color: #fc4b6c"><span style="font-size: 14px;font-weight:bold">{{logRecievedData?.log_received_percent | number:'1.0-0'}}%</span> </div>
         </div>
       </mat-card-content>
     </mat-card>

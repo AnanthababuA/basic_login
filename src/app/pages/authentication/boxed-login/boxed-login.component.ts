@@ -106,15 +106,15 @@ export class AppBoxedLoginComponent {
 
 
           this.router.navigate(['/dashboards/dashboard']);
-          Swal.fire({
-            icon: 'success',
-            title: 'Welcome to ISOC',
-            text: `You have successfully logged-in.`,
-            timer: 3000, 
-            // showConfirmButton: false,
-          }).then(() => {
-            // this.router.navigate(['dashboard']);
-          });
+          // Swal.fire({
+          //   icon: 'success',
+          //   title: 'Welcome to ISOC',
+          //   text: `You have successfully logged-in.`,
+          //   timer: 3000, 
+          //   // showConfirmButton: false,
+          // }).then(() => {
+          //   // this.router.navigate(['dashboard']);
+          // });
           
 
         } else {

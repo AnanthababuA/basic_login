@@ -1,37 +1,39 @@
 <div class="zoom-controls">
     <button (click)="zoomIn()">+</button>
     <button (click)="zoomOut()">-</button>
-</div>
+  </div>
+  
+  <div class="org-chart-container"  >
+   <div   [style.transform]="'scale(' + zoomLevel + ')'">
+  <!-- <p-organizationChart *ngIf="organizationData" [value]="organizationData" #orgChart > -->
+  
+    <p-organizationChart [value]="organizationData" #orgChart selectionMode="single">
 
-<div class="org-chart-container">
-    <div [style.transform]="'scale(' + zoomLevel + ')'">
-        <p-organizationChart [value]="organizationData" #orgChart>
+    <ng-template let-node pTemplate="person">
+      
+      <div class="node-style text-center card" [class]="node.styleClass"
+           [class.node-highlight]="node.highlighted"
+           (click)="highlightNode(node)"
+           
+           (mouseover)="highlightOnMouseOver(node)"  
+           (mouseout)="removeHighlightOnMouseOut(node)">
+        <div class="card">
+          <div class="headerone text-white">
+            <div></div>
+            {{ node.data.name }}
 
-
-            <ng-template let-node pTemplate="person">
-
-                <div class="node-style text-center card" [class]="node.styleClass"
-                    [class.node-highlight]="node.highlighted" (click)="highlightNode(node)"
-                    (mouseover)="highlightOnMouseOver(node)" (mouseout)="removeHighlightOnMouseOut(node)">
-                    <div class="card">
-                        <div class="headerone text-white">
-                            <div></div>
-                            {{ node.data.name }}
-
-                        </div>
-                        <div class="headertwo">
-                            <div style="color: Blue; font-weight: bold;">Total clients</div>
-                            <div style="color:  Blue; font-weight: bold;">Sub clients</div>
-                            <div style="color:  Blue; font-weight: bold;">Blocked Clients</div>
-
-                            <div style="color:#7a0220;font-weight: bold; ">Policy</div>
-                            <div style="color: #7a0220;font-weight: bold; ">Patch</div>
-                            <div style="color: #7a0220;font-weight: bold; ">Clam</div>
-                        </div>
-
-                    </div>
-                </div>
-            </ng-template>
-        </p-organizationChart>
-    </div>
-</div>
+          </div>
+          <div class="headertwo">
+            <div style="color: Blue; font-weight: bold;">Total clients</div>
+            <div style="color:  Blue; font-weight: bold;">Sub clients</div>
+            <div style="color:  Blue; font-weight: bold;">Blocked Clients</div>
+            
+            <div style="color:#7a0220;font-weight: bold; ">Policy</div>
+            <div style="color: #7a0220;font-weight: bold; ">Patch</div>
+            <div style="color: #7a0220;font-weight: bold; ">Clam</div>
+          </div>
+          
+        </div>
+      </div>
+    </ng-template>
+  </p-organizationChart></div></div>

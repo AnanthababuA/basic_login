@@ -379,7 +379,7 @@ export class PolicyUpdateComponent {
     // console.log('URL request parameter...', formattedData);
 
     Swal.fire({
-      title: 'Do you want to do the changes',
+      title: 'Do you want to do the changes?',
       // text: file.name,
       showDenyButton: true,
       // showCancelButton: true,
@@ -682,7 +682,7 @@ export class PolicyUpdateComponent {
           }
         );
       } else if (result.isDenied) {
-        Swal.fire('IP update cancelled', '', 'info');
+        Swal.fire('Updating IP cancelled', '', 'info');
       }
     });
   }

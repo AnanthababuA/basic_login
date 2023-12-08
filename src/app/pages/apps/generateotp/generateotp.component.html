@@ -10,8 +10,8 @@
           <div style="display: flex;">
 
             <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">User Name</mat-label> <span class="hintText"
-              style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* Allow only
-              letters (uppercase and lowercase) and numbers</span>
+              style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* Allow Only
+              Letters (Uppercase And Lowercase) And Numbers</span>
           </div>
     
           <mat-form-field appearance="outline" class="w-100" color="primary">
@@ -21,10 +21,10 @@
             </mat-icon>
     
             <mat-error *ngIf="genOtpForm.get('user_name')?.hasError('required')">
-              Username is required
+              Username Is Required
             </mat-error>
             <mat-error *ngIf="genOtpForm.get('user_name')?.hasError('pattern') && genOtpForm.get('user_name')?.invalid">
-              Allow only letters (uppercase and lowercase) and numbers
+              Allow Only Letters (Uppercase And Lowercase) And Numbers
             </mat-error>
           </mat-form-field>
         </div>
@@ -33,8 +33,8 @@
           <div style="display: flex;">
 
             <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Contact Number</mat-label> <span class="hintText"
-              style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* Must contain 10
-              digit</span>
+              style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* Must Contain 10
+              Digit</span>
           </div>
     
           <mat-form-field appearance="outline" class="w-100" color="primary">
@@ -45,11 +45,11 @@
             </mat-icon>
     
             <mat-error *ngIf="genOtpForm.get('contact_number')?.hasError('required')">
-              Contact Number is required
+              Contact Number Is Required
             </mat-error>
             <mat-error
               *ngIf="genOtpForm.get('contact_number')?.hasError('pattern') && genOtpForm.get('contact_number')?.invalid">
-              Contact Number must be a 10-digit numeric value.
+              Contact Number Must Be 10-Digit Numeric Value.
             </mat-error>
           </mat-form-field>
         </div>
@@ -59,43 +59,46 @@
         <div class="col-lg-6">
           <div style="display: flex;">
 
-            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Designation</mat-label> <span class="hintText"
-              style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* Minimum 5
-              characters & Special character not allowed</span>
+            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Description</mat-label>
+             <span class="hintText"
+              style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* Maximum 200 Characters</span>
           </div>
     
           <mat-form-field appearance="outline" class="w-100" color="primary">
-            <input matInput type="text" formControlName="designation" placeholder="Enter Designation" required />
+            <textarea  rows="5" matInput type="text" formControlName="designation" placeholder="Enter Description" required></textarea>
+
+            <!-- <input matInput type="text" formControlName="designation" placeholder="Enter Designation" required /> -->
             <mat-icon matPrefix>
               <i-tabler name="notebook" class="icon-20 d-flex"></i-tabler>
             </mat-icon>
     
             <mat-error *ngIf="genOtpForm.get('designation')?.hasError('required')">
-              Designation is required
+              Description Is Required
             </mat-error>
             <mat-error *ngIf="genOtpForm.get('designation')?.hasError('pattern') && genOtpForm.get('designation')?.invalid">
-              Designation must contain minimum 5 characters & Special character not allowed
+              Description Should Be Maximum 200 Characters
             </mat-error>
           </mat-form-field>
         </div>
         <div class="col-lg-6">
           <div style="display: flex;">
 
-            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Rank</mat-label> <span class="hintText"
-              style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* Minimum 3
-              characters & Special character not allowed</span>
+            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block m-t-12">Remarks</mat-label> 
+            <span class="hintText"
+              style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* Maximum 200 Characters</span>
           </div>
     
           <mat-form-field appearance="outline" class="w-100" color="primary">
-            <input matInput type="text" formControlName="rank" placeholder="Enter Rank" required />
+            <!-- <input matInput type="text" formControlName="rank" placeholder="Enter Remark" required /> -->
+            <textarea  rows="5" matInput type="text" formControlName="rank" placeholder="Enter Remarks" required ></textarea>
             <mat-icon matPrefix>
               <i-tabler name="star" class="icon-20 d-flex"></i-tabler>
             </mat-icon>
             <mat-error *ngIf="genOtpForm.get('rank')?.hasError('required')">
-              Rank is required
+              Rank Is Required
             </mat-error>
             <mat-error *ngIf="genOtpForm.get('rank')?.hasError('pattern') && genOtpForm.get('rank')?.invalid">
-              Minimum 3 characters & Special character not allowed
+              Remark Should Be Maximum 200 Characters
             </mat-error>
           </mat-form-field>
         </div>

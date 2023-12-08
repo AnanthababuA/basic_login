@@ -13,7 +13,7 @@
               <div class="col-lg-6">
                 <div style="display: flex;">
 
-                  <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Parent unit</mat-label>
+                  <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Parent Unit</mat-label>
                   <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">&nbsp; </span>
                 </div>
 
@@ -26,17 +26,19 @@
 
                   </mat-select>
                   <mat-error *ngIf="secondFormGroup?.get('unitid')?.hasError('required')">
-                    Parent unit is required
+                    Parent Unit Is Required
                   </mat-error>
                 </mat-form-field>
               </div>
 
               <div class="col-lg-6" >
-                <div style="display: flex;">
+                <div style="display: flex;margin-bottom: 0.3rem;">
 
-                  <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Unit Name
+                  <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16" style="margin-bottom: 0 !important;
+                  display: flex !important;
+                  align-items: center !important;">Unit Name
                   </mat-label><span class="hintText" style="font-size: 0.7rem; margin-left: 10px; color: gray;">* Maximum 10
-                    character's and special character not allowed</span>
+                    Character's And Special Character Not Allowed</span>
                 </div>
 
                   <mat-form-field appearance="outline" class="w-100">
@@ -45,12 +47,12 @@
                       <i-tabler name="users" class="icon-20 d-flex"></i-tabler>
                     </mat-icon>
                     <mat-error *ngIf="secondFormGroup?.get('unitname')?.hasError('required')">
-                      Unit Name is required
+                      Unit Name Is Required
                     </mat-error>
       
                     <mat-error
                       *ngIf="secondFormGroup.get('unitname')?.hasError('pattern') && secondFormGroup.get('unitname')?.invalid">
-                      Unit name should be maximum 10 characters & special character not allowed
+                      Unit Name Should Be Maximum 10 Characters & Special Character Not Allowed
                     </mat-error>
                   </mat-form-field>
               </div>
@@ -83,11 +85,13 @@
 
             </mat-form-field> -->
             <!-- input for unitdesc -->
-            <div style="display: flex;">
+            <div style="display: flex;margin-bottom: 0.3rem;">
 
-              <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Describe some information about unit
+              <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16" style="margin-bottom: 0 !important;
+              display: flex !important;
+              align-items: center !important;">Describe Some Information About Unit
               </mat-label> <span class="hintText" style="font-size: 0.7rem; margin-left: 10px; color: gray;">* Maximum 200
-                character's</span>
+                Character's</span>
             </div>
             <mat-form-field appearance="outline" class="w-100 custom-form-field">
               <textarea matInput formControlName="unitdesc" rows="5" required
@@ -98,12 +102,12 @@
               </mat-icon>
               <!-- <input matInput formControlName="unitdesc" required /> -->
               <mat-error *ngIf="secondFormGroup?.get('unitdesc')?.hasError('required')">
-                Unit description is required
+                Unit Description Is Required
               </mat-error>
 
               <mat-error
                 *ngIf="secondFormGroup.get('unitdesc')?.hasError('pattern') && secondFormGroup.get('unitdesc')?.invalid">
-                Unit description should be maximum 200 characters
+                Unit Description Should Be Maximum 200 Characters
               </mat-error>
 
 
@@ -131,99 +135,80 @@
         <!-- <table datatable dtOptions="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover"></table> -->
         <div *ngIf="showEventTable">
 
-          <!-- <table datatable [dtOptions]="dtOptions" class="row-border hover">
-            <thead>
-              <tr>
-                <th>Sr No</th>
-                <th>Unit Name</th>
-                <th>Unit Desc</th>
-                <th>Created On</th>
-                <th>Parent Unit</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of manageUnitDetails; let i = index">
-                <td>{{ i+1 }}</td>
-                <td>{{ item?.unit_name }}</td>
-                <td>{{ item?.unit_desc }}</td>
-                <td>{{ item?.created_on }}</td>
-                <td>{{ item?.parent_unit }}</td>
-                <td>
-                  <button class="bg-success f-s-12 p-x-8 p-y-4 rounded text-white" style="border: none; cursor: pointer;" (click)="editRow()">Edit</button> &nbsp; &nbsp;
-                  <button class="bg-error f-s-12 p-x-8 p-y-4 rounded text-white" style="border: none; cursor: pointer;"  (click)="deleteRow()">Delete</button>
-                </td>
-              </tr>
-            </tbody>
-          </table> -->
 
-          <table datatable [dtOptions]="dtOptions" class="row-border hover">
-            <thead>
-              <tr>
-                <th>Sr No</th>
-                <th>Unit Name</th>
-                <th>Unit Description</th>
-                <th>Created On</th>
-                <th>Parent Unit</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of manageUnitDetails; let i = index">
-                <td>{{ i + 1 }}</td>
-                <td>
-                  <ng-container *ngIf="!editMode[i]; else editModeTemplate">
-                    {{ item.unit_name }}
-                  </ng-container>
-                  <ng-template #editModeTemplate>
-                    <input type="text" [(ngModel)]="item.unit_name"  style="padding: 5px 10px; border-radius: 0.4rem;border: 1px solid gray" oninput="this.value = this.value.toUpperCase()"  />
-                  </ng-template>
-                </td>
-                <td>
-                  <ng-container *ngIf="!editMode[i]; else editModeDescTemplate">
-                    {{ item.unit_desc }}
-                  </ng-container>
-                  <ng-template #editModeDescTemplate>
-                    <input type="text" [(ngModel)]="item.unit_desc" style="padding: 5px 10px; border-radius: 0.4rem; border: 1px solid gray;"  />
-                  </ng-template>
-                </td>
-                <td>{{ item.created_on |
-                  date:'dd-MM-yyyy HH:mm:ss' }}</td>
-                <td>{{ item.parent_unit }}</td>
-                <td>
-                  <div style="display: flex;">
+          <div class="colorTable">
 
-                    <button class="bg-success f-s-12 p-x-8 p-y-4 rounded text-white"
-                            style="border: none; cursor: pointer; display:flex; align-items: center;"
-                            (click)="editRow(i)">
-                            <ng-container *ngIf="editMode[i]">
-                              <i-tabler name="x" class="icon-20 d-flex m-x-2"></i-tabler>
-                               Cancel
-                            </ng-container>
-                            <ng-container *ngIf="!editMode[i]">
-                              <i-tabler name="edit" class="icon-20 d-flex  m-x-2"></i-tabler>
-                               Edit
-                            </ng-container>
-                          
-                      <!-- {{ editMode[i] ? `<i-tabler name="trash-filled" class="icon-20 d-flex"></i-tabler> Cancel` : 'Edit' }} -->
-                    </button>
-                    <button class="bg-error f-s-12 p-x-8 p-y-4 rounded text-white m-x-8"
-                            style="border: none; cursor: pointer; display:flex; align-items: center;"
-                            (click)="deleteRow(i)">
-                       <i-tabler name="trash-filled" class="icon-20 d-flex m-x-2"></i-tabler> Delete
-                    </button>
-                    <button *ngIf="editMode[i]"
-                            class="bg-primary f-s-12 p-x-8 p-y-4 rounded text-white"
-                            style="border: none; cursor: pointer; display:flex; align-items: center;"
-                            (click)="saveChanges(i)">
-                            <i-tabler name="send" class="icon-20 d-flex m-x-2"></i-tabler>
-                      Save
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+              <thead>
+                <tr>
+                  <th>Sr No</th>
+                  <th>Unit Name</th>
+                  <!-- <th>Unit Description</th> -->
+                  <th>Created On</th>
+                  <th>User Group</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of manageUnitDetails; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>
+                    <ng-container *ngIf="!editMode[i]; else editModeTemplate">
+                      {{ item.unit_name }}
+                    </ng-container>
+                    <ng-template #editModeTemplate>
+                      <input type="text" [(ngModel)]="item.unit_name"  style="padding: 5px 10px; border-radius: 0.4rem;border: 1px solid gray" oninput="this.value = this.value.toUpperCase()"  />
+                    </ng-template>
+                  </td>
+                  <!-- <td>
+                    <ng-container *ngIf="!editMode[i]; else editModeDescTemplate">
+                      {{ item.unit_desc }}
+                    </ng-container>
+                    <ng-template #editModeDescTemplate>
+                      <input type="text" [(ngModel)]="item.unit_desc" style="padding: 5px 10px; border-radius: 0.4rem; border: 1px solid gray;"  />
+                    </ng-template>
+                  </td> -->
+                  <td>{{ item.created_on |
+                    date:'dd-MM-yyyy HH:mm:ss' }}</td>
+                  <td>{{ item.parent_unit }}</td>
+                  <!-- <td>{{ item.parent_unit.split('_')[0].toUpperCase() }}</td> -->
+
+                  <td>
+                    <div style="display: flex;justify-content: center;">
+  
+                      <button class="bg-success f-s-12 p-x-8 p-y-4 rounded text-white"
+                              style="border: none; cursor: pointer; display:flex; align-items: center;"
+                              (click)="editRow(i)">
+                              <ng-container *ngIf="editMode[i]">
+                                <i-tabler name="x" class="icon-20 d-flex m-x-2"></i-tabler>
+                                 Cancel
+                              </ng-container>
+                              <ng-container *ngIf="!editMode[i]">
+                                <i-tabler name="edit" class="icon-20 d-flex  m-x-2"></i-tabler>
+                                 Edit
+                              </ng-container>
+                            
+                        <!-- {{ editMode[i] ? `<i-tabler name="trash-filled" class="icon-20 d-flex"></i-tabler> Cancel` : 'Edit' }} -->
+                      </button>
+                      <button class="bg-error f-s-12 p-x-8 p-y-4 rounded text-white m-x-8"
+                              style="border: none; cursor: pointer; display:flex; align-items: center;"
+                              (click)="deleteRow(i)">
+                         <i-tabler name="trash-filled" class="icon-20 d-flex m-x-2"></i-tabler> Delete
+                      </button>
+                      <button *ngIf="editMode[i]"
+                              class="bg-primary f-s-12 p-x-8 p-y-4 rounded text-white"
+                              style="border: none; cursor: pointer; display:flex; align-items: center;"
+                              (click)="saveChanges(i)">
+                              <i-tabler name="send" class="icon-20 d-flex m-x-2"></i-tabler>
+                        Save
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
           
 
 

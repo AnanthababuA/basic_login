@@ -96,6 +96,8 @@ export class PolicySummaryComponent {
     };
 
     this.policySummaryAPI();
+
+    this.otpStatusChart(80)
   }
 
   logSelectedValue() {
@@ -149,7 +151,13 @@ export class PolicySummaryComponent {
 
           console.log('icon', this.policySummary);
 
-          this.refreshDataTable();
+          
+
+          try {
+            this.refreshDataTable();
+          } catch (error) {
+            console.error('An error occurred while refreshing the DataTable:', error);
+          }
         }
       },
       (error) => {
@@ -177,7 +185,11 @@ export class PolicySummaryComponent {
 
           this.totalEntries = res.total_count;
 
-          this.refreshDataTable();
+          try {
+            this.refreshDataTable();
+          } catch (error) {
+            console.error('An error occurred while refreshing the DataTable:', error);
+          }
 
           // console.log('url details', this.urlDetails);
         }
@@ -205,7 +217,11 @@ export class PolicySummaryComponent {
           this.ipDetails = res.data;
           this.totalEntries = res.total_count;
 
-          this.refreshDataTable();
+          try {
+            this.refreshDataTable();
+          } catch (error) {
+            console.error('An error occurred while refreshing the DataTable:', error);
+          }
 
           // dataSource1 = PRODUCT_DATA;
 
@@ -293,5 +309,49 @@ export class PolicySummaryComponent {
         this.datatableElement.ngOnInit();
       }
     });
+  }
+  chartOptions2 : any
+  otpStatusChart(percentage: any){
+    this.chartOptions2 = {
+      series: [percentage], // Single value
+      chart: {
+        height: 350,
+        type: "radialBar"
+      },
+      plotOptions: {
+        radialBar: {
+          startAngle: -90,
+          endAngle: 90,
+          hollow: {
+            size: "70%"
+          },
+          dataLabels: {
+            name: {
+              offsetY: 15,
+              show: false,
+              color: "#888",
+              fontSize: "18px"
+            },
+            value: {
+              offsetY: -15,
+              color: "#111",
+              fontSize: "26px",
+              show: true
+            }
+          }
+        }
+      },
+      labels: ["Series A"], // Label for the single value
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              height: 250
+            }
+          }
+        }
+      ]
+    };
   }
 }

@@ -5,37 +5,40 @@
        
 
       <div *ngIf="showTable">
+        <div class="colorTable">
       
-        <table datatable [dtOptions]="dtOptions" class="row-border hover">
-          <thead>
-            <tr>
-              <th>Sr No</th>
-              <th>ID</th>
-              <th>Client Name</th>
-              <th>Client Unit</th>
-              <th>Unit Name</th>
-              <th>Remark</th>
-              <th>Mac ID</th>
-              <th>Public IP</th>
-             
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of listOfDeletedClient; let i = index">
-              <td>{{ i + 1 }}</td>
-              <td>{{ item.client_id }}</td>
-              <td>{{ item.client_name }}</td>
-              <td>{{ item.client_unit }}</td>
-              <td>{{ item.client_unit_name }}</td>
-              <td>{{ item.remark }}</td>
-              <td>{{ item.client_macid }}</td>
-              <td>{{ item.client_publicip }}</td>
+            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+              <thead>
+                <tr>
+                  <th>Sr No</th>
+                  <th>Client ID</th>
+                  <th>Client Name</th>
+                  <th>Client Unit Name</th>
+                  <!-- <th>Unit Name</th> -->
+                  <th>Remark</th>
+                  <th>Mac ID</th>
+                  <th>Client IP</th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of listOfDeletedClient; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ item.client_id }}</td>
+                  <td>{{ item.client_name }}</td>
+                  <td>{{ item.client_unit_name }}</td>
+                  <!-- <td>{{ item.client_unit_name }}</td> -->
+                  <td>{{ item.remark }}</td>
+                  <td>{{ item.client_macid }}</td>
+                  <td>{{ item.client_publicip }}</td>
+    
+    
+                  
+                </tr>
+              </tbody>
+            </table>
+        </div>
 
-
-              
-            </tr>
-          </tbody>
-        </table>
       </div>
     </mat-card-content>
   </mat-card>

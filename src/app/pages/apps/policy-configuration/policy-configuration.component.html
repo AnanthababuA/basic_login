@@ -138,8 +138,18 @@ margin-bottom: auto;"></i-tabler>
         
                                 <form [formGroup]="urlForm">
         
+                                    <div style="display: flex; margin-bottom:0.3rem">
+    
+                                        <mat-label class="mat-subtitle-2 f-w-600 d-block" style="margin-bottom: 0 !important;
+                                        display: flex !important;
+                                        align-items: center !important;">
+                                            <div>URL</div>
+                                            </mat-label>
+                                        <span class="hintText" style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* URL Should Contain Atleast Dot  (e.g., example.com)</span>
+                                      </div>
+
                                     <!-- f-s-14 class removed from the label  -->
-                                    <mat-label class="mat-subtitle-2  f-w-600 m-b-12 d-block">URL</mat-label>
+                                    <!-- <mat-label class="mat-subtitle-2  f-w-600 m-b-12 d-block">URL</mat-label> -->
         
                                     <mat-form-field appearance="outline" class="w-100" color="primary">
                                         <input matInput formControlName="url" placeholder="Enter URL" />
@@ -150,9 +160,13 @@ margin-bottom: auto;"></i-tabler>
                                             *ngIf="urlForm.get('url')?.hasError('pattern') && urlForm.get('url')?.invalid">
                                             Enter valid url
                                         </mat-error>
+
+                                        <mat-error *ngIf="urlForm?.get('url')?.hasError('required')">
+                                            URL is required
+                                          </mat-error>
         
                                     </mat-form-field>
-                                    <button mat-flat-button color="primary" class="w-100" type="button" (click)="addUrl()"
+                                    <button mat-flat-button color="primary" class="w-100" type="button" (click)="addUrl()" [disabled]="urlForm.invalid"
                                         style="max-width: max-content; margin-top: 10px">
                                         Add URL
                                     </button>
@@ -260,14 +274,28 @@ margin-bottom: auto;"></i-tabler>
                             <div class="col-lg-6">
                                 <form [formGroup]="ipForm">
                                     <!-- f-s-14 class removed from label  -->
-                                    <mat-label class="mat-subtitle-2 f-w-600 m-b-12 d-block">IP Address</mat-label>
+
+                                    <div style="display: flex; margin-bottom:0.3rem">
+    
+                                        <mat-label class="mat-subtitle-2 f-w-600 d-block"style="margin-bottom: 0 !important;
+                                        display: flex !important;
+                                        align-items: center !important;">
+                                            <div>IP Address</div>
+                                            </mat-label>
+                                        <span class="hintText" style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* IP Should Contain 3 Dots  (e.g., 192.168.0.1)</span>
+                                      </div>
+
+                                    <!-- <mat-label class="mat-subtitle-2 f-w-600 m-b-12 d-block">IP Address</mat-label> -->
                                     <mat-form-field appearance="outline" class="w-100" color="primary">
-                                        <input matInput formControlName="ip" placeholder="Enter IP Address" />
+                                        <input matInput formControlName="ip" placeholder="Enter IP" />
                                         <mat-error *ngIf="ipForm.get('ip')?.hasError('pattern') && ipForm.get('ip')?.invalid">
                                             Enter a valid IP address
                                         </mat-error>
+                                        <mat-error *ngIf="ipForm?.get('ip')?.hasError('required')">
+                                            IP is required
+                                          </mat-error>
                                     </mat-form-field>
-                                    <button mat-flat-button color="primary" class="w-100" type="button" (click)="addIP()"
+                                    <button mat-flat-button color="primary" class="w-100" type="button" (click)="addIP()" [disabled]="ipForm.invalid"
                                         style="max-width:  max-content; margin-top: 10px">
                                         Add IP
                                     </button>

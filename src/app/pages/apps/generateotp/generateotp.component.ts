@@ -39,12 +39,12 @@ export class GenerateotpComponent {
       // designation: ['', Validators.required],
       designation: ['', [
         Validators.required,
-        Validators.pattern(/^[a-zA-Z0-9]{5,20}$/)
+        Validators.pattern(/^[\s\S]{0,200}$/)
       ]],
       // rank: ['', Validators.required]
       rank: ['', [
         Validators.required,
-        Validators.pattern(/^[a-zA-Z0-9]{3,20}$/) //min 3 max 20
+        Validators.pattern(/^[\s\S]{0,200}$/) //min 3 max 20
       ]],
     })
 

@@ -10,10 +10,12 @@
                 
 
                 <!-- Divs to show/hide based on role -->
-                <div class="spinner" style="min-height: 250px">
+                <div class="spinner" style="min-height: 200px">
 
                   <div *ngIf="currentRole === 'Summary'">
   
+                    <div class="hideDataTable colorTable" >
+
                       <table datatable [dtOptions]="dtOptions" class="row-border hover">
                           <thead>
                             <tr>
@@ -23,30 +25,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                              <!-- <tr>
-                                  <td>
-                                      <span style="display: flex;">
-                                          <i-tabler name="anchor" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
-                                          <span>
-                                              IP
-                                          </span>
-                                      </span>
-                                  </td>
-                                  <td>{{policySummary?.IP?.total}}</td>
-                                  <td>{{policySummary?.IP?.addlist}}</td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <span style="display: flex;">
-                                          <i-tabler name="link" class="icon-20 d-flex" style="margin-right: 0.2rem"></i-tabler>
-                                          <span>
-                                              URL
-                                          </span>
-                                      </span>
-                                  </td>
-                                  <td>{{policySummary?.URL?.total}}</td>
-                                  <td>{{policySummary?.URL?.addlist}}</td>
-                              </tr> -->
+                             
                            
                               <tr *ngFor="let item of policySummary; ">
                                 <td>
@@ -66,6 +45,118 @@
 
                           </tbody>
                         </table>
+                    </div>
+
+                    <!-- <div class="row">
+                      <div class="col-sm-4 col-lg-4" >
+                        <mat-card class="cardWithShadow ">
+                          <mat-card-content class="p-24 ">
+                            <mat-card-title>IP Summary</mat-card-title>
+                          
+                           
+                                <div id="visitor-chart" class="p-t-30 d-flex flex-column">
+                                  <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart"
+                                    [dataLabels]="chartOptions2.dataLabels" [colors]="chartOptions2.colors"
+                                    [plotOptions]="chartOptions2.plotOptions" [labels]="chartOptions2.labels" style="height:200px"></apx-chart>
+                    
+                                    <mat-card class="b-1 shadow-none">
+                                    
+                                      <mat-card-content class="b-t-1" >
+                                          <div class="row" style=" border-bottom: 1px solid #a3a3a3; padding-bottom: 16px;">
+                                              <div class="col-sm-7 col-lg-7">
+                                                 Total Policy
+                                              </div>
+                                              <div class="col-sm-1 col-lg-1" style="display: flex;justify-content: center;">
+                                                  :
+                                              </div>
+                                              <div class="col-sm-3 col-lg-3">
+                                               1018
+                                              </div>
+                                          </div>
+                              
+                                          <div class="row" style="margin-top: 16px;">
+                                              <div class="col-sm-7 col-lg-7">
+                                                  Active Policy
+                                              </div>
+                                              <div class="col-sm-1 col-lg-1" style="display: flex;justify-content: center;">
+                                                  :
+                                              </div>
+                                              <div class="col-sm-4 col-lg-4">
+                                               1016
+                                              </div>
+                                          </div>
+                          
+                              
+                                         
+                              
+                              
+                              
+                                      </mat-card-content>
+                                  </mat-card>
+                                </div>
+                            
+                          </mat-card-content>
+                         
+                        </mat-card>
+                        
+                      </div>
+                    
+                      <div class="col-sm-4 col-lg-4" >
+                        <mat-card class="cardWithShadow ">
+                          <mat-card-content class="p-24 ">
+                            <mat-card-title>URL Summary</mat-card-title>
+                          
+                           
+                                <div id="visitor-chart" class="p-t-30 d-flex flex-column">
+                                  <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart"
+                                    [dataLabels]="chartOptions2.dataLabels" [colors]="chartOptions2.colors"
+                                    [plotOptions]="chartOptions2.plotOptions" [labels]="chartOptions2.labels" style="height:200px"></apx-chart>
+                    
+                                    <mat-card class="b-1 shadow-none">
+                                    
+                                      <mat-card-content class="b-t-1" >
+                                          <div class="row" style=" border-bottom: 1px solid #a3a3a3; padding-bottom: 16px;">
+                                              <div class="col-sm-7 col-lg-7">
+                                                 Total Policy
+                                              </div>
+                                              <div class="col-sm-1 col-lg-1" style="display: flex;justify-content: center;">
+                                                  :
+                                              </div>
+                                              <div class="col-sm-3 col-lg-3">
+                                               107
+                                              </div>
+                                          </div>
+                              
+                                          <div class="row" style="margin-top: 16px;">
+                                              <div class="col-sm-7 col-lg-7">
+                                                  Active Policy
+                                              </div>
+                                              <div class="col-sm-1 col-lg-1" style="display: flex;justify-content: center;">
+                                                  :
+                                              </div>
+                                              <div class="col-sm-4 col-lg-4">
+                                               104
+                                              </div>
+                                          </div>
+                          
+                              
+                                         
+                              
+                              
+                              
+                                      </mat-card-content>
+                                  </mat-card>
+                                </div>
+                            
+                          </mat-card-content>
+                         
+                        </mat-card>
+                        
+                      </div>
+                    
+                     
+                    
+                    </div> -->
   
                   </div>
                   <div *ngIf="currentRole === 'URL'"  [style.display]="showURLDetails ? 'block' : 'none'">
@@ -90,27 +181,31 @@
                                 </mat-form-field>
                           </span>
                           
-                          <table datatable [dtOptions]="dtOptions" class="row-border hover  fixed-table" >
-                              <thead>
-                                <tr>
-                                  <th>Sr No</th>
-                                  <th>URL</th>
-                                  <th>Created On</th>
-                                  <th>Status</th>
-                                  <th>Version</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr *ngFor="let item of urlDetails; let i = index">
-                                  <td>{{ i + 1 }}</td>
-                                  <td>{{ item.value }}</td>
-                                  <td>{{ item.updated_on |
-                                      date:'dd-MM-yyyy HH:mm:ss'}}</td>
-                                  <td>{{ item.status_text }}</td>
-                                  <td>{{ item.version }}</td>
-                                </tr>
-                              </tbody>
-                            </table>
+                          <div class="colorTable">
+
+                            <table datatable [dtOptions]="dtOptions" class="row-border hover  fixed-table" >
+                                <thead>
+                                  <tr>
+                                    <th>Sr No</th>
+                                    <th>URL</th>
+                                    <th>Created On</th>
+                                    <th>Status</th>
+                                    <th>Version</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let item of urlDetails; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ item.value }}</td>
+                                    <td>{{ item.updated_on |
+                                        date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                                    <td>{{ item.status_text }}</td>
+                                    <td>{{ item.version }}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                          </div>
+
                             
                       </div>
   
@@ -139,27 +234,30 @@
       
                           
       
-                          <table datatable [dtOptions]="dtOptions" class="row-border hover fixed-table">
-                              <thead>
-                                <tr>
-                                  <th>Sr No</th>
-                                  <th>IP</th>
-                                  <th>Created On</th>
-                                  <th>Status</th>
-                                  <th>Version</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr *ngFor="let item of ipDetails; let i = index">
-                                  <td>{{ i + 1 }}</td>
-                                  <td>{{ item.value }}</td>
-                                  <td>{{ item.updated_on |
-                                      date:'dd-MM-yyyy HH:mm:ss'}}</td>
-                                  <td>{{ item.status_text }}</td>
-                                  <td>{{ item.version }}</td>
-                                </tr>
-                              </tbody>
-                            </table>
+                          <div class="colorTable">
+
+                            <table datatable [dtOptions]="dtOptions" class="row-border hover fixed-table">
+                                <thead>
+                                  <tr>
+                                    <th>Sr No</th>
+                                    <th>IP</th>
+                                    <th>Created On</th>
+                                    <th>Status</th>
+                                    <th>Version</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let item of ipDetails; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ item.value }}</td>
+                                    <td>{{ item.updated_on |
+                                        date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                                    <td>{{ item.status_text }}</td>
+                                    <td>{{ item.version }}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                          </div>
                             
                       </div>
   
@@ -201,6 +299,8 @@
         </mat-card>
     </div>
 </div>
+
+
 
 
 <!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">

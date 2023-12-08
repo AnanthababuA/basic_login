@@ -3,28 +3,32 @@
 
     <div *ngIf="showTable">
 
-        <table datatable [dtOptions]="dtOptions" class="row-border hover">
-            <thead>
-                <tr>
-                    <th>Sr No</th>
-                    <th>Policy Version</th>
-                    <th>Updated On</th>
+        <div class="colorTable">
 
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of allServerPolicy; let i = index">
-                    <td>{{ i + 1 }}</td>
-
-                    <td>{{ item.policy_version }}</td>
-
-                    <td>
-                        {{ item.created_on !== 'N/A' ? (item.created_on | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
-                    </td>
-
-                </tr>
-            </tbody>
-        </table>
+            
+            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                <thead>
+                    <tr>
+                        <th>Sr No</th>
+                        <th>Policy Version</th>
+                        <th>Updated On</th>
+    
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of allServerPolicy; let i = index">
+                        <td>{{ i + 1 }}</td>
+    
+                        <td>{{ item.policy_version }}</td>
+    
+                        <td>
+                            {{ item.created_on !== 'N/A' ? (item.created_on | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+                        </td>
+    
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <button mat-flat-button color="primary" mat-dialog-close cdkFocusInitial style="margin: auto;
     display: flex;margin-top: 1rem;">

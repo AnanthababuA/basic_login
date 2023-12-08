@@ -2,53 +2,56 @@
   <mat-card-content class="p-24 bg-white">
 
     <div *ngIf="showTable" class="table-container">
-    
-      <table datatable [dtOptions]="dtOptions" class="row-border hover ">
-        <thead>
-          <tr>
-            <th>Sr No</th>
-            <th>Gen Id</th>
-            <th>Client Name</th>
-            <th>Mac ID</th>
-            <th>Unit</th>
-            <th>Log</th>
-            <th>Server Log</th>
-            <th>Policy</th>
-            <th>Clam</th>
-            <th>Patch</th>
-            <th>Policy Status</th>
-            <th>Patch Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of clientRegStatus; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ item.client_id }}</td>
-            <td>{{ item.client_name }}</td>
-            <td>{{ item.client_macid }}</td>
-            <td>{{ item.client_unit }}</td>
-    
-            <td>
-              {{ item.log_date !== 'N/A' ? (item.log_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
-            </td>
-            <td>
-              {{ item.es_log_date !== 'N/A' ? (item.es_log_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
-            </td>
-            <td>
-              {{ item.policy_date !== 'N/A' ? (item.policy_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
-            </td>
-            <td>
-              {{ item.clam_date !== 'N/A' ? (item.clam_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
-            </td>
-            <td>
-              {{ item.patch_date !== 'N/A' ? (item.patch_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
-            </td>
-            <td>{{ item.policy_status }}</td>
-            <td>{{ item.patch_status }}</td>
-    
-          </tr>
-        </tbody>
-      </table>
+      <div class="colorTable">
+      
+        <table datatable [dtOptions]="dtOptions" class="row-border hover ">
+          <thead>
+            <tr>
+              <th>Sr No</th>
+              <!-- <th>Gen Id</th> -->
+              <th>Client ID</th>
+              <th>Mac ID</th>
+              <th>Unit Name</th>
+              <th>Log</th>
+              <!-- <th>Server Log</th> -->
+              <th>Policy</th>
+              <th>Clam</th>
+              <th>Patch</th>
+              <th>Policy Status</th>
+              <th>Patch Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of clientRegStatus; let i = index">
+              <td>{{ i + 1 }}</td>
+              <!-- <td>{{ item.client_id }}</td> -->
+              <td>{{ item.client_id }}-{{ item.client_name }}</td>
+              <td>{{ item.client_macid }}</td>
+              <td>{{ item.client_name }}</td>
+      
+              <td>
+                {{ item.log_date !== 'N/A' ? (item.log_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+              </td>
+              <!-- <td>
+                {{ item.es_log_date !== 'N/A' ? (item.es_log_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+              </td> -->
+              <td>
+                {{ item.policy_date !== 'N/A' ? (item.policy_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+              </td>
+              <td>
+                {{ item.clam_date !== 'N/A' ? (item.clam_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+              </td>
+              <td>
+                {{ item.patch_date !== 'N/A' ? (item.patch_date | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
+              </td>
+              <td>{{ item.policy_status }}</td>
+              <td>{{ item.patch_status }}</td>
+      
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </mat-card-content>
 </mat-card>

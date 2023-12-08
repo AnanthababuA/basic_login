@@ -4,7 +4,7 @@
 
 <div class="row justify-content-center " >
   <div class="col-sm-6 col-lg-4">
-    <mat-card #registeredClientsBtn class="cardWithShadow card2 position-relative card-hover" style="min-height:30vh; cursor: pointer;" (click)="clientStatus(1)">
+    <mat-card id="myDiv" #registeredClientsBtn class="cardWithShadow card2 position-relative card-hover" style="min-height:30vh; cursor: pointer;" (click)="clientStatus(1)">
       <mat-card-content style="margin: auto;">
         <div style="display:flex; justify-content: center;">
           <span class=" bg-accent rounded-circle" style="padding:10px">
@@ -43,13 +43,13 @@
       <mat-card-content style="margin: auto;">
         <div style="display:flex; justify-content: center;">
           <span class=" bg-accent rounded-circle" style="padding:10px">
-            <i-tabler name="user-minus" class=" d-flex" style="color: white;
+            <i-tabler name="user-x" class=" d-flex" style="color: white;
             font-size: 80px;
             height: 80px;
             width: 80px;"></i-tabler>
           </span>
         </div>
-        <mat-card-title style="display: flex; justify-content: center; margin-top:10px">Delete client</mat-card-title>
+        <mat-card-title style="display: flex; justify-content: center; margin-top:10px">Delete Client</mat-card-title>
       </mat-card-content>
     </mat-card>
   </div>
@@ -67,11 +67,11 @@
 
           </span>
         </div>
-        <mat-card-title style="display: flex; justify-content: center; margin-top:10px">List Of Deleted client</mat-card-title>
+        <mat-card-title style="display: flex; justify-content: center; margin-top:10px">List Of Deleted Clients</mat-card-title>
       </mat-card-content>
     </mat-card>
   </div>
-  
+
 </div>
 
 </div>
@@ -104,9 +104,9 @@
       <button  mat-flat-button class="rounded m-b-8 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 10px;"
       [class.border-red]="formNo === 3" (click)="clientStatus(3)">
       <span class="text-primary" style="display: flex;">
-        <i-tabler name="user-minus" class="icon-20 d-flex" style="margin-right: 0.2rem; margin-top: auto; margin-bottom: auto"></i-tabler>
+        <i-tabler name="user-x" class="icon-20 d-flex" style="margin-right: 0.2rem; margin-top: auto; margin-bottom: auto"></i-tabler>
         <span>
-          Delete client
+          Delete Client
         </span>
       </span>
     </button>
@@ -116,7 +116,7 @@
     <span class="text-primary" style="display: flex;">
       <i-tabler name="list" class="icon-20 d-flex" style="margin-right: 0.2rem; margin-top: auto; margin-bottom: auto"></i-tabler>
       <span>
-        List Of Deleted client
+        List Of Deleted Clients
       </span>
     </span>
   </button>
@@ -137,7 +137,21 @@
             </div>
 
             <div *ngIf="formNo ==3">
-              <app-deleted-client></app-deleted-client>
+             
+              <div *ngIf="userType == 'admin_user'; else elseBlock">
+                <app-deleted-client></app-deleted-client>
+              </div>
+              
+              <ng-template #elseBlock>
+                <mat-card class="cardWithShadow text-center">
+                  <mat-card-content class="p-24">
+                    <h1>You Are Not An Authorized User. Contact The ISOC Admin.</h1>
+                  </mat-card-content>
+                </mat-card>
+
+              </ng-template>
+              
+             
             </div>
 
             <div *ngIf="formNo ==4">

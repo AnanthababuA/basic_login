@@ -26,7 +26,7 @@
                     <mat-option value="0102">0102</mat-option> -->
                   </mat-select>
                   <mat-error *ngIf="secondFormGroup?.get('unitid')?.hasError('required')">
-                    Unit name is required
+                    Unit Name Is Required
                   </mat-error>
                 </mat-form-field>
               </div>
@@ -47,7 +47,7 @@
                     
                   </mat-select>
                   <mat-error *ngIf="secondFormGroup?.get('usertype')?.hasError('required')">
-                    User Type is required
+                    User Type Is Required
                   </mat-error>
                 </mat-form-field>
               </div>
@@ -58,10 +58,12 @@
             <div class="row m-t-20">
               <div class="col-lg-6">
                 <!-- input -->
-                <div style="display: flex;">
+                <div style="display: flex;margin-bottom:0.3rem;">
     
-                  <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">User Name</mat-label>
-                   <span class="hintText" style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* Maximum 10 characters</span>
+                  <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block" style="margin-bottom: 0 !important;
+                  display: flex !important;
+                  align-items: center !important;">User Name</mat-label>
+                   <span class="hintText" style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* Maximum 10 Characters</span>
                 </div>
                 <mat-form-field appearance="outline" class="w-100" color="primary">
                   <input matInput formControlName="username" required placeholder="Enter User Name"/>
@@ -69,11 +71,11 @@
                     <i-tabler name="user" class="icon-20 d-flex"></i-tabler>
                   </mat-icon>
                   <mat-error *ngIf="secondFormGroup?.get('username')?.hasError('required')">
-                    User name is required
+                    User Name Is Required
                   </mat-error>
     
                   <mat-error *ngIf="secondFormGroup.get('username')?.hasError('pattern') && secondFormGroup.get('username')?.invalid">
-                    User name should be maximum 10 character
+                    User Name Should Be Maximum 10 Character
                   </mat-error>
     
                 </mat-form-field>
@@ -94,11 +96,11 @@
                   </mat-icon>
 
                   <mat-error *ngIf="secondFormGroup?.get('email')?.hasError('required')">
-                    E-mail id is required
+                    E-mail ID Is Required
                   </mat-error>
     
                   <mat-error *ngIf="secondFormGroup.get('email')?.hasError('pattern') && secondFormGroup.get('email')?.invalid">
-                    Enter valid email id
+                    Enter Valid Email ID
                   </mat-error>
     
                 </mat-form-field>
@@ -109,10 +111,12 @@
               <div class="col-lg-6">
                 <!-- input -->
     
-                <div style="display: flex;">
+                <div style="display: flex;margin-bottom:0.3rem;">
     
-                  <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Password</mat-label>
-                  <span class="hintText" style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* 8-16 characters with 1 digit, 1 uppercase, and 1 lowercase letter.</span>
+                  <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block"style="margin-bottom: 0 !important;
+                  display: flex !important;
+                  align-items: center !important;">Password</mat-label>
+                  <span class="hintText" style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* 8-16 Characters With 1 digit, 1 Uppercase, And 1 Lowercase Letter.</span>
                 </div>
     
                 <mat-form-field appearance="outline" class="w-100" color="primary">

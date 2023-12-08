@@ -103,7 +103,7 @@ export class DashboardChartsComponent {
       
       colors: ['#1e88e5','#ffb22b', '#7456f0', '#26c6da'],
 
-      responsive: [{ breakpoint: 480, options: { chart: { height: 230 } } }],
+      responsive: [{ breakpoint: 480, options: { chart: { height: 270 } } }],
       style: {
         fontSize: '18px', // Setting font size to 18px
         fontFamily: 'Poppins, sans-serif', // Font family if needed
@@ -125,7 +125,7 @@ export class DashboardChartsComponent {
           options: {
             chart: {
               // width: 200
-              height: 230
+              height: 270
             },
             legend: {
               position: "bottom"

@@ -86,11 +86,11 @@ export class PolicyConfigurationComponent {
     });
 
     this.urlForm = this.fb.group({
-      url: ['', [Validators.pattern(/^[^.]*\.[^.]+$/)]],
+      url: ['', [Validators.required, Validators.pattern(/^[^.]+(\.[^.]+)+$/)]],
     });
 
     this.ipForm = this.fb.group({
-      ip: ['', [Validators.pattern(/^(\d{1,3}\.){3}\d{1,3}$/)]], // Pattern for IPv4 addresses
+      ip: ['', [Validators.required, Validators.pattern(/^(\d{1,3}\.){3}\d{1,3}$/)]], // Pattern for IPv4 addresses
     });
   }
 

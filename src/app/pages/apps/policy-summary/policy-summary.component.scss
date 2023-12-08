@@ -50,4 +50,15 @@
   // background-color: rgba(0, 0, 0, 0.4);
 }
     
+.hideDataTable .dataTables_length{
+  display: none;
+}
+
+ .hideDataTable .dataTables_info{
+  display: none;
+}
+
+.hideDataTable .dataTables_paginate{
+  display: none;
+}
   
