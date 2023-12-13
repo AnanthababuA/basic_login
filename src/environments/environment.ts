@@ -4,13 +4,13 @@
 
 export const environment = {
   production: false,
-  // apiHost: 'http://10.184.36.237:8800'
+  apiHost: 'http://10.184.36.237:8800'
   // apiHost: ''
 
 
   // bharat sir 
   
-  apiHost: 'http://10.184.36.117:8000'
+  // apiHost: 'http://10.184.36.117:8000'
 
 };
 

@@ -1,6 +1,6 @@
 export const environment = {
-  // apiHost: 'https://bemsasn.cdacchn.in',
-  apiHost: '',
+  apiHost: 'https://bemsasn.cdacchn.in',
+  // apiHost: '',
 
   production: true
 };

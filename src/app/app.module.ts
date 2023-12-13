@@ -25,6 +25,8 @@ import { authInterceptorProviders } from './interceptor/auth.interceptor';
 import { DataTablesModule } from "angular-datatables";
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+import { OrganizationChartModule } from 'primeng/organizationchart';
+
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -46,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
     TablerIconsModule.pick(TablerIcons),
     NgApexchartsModule,
     TablerIconsModule,
+    OrganizationChartModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

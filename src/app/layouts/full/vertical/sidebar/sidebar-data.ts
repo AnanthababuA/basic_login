@@ -27,7 +27,7 @@ export const navItems: NavItem[] = [
   },
   {
     displayName: 'Manage Client',
-    iconName: 'file-invoice',
+    iconName: 'address-book',
     route: 'apps/clientAdministration',
   },
   {
@@ -36,20 +36,20 @@ export const navItems: NavItem[] = [
     route: 'apps/policyConfiguration',
   },
 
-  {
-    displayName: 'Groups',
-    iconName: 'users-group',
-    route: 'apps/groups',
-  },
-  {
-    displayName: 'Log Viewer',
-    iconName: 'brand-github-copilot',
-    route: 'apps/logViewer',
-  },
-  {
-    displayName: 'Hierarchy Chart',
-    iconName: 'hierarchy-3',
-    route: 'apps/hierarchyChart',
-  },
+  // {
+  //   displayName: 'Groups',
+  //   iconName: 'users-group',
+  //   route: 'apps/groups',
+  // },
+  // {
+  //   displayName: 'Log Viewer',
+  //   iconName: 'brand-github-copilot',
+  //   route: 'apps/logViewer',
+  // },
+  // {
+  //   displayName: 'Hierarchy Chart',
+  //   iconName: 'hierarchy-3',
+  //   route: 'apps/hierarchyChart',
+  // },
   
 ];

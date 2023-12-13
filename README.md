@@ -4,14 +4,14 @@ command:- ng serve --host 0 --port 4200
 
 description:- port number we can adjust as per our need
 
-
 2. How to Build
 
 environment.ts
 
-apiHost = ''; 
+apiHost = '';
 
-production = false 
+production = false
+
 
 
 environment.prod.ts
@@ -19,7 +19,6 @@ environment.prod.ts
 apiHost:'https://bemsasn.cdacchn.in',
 
 production:true
-
 
 make shour the above file to be like this then use the below command to build the project
 
