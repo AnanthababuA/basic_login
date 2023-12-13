@@ -43,7 +43,7 @@ export class CommonServicesService {
 
   createLocalAdmin(createLocalUnit: any): Observable<any> {
     return this.http.post(
-      env.apiHost.concat('/usermgt/ladmin-creation'),
+      env.apiHost.concat('/usermgt/create-local-user'),
       createLocalUnit
     );
   }
