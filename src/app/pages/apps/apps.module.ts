@@ -100,7 +100,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { HierarchyChartComponent } from './hierarchy-chart/hierarchy-chart.component';
 
 
-import { OrganizationChartModule } from 'primeng/organizationchart';
+// import { OrganizationChartModule } from 'primeng/organizationchart';
 import { DeletedClientListComponent } from './client-administraion/deleted-client-list/deleted-client-list.component';
 import { DeletedClientComponent } from './client-administraion/deleted-client/deleted-client.component';
 import { DeleteClientFormComponent } from './client-administraion/deleted-client/delete-client-form/delete-client-form.component';
@@ -120,7 +120,8 @@ import { DeleteClientFormComponent } from './client-administraion/deleted-client
     DragDropModule,
     NgxPaginationModule,
     HttpClientModule,
-    AngularEditorModule,NgxSpinnerModule,MatDatepickerModule,OrganizationChartModule,
+    AngularEditorModule,NgxSpinnerModule,MatDatepickerModule,
+    // OrganizationChartModule,
     // CalendarModule.forRoot({
     //   provide: DateAdapter,
     //   useFactory: adapterFactory,

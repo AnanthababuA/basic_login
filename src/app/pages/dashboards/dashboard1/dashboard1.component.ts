@@ -32,6 +32,8 @@ import { PatchPopUpComponent } from './patch-pop-up/patch-pop-up.component';
 import { ClamAvPopUpComponent } from './clam-av-pop-up/clam-av-pop-up.component';
 import { LogPopUpComponent } from './log-pop-up/log-pop-up.component';
 import { DashboardChartsComponent } from './dashboard-charts/dashboard-charts.component';
+import { LastCommuniAlertpopComponent } from './last-communi-alertpop/last-communi-alertpop.component';
+import { AlertContentComponent } from './alert-content/alert-content.component';
 // import { AppSalesOurVisitorsComponent as AppSalesOurVisitorsComponent } from "../../../components/dashboard1/our-visitors/our-visitors.component";
 
 
@@ -52,9 +54,7 @@ import { DashboardChartsComponent } from './dashboard-charts/dashboard-charts.co
         ClamAvPopUpComponent,
         LogPopUpComponent,
         DashboardChartsComponent,
-
-
-
+        // LastCommuniAlertpopComponent,
     ]
 })
 export class AppDashboard1Component {
@@ -71,6 +71,8 @@ export class AppDashboard1Component {
 
   pol_per_val: any;
   pat_per_val: any;
+
+  alert_count: any;
 
   clamAvData: any;
   logRecievedData: any;
@@ -115,8 +117,24 @@ export class AppDashboard1Component {
 
     this.clamAvAPI();
     this.logReceivedAPI();
+
+    this.alertAPI();
     
   }
+
+  alertAPI(){
+    this.common.alertinfo().subscribe( (res) => {
+      console.log('res alert', res)
+
+      if(res.api_status == true)
+      {
+        this.alert_count = res.total_count;
+      }
+    }
+
+    );
+  }
+
 
   clamAvAPI() {
     this.spinner.show();
@@ -204,7 +222,20 @@ export class AppDashboard1Component {
     this.componentName = LogPopUpComponent
     this.openDialogPolicy(this.componentName)
     
+  } 
+
+  alertCard(){
+    console.log("alert card function called")
+    this.componentName = AlertContentComponent;
+    this.openDialogPolicy(this.componentName)
   }
+
+lastcommun()
+{
+  console.log("last communication alert function")
+  this.componentName = LastCommuniAlertpopComponent;
+  this.openDialogPolicy(this.componentName)
+}
   
 
   //  i = PolicyPopUpComponent

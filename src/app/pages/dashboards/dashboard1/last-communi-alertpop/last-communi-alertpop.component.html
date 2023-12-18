@@ -1,6 +1,8 @@
+<!-- <p>last-communi-alertpop works!</p> -->
+
 <div style=" margin: 2rem;">
 
-    <h1 style="display: flex; justify-content: center;">ClamAv details</h1>
+    <h1 style="display: flex; justify-content: center;">Last Communication Alert Details</h1>
 
     <!-- <div *ngIf="showTable"> -->
 
@@ -18,17 +20,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let clamAv of clamAvData; let i = index">
+                    <tr *ngFor="let log of alertData; let i = index">
                         <td>{{ i + 1 }}</td>
                         <td>
-                            {{clamAv.client_id__client_name}}
+                            {{log.client_name}}
                         </td>
     
                         <td>
-                            {{clamAv.client_id__client_macid}}
+                            {{log.client_macid}}
                         </td>
                         <td>
-                            {{clamAv.client_id__client_publicip}}
+                            {{log.client_publicip}}
                         </td>
                     </tr>
                 </tbody>

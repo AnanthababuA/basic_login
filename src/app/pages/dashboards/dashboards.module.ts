@@ -6,6 +6,8 @@ import { DatePipe } from '@angular/common';
 // import { DxVectorMapModule, DxPieChartModule } from 'devextreme-angular';
 
 import { DashboardsRoutes } from './dashboards.routing';
+// import { AlertContentComponent } from './dashboard1/alert-content/alert-content.component';
+// import { LastCommuniAlertpopComponent } from './dashboard1/last-communi-alertpop/last-communi-alertpop.component';
 
 @NgModule({
   imports: [RouterModule.forChild(DashboardsRoutes)],
@@ -13,6 +15,10 @@ import { DashboardsRoutes } from './dashboards.routing';
   declarations: [
    
   
+  
+    // LastCommuniAlertpopComponent
+  
+    // AlertContentComponent
   ],
 })
 export class DashboardsModule {}

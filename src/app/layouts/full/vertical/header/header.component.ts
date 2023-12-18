@@ -18,6 +18,8 @@ import { BrandingComponent, } from '../sidebar/branding.component';
 import { NgFor, NgForOf, NgIf } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { CommonServicesService } from 'src/app/services/common-services.service';
+import { LastCommuniAlertpopComponent } from 'src/app/pages/dashboards/dashboard1/last-communi-alertpop/last-communi-alertpop.component';
 
 interface notifications {
   id: number;
@@ -46,10 +48,15 @@ interface profiledd {
   standalone: true,
   imports: [RouterModule, MaterialModule, TablerIconsModule, FormsModule, NgForOf],
   templateUrl: 'search-dialog.component.html',
+  styleUrls: ['header.component.scss'],
 })
 export class AppSearchDialogComponent {
   searchText: string = '';
   navItems = navItems;
+
+  lastalert: any;
+
+  componentName : any
 
   navItemsData = navItems.filter((navitem) => navitem.displayName);
 
@@ -110,12 +117,13 @@ export class HeaderComponent {
       icon: '/assets/images/flag/icon-flag-de.svg',
     },
   ];
+  componentName: typeof LastCommuniAlertpopComponent;
 
   constructor(
     private vsidenav: CoreService,
     public dialog: MatDialog,
     private translate: TranslateService,
-    private ts: TokenStorageService, private router: Router, private auth: AuthService
+    private ts: TokenStorageService, private router: Router, private auth: AuthService, private cs: CommonServicesService
   ) {
     translate.setDefaultLang('en');
   }
@@ -247,6 +255,8 @@ export class HeaderComponent {
 
     // console.log("userName log...", this.userName);
     // console.log("userType log 99999...", this.formatUserName(this.userType));
+
+    this.lastalert();
     
   }
 
@@ -263,5 +273,34 @@ export class HeaderComponent {
   // return formattedString.charAt(0).toUpperCase() + formattedString.slice(1);
 
 }
+
+lastalert(){
+  this.cs.lastcomalerts().subscribe( (res) => {
+
+    console.log('res', res);
+
+    if(res.api_status == true){
+      this.lastalert = res.count;
+      console.log('last count', this.lastalert)
+    }
+
+  }
+  );
 }
 
+openDialogPolicy(componentName : any) {
+  const dialogRef = this.dialog.open(componentName);
+
+  dialogRef.afterClosed().subscribe((result) => {
+  });
+}
+
+lastcommun(){
+  console.log("last communication")
+  
+  console.log("last communication alert function")
+  this.componentName = LastCommuniAlertpopComponent;
+  this.openDialogPolicy(this.componentName)
+}
+
+}

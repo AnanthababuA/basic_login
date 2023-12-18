@@ -138,7 +138,7 @@
 
             <div *ngIf="formNo ==3">
              
-              <div *ngIf="userType == 'admin_user'; else elseBlock">
+              <div *ngIf="userType == 'admin_user' || userType == 'superadmin_user' ; else elseBlock">
                 <app-deleted-client></app-deleted-client>
               </div>
               

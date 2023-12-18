@@ -1,15 +1,15 @@
 // import { Component } from '@angular/core';
 // import { Component, ViewEncapsulation } from '@angular/core';
 import { Component, ViewEncapsulation, Renderer2, ElementRef, ViewChild } from '@angular/core';
-import { TreeNode } from 'primeng/api';
+// import { TreeNode } from 'primeng/api';
 import { CommonServicesService } from 'src/app/services/common-services.service';
 
-interface MyTreeNode extends TreeNode {
-    unit_id: number;
-    name: string;
-    type: string;
-    styleClass: string;
-  }
+// interface MyTreeNode extends TreeNode {
+//     unit_id: number;
+//     name: string;
+//     type: string;
+//     styleClass: string;
+//   }
 
 @Component({
   selector: 'app-hierarchy-chart',
@@ -23,20 +23,20 @@ export class HierarchyChartComponent {
   //   organizationData: TreeNode;
   zoomLevel = 1; // Initial zoom level
   
-  organizationData: MyTreeNode[];
+  // organizationData: MyTreeNode[];
   
   
     constructor(private renderer: Renderer2,private common: CommonServicesService){
     }
   
     ngOnInit() {
-      this.common.hierarchy().subscribe((res) => {
+      // this.common.hierarchy().subscribe((res) => {
     
-        console.log("res",res)
-          const jsonData: TreeNode = res;
-          this.organizationData = this.modifyDataStructure(jsonData.data) as MyTreeNode[];
-          console.log('Organization Data:', this.organizationData);
-      });
+      //   console.log("res",res)
+      //     const jsonData: TreeNode = res;
+      //     this.organizationData = this.modifyDataStructure(jsonData.data) as MyTreeNode[];
+      //     console.log('Organization Data:', this.organizationData);
+      // });
     }
   
     
@@ -110,21 +110,21 @@ export class HierarchyChartComponent {
 
       highlightNode(node: any) {
           // Reset the 'highlighted' property for all nodes
-          this.organizationData.forEach((n: any) => n.highlighted = false);
+          // this.organizationData.forEach((n: any) => n.highlighted = false);
           // Highlight the clicked node
           node.highlighted = true;
       }   
-      calculateMinWidth(node: MyTreeNode): string {
-          // Set a base width
-          let minWidth = '250px';
+      // calculateMinWidth(node: MyTreeNode): string {
+      //     // Set a base width
+      //     let minWidth = '250px';
       
-          // Adjust the width if the node is expanded
-          if (node.expanded) {
-            minWidth = '100px'; // Set your desired expanded width
-          }
+      //     // Adjust the width if the node is expanded
+      //     if (node.expanded) {
+      //       minWidth = '100px'; // Set your desired expanded width
+      //     }
       
-          return minWidth;
-        }
+      //     return minWidth;
+      //   }
     handleNodeClick(event: any) {
       // Remove the 'node-highlight' class from all nodes
       const nodes = document.querySelectorAll('.node-style');

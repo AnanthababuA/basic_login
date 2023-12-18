@@ -24,9 +24,29 @@
     <i-tabler name="search" class="icon-20 d-flex"></i-tabler>
   </button> -->
 
+
+
   <span class="flex-1-auto"></span>
 
+  <!-- <div *ngIf="userType !== 'policy_admin' || userType !== 'view_logs'">
+    <p style="color: white; font-size: 1.3rem; margin-right: 2rem;">(Last Communicated Alert : {{lastalert}})</p>
+  </div> -->
 
+  <!-- <div *ngIf="userType !== 'policy_admin' || userType !== 'view_logs'">
+    <p (click)="lastcommun()" style="color: white; font-size: 1.3rem; margin-right: 2rem; cursor: pointer;" [title]="'Last Communicated Alert: ' + lastalert">
+      (Last Communicated Alert : {{lastalert}})
+    </p>
+  </div> -->
+
+  <div *ngIf="userType !== 'policy_admin' || userType !== 'view_logs'">
+    <button mat-flat-button class="rounded m-b-2" (click)="lastcommun()" style="color: #040404; font-size: 1.3rem; margin-right: 2rem; cursor: pointer; background: none; border: none; background-color: #EA906C;" [title]="'Last Communicated Alert: ' + lastalert">
+      Last Communicated Alert : {{lastalert}}
+    </button>
+  </div>
+
+  
+
+  
   <!-- <div style="margin-right:1rem; display:flex"> -->
     <i-tabler name="user" class="icon-20 d-flex larger-icon" style=" color: white; transform: scale(1.5); margin-right: 0.5rem;"></i-tabler>
 

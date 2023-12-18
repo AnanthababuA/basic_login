@@ -57,7 +57,8 @@ export class DashboardChartsComponent {
 
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
 
-  public ourvisitorChart!: Partial<ourvisitorChart> | any;
+  // public ourvisitorChart!: Partial<ourvisitorChart> | any;
+  ourvisitorChart: any = {};
   chartOptions : any
   chartOptions2 : any
   dateRangeForm: FormGroup;
@@ -66,74 +67,16 @@ export class DashboardChartsComponent {
   otpStatusPercentage: number =0;
   registationStatus: any;
 
+  clamav= 0;
+  integrity= 0;
+  urlV= 0;
+  usbv= 0;
+
 
   constructor(private formBuilder: FormBuilder, private datePipe: DatePipe, private common: CommonServicesService,
     private spinner: NgxSpinnerService) {
-    
-
-    this.ourvisitorChart = {
-      series: [45, 15, 27, 18],
-      chart: {
-        type: 'donut',
-        fontFamily: 'Poppins,sans-serif',
-        height: 253,
-      },
-      plotOptions: {
-        pie: {
-          donut: {
-            size: '85%',
-            background: 'transparent',
-          },
-        },
-      },
-      tooltip: {
-        fillSeriesColor: false,
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        width: 0,
-      },
-      legend: {
-        show: false,
-      },
-      labels: ["ClamAv", "SSH", "Integrity", "URL Violation"],
       
-      
-      colors: ['#1e88e5','#ffb22b', '#7456f0', '#26c6da'],
-
-      responsive: [{ breakpoint: 480, options: { chart: { height: 270 } } }],
-      style: {
-        fontSize: '18px', // Setting font size to 18px
-        fontFamily: 'Poppins, sans-serif', // Font family if needed
-      },
-    };
-
-    this.chartOptions = {
-      series: [44, 55, 13, 43],
-      chart: {
-        height: 253,
-        // width: 380,
-        type: "pie"
-      },
-      labels: ["ClamAv", "SSH", "Integrity", "URL Violation"],
-      colors: ['#1e88e5','#ffb22b', '#abed5b', '#26c6da'],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              // width: 200
-              height: 270
-            },
-            legend: {
-              position: "bottom"
-            }
-          }
-        }
-      ]
-    };
+    this.daterangealertstatus(this.clamav, this.integrity, this.urlV, this.usbv)
 
     this.otpStatusChart(this.otpStatusPercentage)
 
@@ -155,6 +98,11 @@ export class DashboardChartsComponent {
       endDate: [new Date()] // Today's date
     });
 
+    // this.dateRangeForm = this.formBuilder.group({
+    //   startDate: [this.datePipe.transform(yesterday, 'dd/MM/yyyy')], // Display yesterday's date in 'dd/MM/yyyy' format
+    //   endDate: [this.datePipe.transform(new Date(), 'dd/MM/yyyy')] // Display today's date in 'dd/MM/yyyy' format
+    // });
+
     const startDate = this.dateRangeForm.get('startDate')?.value;
     const endDate = this.dateRangeForm.get('endDate')?.value;
 
@@ -167,12 +115,116 @@ export class DashboardChartsComponent {
 
   this.registrationStatusDashboardApi(date)
     // console.log("start date", this.dateRangeForm.get('startDate')?.value);
-    
+  
+    this.daterangealerts(date);
   }
 
+  daterangealertstatus(cav: any, intg: any, urlv: any, usbv: any){
+
+    console.log('cav',cav)
+    console.log('intg',intg)
+    console.log('urlv',urlv)
+    console.log('usbv',usbv)
+
+    this.ourvisitorChart = {
+      // series: [this.clamav, this.integrity, this.urlV, this.usbv],
+      series: [cav, intg, urlv, usbv],
+      // series: [22, 38, 10, 30],
+
+      chart: {
+        type: 'donut',
+        fontFamily: 'Poppins,sans-serif',
+        height: 253,
+      },
+      plotOptions: {
+        pie: {
+          donut: {
+            size: '100%',
+            background: 'transparent',
+          },
+        },
+      },
+      tooltip: {
+        fillSeriesColor: false,
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        width: 0,
+      },
+      legend: {
+        show: false,
+      },
+      labels: ["ClamAv", "Integrity", "URL Violation", "USB Violation",],
+      
+      
+      colors: ['#1e88e5','#ffb22b', '#7456f0', '#26c6da'],
+  
+      responsive: [{ breakpoint: 480, options: { chart: { height: 270 } } }],
+      style: {
+        fontSize: '18px', // Setting font size to 18px
+        fontFamily: 'Poppins, sans-serif', // Font family if needed
+      },
+    };
+
+  }
+
+daterangealerts(date: any){
+
+
+  this.common.alertstatus(date).subscribe( (res) => {
+    console.log("res alert", res);
+
+    if(res.api_status == true)
+    {
+      console.log(res.percentage_data)
+      console.log('clasm',res.percentage_data.ClamAV.toFixed(2))
+      console.log('clasm1',res.percentage_data.Integrity.toFixed(2))
+      console.log('clasm2',res.percentage_data.URLViolation.toFixed(2))
+      console.log('clasm2',res.percentage_data.USBViolation.toFixed(2))
+      this.clamav = parseFloat(res.percentage_data.ClamAV.toFixed(2))
+      this.integrity = parseFloat(res.percentage_data.Integrity.toFixed(2))
+      this.urlV = parseFloat(res.percentage_data.URLViolation.toFixed(2)) 
+      this.usbv = parseFloat(res.percentage_data.USBViolation.toFixed(2))
+
+      this.daterangealertstatus(this.clamav, this.integrity, this.urlV, this.usbv)
+
+    }
+  }
+
+  );
 
   
 
+  // this.chartOptions = {
+  //   // series: [44, 55, 13, 43],
+  //   series: [44, 55, 13, 43],
+
+  //   chart: {
+  //     height: 253,
+  //     // width: 380,
+  //     type: "pie"
+  //   },
+  //   labels: ["ClamAv", "SSH", "Integrity", "URL Violation"],
+  //   colors: ['#1e88e5','#ffb22b', '#abed5b', '#26c6da'],
+  //   responsive: [
+  //     {
+  //       breakpoint: 480,
+  //       options: {
+  //         chart: {
+  //           // width: 200
+  //           height: 270
+  //         },
+  //         legend: {
+  //           position: "bottom"
+  //         }
+  //       }
+  //     }
+  //   ]
+  // };
+
+}
 
   onDateRangeApply() {
     const startDate = this.dateRangeForm.get('startDate')?.value;
@@ -193,6 +245,9 @@ export class DashboardChartsComponent {
     } else {
       console.log("inalid date");
     }
+
+    this.daterangealerts(date);
+    
   }
 
   otpStatusDashboardApi(dateRang: any) {
@@ -237,7 +292,7 @@ export class DashboardChartsComponent {
         this.common.apiErrorHandler(err);
       }
     );
-    
+
 
 
 

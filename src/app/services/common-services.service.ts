@@ -99,6 +99,7 @@ export class CommonServicesService {
       {}
     );
   }
+
   Registeredstatusclients() {
     return this.http.post<any>(
       env.apiHost.concat('/registration/client-status-list'),
@@ -250,6 +251,43 @@ export class CommonServicesService {
     return this.http.post<any>(
       env.apiHost.concat('/logviewer/get-log-desc'),
       {}
+    );
+  }
+
+  alertinfo() {
+    return this.http.post<any>(
+      env.apiHost.concat('/registration/alert-day-stats'),
+      {}
+    );
+  }
+
+  lastcomalerts() {
+    return this.http.post<any>(
+      env.apiHost.concat('/registration/last-com-alert'),
+      {}
+    );
+  }
+
+
+  lastcomalertdetails() {
+    return this.http.post<any>(
+      env.apiHost.concat('/registration/last-com-list'),
+      {}
+    );
+  }
+
+  alertcontent() {
+    return this.http.post<any>(
+      env.apiHost.concat('/registration/alert-content'),
+      {}
+    );
+  }
+
+
+  alertstatus(params: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/registration/alert-range-stats'),
+      params
     );
   }
 
