@@ -2,7 +2,7 @@
 
 <div style=" margin: 2rem;">
 
-    <h1 style="display: flex; justify-content: center;">Last Communication Alert Details</h1>
+    <h1 style="display: flex; justify-content: center;">Non Communicating Clients</h1>
 
     <!-- <div *ngIf="showTable"> -->
 
@@ -15,7 +15,7 @@
                         <th>Name</th>
     
                         <th>Mac ID</th>
-                        <th>Client IP</th>
+                        <th>Last Communication</th>
     
                     </tr>
                 </thead>
@@ -30,7 +30,8 @@
                             {{log.client_macid}}
                         </td>
                         <td>
-                            {{log.client_publicip}}
+                           
+                            {{ log.last_communication !== 'N/A' ? (log.last_communication | date:'dd-MM-yyyy HH:mm:ss') : 'N/A' }}
                         </td>
                     </tr>
                 </tbody>

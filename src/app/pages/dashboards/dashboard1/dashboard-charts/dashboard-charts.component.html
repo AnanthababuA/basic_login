@@ -1,57 +1,133 @@
+<!-- <div class="col-lg-6">
+  <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Select Date Range</mat-label>
+  <mat-form-field appearance="fill" class="w-100" >
+    <mat-label>MM/DD/YYYY-MM/DD/YYYY</mat-label>
+    
+    <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRangeForm">
+      <input matStartDate #start placeholder="Start date" formControlName="startDate">
+      <input matEndDate #end placeholder="End date" formControlName="endDate">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker>
+      <mat-date-range-picker-actions>
+        <button mat-button matDateRangePickerCancel>Cancel</button>
+        <button
+          mat-raised-button
+          color="primary"
+          matDateRangePickerApply
+          (click)="onDateRangeApply()"
+        >
+          Apply
+        </button>
+      </mat-date-range-picker-actions>
+    </mat-date-range-picker>
+  </mat-form-field>
+ 
 
+</div> -->
+
+
+<div class="row">
+
+  <div class="col-lg-6">
+    <mat-card class="b-1 shadow-none">
+      <mat-card-content class="b-t-1 p-t-16">
+        <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Select Date Range</mat-label>
+        <div style="display: flex">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="custompicker" [formGroup]="dateRangeForm">
+              <input matStartDate placeholder="Start date" formControlName="startDate" />
+              <input matEndDate placeholder="End date" formControlName="endDate" />
+            </mat-date-range-input>
+            <mat-hint style="display: block !important">MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="custompicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #custompicker></mat-date-range-picker>
+          </mat-form-field>
+          <button mat-flat-button color="primary" (click)="onDateRangeApply()" style="margin-left: 16px; margin-top: auto; margin-bottom: auto; "
+            [disabled]="!dateRangeForm.valid ">Submit</button>
+        </div>
+        <div style="display: flex;">
+
+          <mat-error *ngIf="dateRangeForm.get('startDate')?.hasError('required')" style="margin-right: 16px;">
+            Start Date Is Required
+          </mat-error>
+          <mat-error *ngIf="dateRangeForm.get('endDate')?.hasError('required')">
+            End Date Is Required
+          </mat-error>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    
+  </div>
+
+  <div class="col-lg-6 col-sm-6">
+    <!-- <mat-card class="cardWithShadow  flex-fill">
+      <mat-card-content class="p-24 ">
+    <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Select Date Range</mat-label>
+    <mat-form-field appearance="fill" class="w-100" >
+      <mat-label>MM/DD/YYYY-MM/DD/YYYY</mat-label>
+      <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRangeForm">
+        <input matStartDate #start placeholder="Start date" formControlName="startDate">
+        <input matEndDate #end placeholder="End date" formControlName="endDate">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker>
+        <mat-date-range-picker-actions>
+          <button mat-button matDateRangePickerCancel>Cancel</button>
+          <button
+            mat-raised-button
+            color="primary"
+            matDateRangePickerApply
+            (click)="onDateRangeApply()"
+          >
+            Apply
+          </button>
+        </mat-date-range-picker-actions>
+      </mat-date-range-picker>
+    </mat-form-field>
+      </mat-card-content>
+    </mat-card> -->
+    
+  
+  </div>
+  
+  <!-- <div class="col-sm-6 col-lg-6 " style="padding-right: 0 !important;display: flex;">
+    <mat-card class="cardWithShadow flex-fill ">
+      <mat-card-content class="p-24 ">
+        <mat-card-title>Registered Client Status</mat-card-title>
+        <p> Registered Clients: {{registationStatus.registered}}</p>
+      </mat-card-content>
+      <app-spinner [showSpinner]="isSpinnerVisible['dashRegClientStatus']">
+      </app-spinner>
+    </mat-card>
+  </div> -->
+
+ 
+
+
+
+</div>
   <div class="row">
 
-    <div class="col-sm-4 col-lg-3" >
+    <div class="col-sm-6 col-lg-4" >
 
       <!-- <div> -->
 
-        <div>
-  
-          <!-- <mat-card class="cardWithShadow">
-            <mat-card-content class="p-24 "> -->
         
-              <mat-form-field appearance="fill" class="example-form-field" style="min-width: 340px;">
-                <mat-label>Enter a date range</mat-label>
-                <form [formGroup]="dateRangeForm">
-                  
-                  <mat-date-range-input [rangePicker]="rangePicker">
-                    <input class="form-control" id="startDate" formControlName="startDate" matStartDate placeholder="Start date" />
-                    <input class="form-control" id="endDate" formControlName="endDate" matEndDate placeholder="End date" />
-                    <!-- <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle> -->
-                    
-                  </mat-date-range-input>
-                  
-                  <mat-hint style="font-size: 16px;">MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-                  <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
-                  
-                  <mat-date-range-picker #rangePicker>
-                    <mat-date-range-picker-actions>
-                      <button mat-button matDateRangePickerCancel>Cancel</button>
-                      <button mat-raised-button color="primary" matDateRangePickerApply (click)="onDateRangeApply()">
-                        Apply
-                      </button>
-                    </mat-date-range-picker-actions>
-                  </mat-date-range-picker>
-                </form>
-              </mat-form-field>
-      
-          
-        
-            <!-- </mat-card-content>
-          </mat-card> -->
-        
-        
-        </div>
   
         <div>
-          <mat-card class="cardWithShadow " >
-            <mat-card-content class="p-16 ">
-              <mat-card-title style="margin-bottom: 14px;">Registered client status</mat-card-title>
+
+          <mat-card class="cardWithShadow " style="display: none" >
+            <mat-card-content class="p-24 ">
+              <mat-card-title>Registered client status</mat-card-title>
               
-                      <mat-card class="b-1 shadow-none">
+                      <!-- <mat-card class="b-1 shadow-none">
                       
-                        <mat-card-content class="b-t-1" >
-                            <div class="row" style=" padding-bottom: 16px;">
+                        <mat-card-content class="b-t-1" > -->
+                          <p> Registered Client: {{registationStatus.registered}}</p>
+                          
+                            <!-- <div class="row" style=" padding-bottom: 16px;">
                                 <div class="col-sm-7 col-lg-6">
                                    Registered Client
                                 </div>
@@ -61,7 +137,8 @@
                                 <div class="col-sm-3 col-lg-3">
                                   {{registationStatus.registered}}
                                 </div>
-                            </div>
+                            </div> -->
+                          
                 
                             <!-- <div class="row" style="margin-top: 16px;">
                                 <div class="col-sm-7 col-lg-7">
@@ -80,13 +157,37 @@
                 
                 
                 
-                        </mat-card-content>
-                    </mat-card>
+                        <!-- </mat-card-content>
+                    </mat-card> -->
                 
               
             </mat-card-content>
            
           </mat-card>
+          <!-- chart  -->
+          <mat-card class="cardWithShadow flex-fill" style="min-height: 199.6px;">
+            <mat-card-content class="p-24 ">
+              <mat-card-title>Date Range Alerts</mat-card-title> 
+            
+
+              <div *ngIf="clamav || integrity || urlV || usbv; else noChartData" id="visitor-chart" class="p-t-12 d-flex flex-column hideToolTip">
+                <apx-chart [series]="ourvisitorChart.series" [chart]="ourvisitorChart.chart" [labels]="ourvisitorChart.labels"
+                  [colors]="ourvisitorChart.colors" [responsive]="ourvisitorChart.responsive"></apx-chart>
+              </div>
+              
+              <ng-template #noChartData>
+                <p>No Data Available For The Chart</p> <!-- Custom message when conditions are not met -->
+              </ng-template>
+              
+
+              
+            </mat-card-content>
+           
+            <app-spinner [showSpinner]="isSpinnerVisible['dashDateRangeAlert']">
+            </app-spinner>
+          </mat-card>
+          
+          
         </div>
 
       <!-- </div> -->
@@ -100,52 +201,17 @@
   
   
    
-  
-    <div class="col-sm-4 col-lg-4" style="display: flex;">
-      <mat-card class="cardWithShadow flex-fill">
-        <mat-card-content class="p-24 m-b-24">
-          <mat-card-title>Date Range Alerts</mat-card-title>
-          <div id="visitor-chart" class="p-t-30 d-flex flex-column">
-  
-            <apx-chart [series]="ourvisitorChart.series" [chart]="ourvisitorChart.chart" [labels]="ourvisitorChart.labels"
-              [colors]="ourvisitorChart.colors" [responsive]="ourvisitorChart.responsive"></apx-chart>
-          </div>
-        </mat-card-content>
-        <!-- <mat-card-content class="p-24">
-          <div class="d-flex align-items-center justify-content-center gap-30">
-            <div class="d-flex gap-12">
-              <i-tabler name="circle-filled" class="text-accent icon-12 d-flex"></i-tabler>
-              <span class="mat-subtitle-2 text-accent">ClampAv</span>
-            </div>
-            <div class="d-flex gap-12">
-              <i-tabler name="circle-filled" class="text-primary icon-12 d-flex"></i-tabler>
-              <span class="mat-subtitle-2 text-primary">SSH</span>
-            </div>
-            <div class="d-flex gap-12">
-              <i-tabler name="circle-filled" class="text-gray-100 icon-12 d-flex"></i-tabler>
-              <span class="mat-subtitle-2 text-gray-100">Inigrity</span>
-            </div>
-  
-  
-          </div>
-        </mat-card-content> -->
-      </mat-card>
 
-    </div>
-
-    <div class="col-sm-4 col-lg-4" >
-      <mat-card class="cardWithShadow ">
+    <div class="col-sm-6 col-lg-4 " style=" display: flex; ">
+      <mat-card class="cardWithShadow  flex-fill">
         <mat-card-content class="p-24 ">
-          <mat-card-title>OTP status</mat-card-title>
+          <mat-card-title>OTP Status</mat-card-title>
         
          
-              <div id="visitor-chart" class="p-t-30 d-flex flex-column">
-                <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart"
-                  [dataLabels]="chartOptions2.dataLabels" [colors]="chartOptions2.colors"
-                  [plotOptions]="chartOptions2.plotOptions" [labels]="chartOptions2.labels" style="height:200px"></apx-chart>
+              <div id="visitor-chart" class="p-t-16 d-flex flex-column">
+               
   
-                  <!-- ********************99*************  -->
-                  <mat-card class="b-1 shadow-none">
+                  <mat-card class="b-1 shadow-none" style="margin-bottom: 0">
                   
                     <mat-card-content class="b-t-1" >
                         <div class="row" style=" border-bottom: 1px solid #a3a3a3; padding-bottom: 16px;">
@@ -160,9 +226,9 @@
                             </div>
                         </div>
             
-                        <div class="row" style="margin-top: 16px;">
+                        <div class="row" style="margin-top: 16px;padding-bottom: 16px;">
                             <div class="col-sm-7 col-lg-7">
-                                OTP used
+                                OTP Used
                             </div>
                             <div class="col-sm-1 col-lg-1" style="display: flex;justify-content: center;">
                                 :
@@ -172,214 +238,28 @@
                             </div>
                         </div>      
                     </mat-card-content>
+                    <app-spinner [showSpinner]="isSpinnerVisible['dashOtpStatusCard']">
+                    </app-spinner>
                 </mat-card>
               </div>
           
         </mat-card-content>
-       
+        <app-spinner [showSpinner]="isSpinnerVisible['card1']">
+        </app-spinner>
       </mat-card>
       
     </div>
 
+    <div class="col-sm-6 col-lg-4 " style="padding-right: 0 !important;display: flex;">
+      <mat-card class="cardWithShadow flex-fill " style="min-height: 199.6px;">
+        <mat-card-content class="p-24 " >
+          <mat-card-title>Registered Client Status</mat-card-title>
+          <p> Registered Clients: {{registationStatus.registered}}</p>
+        </mat-card-content>
+        <app-spinner [showSpinner]="isSpinnerVisible['dashRegClientStatus']">
+        </app-spinner>
+      </mat-card>
+    </div>
 
-
-
-  
-    <!-- <div class="col-sm-4 col-lg-4" style="display: flex;">
-      <mat-card class="cardWithShadow flex-fill">
-        <mat-card-content class="p-24 m-b-24">
-          <mat-card-title>Alert Received Today</mat-card-title>
-          <div id="visitor-chart" class="p-t-30 d-flex flex-column">
-  
-            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
-              [colors]="ourvisitorChart.colors" [responsive]="chartOptions.responsive"></apx-chart>
-          </div>
-        </mat-card-content> -->
-
-        <!-- <mat-card-content class="p-24">
-          <div class="d-flex align-items-center justify-content-center gap-30">
-            <div class="d-flex gap-12">
-              <i-tabler name="circle-filled" class="text-accent icon-12 d-flex"></i-tabler>
-              <span class="mat-subtitle-2 text-accent">ClampAv</span>
-            </div>
-            <div class="d-flex gap-12">
-              <i-tabler name="circle-filled" class="text-primary icon-12 d-flex"></i-tabler>
-              <span class="mat-subtitle-2 text-primary">SSH</span>
-            </div>
-            <div class="d-flex gap-12">
-              <i-tabler name="circle-filled" class="text-gray-100 icon-12 d-flex"></i-tabler>
-              <span class="mat-subtitle-2 text-gray-100">Inigrity</span>
-            </div>
-  
-  
-          </div>
-        </mat-card-content> -->
-      <!-- </mat-card>
-    </div> -->
-
-    <!-- <div class="col-sm-4 col-lg-4" >
-        <mat-card class="cardWithShadow ">
-          <mat-card-content class="p-24 ">
-            <mat-card-title>OTP status</mat-card-title>
-          
-           
-                <div id="visitor-chart" class="p-t-30 d-flex flex-column">
-                  <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart"
-                    [dataLabels]="chartOptions2.dataLabels" [colors]="chartOptions2.colors"
-                    [plotOptions]="chartOptions2.plotOptions" [labels]="chartOptions2.labels" style="height:200px"></apx-chart>
-    
-                    <mat-card class="b-1 shadow-none">
-                    
-                      <mat-card-content class="b-t-1" >
-                          <div class="row" style=" border-bottom: 1px solid #a3a3a3; padding-bottom: 16px;">
-                              <div class="col-sm-7 col-lg-7">
-                                 OTP Generated
-                              </div>
-                              <div class="col-sm-1 col-lg-1" style="display: flex;justify-content: center;">
-                                  :
-                              </div>
-                              <div class="col-sm-3 col-lg-3">
-                                {{otpStatus?.otp_generated}}
-                              </div>
-                          </div>
-              
-                          <div class="row" style="margin-top: 16px;">
-                              <div class="col-sm-7 col-lg-7">
-                                  OTP used
-                              </div>
-                              <div class="col-sm-1 col-lg-1" style="display: flex;justify-content: center;">
-                                  :
-                              </div>
-                              <div class="col-sm-4 col-lg-4">
-                                {{otpStatus?.otp_used}}
-                              </div>
-                          </div>
-                      </mat-card-content>
-                  </mat-card>
-                </div>
-            
-          </mat-card-content>
-         
-        </mat-card>
-        
-      </div> -->
-  
-  
   
   </div>
-  
-  <!-- <div class="row"> -->
-    <!-- <div class="col-sm-4 col-lg-4" >
-      <mat-card class="cardWithShadow ">
-        <mat-card-content class="p-24 ">
-          <mat-card-title>OTP status</mat-card-title>
-              <div id="visitor-chart" class="p-t-30 d-flex flex-column">
-                <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart"
-                  [dataLabels]="chartOptions2.dataLabels" [colors]="chartOptions2.colors"
-                  [plotOptions]="chartOptions2.plotOptions" [labels]="chartOptions2.labels" style="height:200px"></apx-chart>
-                  <mat-card class="b-1 shadow-none">
-                    <mat-card-content class="b-t-1" >
-                        <div class="row" style=" border-bottom: 1px solid #a3a3a3; padding-bottom: 16px;">
-                            <div class="col-sm-7 col-lg-7">
-                               OTP Generated
-                            </div>
-                            <div class="col-sm-1 col-lg-1" style="display: flex;justify-content: center;">
-                                :
-                            </div>
-                            <div class="col-sm-3 col-lg-3">
-                              {{otpStatus?.otp_generated}}
-                            </div>
-                        </div>
-            
-                        <div class="row" style="margin-top: 16px;">
-                            <div class="col-sm-7 col-lg-7">
-                                OTP used
-                            </div>
-                            <div class="col-sm-1 col-lg-1" style="display: flex;justify-content: center;">
-                                :
-                            </div>
-                            <div class="col-sm-4 col-lg-4">
-                              {{otpStatus?.otp_used}}
-                            </div>
-                        </div>
-           </mat-card-content>
-                </mat-card>
-              </div>
-          
-        </mat-card-content>
-       
-      </mat-card>
-      
-    </div> -->
-  
-    <!-- <div class="col-sm-4 col-lg-4" >
-      <mat-card class="cardWithShadow ">
-        <mat-card-content class="p-24 ">
-          <mat-card-title style="margin-bottom: 14px;">Registered client status</mat-card-title>
-          
-                  <mat-card class="b-1 shadow-none">
-                  
-                    <mat-card-content class="b-t-1" >
-                        <div class="row" style=" padding-bottom: 16px;">
-                            <div class="col-sm-7 col-lg-7">
-                               Registered Client
-                            </div>
-                            <div class="col-sm-1 col-lg-1" style="display: flex;justify-content: center;">
-                                :
-                            </div>
-                            <div class="col-sm-3 col-lg-3">
-                              {{registationStatus.registered}}
-                            </div>
-                        </div>
-                    </mat-card-content>
-                </mat-card>
-            
-          
-        </mat-card-content>
-       
-      </mat-card>
-      
-    </div> -->
-  
-  
-    <!-- <div class="col-sm-4 col-lg-4">
-      <mat-card class="cardWithShadow">
-        <mat-card-content class="p-24 m-b-24">
-          <mat-card-title>Alert received Today</mat-card-title>
-          <div id="visitor-chart" class="p-t-30 d-flex flex-column">
-            <apx-chart [series]="ourvisitorChart.series" [chart]="ourvisitorChart.chart" [labels]="ourvisitorChart.labels"
-              [responsive]="ourvisitorChart.responsive" [tooltip]="ourvisitorChart.tooltip"
-              [legend]="ourvisitorChart.legend" [colors]="ourvisitorChart.colors"
-              [dataLabels]="ourvisitorChart.dataLabels" [plotOptions]="ourvisitorChart.plotOptions"
-              [stroke]="ourvisitorChart.stroke" [responsive]="ourvisitorChart.responsive">
-            </apx-chart>
-          </div>
-        </mat-card-content>
-        <mat-card-content class="p-24">
-          <div class="d-flex align-items-center justify-content-center gap-30">
-            <div class="d-flex gap-12">
-              <i-tabler name="circle-filled" class="text-accent icon-12 d-flex"></i-tabler>
-              <span class="mat-subtitle-2 text-accent">ClampAv</span>
-            </div>
-            <div class="d-flex gap-12">
-              <i-tabler name="circle-filled" class="text-primary icon-12 d-flex"></i-tabler>
-              <span class="mat-subtitle-2 text-primary">SSH</span>
-            </div>
-            <div class="d-flex gap-12">
-              <i-tabler name="circle-filled" class="text-gray-100 icon-12 d-flex"></i-tabler>
-              <span class="mat-subtitle-2 text-gray-100">Inigrity</span>
-            </div>
-  
-  
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div> -->
-  
-   
-  
-  <!-- </div> -->
-  
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
-    <p class="text-white"> Loading... </p>
-  </ngx-spinner>

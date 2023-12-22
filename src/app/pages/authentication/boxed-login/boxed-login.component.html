@@ -76,6 +76,30 @@
               </mat-hint>
             </mat-form-field>
 
+            <mat-label class="mat-subtitle-2 f-w-600 m-b-12 d-block">Captcha</mat-label>
+            <div style="display: flex;">
+
+           
+            <div style="display: flex; justify-content: center; align-items: center; height: 50px; width: 140px; overflow: hidden;">
+              <img [src]="captchaUrl" alt="Image not found" style="max-height: 100%;">
+            </div>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput formControlName="captcha"
+                placeholder="Enter Captcha" />
+              <mat-icon matSuffix style="cursor: pointer;" (click)="refreshCaptcha()">
+                <i-tabler name="refresh" class="icon-20 d-flex"></i-tabler>
+              </mat-icon>
+
+              <mat-hint *ngIf="f['captcha'].touched && f['captcha'].invalid" class="m-b-16 error-msg">
+                <div class="text-error" *ngIf="
+                      f['captcha'].errors && f['captcha'].errors['required']
+                    ">
+                  Captcha is required.
+                </div>
+              </mat-hint>
+            </mat-form-field>
+          </div>
+
             <button mat-flat-button color="primary" class="w-100">
               Sign In
             </button>
@@ -87,11 +111,13 @@
           </div>
 
         </mat-card-content>
+        <app-spinner [showSpinner]="isSpinnerVisible['loginComponent']">
+        </app-spinner>
       </mat-card>
     </div>
   </div>
 </div>
 
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
+<!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
   <p class="text-white"> {{ loaderStatus }} </p>
-</ngx-spinner>
+</ngx-spinner> -->

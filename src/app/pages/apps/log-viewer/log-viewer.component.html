@@ -1,193 +1,313 @@
-<mat-card class=" cardWithShadow">
-  <mat-nav-list class="p-x-8" >
-    <!-- <button mat-flat-button  class="rounded m-b-2 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 5px; width: 150px; height: 30px;" [class.border-red]="formNo === 0"> <span class="text-primary" (click)="logstatus(0, 'search')"> <mat-icon style="margin-top: 10px 10px;">search</mat-icon> Log Search</span></button> -->
-    <button mat-flat-button class="rounded m-b-2 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 5px;" [class.border-red]="formNo === 0">
-      <mat-icon style="color: blue;">search</mat-icon>
-      <span class="text-primary" (click)="logstatus(0, 'search')">Log Search</span>
-    </button>
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-content >
+    <form [formGroup]="secondFormGroup">
+      <div class="row ">
+        <div class="col-lg-3"> 
+          <div style="display: flex;">
 
-    <button mat-flat-button class="rounded m-b-2 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 5px;" [class.border-red]="formNo === 1">
-      <mat-icon style="color: blue;">edit</mat-icon>
-      <span class="text-primary" (click)="logstatus(1, 'summary')">Logs Summary</span>
-    </button>
+            <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Unit Name</mat-label>
+            <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">&nbsp; </span>
+          </div>
+          <mat-form-field appearance="outline" class="w-100" color="primary"> 
+            <mat-select placeholder="Select" formControlName="unitname" multiple (selectionChange)="onUnitSelected($event.value)" 
+                        style="padding-top: 1px; padding-bottom: 1px;">
+              <mat-option *ngFor="let item of unitName" [value]="item.unit_id">
+                {{ item.unit_name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div> 
+        
+        <div class="col-lg-3">
+          <div style="display: flex;">
 
-    <button mat-flat-button class="rounded m-b-2 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 5px; " [class.border-red]="formNo === 2">
-      <mat-icon style="color: blue;">insert_drive_file</mat-icon>
-      <span class="text-primary" (click)="logstatus(2, 'view')">View Logs</span>
-    </button>
+            <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Clients</mat-label>
+            <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">&nbsp; </span>
+          </div>
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <mat-select placeholder="Select" formControlName="clienttype" multiple (selectionChange)="onClientSelected($event.value)">
+              <!-- <mat-checkbox [checked]="selectclientchecked" (change)="toggleAllClients($event.checked)">Select
+                All</mat-checkbox> -->
+              <mat-option *ngFor="let item of unitType" [value]="item.client_id">
+                {{ item.client_id }} - {{ item.client_name }}
+              </mat-option>
+              
+            </mat-select>
+          </mat-form-field>
+        </div>
 
-    <!-- <button mat-flat-button  class="rounded m-b-2 bg-light-accent" style="padding: 1.3rem 1rem; margin: 0 5px; width: 150px; height: 30px;" [class.border-red]="formNo === 1"> <span class="text-accent" (click)="logstatus(1, 'summary')">Logs Summary</span></button> -->
+        
 
-    <!-- <button mat-flat-button  class="rounded m-b-2 bg-light-accent" style="padding: 1.3rem 1rem; margin: 0 5px; width: 160px; height: 30px;" [class.border-red]="formNo === 2"> <span class="text-accent" (click)="logstatus(2, 'view')">View Logs</span></button> -->
-</mat-nav-list>
+        <div class="col-lg-3">
+          <div style="display: flex;">
+            <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Log type</mat-label>
+            <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">&nbsp; </span>
+          </div>
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <mat-select placeholder="Select" formControlName="logtype" multiple (selectionChange)="onLogTypeSelection($event)">
+
+              <mat-option *ngFor="let item of logtypes" [value]="item.value">
+                {{ item.name }}
+              </mat-option>
+              
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+
+        <div class="col-lg-3">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Select Date Range</mat-label>
+          <mat-form-field appearance="fill" class="w-100" >
+            <!-- <mat-label>MM/DD/YYYY-MM/DD/YYYY</mat-label> -->
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate #start placeholder="Start date" formControlName="startDate">
+              <input matEndDate #end placeholder="End date" formControlName="endDate">
+            </mat-date-range-input>
+            <mat-hint style="display: block !important">MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker>
+              <mat-date-range-picker-actions>
+                <button mat-button matDateRangePickerCancel>Cancel</button>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  matDateRangePickerApply
+                >
+                  Apply
+                </button>
+              </mat-date-range-picker-actions>
+            </mat-date-range-picker>
+          </mat-form-field>
+          <!-- <mat-form-field appearance="fill" class="example-form-field">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="rangePicker">
+              <input
+                class="form-control"
+                id="startDate"
+                formControlName="startDate"
+                matStartDate
+                placeholder="Start date"
+              />
+              <input
+                class="form-control"
+                id="endDate"
+                formControlName="endDate"
+                matEndDate
+                placeholder="End date"
+              />
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="rangePicker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #rangePicker>
+              <mat-date-range-picker-actions>
+                <button mat-button matDateRangePickerCancel>Cancel</button>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  matDateRangePickerApply
+                >
+                  Apply
+                </button>
+              </mat-date-range-picker-actions>
+            </mat-date-range-picker>
+          </mat-form-field> -->
+        
+        </div>
+
+       
+        
+
+        
+
+
+      </div>
+
+      <div class="row ">
+
+        <div class="col-lg-3">
+          <div class="">
+            <mat-checkbox class="example-margin"
+              [disabled]="!(secondFormGroup.get('unitname')?.value) || secondFormGroup.get('unitname')?.value === ''"  [checked]="use_subclients"
+              (change)="onCheckboxChange($event)">
+              Include Sub Clients
+            </mat-checkbox>
+          </div>
+        </div>
+
+        
+
+        <div class="col-lg-6">
+          <!-- <button mat-raised-button class="rounded m-b-2 bg-light-primary" style="padding: 1.3rem 1rem; margin: 0 5px;" [class.border-red]="formNo === 1">
+            
+            <span class="text-primary" (click)="logstatus(1, 'summary')">Logs Summary</span>
+          </button> -->
+          
+          <!-- <button mat-flat-button color="warn" class="m-l-8" type="reset">Reset</button> -->
+
+          <!-- <button mat-raised-button color="primary" (click)="logstatus(1, 'summary')" style="padding: 1.3rem 1rem; margin: 0 5px;" [class.border-red]="formNo === 1">
+            Log Summary
+          </button> -->
+
+          <button mat-raised-button color="accent" (click)="logstatus(2, 'view')" style="padding: 1.3rem 1rem; margin: 10px 5px;" [class.border-red]="formNo === 2">
+            View Logs
+          </button>
+
+          <button mat-raised-button color="warn" style="padding: 1.3rem 1rem; margin: 0 5px;" (click)="resetForm()">
+            Reset
+          </button>
+
+        </div>
+
+        <!-- <div class="col-lg-2">
+         
+        </div>
+
+        <div class="col-lg-2">
+         
+        </div> -->
+
+      </div>
+
+      
+  
+
+    </form>
+  </mat-card-content>
 </mat-card>
 
-<mat-card-content class="p-8 bg-white">
-  <div class="" >
-    <div *ngIf="formNo ==0">
-      <form class="m-t-1" [formGroup]="secondFormGroup">
-        <div class="row m-t-1">                
 
-          <!-- <div class="col-lg-2">
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-            <mat-label >Unit Name</mat-label>
-              <mat-select placeholder="Select" formControlName="unitname" required (selectionChange)="onUnitSelected($event.value)" style="padding-top: 1px; padding-bottom: 1px;">
 
-                <mat-option *ngFor="let item of unitName" [value]="item.unit_id">
-                  {{ item.unit_name }}
-                </mat-option>
-                
-              </mat-select>
-              <mat-error *ngIf="secondFormGroup?.get('unitname')?.hasError('required')">
-                Unit name is required
-              </mat-error>
-            </mat-form-field>
-          </div> -->
+<mat-card-content class="p-4 bg-white" *ngIf="formNo ==1 || formNo ==2 ">
+  <div *ngIf="formNo ==1"> 
+    
+    <div class="row">
+      <div class="col-sm-6 col-lg-3" *ngFor="let logs of courseList">
+        <mat-card class="cardWithShadow overflow-hidden">
+          <mat-card-header
+            class="course-header bg-{{
+              logs.courseType
+            }} d-flex justify-content-between"
+          >
+            <mat-card-title class="m-b-0 f-s-16 text-white">
+              {{ logs.logtype }}
+            </mat-card-title>
+            <!-- <span class="d-flex align-items-center gap-4"><i-tabler name="clock" class="icon-16 d-flex"></i-tabler>{{ course.Time }}</span> -->
+          </mat-card-header>
+          <mat-card-content class="text-center p-y-24">
+            <h3 class="m-b-4 mat-subtitle-2 f-s-16 f-w-600">
+             log: {{ logs.log }}
+            </h3>
+            <!-- <span class="f-s-12">{{ course.Update }}</span> -->
 
-          <div class="col-lg-2">
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <mat-label>Unit Name</mat-label>
-              <mat-select placeholder="Select" formControlName="unitname" required 
-                          (selectionChange)="onUnitSelected($event.value)" 
-                          style="padding-top: 1px; padding-bottom: 1px;">
-                <mat-option *ngFor="let item of unitName" [value]="item.unit_id">
-                  {{ item.unit_name }}
-                </mat-option>
-              </mat-select>
-              <mat-error *ngIf="secondFormGroup?.get('unitname')?.hasError('required')">
-                Unit name is required
-              </mat-error>
-              <!-- <mat-icon matSuffix></mat-icon> This is an empty mat-icon acting as a suffix -->
-            </mat-form-field>
-          </div>
+            <h3 class="m-b-4 mat-subtitle-2 f-s-16 f-w-600">
+              log: {{ logs.log }}
+             </h3>
+          </mat-card-content>
 
-          <div class="col-lg-2">
-            <!-- <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Clients:</mat-label> -->
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-            <mat-label>Clients</mat-label>
-              <mat-select placeholder="Select" formControlName="clienttype" required (selectionChange)="onClientSelected($event.value)">
-
-                <mat-option *ngFor="let item of unitType" [value]="item.client_id">
-                  {{ item.client_name }}
-                </mat-option>
-                
-              </mat-select>
-              <mat-error *ngIf="secondFormGroup?.get('clienttype')?.hasError('required')">
-                Client name is required
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <div class="col-lg-2">
-            <div class="">
-              <mat-checkbox class="example-margin" style="margin-left: 1pt; margin-top: 10pt;"
-                [disabled]="!(secondFormGroup.get('unitname')?.value) || secondFormGroup.get('unitname')?.value === ''"  [checked]="use_subclients"
-                (change)="onCheckboxChange($event)">
-                Include Sub Clients
-              </mat-checkbox>
-            </div>
-          </div>
-
-          <div class="col-lg-2">
-            <!-- <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Logs:</mat-label> -->
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-            <mat-label>Logs</mat-label>
-              <mat-select placeholder="Select" formControlName="logtype" required>
-
-                <mat-option *ngFor="let item of logtypes" [value]="item.name">
-                  {{ item.name }}
-                </mat-option>
-                
-              </mat-select>
-              <mat-error *ngIf="secondFormGroup?.get('logtype')?.hasError('required')">
-                Log name is required
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-         
-
-          <div class="col-lg-2">
-            <!-- <mat-label class="mat-subtitle-2 f-w-100 m-b-8 d-block">Select Date Range</mat-label> -->
-            <mat-form-field appearance="fill" class="w-100" >
-              <mat-label>Select Date Range</mat-label>
-              <mat-date-range-input [rangePicker]="picker">
-                <input matStartDate #start placeholder="Start date" formControlName="startDate">
-                <input matEndDate #end placeholder="End date" formControlName="endDate">
-              </mat-date-range-input>
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-date-range-picker #picker>
-                <mat-date-range-picker-actions>
-                  <button mat-button matDateRangePickerCancel>Cancel</button>
-                  <button
-                    mat-raised-button
-                    color="primary"
-                    matDateRangePickerApply
-                  >
-                    Apply
-                  </button>
-                </mat-date-range-picker-actions>
-              </mat-date-range-picker>
-            </mat-form-field>
-            <!-- <mat-form-field appearance="fill" class="example-form-field">
-              <mat-label>Enter a date range</mat-label>
-              <mat-date-range-input [rangePicker]="rangePicker">
-                <input
-                  class="form-control"
-                  id="startDate"
-                  formControlName="startDate"
-                  matStartDate
-                  placeholder="Start date"
-                />
-                <input
-                  class="form-control"
-                  id="endDate"
-                  formControlName="endDate"
-                  matEndDate
-                  placeholder="End date"
-                />
-              </mat-date-range-input>
-              <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="rangePicker"
-              ></mat-datepicker-toggle>
-              <mat-date-range-picker #rangePicker>
-                <mat-date-range-picker-actions>
-                  <button mat-button matDateRangePickerCancel>Cancel</button>
-                  <button
-                    mat-raised-button
-                    color="primary"
-                    matDateRangePickerApply
-                  >
-                    Apply
-                  </button>
-                </mat-date-range-picker-actions>
-              </mat-date-range-picker>
-            </mat-form-field> -->
           
+          <mat-divider></mat-divider>
+          <!-- <mat-card-actions class="text-center p-y-8"> -->
+            <!-- <button mat-button>Start</button> -->
+            <!-- <a
+              mat-button
+              [routerLink]="['/apps/courses/coursesdetail/', course.Id]"
+              class="w-100"
+            >
+              START
+            </a> -->
+          <!-- </mat-card-actions> -->
+        </mat-card>
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf="formNo ==2"> 
+    <!-- <p>View logs page</p> -->
+
+
+    <!-- <div class="col-lg-6">
+      <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Log type</mat-label>
+
+      <mat-form-field appearance="outline" class="w-100" color="primary">
+        <mat-select placeholder="Select">
+          <mat-option *ngFor="let logtype of uniqueLogTypes" [value]="logtype">
+            {{ logtype }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div> -->
+    <div style=" margin: 1rem;">
+
+      <!-- <h1 style="display: flex; justify-content: center;">Log Details</h1> -->
+  
+      <!-- <div *ngIf="showTable"> -->
+
+        <ng-container *ngIf="loading; else dataContent">
+          <div class="spinner-container">
+            <mat-spinner color="primary"></mat-spinner>
           </div>
+        </ng-container>
 
-          <div class="col-lg-2">
-            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block"> </mat-label>
-            <button mat-flat-button color="primary" (click)="performSearch()" class="mat-button mat-button-lg" style="margin-top: 15px;">Search</button>
-          </div> 
+        <ng-template #dataContent>
+          <div class="colorTable" *ngIf="logdata &&  logdata.length > 0; else nodata">
+  
+            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                <thead >
+                    <tr>
+                        <th>Sr No</th>
+                        <th>Name</th>
+    
+                        <th>Mac ID</th>
+                        <!-- <th>Client IP</th> -->
+                        <th>Unit Name</th>
+                        <th>Log Type</th>
+                        <th> Message</th>
+                        <th> Date </th>
+  
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let log of logdata; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>
+                            {{log.client_name}}
+                        </td>
+    
+                        <td>
+                            {{log.client_macid}}
+                        </td>
+                        <!-- <td>
+                            {{log.client_ip}}
+                        </td> -->
+                        <td>
+                          {{log.unit_name}}
+                        </td>
+                        <td>
+                          {{log.log_type}}
+                        </td>
+                        <td>
+                            {{log.message}}
+                        </td>
+                        <td>
+                          {{log.datereported}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-          <!-- <div class="col-lg-2">
-            <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block"> </mat-label>
-            <button mat-flat-button color="primary" (click)="resetsearch()" class="mat-button mat-button-lg" style="margin-top: 15px;">Search</button>
-          </div>  -->
+        <ng-template #nodata>
+      <h1 style="display: flex; justify-content: center;">No logs available</h1>
+        </ng-template>
+          
+        </ng-template>
+  
+      <!-- </div> -->
+  </div>
 
-        </div>                  
-
-      </form>
-    </div>
-    <div *ngIf="formNo ==1"> <p>logs summary page</p>
-
-    </div>
-    <div *ngIf="formNo ==2"> <p>View logs page</p>
-
-    </div>
-
-  </div>  
+  </div>   
 </mat-card-content>
+

@@ -26,13 +26,17 @@ export class AppBoxedLoginComponent {
   loaderStatus: string = 'Loading...';
   options = this.settings.getOptions();
 
+  captchaUrl: any;
 
+  isSpinnerVisible: { [key: string]: boolean } = {};
 
   constructor(private fb: FormBuilder, private settings: CoreService, private router: Router, private auth: AuthService, private tokenStorage: TokenStorageService, private spinner: NgxSpinnerService,private common: CommonServicesService,) {
 
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
+      captcha: ['', Validators.required],
+
       
     })
   }
@@ -42,6 +46,8 @@ export class AppBoxedLoginComponent {
     localStorage.clear();
 
     this.auth.getVersionNumber().subscribe((data: any) => {
+
+    
 
       this.spinner.hide();
 
@@ -55,11 +61,14 @@ export class AppBoxedLoginComponent {
 
       this.spinner.hide();
 
+
       this.common.apiErrorHandler(error);
       console.log("eerror---", error);
 
 
     })
+
+    this.captchaAPI()
   }
 
 
@@ -81,6 +90,7 @@ export class AppBoxedLoginComponent {
 
   submit() {
     
+    console.log("form value:", this.loginForm.value);
     
 
     this.spinner.show();
@@ -90,12 +100,13 @@ export class AppBoxedLoginComponent {
     if (this.loginForm.valid) {
 
       this.spinner.show();
+      this.isSpinnerVisible['loginComponent'] = true;
 
       this.auth.login(this.loginForm.value).subscribe((res) => {
 
+        this.isSpinnerVisible['loginComponent'] = false;
         if (res.api_status) {
          
-
           this.spinner.hide();
 
 
@@ -119,18 +130,55 @@ export class AppBoxedLoginComponent {
 
         } else {
           this.spinner.hide();
+          this.isSpinnerVisible['loginComponent'] = false;
           // console.log("message", res.message);
-          this.loginError = 'Invalid login Username or password.';
+          this.loginError = 'Invalid Username Or Password';
         }
 
       })
 
     } else {
       this.spinner.hide();
+      this.isSpinnerVisible['loginComponent'] = false;
 
     }
 
   }
 
+  captchaAPI() {
+    this.spinner.show();
+    this.captchaUrl = '';
+    this.auth.genCaptcha().subscribe(
+      (res: any) => {
+        if (res.api_status === true) {
+          this.spinner.hide();
+          this.captchaUrl = res.captcha_img;
+console.log("captch..", this.captchaUrl);
+
+         
+          
+        } else {
+          this.spinner.hide();
+
+          Swal.fire({
+            icon: 'error',
+            title: `${res.message}`,
+          });
+        }
+      },
+      (error) => {
+        this.spinner.hide();
+
+        this.common.apiErrorHandler(error);
+        // console.log('eerror---', error);
+      }
+    );
+  }
+  refreshCaptcha(){
+    console.log("refresh captcha");
+
+    this.captchaAPI()
+    
+  }
 }
 

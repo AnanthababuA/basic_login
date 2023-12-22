@@ -9,9 +9,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 // @import "primeng/resources/primeng.css"; 
 
 /* ATab header font size*/
-.mat-mdc-tab-header {
-    --mat-tab-header-label-text-size: 18px !important;
-  }
+// .mat-mdc-tab-header {
+//     --mat-tab-header-label-text-size: 18px !important;
+//   }
 
   .mdc-tab--active {
     background-color: #dcecfb !important;
@@ -22,57 +22,57 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   // @media screen and (min-width: 1280px) {
 
 
-  h1 {
-    font-size: 2em;
-  }
+//   h1 {
+//     font-size: 2em;
+//   }
   
-  h4,
-  th,
-  mat-card-title {
-    font-size: 22px !important;
-  }
+//   h4,
+//   th,
+//   mat-card-title {
+//     font-size: 22px !important;
+//   }
   
-  p,
-  span,
-  td,
-  label,
-  div {
-    font-size: 20px;
-  }
+//   p,
+//   span,
+//   td,
+//   label,
+//   div {
+//     font-size: 20px;
+//   }
 
-  mat-option{
-    font-size: 20px !important;
+//   mat-option{
+//     font-size: 20px !important;
     
-  }
+//   }
 
-  sub{
-    font-size: 20px !important;
+//   sub{
+//     font-size: 20px !important;
 
-  }
-  mat-card-title{
-    font-size: 22px !important;
-}
+//   }
+//   mat-card-title{
+//     font-size: 22px !important;
+// }
 
 
-  .mat-subtitle-2 {
-    font-size: 20px !important;
+//   .mat-subtitle-2 {
+//     font-size: 20px !important;
     
-  }
-  .hide-menu{
-    height: 24px;
-  }
+//   }
+//   .hide-menu{
+//     height: 24px;
+//   }
 
-  .hintText{
-    font-size: 1rem !important;
-  }
+//   .hintText{
+//     font-size: 1rem !important;
+//   }
 
-  .dataTables_length{
-    margin-top: 1px;
-  }
+//   .dataTables_length{
+//     margin-top: 1px;
+//   }
   
-  .dataTables_filter{
-    margin-top: 1px;
-  } 
+//   .dataTables_filter{
+//     margin-top: 1px;
+//   } 
 
   
 // }
@@ -85,15 +85,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 100%;
 }
 .colorTable th, .colorTable td {
-  border: 1px solid #000;
+  border: 0.5px solid rgba(0, 0, 0, 0.3) !important;
   padding: 8px;
   text-align: center !important;
 }
 
 .colorTable th {
   
-  background: linear-gradient(to bottom, #26c6da, #26c6da);
-color: white;
+//   background: linear-gradient(to bottom, #26c6da, #26c6da);
+// color: white;
 text-align: center !important;
 
 }
@@ -101,7 +101,10 @@ text-align: center !important;
 }
 
 .colorTable tbody tr:nth-child(odd) {
-  background-color: #dbfaff; 
+  // background-color: #dbfaff; 
+  
+  box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.05);
+  
 }
 
 

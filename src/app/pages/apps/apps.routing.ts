@@ -93,28 +93,28 @@ export const AppsRoutes: Routes = [
       //   },
       // },
       
-      // {
-      //   path: 'logViewer',
-      //   component: LogViewerComponent,
-      //   data: {
-      //     title: 'Log Viewer',
-      //     urls: [
-      //       { title: 'Dashboard', url: '/dashboards/dashboard1' },
-      //       { title: 'Log Viewer' },
-      //     ],
-      //   },
-      // },
-      // {
-      //   path: 'hierarchyChart',
-      //   component: HierarchyChartComponent,
-      //   data: {
-      //     title: 'HierarchyvChart',
-      //     urls: [
-      //       { title: 'Dashboard', url: '/dashboards/dashboard1' },
-      //       { title: 'HierarchyvChart' },
-      //     ],
-      //   },
-      // },
+      {
+        path: 'logViewer',
+        component: LogViewerComponent,
+        data: {
+          title: 'Log Viewer',
+          urls: [
+            { title: 'Dashboard', url: '/dashboards/dashboard1' },
+            { title: 'Log Viewer' },
+          ],
+        },
+      },
+      {
+        path: 'hierarchyChart',
+        component: HierarchyChartComponent,
+        data: {
+          title: 'HierarchyvChart',
+          urls: [
+            { title: 'Dashboard', url: '/dashboards/dashboard1' },
+            { title: 'HierarchyvChart' },
+          ],
+        },
+      },
      
       { path: 'email', redirectTo: 'email/inbox', pathMatch: 'full' },
       { path: 'listregclient', component: ListregclientComponent }, 

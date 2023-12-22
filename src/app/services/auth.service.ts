@@ -37,7 +37,14 @@ export class AuthService {
 
   getVersionNumber(): Observable<any> {
 
-    return this.http.post(env.apiHost.concat('/registration/version-detail') , "")
+    return this.http.post(env.apiHost.concat('/registration/version-detail') , {})
 
   }
+
+  genCaptcha(): Observable<any> {
+
+    return this.http.post(env.apiHost.concat('/registration/gen_captcha') , {})
+
+  }
+
 }

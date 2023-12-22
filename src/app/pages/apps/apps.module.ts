@@ -104,6 +104,11 @@ import { HierarchyChartComponent } from './hierarchy-chart/hierarchy-chart.compo
 import { DeletedClientListComponent } from './client-administraion/deleted-client-list/deleted-client-list.component';
 import { DeletedClientComponent } from './client-administraion/deleted-client/deleted-client.component';
 import { DeleteClientFormComponent } from './client-administraion/deleted-client/delete-client-form/delete-client-form.component';
+import { BlockClientComponent } from './client-administraion/block-client/block-client.component';
+import { BlockClientListComponent } from './client-administraion/block-client-list/block-client-list.component';
+import { BlockClientFormComponent } from './client-administraion/block-client/block-client-form/block-client-form.component';
+import { UnblockClientFormComponent } from './client-administraion/block-client-list/unblock-client-form/unblock-client-form.component';
+import { SpinnerComponent } from '../dashboards/dashboard1/spinner/spinner.component';
 // import { DeleteClientFormComponent } from './client-administraion/deletedClient/delete-client-form/delete-client-form.component';
 
 
@@ -127,7 +132,7 @@ import { DeleteClientFormComponent } from './client-administraion/deleted-client
     //   useFactory: adapterFactory,
     // }),
     MatNativeDateModule,
-    NgScrollbarModule,MatIconModule
+    NgScrollbarModule,MatIconModule, SpinnerComponent
   ],
   exports: [TablerIconsModule],
   declarations: [
@@ -183,6 +188,10 @@ import { DeleteClientFormComponent } from './client-administraion/deleted-client
     DeletedClientListComponent,
     DeletedClientComponent,
     DeleteClientFormComponent,
+    BlockClientComponent,
+    BlockClientListComponent,
+    BlockClientFormComponent,
+    UnblockClientFormComponent,
     
   ],
   providers: [DatePipe],

@@ -1,0 +1,165 @@
+<div class="row">
+    <div class="col-lg-3 col-sm-6">
+      <mat-card class="cardWithShadow" (click)="patchCard()" style="cursor: pointer;">
+        <mat-card-content class="p-x-24 p-y-16">
+          <div class="row justify-content-between">
+            <div class="col-6 d-flex align-items-center">
+              <div>
+                <mat-card-title class="f-s-20 f-w-500"> 
+                {{this.pat_upd_cli}}/{{this.pat_tol_cli}}
+                     </mat-card-title>
+                <mat-card-subtitle class="f-s-14 f-w-400">
+                  Patch : {{patch_ver}} Version
+                </mat-card-subtitle>
+              </div>
+            </div>
+            <div class="col-5 d-flex align-items-center">
+              <div
+                class="d-flex flex-column align-items-center justify-content-end"
+              >
+                <apx-chart
+                  [series]="pie1Chart.series"
+                  [chart]="pie1Chart.chart"
+                  [labels]="pie1Chart.labels"
+                  [tooltip]="pie1Chart.tooltip"
+                  [legend]="pie1Chart.legend"
+                  [colors]="pie1Chart.colors"
+                  [dataLabels]="pie1Chart.dataLabels"
+                  [plotOptions]="pie1Chart.plotOptions"
+                  [stroke]="pie1Chart.stroke"
+                >
+                </apx-chart>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+        <app-spinner [showSpinner]="isSpinnerVisible['dashPatchCard']">
+        </app-spinner>
+      </mat-card>
+    </div>
+
+    <div class="col-lg-3 col-sm-6">
+        <mat-card class="cardWithShadow" (click)="policyCard()" style="cursor: pointer;">
+          <mat-card-content class="p-x-24 p-y-16">
+            <div class="row justify-content-between">
+              <div class="col-6 d-flex align-items-center">
+                <div>
+                  <mat-card-title class="f-s-20 f-w-500"> 
+                  {{this.pol_upd_cli}}/{{this.pol_tot_cli}}
+                       </mat-card-title>
+                  <mat-card-subtitle class="f-s-14 f-w-400">
+                    Policy : {{policy_ver}} Version
+                  </mat-card-subtitle>
+                </div>
+              </div>
+              <div class="col-5 d-flex align-items-center">
+                <div
+                  class="d-flex flex-column align-items-center justify-content-end"
+                >
+                  <apx-chart
+                    [series]="pie2Chart.series"
+                    [chart]="pie2Chart.chart"
+                    [labels]="pie2Chart.labels"
+                    [tooltip]="pie2Chart.tooltip"
+                    [legend]="pie2Chart.legend"
+                    [colors]="pie2Chart.colors"
+                    [dataLabels]="pie2Chart.dataLabels"
+                    [plotOptions]="pie2Chart.plotOptions"
+                    [stroke]="pie2Chart.stroke"
+                  >
+                  </apx-chart>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+          <app-spinner [showSpinner]="isSpinnerVisible['dashPolicyCard']">
+          </app-spinner>
+        </mat-card>
+      </div>
+
+
+
+      <div class="col-lg-3 col-sm-6">
+        <mat-card class="cardWithShadow" (click)="clamAvCard()" style="cursor: pointer;">
+          <mat-card-content class="p-x-24 p-y-16">
+            <div class="row justify-content-between">
+              <div class="col-6 d-flex align-items-center">
+                <div>
+                  <mat-card-title class="f-s-20 f-w-500"> 
+                  {{clamUpdatedCount}}/{{clamTotal}}
+                       </mat-card-title>
+                  <mat-card-subtitle class="f-s-14 f-w-400">
+                    ClamAv 
+                  </mat-card-subtitle>
+                </div>
+              </div>
+              <div class="col-5 d-flex align-items-center">
+                <div
+                  class="d-flex flex-column align-items-center justify-content-end"
+                >
+                  <apx-chart
+                    [series]="pie3Chart.series"
+                    [chart]="pie3Chart.chart"
+                    [labels]="pie3Chart.labels"
+                    [tooltip]="pie3Chart.tooltip"
+                    [legend]="pie3Chart.legend"
+                    [colors]="pie3Chart.colors"
+                    [dataLabels]="pie3Chart.dataLabels"
+                    [plotOptions]="pie3Chart.plotOptions"
+                    [stroke]="pie3Chart.stroke"
+                  >
+                  </apx-chart>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+          <app-spinner [showSpinner]="isSpinnerVisible['dashClamAVCard']">
+          </app-spinner>
+        </mat-card>
+      </div>
+
+      <div class="col-lg-3 col-sm-6" style="padding-right: 0 !important;">
+        <mat-card class="cardWithShadow"  (click)="logCard()" style="cursor: pointer;">
+          <mat-card-content class="p-x-24 p-y-16">
+            <div class="row justify-content-between">
+              <div class="col-6 d-flex align-items-center">
+                <div>
+                  <mat-card-title class="f-s-20 f-w-500"> 
+                    {{logRecievedData?.log_received_count}}/{{logRecievedData?.total_reg}}
+                       </mat-card-title>
+                  <mat-card-subtitle class="f-s-14 f-w-400">
+                    Logs Received 
+                  </mat-card-subtitle>
+                </div>
+              </div>
+              <div class="col-5 d-flex align-items-center">
+                <div
+                  class="d-flex flex-column align-items-center justify-content-end"
+                >
+                  <apx-chart
+                    [series]="pie4Chart.series"
+                    [chart]="pie4Chart.chart"
+                    [labels]="pie4Chart.labels"
+                    [tooltip]="pie4Chart.tooltip"
+                    [legend]="pie4Chart.legend"
+                    [colors]="pie4Chart.colors"
+                    [dataLabels]="pie4Chart.dataLabels"
+                    [plotOptions]="pie4Chart.plotOptions"
+                    [stroke]="pie4Chart.stroke"
+                  >
+                  </apx-chart>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+          <app-spinner [showSpinner]="isSpinnerVisible['dashAlertCard']">
+          </app-spinner>
+        </mat-card>
+      </div>
+
+</div>
+
+
+
+
+

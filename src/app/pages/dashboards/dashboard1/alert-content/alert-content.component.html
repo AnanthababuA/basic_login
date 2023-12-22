@@ -12,16 +12,23 @@
                 <thead>
                     <tr>
                         <th>Sr No</th>
+                        <th>Date</th>
                         <th>Name</th>
     
                         <th>Mac ID</th>
-                        <th>Client IP</th>
-    
+                        <th>Unit Name</th>
+
+                        <th>Log Type</th>
+                        <th>Message</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let log of alertData; let i = index">
                         <td>{{ i + 1 }}</td>
+                        <td style="min-width: 212px;">
+                            {{ log.datereported}}
+                          </td>
                         <td>
                             {{log.client_name}}
                         </td>
@@ -30,8 +37,18 @@
                             {{log.client_macid}}
                         </td>
                         <td>
-                            {{log.client_publicip}}
+                            {{log.unit_name}}
                         </td>
+
+
+                        <td style="min-width: max-content;">
+                            {{log.log_type}}
+                        </td>
+
+                        <td style="min-width: 465px;">
+                            {{log.message}}
+                        </td>
+                       
                     </tr>
                 </tbody>
             </table>

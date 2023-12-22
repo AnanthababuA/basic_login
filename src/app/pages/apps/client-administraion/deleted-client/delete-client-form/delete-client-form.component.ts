@@ -60,7 +60,7 @@ params: any
     console.log("form data..",this.deleteClient.value);
     
     Swal.fire({
-      title: 'Do you really want to delete the client',
+      title: 'Do you really want to delete the client?',
       // text: file.name,
       showDenyButton: true,
       // showCancelButton: true,

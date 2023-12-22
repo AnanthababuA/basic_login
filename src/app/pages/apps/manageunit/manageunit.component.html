@@ -11,10 +11,12 @@
 
             <div class="row m-t-20">
               <div class="col-lg-6">
-                <div style="display: flex;">
+                <div style="display: flex;margin-bottom: 0.3rem;">
 
-                  <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Parent Unit</mat-label>
-                  <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">&nbsp; </span>
+                  <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16" style="margin-bottom: 0 !important;
+                  display: flex !important;
+                  align-items: center !important;">Parent Unit</mat-label>
+                  <span class="hintText" style="font-size: 0.8rem; margin-left: 10px; color: gray;">&nbsp; </span>
                 </div>
 
                 <mat-form-field appearance="outline" class="w-100" color="primary">
@@ -37,7 +39,8 @@
                   <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16" style="margin-bottom: 0 !important;
                   display: flex !important;
                   align-items: center !important;">Unit Name
-                  </mat-label><span class="hintText" style="font-size: 0.7rem; margin-left: 10px; color: gray;">* Maximum 10
+                  </mat-label>
+                  <span class="hintText" style="font-size: 0.8rem; margin-left: 10px; color: gray;">* Maximum 10
                     Character's And Special Character Not Allowed</span>
                 </div>
 
@@ -65,7 +68,7 @@
             <div >
 
               <!-- <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Unit Name
-              </mat-label><span style="font-size: 0.7rem; margin-left: 10px; color: gray;">* Maximum 10
+              </mat-label><span style="font-size: 0.8rem; margin-left: 10px; color: gray;">* Maximum 10
                 character's and special character not allowed</span>
             </div>
             <mat-form-field appearance="outline" class="w-100">
@@ -90,7 +93,7 @@
               <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16" style="margin-bottom: 0 !important;
               display: flex !important;
               align-items: center !important;">Describe Some Information About Unit
-              </mat-label> <span class="hintText" style="font-size: 0.7rem; margin-left: 10px; color: gray;">* Maximum 200
+              </mat-label> <span class="hintText" style="font-size: 0.8rem; margin-left: 10px; color: gray;">* Maximum 200
                 Character's</span>
             </div>
             <mat-form-field appearance="outline" class="w-100 custom-form-field">
@@ -226,6 +229,9 @@
     </mat-tab>
 
   </mat-tab-group>
+  <!-- <app-spinner [showSpinner]="isSpinnerVisible['manageUnitCreateUnit']"></app-spinner>
+  <app-spinner [showSpinner]="isSpinnerVisible['manageUnitUnitDetails']"></app-spinner> -->
+
 </mat-card>
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">

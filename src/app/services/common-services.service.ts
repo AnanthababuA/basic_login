@@ -291,6 +291,14 @@ export class CommonServicesService {
     );
   }
 
+  
+  dashboardAllRegisteredClient(): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/all-client-reg-list'),
+      {}
+    );
+  }
+
   dashboardOTPStatus(dateRange: any): Observable<any> {
     return this.http.post(
       env.apiHost.concat('/registration/otp-stats-dash'),
@@ -333,6 +341,20 @@ export class CommonServicesService {
     );
   }
 
+  dashboardDeletedClients(): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/delete-client-count'),
+      {}
+    );
+  }
+
+  dashboardBlockClients(): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/block-client-count'),
+      {}
+    );
+  }
+
   listofclients(params: any) {
     return this.http.post<any>(
       env.apiHost.concat('/logviewer/client-lists'),
@@ -357,4 +379,32 @@ export class CommonServicesService {
       clientData
     );
   }
+
+  blockClient(clientData: any): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/block-client'),
+      clientData
+    );
+  }
+
+  blockClientList(): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/block-client-list'),
+      {}
+    );
+  }
+
+  unBlockClient(clientData: any): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/registration/unblock-client'),
+      clientData
+    );
+  }
+
+  logfiles(params: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/logviewer/search-log'),
+      params
+    );
+    }
 }

@@ -40,19 +40,19 @@
                       style="font-size: 0.7rem; margin-left: 10px; color: gray; align-items: end; display: flex;">* Maximum 200 Characters</span>
                   </div>
                 <mat-form-field appearance="outline" class="w-100 custom-form-field">
-                    <textarea matInput formControlName="remark" rows="5" required placeholder="Enter Remark"></textarea>
+                    <textarea matInput formControlName="remark" rows="5" required placeholder="Enter Remarks"></textarea>
 
                     <mat-icon matPrefix>
                         <i-tabler name="notebook" class="icon-20 d-flex"></i-tabler>
                     </mat-icon>
                     <!-- <input matInput formControlName="remark" required /> -->
                     <mat-error *ngIf="deleteClient?.get('remark')?.hasError('required')">
-                        Remark is required
+                        Remarks is required
                     </mat-error>
 
                     <mat-error
                         *ngIf="deleteClient.get('remark')?.hasError('pattern') && deleteClient.get('remark')?.invalid">
-                        Remark should be maximum 200 characters
+                        Remarks should be maximum 200 characters
                     </mat-error>
 
 

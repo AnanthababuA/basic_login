@@ -96,7 +96,7 @@ export class ClientAdministraionComponent {
           console.log("in the elsee");
           
         }
-      }, 1000);
+      }, 500);
 
 
       

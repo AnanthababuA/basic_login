@@ -1,5 +1,5 @@
 // import { Component } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TablerIconsModule } from 'angular-tabler-icons';
@@ -18,6 +18,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonServicesService } from 'src/app/services/common-services.service';
 import Swal from 'sweetalert2';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 
 export type ChartOptions = {
@@ -49,7 +50,7 @@ export interface ourvisitorChart {
   templateUrl: './dashboard-charts.component.html',
   styleUrls: ['./dashboard-charts.component.scss'],
   standalone: true,
-  imports: [NgApexchartsModule, MaterialModule, TablerIconsModule, ReactiveFormsModule,NgxSpinnerModule,],
+  imports: [NgApexchartsModule, MaterialModule, TablerIconsModule, ReactiveFormsModule,NgxSpinnerModule,SpinnerComponent, CommonModule],
   encapsulation: ViewEncapsulation.None,
 
 })
@@ -62,6 +63,8 @@ export class DashboardChartsComponent {
   chartOptions : any
   chartOptions2 : any
   dateRangeForm: FormGroup;
+
+  isFormValid: boolean = false;
 
   otpStatus: any
   otpStatusPercentage: number =0;
@@ -83,26 +86,27 @@ export class DashboardChartsComponent {
     
   }
 
+
   ngOnInit() {
+    
     this.dateRangeForm = this.formBuilder.group({
-      startDate: [''], // Initialize with default values if needed
-      endDate: [''],     // Initialize with default values if needed
+      startDate: ['',  Validators.required], // Initialize with default values if needed
+      endDate: ['',  Validators.required],     // Initialize with default values if needed
     });
+
+    
 
     // Initialize form controls with default dates (yesterday and today)
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1); // Get yesterday's date
 
     this.dateRangeForm = this.formBuilder.group({
-      startDate: [yesterday], // Yesterday's date
-      endDate: [new Date()] // Today's date
+      startDate: [yesterday,  Validators.required], // Yesterday's date
+      endDate: [new Date(),  Validators.required] // Today's date
     });
 
-    // this.dateRangeForm = this.formBuilder.group({
-    //   startDate: [this.datePipe.transform(yesterday, 'dd/MM/yyyy')], // Display yesterday's date in 'dd/MM/yyyy' format
-    //   endDate: [this.datePipe.transform(new Date(), 'dd/MM/yyyy')] // Display today's date in 'dd/MM/yyyy' format
-    // });
-
+   
+    // this.dateRangeForm.reset();
     const startDate = this.dateRangeForm.get('startDate')?.value;
     const endDate = this.dateRangeForm.get('endDate')?.value;
 
@@ -145,7 +149,8 @@ export class DashboardChartsComponent {
         },
       },
       tooltip: {
-        fillSeriesColor: false,
+        // fillSeriesColor: false,
+        enabled: false,
       },
       dataLabels: {
         enabled: false,
@@ -173,8 +178,11 @@ export class DashboardChartsComponent {
 daterangealerts(date: any){
 
 
+  this.isSpinnerVisible['dashDateRangeAlert'] = true;
+
   this.common.alertstatus(date).subscribe( (res) => {
     console.log("res alert", res);
+    this.isSpinnerVisible['dashDateRangeAlert'] = false;
 
     if(res.api_status == true)
     {
@@ -252,10 +260,13 @@ daterangealerts(date: any){
 
   otpStatusDashboardApi(dateRang: any) {
 
+    this.isSpinnerVisible['dashOtpStatusCard'] = true;
+
     this.spinner.show();
     this.otpStatus = ''
     this.common.dashboardOTPStatus(dateRang).subscribe(
       (res) => {
+    this.isSpinnerVisible['dashOtpStatusCard'] = false;
        
         if (res.api_status) {
           this.otpStatus = res
@@ -286,6 +297,8 @@ daterangealerts(date: any){
         }
       },
       (err) => {
+    this.isSpinnerVisible['dashOtpStatusCard'] = false;
+
       this.spinner.hide();
 
         // console.log('unable to log in', err);
@@ -301,11 +314,14 @@ daterangealerts(date: any){
   }
 
   registrationStatusDashboardApi(dateRang: any) {
+    this.isSpinnerVisible['dashRegClientStatus'] = true;
 
     this.spinner.show();
     this.registationStatus = ''
     this.common.dashboardRegistrationStatus(dateRang).subscribe(
       (res) => {
+    this.isSpinnerVisible['dashRegClientStatus'] = false;
+
        
         if (res.api_status) {
           this.registationStatus = res
@@ -328,6 +344,8 @@ daterangealerts(date: any){
         }
       },
       (err) => {
+    this.isSpinnerVisible['dashRegClientStatus'] = false;
+
       this.spinner.hide();
 
         // console.log('unable to log in', err);
@@ -381,4 +399,13 @@ daterangealerts(date: any){
     };
   }
 
+  isSpinnerVisible: { [key: string]: boolean } = {};
+
+  sampleShow(){
+    this.isSpinnerVisible['card1'] = true;
+  }
+
+  sampleHide(){
+    this.isSpinnerVisible['card1'] = false;
+  }
 }
