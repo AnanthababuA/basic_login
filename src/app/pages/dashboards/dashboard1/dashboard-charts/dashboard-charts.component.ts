@@ -50,7 +50,8 @@ export interface ourvisitorChart {
   templateUrl: './dashboard-charts.component.html',
   styleUrls: ['./dashboard-charts.component.scss'],
   standalone: true,
-  imports: [NgApexchartsModule, MaterialModule, TablerIconsModule, ReactiveFormsModule,NgxSpinnerModule,SpinnerComponent, CommonModule],
+    
+    imports: [NgApexchartsModule, MaterialModule, TablerIconsModule, ReactiveFormsModule,NgxSpinnerModule,SpinnerComponent, CommonModule, ],
   encapsulation: ViewEncapsulation.None,
 
 })

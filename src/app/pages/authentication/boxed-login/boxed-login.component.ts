@@ -27,6 +27,7 @@ export class AppBoxedLoginComponent {
   options = this.settings.getOptions();
 
   captchaUrl: any;
+  captchaText: any;
 
   isSpinnerVisible: { [key: string]: boolean } = {};
 
@@ -63,7 +64,7 @@ export class AppBoxedLoginComponent {
 
 
       this.common.apiErrorHandler(error);
-      console.log("eerror---", error);
+      // console.log("eerror---", error);
 
 
     })
@@ -90,69 +91,76 @@ export class AppBoxedLoginComponent {
 
   submit() {
     
-    console.log("form value:", this.loginForm.value);
+    // console.log("form value:", this.loginForm.value);
     
+    // console.log("captcha text:", this.captchaText, "user enter: ", this.loginForm.value.captcha);
 
-    this.spinner.show();
+    if (this.captchaText == this.loginForm.value.captcha) {
 
-    
-
-    if (this.loginForm.valid) {
-
+    //   console.log("valid captcha");
       this.spinner.show();
-      this.isSpinnerVisible['loginComponent'] = true;
 
-      this.auth.login(this.loginForm.value).subscribe((res) => {
+    
 
-        this.isSpinnerVisible['loginComponent'] = false;
-        if (res.api_status) {
-         
-          this.spinner.hide();
-
-
-          this.tokenStorage.saveToken(res.access);
-          this.tokenStorage.saveRefreshToken(res.refresh);
-          this.tokenStorage.saveUserType(res.user_type); // set userType here for now user name set
-          this.tokenStorage.saveUser(res.username);
-
-
-          this.router.navigate(['/dashboards/dashboard']);
-          // Swal.fire({
-          //   icon: 'success',
-          //   title: 'Welcome to ISOC',
-          //   text: `You have successfully logged-in.`,
-          //   timer: 3000, 
-          //   // showConfirmButton: false,
-          // }).then(() => {
-          //   // this.router.navigate(['dashboard']);
-          // });
-          
-
-        } else {
-          this.spinner.hide();
+      if (this.loginForm.valid) {
+  
+        this.spinner.show();
+        this.isSpinnerVisible['loginComponent'] = true;
+  
+        this.auth.login(this.loginForm.value).subscribe((res) => {
+  
           this.isSpinnerVisible['loginComponent'] = false;
-          // console.log("message", res.message);
-          this.loginError = 'Invalid Username Or Password';
-        }
-
-      })
-
+          if (res.api_status) {
+           
+            this.spinner.hide();
+  
+  
+            this.tokenStorage.saveToken(res.access);
+            this.tokenStorage.saveRefreshToken(res.refresh);
+            this.tokenStorage.saveUserType(res.user_type); // set userType here for now user name set
+            this.tokenStorage.saveUser(res.username);
+  
+  
+            this.router.navigate(['/dashboards/dashboard']);
+           
+            
+  
+          } else {
+            this.spinner.hide();
+            this.isSpinnerVisible['loginComponent'] = false;
+            this.loginError = 'Invalid Username Or Password';
+          }
+  
+        })
+  
+      } else {
+        this.spinner.hide();
+        this.isSpinnerVisible['loginComponent'] = false;
+  
+      }
+  
+      
     } else {
-      this.spinner.hide();
-      this.isSpinnerVisible['loginComponent'] = false;
-
+      // console.log("INvalid captcha");
+      this.loginError = 'Invalid Captcha';
+      
     }
+    
 
+  
   }
 
   captchaAPI() {
+    this.loginForm.get('captcha')?.setValue('');
     this.spinner.show();
     this.captchaUrl = '';
+    this.captchaText = '';
     this.auth.genCaptcha().subscribe(
       (res: any) => {
         if (res.api_status === true) {
           this.spinner.hide();
           this.captchaUrl = res.captcha_img;
+          this.captchaText =  res.captcha_text
 console.log("captch..", this.captchaUrl);
 
          

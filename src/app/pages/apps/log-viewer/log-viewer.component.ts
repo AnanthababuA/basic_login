@@ -10,10 +10,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonServicesService } from 'src/app/services/common-services.service';
 import Swal from 'sweetalert2';
 
-
-
-
-
 @Component({
   selector: 'app-log-viewer',
   templateUrl: './log-viewer.component.html',
@@ -54,6 +50,11 @@ export class LogViewerComponent {
   minDate: Date | null = null;
   includeSubClients = false;
 
+  time_stamp: any[] = [];
+  next_ts: boolean = false;
+  prev_ts: boolean = false;
+  clickCount = 0;
+
   errorMessage: string; 
 
   selectedTabIndex = 0; // Default to Log Search tab
@@ -71,85 +72,80 @@ export class LogViewerComponent {
   courseList = [
     {
       Id: 1,
-      icon: 'mdi-account-multiple',
-      courseType: 'primary',
-      logtype: 'Total',
+      icon: 'people',
+      logtype: 'TOTAL',
       log: '12',
-      Update: 'Updated 21 Jan 2020',
+      clients: '2',
     },
     {
       Id: 2,
-      icon: 'mdi-account-multiple',
-      courseType: 'error',
+      icon: 'power_settings_new',
       logtype: 'SYSTEM HALT / REBOOT',
       log: '25',
-      Update: 'Updated 25 Jan 2020',
+      clients: '2',
     },
     {
       Id: 3,
-      icon: 'file',
-      courseType: 'warning',
+      icon: 'no_accounts',
       logtype: 'BAD LOGIN',
       log: '12',
-      Update: 'Updated 30 Jan 2020',
+      clients: '2',
     },
     {
       Id: 4,
-      icon: 'file',
-      courseType: 'accent',
+      icon: 'usb',
       logtype: 'OTHER USB DEVICE USAGE',
       log: '25',
-      Update: 'Updated 01 Feb 2020',
+      clients: '2',
     },
     {
       Id: 5,
-      icon: 'file',
-      courseType: 'primary',
+      icon: 'lock_clock',
       logtype: 'LAST LOGIN LOG',
       log: '25',
-      Update: 'Updated 15 Feb 2020',
+      clients: '2',
     },
     {
       Id: 6,
-      icon: 'file',
-      courseType: 'warning',
+      icon: 'manage_accounts',
       logtype: 'UPGRADE TO SUPER USER',
       log: '16',
-      Update: 'Updated 16 Feb 2020',
+      clients: '2',
     },
     {
       Id: 7,
-      icon: 'file',
-      courseType: 'primary',
+      icon: 'task',
       logtype: 'INTEGRITY',
       log: '35',
-      Update: 'Updated 18 Feb 2020',
+      clients: '2',
     },
     {
       Id: 8,
-      icon: 'file',
-      courseType: 'error',
+      icon: 'insert_drive_file',
       logtype: 'FILE SYSTEM STATUS',
       log: '123',
-      Update: 'Updated 20 Feb 2020',
+      clients: '2',
     },
     {
       Id: 9,
-      icon: 'description',
-      courseType: 'accent',
+      icon: 'bug_report',
       logtype: 'ANDIVIRUS SCAN LOG',
-      Time: '80 min',
       log: '234',
-      Update: 'Updated 21 Feb 2020',
+      clients: '2',
     },
     {
       Id: 10,
-      icon: 'description',
-      courseType: 'error',
+      icon: 'install_desktop',
       logtype: 'BROWSER LOG',
-      Time: '150 min',
       log: '253',
-      Update: 'Updated 20 Feb 2020',
+      clients: '2',
+    },
+    {
+      Id: 10,
+      icon: 'link',
+      logtype: 'URL VIOLATION',
+      log: '253',
+      clients: '2',
     },
   ];
   form: any;
@@ -184,8 +180,8 @@ export class LogViewerComponent {
       unitname: [],
       clienttype: [],
       logtype: [],
-      startDate: [yesterday], // Add validation if needed
-      endDate: [today] // Disable end date initially
+      startDate: [yesterday, Validators.required ], // Add validation if needed
+      endDate: [ today, Validators.required ] // Disable end date initially
      
     },   
     );
@@ -246,6 +242,21 @@ export class LogViewerComponent {
     // this.logstatus(2, 'view');
   }
 
+  get startDateControl() {
+    this.time_stamp = [];
+    this.next_ts = false;
+    this.prev_ts = false;
+    return this.secondFormGroup.get('startDate');
+
+  }
+
+  get endDateControl() {
+    this.time_stamp = [];
+    this.next_ts = false;
+    this.prev_ts = false;
+    return this.secondFormGroup.get('endDate');
+  }
+
 
 formNo: any = 0;
 
@@ -280,243 +291,42 @@ logstatus(i: any, logs: any){
 
   const formValues = this.secondFormGroup.value;
 
-  if (
-    (!formValues.unitname || formValues.unitname === "" || formValues.unitname.length === 0) &&
-    (!formValues.clients || formValues.clients === "" || formValues.clients.length === 0) &&
-    (!formValues.logtype || formValues.logtype === "" || formValues.logtype.length === 0)
-  )
-  {
-    this.loading = true; 
-    
-    console.log("form values", formValues)
+  if( this.formNo == 1){
+    console.log('forms 1')
+  }
 
-    console.log('unitName',this.unitName)
+  if( this.formNo === 2 && logs === 'view' ){
+    console.log("forms 22");
+    this.clickCount++;
 
-    this.unitName.forEach( (obj: any) => unit_ids.push(obj.unit_id) );
-
-    console.log("u_id",unit_ids)
-
-    const params = {
-      "unitid": unit_ids,
-      "use_subclients": true
-    };
-
-    console.log("this.logtype", this.logtypes);
-
-    this.log_value.forEach( (obj: any) => log_types.push(obj.name));
-
-    console.log("log_typea",log_types)
-
-    console.log("s date", this.formattedToday);
-    
-
-    this.includeSubClients = true;
-
-    this.common.listofclients(params).subscribe((res1) => {
-      console.log(res1);
-  
-      if (res1.api_status === true) {
-        client_type12 = res1.data;
-        client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
-        
-        if (formValues.startDate != null){
-          s_date= this.formatDate(formValues.startDate);
-        }else{
-          s_date = this.formattedYesterday;          
-        }
-      
-        if(formValues.endDate != null){
-          e_date= this.formatDate(formValues.endDate);
-        }else{
-          e_date = this.formattedToday;
-        }
-   
-    const param1 = { unit_id: unit_ids, clients: client_type, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: null }
-
-    this.common.logfiles(param1).subscribe( (res) => {
-
-      console.log("log respo", res);
-  
-      if(res.api_status === true)
-      {
-        this.logdata = res.data;
-  
-        // this.spinner.hide();
-        this.loading = false;
-  
-      }
-
-      
-    }
-  
-    );
-
-      }
-     
-    });
-
-    console.log("client type", client_type);
-
-  } else if(formValues.unitname != null && formValues.unitname.length > 0)
-  {
-    console.log('formValues.unitname else if', formValues.unitname.length )
-
-    this.loading = true; 
-    
-        console.log("this.logtype", this.logtypes);
-
-    if(formValues.logtype == null )
+    if (
+      (!formValues.unitname || formValues.unitname === "" || formValues.unitname.length === 0) &&
+      (!formValues.clients || formValues.clients === "" || formValues.clients.length === 0) &&
+      (!formValues.logtype || formValues.logtype === "" || formValues.logtype.length === 0)
+    )
     {
-      this.log_value.forEach( (obj: any) => log_types.push(obj.name));
-
-      console.log("log_typea",log_types)
-    }
-    else{
-      log_types = formValues.logtype;
-    }
-
-    this.includeSubClients = true;
-
-    if(formValues.clients != null){
-
-      if (formValues.startDate != null){
-        s_date= this.formatDate(formValues.startDate);
-      }else{
-        s_date = this.formattedYesterday;          
-      }
-    
-      if(formValues.endDate != null){
-        e_date= this.formatDate(formValues.endDate);
-      }else{
-        e_date = this.formattedToday;
-      }
-
-      const param1 = { unit_id: formValues.unitname, clients: formValues.clients, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: null }
-  
-      this.common.logfiles(param1).subscribe( (res) => {
-  
-        console.log("log respo", res);
-    
-        if(res.api_status === true)
-        {
-          this.logdata = res.data;
-    
-          // this.spinner.hide();
-          this.loading = false;
-    
-        }
-  
-        
-      }
-    
-      );
+      this.loading = true; 
       
-
-    } else{
-      const params = {
-        "unitid": formValues.unitname,
-        "use_subclients": true
-      };
-
-      this.common.listofclients(params).subscribe((res1) => {
-        console.log(res1);
-    
-        if (res1.api_status === true) {
-          client_type12 = res1.data;
-          client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
-          
-          if (formValues.startDate != null){
-            s_date= this.formatDate(formValues.startDate);
-          }else{
-            s_date = this.formattedYesterday;          
-          }
-        
-          if(formValues.endDate != null){
-            e_date= this.formatDate(formValues.endDate);
-          }else{
-            e_date = this.formattedToday;
-          }
-     
-      const param1 = { unit_id: formValues.unitname, clients: client_type, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: null }
+      console.log("if form values", formValues)
   
-      this.common.logfiles(param1).subscribe( (res) => {
+      console.log('unitName',this.unitName)
   
-        console.log("log respo", res);
-    
-        if(res.api_status === true)
-        {
-          this.logdata = res.data;
-    
-          // this.spinner.hide();
-          this.loading = false;
-    
-        }
-  
-        
-      }
-    
-      );
-  
-        }
-       
-      });
-      
-      
-    }
-
-    console.log("client type", client_type);
-
-  } else if(formValues.logtype != null && formValues.logtype.length > 0 )
-  {
-    this.loading = true; 
-
-    if(formValues.unitname != null && formValues.unitname.length > 0 ){
-      unit_ids = formValues.unitname;
-    }else{
       this.unitName.forEach( (obj: any) => unit_ids.push(obj.unit_id) );
-    }
-
-
-    if(formValues.clients != null){
-
-      if (formValues.startDate != null){
-        s_date= this.formatDate(formValues.startDate);
-      }else{
-        s_date = this.formattedYesterday;          
-      }
-    
-      if(formValues.endDate != null){
-        e_date= this.formatDate(formValues.endDate);
-      }else{
-        e_date = this.formattedToday;
-      }
-
-      const param1 = { unit_id: formValues.unitname, clients: formValues.clients, include_subclient: this.includeSubClients, logtype: formValues.logtype , startdate: s_date, enddate: e_date, last_timestamp: null }
   
-      this.common.logfiles(param1).subscribe( (res) => {
+      console.log("u_id",unit_ids)
   
-        console.log("log respo", res);
-    
-        if(res.api_status === true)
-        {
-          this.logdata = res.data;
-    
-          // this.spinner.hide();
-          this.loading = false;
-    
-        }
-  
-        
-      }
-    
-      );
-      
-
-    } else{
       const params = {
         "unitid": unit_ids,
         "use_subclients": true
       };
+  
+      console.log("this.logtype", this.logtypes);
+  
+      this.log_value.forEach( (obj: any) => log_types.push(obj.name));
+  
+      console.log("log_typea",log_types)
+  
+      console.log("s date", this.formattedToday);
       
   
       this.includeSubClients = true;
@@ -539,11 +349,318 @@ logstatus(i: any, logs: any){
           }else{
             e_date = this.formattedToday;
           }
-     
-      const param1 = { unit_id: unit_ids, clients: client_type, include_subclient: this.includeSubClients, logtype: formValues.logtype, startdate: s_date, enddate: e_date, last_timestamp: null }
+
+          
+          console.log("outer if ts", this.time_stamp);
+    
+      const param1 = { unit_id: unit_ids, clients: client_type, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: null }
   
       this.common.logfiles(param1).subscribe( (res) => {
   
+        console.log("if log respo", res);
+    
+        if(res.api_status === true)
+        {
+          this.logdata = res.data;
+
+          if (res.next_timestamp !== null) {
+            // Check if the timestamp is not already present in the array
+            if (!this.time_stamp.includes(res.next_timestamp)) {
+
+              this.time_stamp.push(res.next_timestamp);
+              this.next_ts = true;
+              console.log('if TS res.next_timestamp',this.time_stamp);
+            }
+          
+          }
+          
+    
+          console.log('if TS',this.time_stamp);
+          // this.spinner.hide();
+          this.loading = false;
+        }
+      }
+    
+      );
+  
+        }
+       
+      });
+  
+      console.log("client type", client_type);
+  
+    } else if(formValues.unitname != null && formValues.unitname.length > 0)
+    {
+      console.log('formValues.unitname else if', formValues.unitname.length )
+  
+      this.loading = true; 
+      
+          console.log("this.logtype", this.logtypes);
+  
+      if(formValues.logtype === null || formValues.logtype.length === 0)
+      {
+        this.log_value.forEach( (obj: any) => log_types.push(obj.name));
+  
+        console.log("log_typea",log_types)
+      }
+      else{
+        console.log('else')
+        log_types = formValues.logtype;
+      }
+  
+      this.includeSubClients = true;
+  
+      if(formValues.clients != null){
+  
+        if (formValues.startDate != null){
+          s_date= this.formatDate(formValues.startDate);
+        }else{
+          s_date = this.formattedYesterday;          
+        }
+      
+        if(formValues.endDate != null){
+          e_date= this.formatDate(formValues.endDate);
+        }else{
+          e_date = this.formattedToday;
+        }
+
+        // const previousTimestamp = this.time_stamp[this.time_stamp.length - 1];
+  
+        const param1 = { unit_id: formValues.unitname, clients: formValues.clients, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: null }
+    
+        this.common.logfiles(param1).subscribe( (res) => {    
+          console.log("log respo", res);  
+          if(res.api_status === true)
+          {
+            this.logdata = res.data;  
+            
+            if (res.next_timestamp !== null) {
+              // Check if the timestamp is not already present in the array
+              if (!this.time_stamp.includes(res.next_timestamp)) {
+                this.time_stamp.push(res.next_timestamp);
+
+                this.next_ts = true; 
+              }
+            }
+            // this.spinner.hide();
+            this.loading = false;     
+          }         
+        }    
+        );
+      } else{
+        const params = {
+          "unitid": formValues.unitname,
+          "use_subclients": true
+        };
+  
+        this.common.listofclients(params).subscribe((res1) => {
+          console.log(res1);
+      
+          if (res1.api_status === true) {
+            client_type12 = res1.data;
+            client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
+            
+            if (formValues.startDate != null){
+              s_date= this.formatDate(formValues.startDate);
+            }else{
+              s_date = this.formattedYesterday;          
+            }
+          
+            if(formValues.endDate != null){
+              e_date= this.formatDate(formValues.endDate);
+            }else{
+              e_date = this.formattedToday;
+            }
+       
+        const param1 = { unit_id: formValues.unitname, clients: client_type, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: null }
+    
+        this.common.logfiles(param1).subscribe( (res) => {
+    
+          console.log("log respo", res);
+      
+          if(res.api_status === true)
+          {
+            this.logdata = res.data;
+
+            if (res.next_timestamp !== null) {
+              // Check if the timestamp is not already present in the array
+              if (!this.time_stamp.includes(res.next_timestamp)) {
+                this.time_stamp.push(res.next_timestamp);
+
+                this.next_ts = true;
+              }
+            }
+      
+            // this.spinner.hide();
+            this.loading = false;
+      
+          }
+    
+          
+        }
+      
+        );
+    
+          }
+         
+        });
+        
+        
+      }
+  
+      console.log("client type", client_type);
+  
+    } else if(formValues.logtype != null && formValues.logtype.length > 0 )
+    {
+      this.loading = true; 
+  
+      if(formValues.unitname != null && formValues.unitname.length > 0 ){
+        unit_ids = formValues.unitname;
+      }else{
+        this.unitName.forEach( (obj: any) => unit_ids.push(obj.unit_id) );
+      }
+  
+  
+      if(formValues.clients != null){
+  
+        if (formValues.startDate != null){
+          s_date= this.formatDate(formValues.startDate);
+        }else{
+          s_date = this.formattedYesterday;          
+        }
+      
+        if(formValues.endDate != null){
+          e_date= this.formatDate(formValues.endDate);
+        }else{
+          e_date = this.formattedToday;
+        }
+  
+        const param1 = { unit_id: formValues.unitname, clients: formValues.clients, include_subclient: this.includeSubClients, logtype: formValues.logtype , startdate: s_date, enddate: e_date, last_timestamp: null }
+    
+        this.common.logfiles(param1).subscribe( (res) => {
+    
+          console.log("log respo", res);
+      
+          if(res.api_status === true)
+          {
+            this.logdata = res.data;
+
+            if (res.next_timestamp !== null) {
+              // Check if the timestamp is not already present in the array
+              if (!this.time_stamp.includes(res.next_timestamp)) {
+                this.time_stamp.push(res.next_timestamp);
+
+                this.next_ts = true;
+              }
+            }
+      
+            // this.spinner.hide();
+            this.loading = false;
+      
+          }
+    
+          
+        }
+      
+        );
+        
+  
+      } else{
+        const params = {
+          "unitid": unit_ids,
+          "use_subclients": true
+        };
+        
+    
+        this.includeSubClients = true;
+    
+        this.common.listofclients(params).subscribe((res1) => {
+          console.log(res1);
+      
+          if (res1.api_status === true) {
+            client_type12 = res1.data;
+            client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
+            
+            if (formValues.startDate != null){
+              s_date= this.formatDate(formValues.startDate);
+            }else{
+              s_date = this.formattedYesterday;          
+            }
+          
+            if(formValues.endDate != null){
+              e_date= this.formatDate(formValues.endDate);
+            }else{
+              e_date = this.formattedToday;
+            }
+       
+        const param1 = { unit_id: unit_ids, clients: client_type, include_subclient: this.includeSubClients, logtype: formValues.logtype, startdate: s_date, enddate: e_date, last_timestamp: null }
+    
+        this.common.logfiles(param1).subscribe( (res) => {
+    
+          console.log("log respo", res);
+      
+          if(res.api_status === true)
+          {
+            this.logdata = res.data;
+
+            if (res.next_timestamp !== null) {
+              // Check if the timestamp is not already present in the array
+              if (!this.time_stamp.includes(res.next_timestamp)) {
+                this.time_stamp.push(res.next_timestamp);
+
+                this.next_ts = true;
+              }
+            }
+      
+            // this.spinner.hide();
+            this.loading = false;
+      
+          }
+    
+          
+        }
+      
+        );
+    
+          }
+         
+        });
+      }
+  
+    }
+    else {
+  
+      console.log(formValues); // Replace this with your search logic
+  
+      console.log("unitname",formValues.unitname)
+    
+    
+      if (formValues.startDate != null){
+        s_date= this.formatDate(formValues.startDate);
+      }
+    
+      if(formValues.endDate != null){
+        e_date= this.formatDate(formValues.endDate);
+      }
+    
+    
+      console.log("sub clients", this.includeSubClients)
+    
+      // console.log("s_date",s_date)
+  
+      const params = { unit_id: formValues.unitname, clients: formValues.clienttype, include_subclient: this.includeSubClients, logtype: formValues.logtype , startdate: s_date, enddate: e_date, last_timestamp: null }
+  
+      console.log("params", params)
+    
+      // this.spinner.show();
+      this.loading = true;
+      console.log("i", i);
+      console.log("status", logs)
+    
+      
+    
+      this.common.logfiles(params).subscribe( (res) => {
+    
         console.log("log respo", res);
     
         if(res.api_status === true)
@@ -553,9 +670,105 @@ logstatus(i: any, logs: any){
           // this.spinner.hide();
           this.loading = false;
     
+        }else{
+          this.loading = false;
+          this.errorMessage = res.message; 
+          console.log("this error mesasgae", this.errorMessage)        
+          Swal.fire({
+            icon: 'error',
+            title: `${res.message}`,
+          });        
         }
-  
         
+      }
+    
+      );
+  
+    }
+  }
+
+  if( this.formNo === 2 && logs === 'next' ){
+    console.log("forme 23 nexxt batch")
+
+    if (
+      (!formValues.unitname || formValues.unitname === "" || formValues.unitname.length === 0) &&
+      (!formValues.clients || formValues.clients === "" || formValues.clients.length === 0) &&
+      (!formValues.logtype || formValues.logtype === "" || formValues.logtype.length === 0)
+    )
+    {
+      this.loading = true; 
+      
+      console.log("if form values", formValues)
+  
+      console.log('unitName',this.unitName)
+  
+      this.unitName.forEach( (obj: any) => unit_ids.push(obj.unit_id) );
+  
+      console.log("u_id",unit_ids)
+  
+      const params = {
+        "unitid": unit_ids,
+        "use_subclients": true
+      };
+  
+      console.log("this.logtype", this.logtypes);
+  
+      this.log_value.forEach( (obj: any) => log_types.push(obj.name));
+      this.includeSubClients = true;
+  
+      this.common.listofclients(params).subscribe((res1) => {
+        console.log(res1);
+    
+        if (res1.api_status === true) {
+          client_type12 = res1.data;
+          client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
+          
+          if (formValues.startDate != null){
+            s_date= this.formatDate(formValues.startDate);
+          }else{
+            s_date = this.formattedYesterday;          
+          }
+        
+          if(formValues.endDate != null){
+            e_date= this.formatDate(formValues.endDate);
+          }else{
+            e_date = this.formattedToday;
+          }
+          const previousTimestamp = this.time_stamp[this.time_stamp.length - 1];
+
+          if(previousTimestamp !== null){
+            this.prev_ts = true;
+          }
+    
+      const param1 = { unit_id: unit_ids, clients: client_type, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: previousTimestamp }
+  
+      this.common.logfiles(param1).subscribe( (res) => {
+  
+        console.log("log respo", res);   
+        if(res.api_status === true)
+        {
+          this.logdata = res.data;
+
+          if (res.next_timestamp !== null) {
+            // Check if the timestamp is not already present in the array
+            if (!this.time_stamp.includes(res.next_timestamp)) {
+              this.time_stamp.push(res.next_timestamp);
+            }
+            
+          }
+
+          if(previousTimestamp === res.next_timestamp){
+            // this.time_stamp = [];
+            this.next_ts = false;
+          }
+
+          if(this.time_stamp.length >= 2){
+            this.prev_ts = true;
+          }
+
+          console.log('TS',this.time_stamp);
+          this.loading = false;
+        }
       }
     
       );
@@ -563,70 +776,751 @@ logstatus(i: any, logs: any){
         }
        
       });
-    }
-
-  }
   
-  else {
-
-    console.log(formValues); // Replace this with your search logic
-
-    console.log("unitname",formValues.unitname)
+      console.log("client type", client_type);
   
+    } else if(formValues.unitname != null && formValues.unitname.length > 0)
+    {
+      console.log('formValues.unitname else if', formValues.unitname.length )
   
-    if (formValues.startDate != null){
-      s_date= this.formatDate(formValues.startDate);
-    }
-  
-    if(formValues.endDate != null){
-      e_date= this.formatDate(formValues.endDate);
-    }
-  
-  
-    console.log("sub clients", this.includeSubClients)
-  
-    // console.log("s_date",s_date)
-
-    const params = { unit_id: formValues.unitname, clients: formValues.clienttype, include_subclient: this.includeSubClients, logtype: formValues.logtype , startdate: s_date, enddate: e_date, last_timestamp: null }
-
-    console.log("params", params)
-  
-    // this.spinner.show();
-    this.loading = true;
-    console.log("i", i);
-    console.log("status", logs)
-  
-    
-  
-    this.common.logfiles(params).subscribe( (res) => {
-  
-      console.log("log respo", res);
-  
-      if(res.api_status === true)
-      {
-        this.logdata = res.data;
-  
-        // this.spinner.hide();
-        this.loading = false;
-  
-      }else{
-        this.loading = false;
-        // this.errorMessage = res.message; 
-        // console.log("this error mesasgae", this.errorMessage)        
-        // Swal.fire({
-        //   icon: 'error',
-        //   title: `${res.message}`,
-        // });        
-      }
+      this.loading = true; 
       
-    }
+          console.log("this.logtype", this.logtypes);
   
-    );
+      if(formValues.logtype === null || formValues.logtype.length === 0)
+      {
+        this.log_value.forEach( (obj: any) => log_types.push(obj.name));
+  
+        console.log("log_typea",log_types)
+      }
+      else{
+        console.log('else')
+        log_types = formValues.logtype;
+      }
+  
+      this.includeSubClients = true;
+  
+      if(formValues.clients != null){
+  
+        if (formValues.startDate != null){
+          s_date= this.formatDate(formValues.startDate);
+        }else{
+          s_date = this.formattedYesterday;          
+        }
+      
+        if(formValues.endDate != null){
+          e_date= this.formatDate(formValues.endDate);
+        }else{
+          e_date = this.formattedToday;
+        }
 
+        const previousTimestamp = this.time_stamp[this.time_stamp.length - 1];
+
+        if(previousTimestamp !== null){
+          this.prev_ts = true;
+        }
+  
+        const param1 = { unit_id: formValues.unitname, clients: formValues.clients, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: previousTimestamp }
+    
+        this.common.logfiles(param1).subscribe( (res) => {    
+          console.log("log respo", res);  
+          if(res.api_status === true)
+          {
+            this.logdata = res.data;  
+            
+            if (res.next_timestamp !== null && !this.time_stamp.includes(res.next_timestamp)) {
+              this.time_stamp.push(res.next_timestamp);
+            }
+
+            if(previousTimestamp === res.next_timestamp)
+            {
+              this.next_ts = false;
+            }
+
+            if(this.time_stamp.length >= 2){
+              this.prev_ts = true;
+            }
+            // this.spinner.hide();
+            this.loading = false;     
+          }         
+        }    
+        );
+      } else{
+        const params = {
+          "unitid": formValues.unitname,
+          "use_subclients": true
+        };
+  
+        this.common.listofclients(params).subscribe((res1) => {
+          console.log(res1);
+      
+          if (res1.api_status === true) {
+            client_type12 = res1.data;
+            client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
+            
+            if (formValues.startDate != null){
+              s_date= this.formatDate(formValues.startDate);
+            }else{
+              s_date = this.formattedYesterday;          
+            }
+          
+            if(formValues.endDate != null){
+              e_date= this.formatDate(formValues.endDate);
+            }else{
+              e_date = this.formattedToday;
+            }
+
+            const previousTimestamp = this.time_stamp[this.time_stamp.length - 1];
+
+            if(previousTimestamp !== null){
+              this.prev_ts = true;
+            }
+       
+        const param1 = { unit_id: formValues.unitname, clients: client_type, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: previousTimestamp }
+    
+        this.common.logfiles(param1).subscribe( (res) => {
+    
+          console.log("log respo", res);
+      
+          if(res.api_status === true)
+          {
+            this.logdata = res.data;
+
+            if (res.next_timestamp !== null && !this.time_stamp.includes(res.next_timestamp)) {
+              this.time_stamp.push(res.next_timestamp);
+            }
+
+            if(previousTimestamp === res.next_timestamp)
+            {
+              this.next_ts = false;
+            }
+
+            if(this.time_stamp.length >= 2){
+              this.prev_ts = true;
+            }
+      
+            // this.spinner.hide();
+            this.loading = false;
+      
+          }     
+        }
+        );
+          }
+        });      
+      }
+      console.log("client type", client_type);
+  
+    } else if(formValues.logtype != null && formValues.logtype.length > 0 )
+    {
+      this.loading = true; 
+  
+      if(formValues.unitname != null && formValues.unitname.length > 0 ){
+        unit_ids = formValues.unitname;
+      }else{
+        this.unitName.forEach( (obj: any) => unit_ids.push(obj.unit_id) );
+      }
+    
+      if(formValues.clients != null){
+  
+        if (formValues.startDate != null){
+          s_date= this.formatDate(formValues.startDate);
+        }else{
+          s_date = this.formattedYesterday;          
+        }
+      
+        if(formValues.endDate != null){
+          e_date= this.formatDate(formValues.endDate);
+        }else{
+          e_date = this.formattedToday;
+        }
+
+        const previousTimestamp = this.time_stamp[this.time_stamp.length - 1];
+
+        if(previousTimestamp !== null){
+          this.prev_ts = true;
+        }
+  
+        const param1 = { unit_id: formValues.unitname, clients: formValues.clients, include_subclient: this.includeSubClients, logtype: formValues.logtype , startdate: s_date, enddate: e_date, last_timestamp: previousTimestamp }
+    
+        this.common.logfiles(param1).subscribe( (res) => {
+    
+          console.log("log respo", res);
+      
+          if(res.api_status === true)
+          {
+            this.logdata = res.data;
+
+            if (res.next_timestamp !== null && !this.time_stamp.includes(res.next_timestamp)) {
+              this.time_stamp.push(res.next_timestamp);
+            }     
+
+            if(previousTimestamp === res.next_timestamp)
+            {
+              this.next_ts = false;
+            }
+
+            if(this.time_stamp.length >= 2){
+              this.prev_ts = true;
+            }
+            // this.spinner.hide();
+            this.loading = false;     
+          }       
+        }     
+        );
+      } else{
+        const params = {
+          "unitid": unit_ids,
+          "use_subclients": true
+        };  
+    
+        this.includeSubClients = true;
+    
+        this.common.listofclients(params).subscribe((res1) => {
+          console.log(res1);
+      
+          if (res1.api_status === true) {
+            client_type12 = res1.data;
+            client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
+            
+            if (formValues.startDate != null){
+              s_date= this.formatDate(formValues.startDate);
+            }else{
+              s_date = this.formattedYesterday;          
+            }
+          
+            if(formValues.endDate != null){
+              e_date= this.formatDate(formValues.endDate);
+            }else{
+              e_date = this.formattedToday;
+            }
+
+            const previousTimestamp = this.time_stamp[this.time_stamp.length - 1];
+
+            if(previousTimestamp !== null){
+              this.prev_ts = true;
+            }
+       
+        const param1 = { unit_id: unit_ids, clients: client_type, include_subclient: this.includeSubClients, logtype: formValues.logtype, startdate: s_date, enddate: e_date, last_timestamp: previousTimestamp }
+    
+        this.common.logfiles(param1).subscribe( (res) => {
+    
+          console.log("log respo", res);
+      
+          if(res.api_status === true)
+          {
+            this.logdata = res.data;
+
+            if (res.next_timestamp !== null && !this.time_stamp.includes(res.next_timestamp)) {
+              this.time_stamp.push(res.next_timestamp);
+            }
+            
+            if(previousTimestamp === res.next_timestamp)
+            {
+              this.next_ts = false;
+            }
+
+            if(this.time_stamp.length >= 2){
+              this.prev_ts = true;
+            }
+
+       // this.spinner.hide();
+            this.loading = false;     
+          }        
+        }     
+        );   
+          }        
+        });
+      } 
+    }
+    else {
+  
+      console.log(formValues); // Replace this with your search logic
+  
+      console.log("unitname",formValues.unitname)
+        
+      if (formValues.startDate != null){
+        s_date= this.formatDate(formValues.startDate);
+      }
+    
+      if(formValues.endDate != null){
+        e_date= this.formatDate(formValues.endDate);
+      }
+    
+    
+      console.log("sub clients", this.includeSubClients)
+    
+      // console.log("s_date",s_date)
+
+      const previousTimestamp = this.time_stamp[this.time_stamp.length - 1];
+  
+      const params = { unit_id: formValues.unitname, clients: formValues.clienttype, include_subclient: this.includeSubClients, logtype: formValues.logtype , startdate: s_date, enddate: e_date, last_timestamp: previousTimestamp }
+  
+      console.log("params", params)
+    
+      // this.spinner.show();
+      this.loading = true;
+      console.log("i", i);
+      console.log("status", logs)
+    
+      
+    
+      this.common.logfiles(params).subscribe( (res) => {
+    
+        console.log("log respo", res);
+    
+        if(res.api_status === true)
+        {
+          this.logdata = res.data;
+
+          if (res.next_timestamp !== null && !this.time_stamp.includes(res.next_timestamp)) {
+            this.time_stamp.push(res.next_timestamp);
+          }
+    
+          // this.spinner.hide();
+          this.loading = false;
+    
+        }else{
+          this.loading = false;
+          this.errorMessage = res.message; 
+          console.log("this error mesasgae", this.errorMessage)        
+          Swal.fire({
+            icon: 'error',
+            title: `${res.message}`,
+          });        
+        }
+        
+      }
+    
+      );
+  
+    }
   }
 
+  if( this.formNo === 2 && logs === 'prev' ){
+    console.log("forme prev nexxt batch")
+
+    if (
+      (!formValues.unitname || formValues.unitname === "" || formValues.unitname.length === 0) &&
+      (!formValues.clients || formValues.clients === "" || formValues.clients.length === 0) &&
+      (!formValues.logtype || formValues.logtype === "" || formValues.logtype.length === 0)
+    )
+    {
+      this.loading = true; 
+      
+      console.log("if form values", formValues)
+  
+      console.log('unitName',this.unitName)
+  
+      this.unitName.forEach( (obj: any) => unit_ids.push(obj.unit_id) );
+  
+      const params = {
+        "unitid": unit_ids,
+        "use_subclients": true
+      };
+  
+      this.log_value.forEach( (obj: any) => log_types.push(obj.name));     
+  
+      this.includeSubClients = true;
+  
+      this.common.listofclients(params).subscribe((res1) => {
+        console.log(res1);
+    
+        if (res1.api_status === true) {
+          client_type12 = res1.data;
+          client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
+          
+          if (formValues.startDate != null){
+            s_date= this.formatDate(formValues.startDate);
+          }else{
+            s_date = this.formattedYesterday;          
+          }
+        
+          if(formValues.endDate != null){
+            e_date= this.formatDate(formValues.endDate);
+          }else{
+            e_date = this.formattedToday;
+          }
+
+          var previousTimestamp: any;
+
+          if(this.time_stamp.length > 2){
+            previousTimestamp = this.time_stamp[this.time_stamp.length - 2];
+            this.next_ts = true;
+          }else{
+              previousTimestamp = null;
+              this.prev_ts = false;
+              // this.next_ts = false;
+          }          
+    
+      const param1 = { unit_id: unit_ids, clients: client_type, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: previousTimestamp }
+  
+      this.common.logfiles(param1).subscribe( (res) => {
+  
+        console.log("log respo", res);   
+        if(res.api_status === true)
+        {
+          this.logdata = res.data;
+
+          if(this.time_stamp.length > 0){
+            this.time_stamp.pop();
+          }
+
+          if(this.time_stamp.length == 1){
+            this.next_ts = true;
+            this.prev_ts = false;
+          }
+          
+          // else{
+          //   previousTimestamp = null;
+          // }
+
+          // if(previousTimestamp === res.next_timestamp){
+          //   // this.time_stamp = [];
+          //   this.next_ts = false;
+          // }
+
+          console.log('TS',this.time_stamp);
+          this.loading = false;
+        }
+      }
+    
+      );
+  
+        }
+       
+      });
+  
+      console.log("client type", client_type);
+  
+    } else if(formValues.unitname != null && formValues.unitname.length > 0)
+    {
+      console.log('formValues.unitname else if', formValues.unitname.length )
+  
+      this.loading = true; 
+      
+          console.log("this.logtype", this.logtypes);
+  
+      if(formValues.logtype === null || formValues.logtype.length === 0)
+      {
+        this.log_value.forEach( (obj: any) => log_types.push(obj.name));
+  
+        console.log("log_typea",log_types)
+      }
+      else{
+        console.log('else')
+        log_types = formValues.logtype;
+      }
+  
+      this.includeSubClients = true;
+  
+      if(formValues.clients != null){
+  
+        if (formValues.startDate != null){
+          s_date= this.formatDate(formValues.startDate);
+        }else{
+          s_date = this.formattedYesterday;          
+        }
+      
+        if(formValues.endDate != null){
+          e_date= this.formatDate(formValues.endDate);
+        }else{
+          e_date = this.formattedToday;
+        }
+
+        var previousTimestamp: any;
+
+          if(this.time_stamp.length > 2){
+            previousTimestamp = this.time_stamp[this.time_stamp.length - 2];
+            this.next_ts = true;
+          }else{
+              previousTimestamp = null;
+              this.prev_ts = false;
+              // this.next_ts = false;
+          }
+  
+        const param1 = { unit_id: formValues.unitname, clients: formValues.clients, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: previousTimestamp }
+    
+        this.common.logfiles(param1).subscribe( (res) => {    
+          console.log("log respo", res);  
+          if(res.api_status === true)
+          {
+            this.logdata = res.data;  
+            
+            if (res.next_timestamp !== null && !this.time_stamp.includes(res.next_timestamp)) {
+              this.time_stamp.push(res.next_timestamp);
+            }
+
+            if(this.time_stamp.length > 0){
+              this.time_stamp.pop();
+            }
+  
+            if(this.time_stamp.length == 1){
+              this.next_ts = true;
+              this.prev_ts = false;
+            }
+
+            // this.spinner.hide();
+            this.loading = false;     
+          }         
+        }    
+        );
+      } else{
+        const params = {
+          "unitid": formValues.unitname,
+          "use_subclients": true
+        };
+  
+        this.common.listofclients(params).subscribe((res1) => {
+          console.log(res1);
+      
+          if (res1.api_status === true) {
+            client_type12 = res1.data;
+            client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
+            
+            if (formValues.startDate != null){
+              s_date= this.formatDate(formValues.startDate);
+            }else{
+              s_date = this.formattedYesterday;          
+            }
+          
+            if(formValues.endDate != null){
+              e_date= this.formatDate(formValues.endDate);
+            }else{
+              e_date = this.formattedToday;
+            }
+
+            var previousTimestamp: any;
+
+            if(this.time_stamp.length > 2){
+              previousTimestamp = this.time_stamp[this.time_stamp.length - 2];
+              this.next_ts = true;
+            }else{
+                previousTimestamp = null;
+                this.prev_ts = false;
+                // this.next_ts = false;
+            }
+       
+        const param1 = { unit_id: formValues.unitname, clients: client_type, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: previousTimestamp }
+    
+        this.common.logfiles(param1).subscribe( (res) => {
+    
+          console.log("log respo", res);
+      
+          if(res.api_status === true)
+          {
+            this.logdata = res.data;
+
+            if(this.time_stamp.length > 0){
+              this.time_stamp.pop();
+            }
+  
+            if(this.time_stamp.length == 1){
+              this.next_ts = true;
+              this.prev_ts = false;
+            }
+            
+            // this.spinner.hide();
+            this.loading = false;
+          }     
+        }
+        );
+          }
+        });      
+      }
+      console.log("client type", client_type);
+  
+    } else if(formValues.logtype != null && formValues.logtype.length > 0 )
+    {
+
+      console.log('log type', this.time_stamp);
+      this.loading = true; 
+  
+      if(formValues.unitname != null && formValues.unitname.length > 0 ){
+        unit_ids = formValues.unitname;
+      }else{
+        this.unitName.forEach( (obj: any) => unit_ids.push(obj.unit_id) );
+      }
+    
+      if(formValues.clients != null){
+  
+        if (formValues.startDate != null){
+          s_date= this.formatDate(formValues.startDate);
+        }else{
+          s_date = this.formattedYesterday;          
+        }
+      
+        if(formValues.endDate != null){
+          e_date= this.formatDate(formValues.endDate);
+        }else{
+          e_date = this.formattedToday;
+        }
+
+        var previousTimestamp: any;
+
+          if(this.time_stamp.length > 2){
+            previousTimestamp = this.time_stamp[this.time_stamp.length - 2];
+            this.next_ts = true;
+          }else{
+              previousTimestamp = null;
+              this.prev_ts = false;
+              // this.next_ts = false;
+          }  
+
+  
+        const param1 = { unit_id: formValues.unitname, clients: formValues.clients, include_subclient: this.includeSubClients, logtype: formValues.logtype , startdate: s_date, enddate: e_date, last_timestamp: previousTimestamp }
+    
+        this.common.logfiles(param1).subscribe( (res) => {
+    
+          console.log("log respo log type", res);
+      
+          if(res.api_status === true)
+          {
+            this.logdata = res.data;    
+
+            if(this.time_stamp.length > 0){
+              this.time_stamp.pop();
+            }
+  
+            if(this.time_stamp.length == 1){
+              this.next_ts = true;
+              this.prev_ts = false;
+            }
+
+            // this.spinner.hide();
+            this.loading = false;     
+          }       
+        }     
+        );
+      } else{
+
+        console.log('log type else', this.time_stamp);
+
+        const params = {
+          "unitid": unit_ids,
+          "use_subclients": true
+        };  
+    
+        this.includeSubClients = true;
+    
+        this.common.listofclients(params).subscribe((res1) => {
+          console.log(res1);
+      
+          if (res1.api_status === true) {
+            client_type12 = res1.data;
+            client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
+            
+            if (formValues.startDate != null){
+              s_date= this.formatDate(formValues.startDate);
+            }else{
+              s_date = this.formattedYesterday;          
+            }
+          
+            if(formValues.endDate != null){
+              e_date= this.formatDate(formValues.endDate);
+            }else{
+              e_date = this.formattedToday;
+            }
+
+            var previousTimestamp: any;
+
+          if(this.time_stamp.length > 2){
+            previousTimestamp = this.time_stamp[this.time_stamp.length - 2];
+            this.next_ts = true;
+          }else{
+              previousTimestamp = null;
+              this.prev_ts = false;
+              // this.next_ts = false;
+          }  
+
+       
+        const param1 = { unit_id: unit_ids, clients: client_type, include_subclient: this.includeSubClients, logtype: formValues.logtype, startdate: s_date, enddate: e_date, last_timestamp: previousTimestamp }
+    
+        this.common.logfiles(param1).subscribe( (res) => {
+    
+          console.log("log respo", res);
+      
+          if(res.api_status === true)
+          {
+            this.logdata = res.data;
+
+            if(this.time_stamp.length > 1){
+              this.time_stamp.pop();
+            }
+  
+            if(this.time_stamp.length == 1){
+              this.next_ts = true;
+              this.prev_ts = false;
+            }
+       // this.spinner.hide();
+            this.loading = false;     
+          }        
+        }     
+        );   
+          }        
+        });
+      } 
+    }
+    else {  
+      console.log(formValues); // Replace this with your search logic
+      console.log("unitname",formValues.unitname)     
+      if (formValues.startDate != null){
+        s_date= this.formatDate(formValues.startDate);
+      }
+    
+      if(formValues.endDate != null){
+        e_date= this.formatDate(formValues.endDate);
+      }
+    
+    
+      console.log("sub clients", this.includeSubClients)
+    
+      // console.log("s_date",s_date)
+
+      const previousTimestamp = this.time_stamp[this.time_stamp.length - 1];
+  
+      const params = { unit_id: formValues.unitname, clients: formValues.clienttype, include_subclient: this.includeSubClients, logtype: formValues.logtype , startdate: s_date, enddate: e_date, last_timestamp: previousTimestamp }
+  
+      console.log("params", params)
+    
+      // this.spinner.show();
+      this.loading = true;
+      console.log("i", i);
+      console.log("status", logs)     
+    
+      this.common.logfiles(params).subscribe( (res) => {
+    
+        console.log("log respo", res);
+    
+        if(res.api_status === true)
+        {
+          this.logdata = res.data;
+
+          if (res.next_timestamp !== null && !this.time_stamp.includes(res.next_timestamp)) {
+            this.time_stamp.push(res.next_timestamp);
+          }
+    
+          // this.spinner.hide();
+          this.loading = false;
+    
+        }else{
+          this.loading = false;
+          this.errorMessage = res.message; 
+          console.log("this error mesasgae", this.errorMessage)        
+          Swal.fire({
+            icon: 'error',
+            title: `${res.message}`,
+          });        
+        }
+        
+      }
+    
+      );
+  
+    }
+  }
 
 }
+
 
 onCheckboxChange(event: any) {
   this.includeSubClients = event.checked;
@@ -669,10 +1563,10 @@ unitNameLocalAdminfun() {
       this.unitName = res.data;
     } else {
       this.spinner.hide();
-      // Swal.fire({
-      //   icon: 'error',
-      //   title: `${res.message}`,
-      // });
+      Swal.fire({
+        icon: 'error',
+        title: `${res.message}`,
+      });
     }
   }, error => {
     this.spinner.hide();
@@ -709,10 +1603,17 @@ logdetails(){
 
 onLogTypeSelection(selectedKeys: any) {
   console.log("keys", selectedKeys);
+
+  this.time_stamp = [];
+  this.next_ts = false;
+  this.prev_ts = false;
  
 }
 
 onUnitSelected(selectedUnitId: any) {
+  this.time_stamp = [];
+  this.next_ts = false;
+  this.prev_ts = false;
   console.log('Selected unit ID:', selectedUnitId);
   this.unit_id = selectedUnitId;
   
@@ -747,18 +1648,34 @@ onUnitSelected(selectedUnitId: any) {
 
 onClientSelected(selectedClientId: any) {
   console.log("client ID", selectedClientId)
+  this.time_stamp = [];
+  this.next_ts = false;
+  this.prev_ts = false;
 
 }
 
-handleDateRangeChange(event: any) {
-  const selectedDate = event.value;
-  // Perform operations with the selected date range
-  console.log('Selected date range:', selectedDate);
+handleApplyButtonClick() {
+  this.time_stamp = [];
+  this.next_ts = false;
+  this.prev_ts = false; 
 }
 
 resetForm() {
 
-   this.secondFormGroup.reset();
+  this.next_ts = false;
+  this.prev_ts = false;
+
+  const today = new Date();
+  const yesterday = new Date(today);
+
+  yesterday.setDate(yesterday.getDate() - 1);
+
+   this.secondFormGroup.reset( {
+  // Reset the specific form controls
+    startDate: yesterday,
+    endDate: today,
+    // Add other form controls here with their initial values
+}   );
 
 }
 

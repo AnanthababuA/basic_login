@@ -137,6 +137,7 @@
 // ];
 
 
+// ----------------------------------------------------- 
 
 import { Injectable } from '@angular/core';
 import {
@@ -179,9 +180,55 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(authReq).pipe(
       catchError((error) => {
-        if (error instanceof HttpErrorResponse && error.status === 401) {
-          return this.handle401Error(req, next);
+        console.log("error is:", error);
+        
+        if ((error instanceof HttpErrorResponse && error.status === 500) 
+      // || error.status === 0
+      ) {
+
+        // this.spinner.hide();
+
+        // Swal.fire('Unable to connect server', '', 'error');
+
+        this.router.navigate(['/authentication/login'])
+      }
+
+      if (error instanceof HttpErrorResponse && !authReq.url.includes('/registration/db_auth') && error.status === 401) {
+        // console.log("error is1:", error);
+
+
+        if (authReq.url.includes('/registration/token/verify')) {
+
+          // console.log('Expired Refresh Token')
+
+          // this.spinner.hide();
+
+          this.router.navigate(['/authentication/login'])
+
+        } 
+
+        if (authReq.url.includes('/registration/token/refresh')) {
+
+          // console.log('Expired Refresh Token')
+
+          // this.spinner.hide();
+
+          // this.router.navigate(['/authentication/login'])
+        // console.log("error refresh:", error);
+
+
+        } else {
+          // console.log("error refresh else:", error);
+
+          return this.handle401Error(authReq, next);
+
         }
+      }
+
+        
+        // if (error instanceof HttpErrorResponse && error.status === 401) {
+        //   return this.handle401Error(req, next);
+        // }
         return throwError(error);
       })
     );
@@ -196,14 +243,14 @@ export class AuthInterceptor implements HttpInterceptor {
 
       this.http.post<any>(env.apiHost.concat('/registration/token/verify'), { token: token }).subscribe((res) => {
 
-        console.log("verify response",res)
-        if(res.data){
-          console.log("token not valid");
-        this.router.navigate(['/authentication/login'])
+        // console.log("verify response",res)
+        // if(res.data){
+        //   console.log("token not valid");
+        // this.router.navigate(['/authentication/login'])
           
-        }else{
-          console.log("valid token ");
-        }
+        // }else{
+        //   console.log("valid token ");
+        // }
 
       }, catchError => {
 
@@ -265,3 +312,146 @@ export const authInterceptorProviders = [
 ];
 
 
+
+// import { Injectable } from '@angular/core';
+// import {
+//   HttpRequest,
+//   HttpHandler,
+//   HttpEvent,
+//   HttpInterceptor,
+//   HttpErrorResponse,
+//   HTTP_INTERCEPTORS,
+//   HttpClient,
+// } from '@angular/common/http';
+// import { Observable, BehaviorSubject, throwError } from 'rxjs';
+// import { catchError, switchMap, filter, take, exhaustMap } from 'rxjs/operators';
+// import { TokenStorageService } from '../services/token-storage.service';
+// import { AuthService } from '../services/auth.service';
+// import { Router } from '@angular/router';
+// import { environment as env } from '../../environments/environment';
+// import { NgxSpinnerService } from 'ngx-spinner';
+// import Swal from 'sweetalert2';
+
+// const TOKEN_HEADER_KEY = 'Authorization';
+
+
+// @Injectable()
+// export class AuthInterceptor implements HttpInterceptor {
+//   private isRefreshing = false;
+//   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
+//   constructor(private tokenService: TokenStorageService, private authService: AuthService, private router: Router, private http: HttpClient, private spinner: NgxSpinnerService) { }
+
+//   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
+//     let authReq = req;
+//     const token = this.tokenService.getToken();
+//     if (token != null) {
+//       authReq = this.addTokenHeader(req, token);
+//     }
+
+//     return next.handle(authReq).pipe(catchError(error => {
+
+//       if ((error instanceof HttpErrorResponse && error.status === 500) 
+//       // || error.status === 0
+//       ) {
+
+//         this.spinner.hide();
+
+//         Swal.fire('Unable to connect server', '', 'error');
+
+//         this.router.navigate(['/authentication/login'])
+//       }
+
+//       if (error instanceof HttpErrorResponse && !authReq.url.includes('/registration/db_auth') && error.status === 401) {
+
+//         if (authReq.url.includes('/registration/token/verify')) {
+
+//           // console.log('Expired Refresh Token')
+
+//           this.spinner.hide();
+
+//           this.router.navigate(['/authentication/login'])
+
+//         } 
+
+//         if (authReq.url.includes('/registration/token/refresh')) {
+
+//           // console.log('Expired Refresh Token')
+
+//           this.spinner.hide();
+
+//           // this.router.navigate(['/authentication/login'])
+
+//         } else {
+
+//           return this.handle401Error(authReq, next);
+
+//         }
+//       }
+
+//       return throwError(error);
+//     }));
+//   }
+
+//   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
+//     if (!this.isRefreshing) {
+//       this.isRefreshing = true;
+//       this.refreshTokenSubject.next(null);
+
+//       const token = this.tokenService.getRefreshToken();
+
+//       this.http.post<any>(env.apiHost.concat('/registration/token/verify'), { token: token }).subscribe((res) => {
+
+//         // console.log(res)
+
+//       }, catchError => {
+
+//         this.router.navigate(['/authentication/login'])
+
+//       });
+
+//       if (token)
+//         return this.authService.refreshToken(token).pipe(
+//           switchMap((token: any) => {
+//             this.isRefreshing = false;
+
+//             if (token.access != undefined) {
+
+//               this.tokenService.saveToken(token.access);
+//               this.tokenService.saveRefreshToken(token.refresh);
+//               this.refreshTokenSubject.next(token.refresh);
+
+//               return next.handle(this.addTokenHeader(request, token.access));
+//             }
+//             else {
+//               this.tokenService.signOut();
+//               return next.handle(request);
+//             }
+//           }),
+//           catchError((err) => {
+//             this.isRefreshing = false;
+
+//             this.tokenService.signOut();
+//             return throwError(err);
+//           })
+//         );
+//     }
+
+//     return this.refreshTokenSubject.pipe(
+//       filter(token => token !== null),
+//       take(1),
+//       switchMap((token) => next.handle(this.addTokenHeader(request, token)))
+//     );
+//   }
+
+//   private addTokenHeader(request: HttpRequest<any>, token: string) {
+
+//     return request.clone({ headers: request.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
+//     // return request.clone({ setHeaders: { Authorization: `Bearer ${token}`, Retry: "true" } });
+
+//   }
+// }
+
+// export const authInterceptorProviders = [
+//   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+// ];

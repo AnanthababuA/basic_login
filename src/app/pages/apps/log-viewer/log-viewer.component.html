@@ -55,70 +55,47 @@
         </div>
 
 
-        <div class="col-lg-3">
+        <!-- <div class="col-lg-3">
           <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Select Date Range</mat-label>
-          <mat-form-field appearance="fill" class="w-100" >
-            <!-- <mat-label>MM/DD/YYYY-MM/DD/YYYY</mat-label> -->
+          <mat-form-field appearance="fill" class="w-100">
             <mat-date-range-input [rangePicker]="picker">
-              <input matStartDate #start placeholder="Start date" formControlName="startDate">
-              <input matEndDate #end placeholder="End date" formControlName="endDate">
+              <input matStartDate #start placeholder="Start date" formControlName="startDate"  required>
+              <input matEndDate #end placeholder="End date" formControlName="endDate" required>
             </mat-date-range-input>
             <mat-hint style="display: block !important">MM/DD/YYYY – MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker>
               <mat-date-range-picker-actions>
                 <button mat-button matDateRangePickerCancel>Cancel</button>
-                <button
-                  mat-raised-button
-                  color="primary"
-                  matDateRangePickerApply
-                >
-                  Apply
-                </button>
+                <button mat-raised-button color="primary" [disabled]="!secondFormGroup.valid" matDateRangePickerApply>Apply</button>
               </mat-date-range-picker-actions>
             </mat-date-range-picker>
           </mat-form-field>
-          <!-- <mat-form-field appearance="fill" class="example-form-field">
-            <mat-label>Enter a date range</mat-label>
-            <mat-date-range-input [rangePicker]="rangePicker">
-              <input
-                class="form-control"
-                id="startDate"
-                formControlName="startDate"
-                matStartDate
-                placeholder="Start date"
-              />
-              <input
-                class="form-control"
-                id="endDate"
-                formControlName="endDate"
-                matEndDate
-                placeholder="End date"
-              />
+          
+        </div> -->
+
+        <div class="col-lg-3">
+          <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Select Date Range</mat-label>
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate #start placeholder="Start date" formControlName="startDate">
+              <input matEndDate #end placeholder="End date" formControlName="endDate" >
             </mat-date-range-input>
-            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="rangePicker"
-            ></mat-datepicker-toggle>
-            <mat-date-range-picker #rangePicker>
+            <mat-hint style="display: block !important">MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker>
               <mat-date-range-picker-actions>
                 <button mat-button matDateRangePickerCancel>Cancel</button>
-                <button
-                  mat-raised-button
-                  color="primary"
-                  matDateRangePickerApply
-                >
-                  Apply
-                </button>
+                <button mat-raised-button color="primary"  matDateRangePickerApply>Apply</button>
               </mat-date-range-picker-actions>
             </mat-date-range-picker>
-          </mat-form-field> -->
-        
+          </mat-form-field>
+          <mat-error *ngIf="secondFormGroup.invalid && (startDateControl!.invalid || endDateControl!.invalid)">
+            {{ startDateControl!.hasError('required') ? 'Start date is required' : 'End date is required' }}
+          </mat-error>
         </div>
 
-       
-        
+               
 
         
 
@@ -151,13 +128,27 @@
             Log Summary
           </button> -->
 
+         
+
           <button mat-raised-button color="accent" (click)="logstatus(2, 'view')" style="padding: 1.3rem 1rem; margin: 10px 5px;" [class.border-red]="formNo === 2">
             View Logs
+          </button>
+
+          
+
+          <button mat-raised-button *ngIf="next_ts" style="padding: 1.3rem 1rem; margin: 0 5px; background-color: green; color: white;" (click)="logstatus(2, 'next')" >
+            Load next batch logs
+          </button>
+
+          <button mat-raised-button class="bg-warning" *ngIf="prev_ts" style="padding: 1.3rem 1rem; margin: 0 5px; color: white;" (click)="logstatus(2, 'prev')" >
+            Load previous batch logs
           </button>
 
           <button mat-raised-button color="warn" style="padding: 1.3rem 1rem; margin: 0 5px;" (click)="resetForm()">
             Reset
           </button>
+
+
 
         </div>
 
@@ -184,42 +175,92 @@
   <div *ngIf="formNo ==1"> 
     
     <div class="row">
+
       <div class="col-sm-6 col-lg-3" *ngFor="let logs of courseList">
-        <mat-card class="cardWithShadow overflow-hidden">
-          <mat-card-header
-            class="course-header bg-{{
-              logs.courseType
-            }} d-flex justify-content-between"
-          >
-            <mat-card-title class="m-b-0 f-s-16 text-white">
-              {{ logs.logtype }}
-            </mat-card-title>
-            <!-- <span class="d-flex align-items-center gap-4"><i-tabler name="clock" class="icon-16 d-flex"></i-tabler>{{ course.Time }}</span> -->
-          </mat-card-header>
-          <mat-card-content class="text-center p-y-24">
-            <h3 class="m-b-4 mat-subtitle-2 f-s-16 f-w-600">
-             log: {{ logs.log }}
-            </h3>
-            <!-- <span class="f-s-12">{{ course.Update }}</span> -->
 
-            <h3 class="m-b-4 mat-subtitle-2 f-s-16 f-w-600">
-              log: {{ logs.log }}
-             </h3>
-          </mat-card-content>
+        <mat-card class="cardWithShadow text-center"  style="border-color: lightgrey; background-color: white;  border-width: 0.5px; ">
+          <!-- Title Section -->
 
-          
-          <mat-divider></mat-divider>
-          <!-- <mat-card-actions class="text-center p-y-8"> -->
-            <!-- <button mat-button>Start</button> -->
-            <!-- <a
-              mat-button
-              [routerLink]="['/apps/courses/coursesdetail/', course.Id]"
-              class="w-100"
-            >
-              START
-            </a> -->
-          <!-- </mat-card-actions> -->
+          <div class="row" style="padding-top: 10px;">
+            <div class="col-3" style="padding-top: 30px;">
+              <mat-icon  color="accent" style="font-size: 50px !important; height: 55px; width: 50px;">{{logs.icon}}</mat-icon>
+            </div>
+            
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <mat-card-title class="f-s-16">{{ logs.logtype }}</mat-card-title>
+
+                  <!-- <hr style="margin-left: 2px;"> -->
+                </div>
+
+                <!-- <div class="vertical-line"></div> -->
+                
+                
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-card-title class="f-s-16">Logs</mat-card-title>
+                </div>
+                <div class="col">
+                  <mat-card-title class="f-s-16">Clients</mat-card-title>
+                </div>                
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-card-title class="f-s-16">12312</mat-card-title>
+                </div>
+                <div class="col">
+                  <mat-card-title class="f-s-16">4531</mat-card-title>
+                </div>
+              </div>
+              
+            </div>
+
+          </div>
+        
+          <!-- Content Section -->
+          <!-- <div class="row">
+            <div class="col-9">
+              <div class="row">
+                <div class="col">
+                  <p><b>Logs</b> </p>
+                </div>
+                <div class="col">
+                  <p><b>Clients</b> </p>
+                </div>
+              </div>
+            </div>
+          </div> -->
         </mat-card>
+        
+        <!-- <mat-card class="cardWithShadow text-center" style="border-color: black; background-color: white;">
+          <div class="p-8 b-t-1">
+            <mat-card-title class="f-s-16">{{ logs.logtype }}</mat-card-title>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <mat-icon>announcement</mat-icon>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p><b>Logs</b> </p>
+              </div>
+              <div class="col">
+                <p><b>Clients</b> </p>
+              </div>
+            </div>
+            
+        </div> -->
+
+          <!-- <mat-card-content class="p-20">
+            <h5 class="f-s-16 f-w-400 mat-subtitle-1 m-b-10">ghujjfd</h5>
+          
+          </mat-card-content> -->
+
+
+        <!-- </mat-card> -->
       </div>
     </div>
 
@@ -264,8 +305,9 @@
                         <!-- <th>Client IP</th> -->
                         <th>Unit Name</th>
                         <th>Log Type</th>
-                        <th> Message</th>
                         <th> Date </th>
+                        <th> Message</th>
+                        
   
                     </tr>
                 </thead>
@@ -289,19 +331,21 @@
                           {{log.log_type}}
                         </td>
                         <td>
-                            {{log.message}}
-                        </td>
-                        <td>
                           {{log.datereported}}
                         </td>
+                        <td>
+                            {{log.message}}
+                        </td>
+                        
                     </tr>
                 </tbody>
             </table>
         </div>
 
         <ng-template #nodata>
-      <h1 style="display: flex; justify-content: center;">No logs available</h1>
+            <h1 style="display: flex; justify-content: center;">No logs available</h1>
         </ng-template>
+     
           
         </ng-template>
   
@@ -310,4 +354,3 @@
 
   </div>   
 </mat-card-content>
-
