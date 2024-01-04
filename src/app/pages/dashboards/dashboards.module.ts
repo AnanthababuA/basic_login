@@ -8,9 +8,6 @@ import { DatePipe } from '@angular/common';
 import { DashboardsRoutes } from './dashboards.routing';
 
 
-// import { AlertContentComponent } from './dashboard1/alert-content/alert-content.component';
-// import { LastCommuniAlertpopComponent } from './dashboard1/last-communi-alertpop/last-communi-alertpop.component';
-
 @NgModule({
   imports: [RouterModule.forChild(DashboardsRoutes)],
   providers: [DatePipe],
@@ -23,6 +20,8 @@ import { DashboardsRoutes } from './dashboards.routing';
     // AlertContentComponent
   
    
+  
+
   ],
 })
 export class DashboardsModule {}

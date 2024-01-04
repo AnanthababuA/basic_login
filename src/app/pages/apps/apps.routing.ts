@@ -29,6 +29,7 @@ import { RegstatusclientComponent } from './regstatusclient/regstatusclient.comp
 import { GroupsComponent } from './groups/groups.component';
 import { LogViewerComponent } from './log-viewer/log-viewer.component';
 import { HierarchyChartComponent } from './hierarchy-chart/hierarchy-chart.component';
+import { UsbViolationComponent } from './usb-violation/usb-violation.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -92,6 +93,17 @@ export const AppsRoutes: Routes = [
       //     ],
       //   },
       // },
+      {
+        path: 'usbviolation',
+        component: UsbViolationComponent,
+        data: {
+          title: 'USB Violation',
+          urls: [
+            { title: 'Dashboard', url: '/dashboards/dashboard1' },
+            { title: 'USB Violation' },
+          ],
+        },
+      },
       
       {
         path: 'logViewer',

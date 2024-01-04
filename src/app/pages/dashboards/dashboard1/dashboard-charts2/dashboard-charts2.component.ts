@@ -30,6 +30,7 @@ import { PolicyPopUpComponent } from '../policy-pop-up/policy-pop-up.component';
 import { ClamAvPopUpComponent } from '../clam-av-pop-up/clam-av-pop-up.component';
 import { LogPopUpComponent } from '../log-pop-up/log-pop-up.component';
 import { SpinnerComponent } from '../spinner/spinner.component';
+import { CommonModule } from '@angular/common';
 
 export interface piechart {
   series: ApexNonAxisChartSeries | any;
@@ -50,17 +51,21 @@ export interface piechart {
   templateUrl: './dashboard-charts2.component.html',
   styleUrls: ['./dashboard-charts2.component.scss'],
   standalone: true,
-  imports: [NgApexchartsModule, MaterialModule, TablerIconsModule, SpinnerComponent],
+  imports: [NgApexchartsModule, MaterialModule, TablerIconsModule, SpinnerComponent, CommonModule],
   encapsulation: ViewEncapsulation.None,
 })
 export class DashboardCharts2Component {
 
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
 
-  public pie1Chart: Partial<piechart> = {};
-  public pie2Chart: Partial<piechart> = {};
-  public pie3Chart: Partial<piechart> = {};
-  public pie4Chart: Partial<piechart> = {};
+  public pie1Chart: Partial<piechart> = {series: [{ name: 'Initial', data: [0, 0] }], // Example initial data values
+  chart: {}, };
+  public pie2Chart: Partial<piechart> = {series: [{ name: 'Initial', data: [0, 0] }], // Example initial data values
+  chart: {}, };
+  public pie3Chart: Partial<piechart> = {series: [{ name: 'Initial', data: [0, 0] }], // Example initial data values
+  chart: {},};
+  public pie4Chart: Partial<piechart> = {series: [{ name: 'Initial', data: [0, 0] }], // Example initial data values
+  chart: {},};
   // public pie4Chart: Partial<piechart> = {}; 
 
 
@@ -252,11 +257,28 @@ export class DashboardCharts2Component {
 
   }
 
+  getColor(value: number) {
+    if (value < 25) {
+      return '#FF0000'; // Red color for values less than 25
+    } else if (value >= 25 && value <= 75) {
+      return '#ffb12b'; // Yellow color for values between 25 and 75
+    } else {
+      return '#14b814'; // Green color for values greater than 75
+    }
+  }
 
+
+ 
+  
+  
+
+  
 
   piechart1(){
     console.log("5555", this.pat_upd_cli
-    , this.pat_tol_cli);
+    , this.pat_tol_cli, "per", this.pat_per_val);
+
+    const numericValuePatch = parseFloat(this.pat_per_val.replace('%', '')); 
     
     
     this.pie1Chart = {
@@ -289,10 +311,19 @@ export class DashboardCharts2Component {
                 color: '#2A3547',
                 fontSize: '14px',
                 fontWeight: '400',
+                // label: `${this.pat_per_val}`,
                 label: `${this.pat_per_val}`,
+                formatter:  (w: any) => {
+                  return `${this.pat_per_val}`; // Show this.pat_per_val as label content
+                },
+
+                
               },
             },
           },
+          // dataLabels: {
+          //   enabled: false, // Disable the display of labels on hover
+          // },
           expandOnClick: false ,
           toggleDataPointSelection: false,
           
@@ -306,6 +337,20 @@ export class DashboardCharts2Component {
       },
       tooltip: {
         fillSeriesColor: false,
+        enabled: true,
+    // enabledOnSeries: undefined,
+    // shared: false,
+    // followCursor: true,
+    // intersect: false,
+    // inverseOrder: false,
+    // custom: ({ series, seriesIndex, dataPointIndex, w }: any) => {
+    //   if (dataPointIndex === 0) {
+    //     return `<div class="apexcharts-tooltip">${this.pat_per_val}</div>`;
+    //   }
+    //   return '';
+    // },
+
+        // enabled: false,
       },
       dataLabels: {
         enabled: false,
@@ -314,8 +359,8 @@ export class DashboardCharts2Component {
         },
       },
       labels: ['Patch Updated', 'Patch Remaining'],
-      colors: ['#1e88e5', 'rgba(0, 0, 0, 0.1)'],
-      
+      colors: [this.getColor(numericValuePatch), 'rgba(0, 0, 0, 0.1)'],
+      // numericValuePatch
       
       
     };
@@ -323,6 +368,7 @@ export class DashboardCharts2Component {
   }
 
   piechart2(){
+    const numericValue = parseFloat(this.pol_per_val.replace('%', '')); 
     this.pie2Chart = {
       series: [this.pol_upd_cli, this.pol_tot_cli - this.pol_upd_cli],
       chart: {
@@ -371,11 +417,13 @@ export class DashboardCharts2Component {
         enabled: false,
       },
       labels: ['Policy Updated', 'Policy Remaining'],
-      colors: ['#26c6da', 'rgba(0, 0, 0, 0.1)'],
+      colors: [this.getColor(numericValue), 'rgba(0, 0, 0, 0.1)'],
     };
   }
 
   piechart3(){
+    const numericValue = parseFloat(this.clamAvPercentage.replace('%', '')); 
+
     this.pie3Chart = {
       series: [this.clamUpdatedCount , this.clamTotal - this.clamUpdatedCount],
       chart: {
@@ -424,11 +472,13 @@ export class DashboardCharts2Component {
         enabled: false,
       },
       labels: ['ClamAV Updated', 'ClamAV Remaining'],
-      colors: ['#ffb22b', 'rgba(0, 0, 0, 0.1)'],
+      colors: [this.getColor(numericValue), 'rgba(0, 0, 0, 0.1)'],
     };
   }
 
   piechart4(){
+    const numericValue = parseFloat(this.logRecivedPercentage.replace('%', '')); 
+
     this.pie4Chart = {
       series: [this.logRecievedCount, this.logrecivedTotal - this.logRecievedCount],
       chart: {
@@ -478,7 +528,7 @@ export class DashboardCharts2Component {
         enabled: false,
       },
       labels: ['Log Recieved', 'Log Remaining'],
-      colors: ['#fc4b6c', 'rgba(0, 0, 0, 0.1)'],
+      colors: [this.getColor(numericValue), 'rgba(0, 0, 0, 0.1)'],
     };
   }
   

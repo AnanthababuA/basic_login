@@ -5,18 +5,49 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDateRangePicker } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { DataTableDirective, DataTablesModule } from 'angular-datatables';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { concatMap, from, Subject, takeUntil } from 'rxjs';
 import { CommonServicesService } from 'src/app/services/common-services.service';
 import Swal from 'sweetalert2';
+import { MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import * as moment from 'moment';
+
+
+interface LogIconList {
+  [key: string]: string;
+}
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
+
 
 @Component({
   selector: 'app-log-viewer',
   templateUrl: './log-viewer.component.html',
   styleUrls: ['./log-viewer.component.scss'],
   // imports: [DataTablesModule, CommonModule,  MatButtonModule, MatDialogModule ]
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS] },
+  ],
 })
 export class LogViewerComponent {
+  // mmm
+  public unitnameMultiFilterCtrl: FormControl<string | null> = new FormControl<string | null>('');
+
   @ViewChild('picker') picker: MatDateRangePicker<Date>;
 
   selectclientchecked: boolean = true;
@@ -53,7 +84,10 @@ export class LogViewerComponent {
   time_stamp: any[] = [];
   next_ts: boolean = false;
   prev_ts: boolean = false;
+  tabshow: boolean = false;
   clickCount = 0;
+
+  loglist: any[] = [];
 
   errorMessage: string; 
 
@@ -67,9 +101,10 @@ export class LogViewerComponent {
   // logdata: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   loaderStatus: string = 'Loading...';
   loading = true; // Initialize the loading state to true
+  l_loading = true;
   uniqueLogTypes: unknown[];
 
-  courseList = [
+  logiconlis = [
     {
       Id: 1,
       icon: 'people',
@@ -148,6 +183,21 @@ export class LogViewerComponent {
       clients: '2',
     },
   ];
+
+  logiconlist: LogIconList = {
+    "USB VIOLATION": "mediation",
+    "SYSTEM HALT/REBOOT": "power_settings_new",
+    "BADLOGIN": "no_accounts",
+    "OTHER USB DEVICE USAGE": "usb",
+    "LAST LOGIN LOG": "lock_clock",
+    "UPGRADE TO SUPER USER": "manage_accounts",
+    "INTEGRITY": 'task',
+    "FILE SYSTEM STATUS": "insert_drive_file",
+    "ANTIVIRUS SCAN LOG": "bug_report",
+    "URL VIOLATION": "link",
+    "PATCH UPGRADE LOG": "settings",
+  }
+
   form: any;
   formattedToday: string;
   formattedYesterday: string;
@@ -189,12 +239,20 @@ export class LogViewerComponent {
     
   }
 
-  ngOnInit(): void {
+  private _onDestroy: Subject<void> = new Subject<void>();
+  
+  
+  ngOnInit() {
+
+    // mmm
+    this.unitnameMultiFilterCtrl.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
+      this.filterMultiunits();
+    });
+
+    
     this.unitNameLocalAdminfun();
     // this.unitTypeLocalAdminfun();
     this.logdetails();
-
-    
 
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -239,15 +297,45 @@ export class LogViewerComponent {
 
     // this.logdata = new MatTableDataSource<any>([]);
 
-    // this.logstatus(2, 'view');
+   
   }
 
+  protected filterMultiunits() {
+    // if (!this.unitName) {
+    //   return;
+    // }
+
+
+    // get the search keyword
+    let search = this.unitnameMultiFilterCtrl.value;
+    console.log("search", search)
+
+    // this.unitNameLocalAdminfun();
+
+    console.log("this unit name", this.unitName)
+    if (!search) {
+      // this.filteredBanksMulti.next(this.unitName.slice());
+      console.log("id search")
+      this.unitNameLocalAdminfun();
+      return;
+    } else {
+      // this.unitNameLocalAdminfun();
+      
+      search = search.toLowerCase();
+      console.log("else search", search)
+      
+
+      this.unitName = this.unitName.filter((unit: { unit_name: { toLowerCase: () => (string | null)[]; }; }) => unit.unit_name.toLowerCase().includes(search));
+    console.log("Filtered units:", this.unitName);
+
+    }
+  }
+ 
   get startDateControl() {
     this.time_stamp = [];
     this.next_ts = false;
     this.prev_ts = false;
     return this.secondFormGroup.get('startDate');
-
   }
 
   get endDateControl() {
@@ -260,24 +348,47 @@ export class LogViewerComponent {
 
 formNo: any = 0;
 
-formatDate(date: { getDate: () => { (): any; new(): any; toString: { (): string; new(): any; }; }; getMonth: () => number; getFullYear: () => any; }) {
+// formatDate(date: { getDate: () => { (): any; new(): any; toString: { (): string; new(): any; }; }; getMonth: () => number; getFullYear: () => any; }) {
+//   const day = date.getDate().toString().padStart(2, '0');
+//   const month = (date.getMonth() + 1).toString().padStart(2, '0');
+//   const year = date.getFullYear();
+//   return `${day}-${month}-${year}`;
+// }
+
+formatDate(date: Date): string {
   const day = date.getDate().toString().padStart(2, '0');
   const month = (date.getMonth() + 1).toString().padStart(2, '0');
   const year = date.getFullYear();
   return `${day}-${month}-${year}`;
 }
 
+onTabChange(event: MatTabChangeEvent): void {
+  const selectedIndex = event.index;
+  // Map tab index to your logic, for example:
+  console.log("event", event)
+  var tabType;
 
+  this.selectedTabIndex = event.index;
 
-toggleAllClients(checked: boolean): void {
-  if (checked) {
+  console.log("this.selectedTabIndex",this.selectedTabIndex)
 
-    console.log("this unit type", this.unitType)
-    
-  } else {
-   
+  // Mapping logic for formNo and tabType based on selectedIndex
+  if (selectedIndex === 0) {
+    this.formNo = 1;
+    tabType = 'summary';
+  } else if (selectedIndex === 1) {
+    this.formNo = 2;
+    tabType = 'view';
   }
+
+  console.log("this.form", this.formNo, tabType);
+
+  // Call your function with the appropriate parameters
+  this.logstatus(this.formNo, tabType);
 }
+
+
+
 
 logstatus(i: any, logs: any){
 
@@ -293,6 +404,363 @@ logstatus(i: any, logs: any){
 
   if( this.formNo == 1){
     console.log('forms 1')
+
+    if (
+      (!formValues.unitname || formValues.unitname === "" || formValues.unitname.length === 0) &&
+      (!formValues.clients || formValues.clients === "" || formValues.clients.length === 0) &&
+      (!formValues.logtype || formValues.logtype === "" || formValues.logtype.length === 0)
+    )
+    {
+      this.l_loading = true; 
+      
+      console.log("if form values", formValues)
+  
+      console.log('unitName',this.unitName)
+  
+      this.unitName.forEach( (obj: any) => unit_ids.push(obj.unit_id) );
+  
+      console.log("u_id",unit_ids)
+  
+      const params = {
+        "unitid": unit_ids,
+        "use_subclients": true
+      };
+  
+      console.log("this.logtype", this.logtypes);
+  
+      this.log_value.forEach( (obj: any) => log_types.push(obj.name));
+  
+      console.log("log_typea",log_types)
+  
+      console.log("s date", this.formattedToday);
+      
+  
+      this.includeSubClients = true;
+  
+      this.common.listofclients(params).subscribe((res1) => {
+        console.log(res1);
+    
+        if (res1.api_status === true) {
+          client_type12 = res1.data;
+          client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
+          
+          if (formValues.startDate != null) {
+            s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+          } else {
+            s_date = this.formattedYesterday;          
+          }
+
+          if (formValues.endDate != null) {
+            e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+          } else {
+            e_date = this.formattedToday;          
+          }
+
+          
+          console.log("outer if ts", this.time_stamp);
+    
+      const param1 = { unit_id: unit_ids, clients: client_type, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: null }
+
+      this.common.logsummary(param1).subscribe( (res1) => {
+        console.log("log summary response", res1);
+        const updatedLogList = Object.keys(res1.data).map(key => {
+          const logItem = { logtype: key, ...res1.data[key] };
+          if (this.logiconlist[key]) {
+            logItem['icon'] = this.logiconlist[key];
+          }
+          return logItem;
+        });
+
+        this.loglist = updatedLogList;
+
+        console.log("loglist", this.loglist); 
+        
+        this.l_loading = false;
+      }
+
+      );
+  
+        }
+       
+      });
+  
+      console.log("client type", client_type);
+  
+    } else if(formValues.unitname != null && formValues.unitname.length > 0)
+    {
+      console.log('formValues.unitname else if', formValues.unitname.length )
+  
+      this.l_loading = true; 
+      
+          console.log("this.logtype", this.logtypes);
+  
+      if(formValues.logtype === null || formValues.logtype.length === 0)
+      {
+        this.log_value.forEach( (obj: any) => log_types.push(obj.name));
+  
+        console.log("log_typea",log_types)
+      }
+      else{
+        console.log('else')
+        log_types = formValues.logtype;
+      }
+  
+      this.includeSubClients = true;
+  
+      if(formValues.clients != null){
+  
+        if (formValues.startDate != null) {
+          s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+        } else {
+          s_date = this.formattedYesterday;          
+        }
+
+        if (formValues.endDate != null) {
+          e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+        } else {
+          e_date = this.formattedToday;          
+        }
+
+        // const previousTimestamp = this.time_stamp[this.time_stamp.length - 1];
+  
+        const param1 = { unit_id: formValues.unitname, clients: formValues.clients, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: null }
+    
+        this.common.logsummary(param1).subscribe( (res1) => {
+          console.log("log summary response", res1);
+          const updatedLogList = Object.keys(res1.data).map(key => {
+            const logItem = { logtype: key, ...res1.data[key] };
+            if (this.logiconlist[key]) {
+              logItem['icon'] = this.logiconlist[key];
+            }
+            return logItem;
+          });
+  
+          this.loglist = updatedLogList;
+  
+          console.log("loglist", this.loglist); 
+          
+          this.l_loading = false;
+        }
+  
+        );
+      } else{
+        const params = {
+          "unitid": formValues.unitname,
+          "use_subclients": true
+        };
+  
+        this.common.listofclients(params).subscribe((res1) => {
+          console.log(res1);
+      
+          if (res1.api_status === true) {
+            client_type12 = res1.data;
+            client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
+            
+            if (formValues.startDate != null) {
+              s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+            } else {
+              s_date = this.formattedYesterday;          
+            }
+  
+            if (formValues.endDate != null) {
+              e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+            } else {
+              e_date = this.formattedToday;          
+            }
+       
+        const param1 = { unit_id: formValues.unitname, clients: client_type, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: null }
+    
+        this.common.logsummary(param1).subscribe( (res1) => {
+          console.log("log summary response", res1);
+          const updatedLogList = Object.keys(res1.data).map(key => {
+            const logItem = { logtype: key, ...res1.data[key] };
+            if (this.logiconlist[key]) {
+              logItem['icon'] = this.logiconlist[key];
+            }
+            return logItem;
+          });
+  
+          this.loglist = updatedLogList;
+  
+          console.log("loglist", this.loglist); 
+          
+          this.l_loading = false;
+        }
+  
+        );
+    
+          }
+         
+        });
+        
+        
+      }
+  
+      console.log("client type", client_type);
+  
+    } else if(formValues.logtype != null && formValues.logtype.length > 0 )
+    {
+      this.l_loading = true; 
+  
+      if(formValues.unitname != null && formValues.unitname.length > 0 ){
+        unit_ids = formValues.unitname;
+      }else{
+        this.unitName.forEach( (obj: any) => unit_ids.push(obj.unit_id) );
+      }
+  
+  
+      if(formValues.clients != null){
+  
+        if (formValues.startDate != null) {
+          s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+        } else {
+          s_date = this.formattedYesterday;          
+        }
+
+        if (formValues.endDate != null) {
+          e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+        } else {
+          e_date = this.formattedToday;          
+        }
+  
+        const param1 = { unit_id: formValues.unitname, clients: formValues.clients, include_subclient: this.includeSubClients, logtype: formValues.logtype , startdate: s_date, enddate: e_date, last_timestamp: null }
+    
+        this.common.logsummary(param1).subscribe( (res1) => {
+          console.log("log summary response", res1);
+          const updatedLogList = Object.keys(res1.data).map(key => {
+            const logItem = { logtype: key, ...res1.data[key] };
+            if (this.logiconlist[key]) {
+              logItem['icon'] = this.logiconlist[key];
+            }
+            return logItem;
+          });
+  
+          this.loglist = updatedLogList;
+  
+          console.log("loglist", this.loglist); 
+          
+          this.l_loading = false;
+        }
+  
+        );
+        
+  
+      } else{
+        const params = {
+          "unitid": unit_ids,
+          "use_subclients": true
+        };
+        
+    
+        this.includeSubClients = true;
+    
+        this.common.listofclients(params).subscribe((res1) => {
+          console.log(res1);
+      
+          if (res1.api_status === true) {
+            client_type12 = res1.data;
+            client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
+            
+            if (formValues.startDate != null) {
+              s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+            } else {
+              s_date = this.formattedYesterday;          
+            }
+  
+            if (formValues.endDate != null) {
+              e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+            } else {
+              e_date = this.formattedToday;          
+            }
+       
+        const param1 = { unit_id: unit_ids, clients: client_type, include_subclient: this.includeSubClients, logtype: formValues.logtype, startdate: s_date, enddate: e_date, last_timestamp: null }
+    
+        this.common.logsummary(param1).subscribe( (res1) => {
+          console.log("log summary response", res1);
+          const updatedLogList = Object.keys(res1.data).map(key => {
+            const logItem = { logtype: key, ...res1.data[key] };
+            if (this.logiconlist[key]) {
+              logItem['icon'] = this.logiconlist[key];
+            }
+            return logItem;
+          });
+  
+          this.loglist = updatedLogList;
+  
+          console.log("loglist", this.loglist); 
+          
+          this.l_loading = false;
+        }
+  
+        );
+    
+          }
+         
+        });
+      }
+  
+    }
+    else {
+  
+      console.log(formValues); // Replace this with your search logic
+  
+      console.log("unitname",formValues.unitname)
+    
+    
+      if (formValues.startDate != null) {
+        s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+      } else {
+        s_date = this.formattedYesterday;          
+      }
+
+      if (formValues.endDate != null) {
+        e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+      } else {
+        e_date = this.formattedToday;          
+      }
+    
+    
+      console.log("sub clients", this.includeSubClients)
+    
+      // console.log("s_date",s_date)
+  
+      const params = { unit_id: formValues.unitname, clients: formValues.clienttype, include_subclient: this.includeSubClients, logtype: formValues.logtype , startdate: s_date, enddate: e_date, last_timestamp: null }
+  
+      console.log("params", params)
+    
+      // this.spinner.show();
+      this.loading = true;
+      console.log("i", i);
+      console.log("status", logs)
+    
+      
+    
+      this.common.logfiles(params).subscribe( (res) => {
+    
+        console.log("log respo", res);
+    
+        if(res.api_status === true)
+        {
+          this.logdata = res.data;
+    
+          // this.spinner.hide();
+          this.loading = false;
+    
+        }else{
+          this.loading = false;
+          this.errorMessage = res.message; 
+          console.log("this error mesasgae", this.errorMessage)        
+          Swal.fire({
+            icon: 'error',
+            title: `${res.message}`,
+          });        
+        }
+        
+      }
+    
+      );
+  
+    }
   }
 
   if( this.formNo === 2 && logs === 'view' ){
@@ -338,16 +806,16 @@ logstatus(i: any, logs: any){
           client_type12 = res1.data;
           client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
           
-          if (formValues.startDate != null){
-            s_date= this.formatDate(formValues.startDate);
-          }else{
+          if (formValues.startDate != null) {
+            s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+          } else {
             s_date = this.formattedYesterday;          
           }
-        
-          if(formValues.endDate != null){
-            e_date= this.formatDate(formValues.endDate);
-          }else{
-            e_date = this.formattedToday;
+
+          if (formValues.endDate != null) {
+            e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+          } else {
+            e_date = this.formattedToday;          
           }
 
           
@@ -412,16 +880,16 @@ logstatus(i: any, logs: any){
   
       if(formValues.clients != null){
   
-        if (formValues.startDate != null){
-          s_date= this.formatDate(formValues.startDate);
-        }else{
+        if (formValues.startDate != null) {
+          s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+        } else {
           s_date = this.formattedYesterday;          
         }
-      
-        if(formValues.endDate != null){
-          e_date= this.formatDate(formValues.endDate);
-        }else{
-          e_date = this.formattedToday;
+
+        if (formValues.endDate != null) {
+          e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+        } else {
+          e_date = this.formattedToday;          
         }
 
         // const previousTimestamp = this.time_stamp[this.time_stamp.length - 1];
@@ -460,16 +928,16 @@ logstatus(i: any, logs: any){
             client_type12 = res1.data;
             client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
             
-            if (formValues.startDate != null){
-              s_date= this.formatDate(formValues.startDate);
-            }else{
+            if (formValues.startDate != null) {
+              s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+            } else {
               s_date = this.formattedYesterday;          
             }
-          
-            if(formValues.endDate != null){
-              e_date= this.formatDate(formValues.endDate);
-            }else{
-              e_date = this.formattedToday;
+  
+            if (formValues.endDate != null) {
+              e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+            } else {
+              e_date = this.formattedToday;          
             }
        
         const param1 = { unit_id: formValues.unitname, clients: client_type, include_subclient: this.includeSubClients, logtype: log_types, startdate: s_date, enddate: e_date, last_timestamp: null }
@@ -523,16 +991,16 @@ logstatus(i: any, logs: any){
   
       if(formValues.clients != null){
   
-        if (formValues.startDate != null){
-          s_date= this.formatDate(formValues.startDate);
-        }else{
+        if (formValues.startDate != null) {
+          s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+        } else {
           s_date = this.formattedYesterday;          
         }
-      
-        if(formValues.endDate != null){
-          e_date= this.formatDate(formValues.endDate);
-        }else{
-          e_date = this.formattedToday;
+
+        if (formValues.endDate != null) {
+          e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+        } else {
+          e_date = this.formattedToday;          
         }
   
         const param1 = { unit_id: formValues.unitname, clients: formValues.clients, include_subclient: this.includeSubClients, logtype: formValues.logtype , startdate: s_date, enddate: e_date, last_timestamp: null }
@@ -581,16 +1049,16 @@ logstatus(i: any, logs: any){
             client_type12 = res1.data;
             client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
             
-            if (formValues.startDate != null){
-              s_date= this.formatDate(formValues.startDate);
-            }else{
+            if (formValues.startDate != null) {
+              s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+            } else {
               s_date = this.formattedYesterday;          
             }
-          
-            if(formValues.endDate != null){
-              e_date= this.formatDate(formValues.endDate);
-            }else{
-              e_date = this.formattedToday;
+  
+            if (formValues.endDate != null) {
+              e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+            } else {
+              e_date = this.formattedToday;          
             }
        
         const param1 = { unit_id: unit_ids, clients: client_type, include_subclient: this.includeSubClients, logtype: formValues.logtype, startdate: s_date, enddate: e_date, last_timestamp: null }
@@ -635,12 +1103,16 @@ logstatus(i: any, logs: any){
       console.log("unitname",formValues.unitname)
     
     
-      if (formValues.startDate != null){
-        s_date= this.formatDate(formValues.startDate);
+      if (formValues.startDate != null) {
+        s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+      } else {
+        s_date = this.formattedYesterday;          
       }
-    
-      if(formValues.endDate != null){
-        e_date= this.formatDate(formValues.endDate);
+
+      if (formValues.endDate != null) {
+        e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+      } else {
+        e_date = this.formattedToday;          
       }
     
     
@@ -723,16 +1195,16 @@ logstatus(i: any, logs: any){
           client_type12 = res1.data;
           client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
           
-          if (formValues.startDate != null){
-            s_date= this.formatDate(formValues.startDate);
-          }else{
+          if (formValues.startDate != null) {
+            s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+          } else {
             s_date = this.formattedYesterday;          
           }
-        
-          if(formValues.endDate != null){
-            e_date= this.formatDate(formValues.endDate);
-          }else{
-            e_date = this.formattedToday;
+
+          if (formValues.endDate != null) {
+            e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+          } else {
+            e_date = this.formattedToday;          
           }
           const previousTimestamp = this.time_stamp[this.time_stamp.length - 1];
 
@@ -802,18 +1274,17 @@ logstatus(i: any, logs: any){
   
       if(formValues.clients != null){
   
-        if (formValues.startDate != null){
-          s_date= this.formatDate(formValues.startDate);
-        }else{
+        if (formValues.startDate != null) {
+          s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+        } else {
           s_date = this.formattedYesterday;          
         }
-      
-        if(formValues.endDate != null){
-          e_date= this.formatDate(formValues.endDate);
-        }else{
-          e_date = this.formattedToday;
-        }
 
+        if (formValues.endDate != null) {
+          e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+        } else {
+          e_date = this.formattedToday;          
+        }
         const previousTimestamp = this.time_stamp[this.time_stamp.length - 1];
 
         if(previousTimestamp !== null){
@@ -858,16 +1329,16 @@ logstatus(i: any, logs: any){
             client_type12 = res1.data;
             client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
             
-            if (formValues.startDate != null){
-              s_date= this.formatDate(formValues.startDate);
-            }else{
+            if (formValues.startDate != null) {
+              s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+            } else {
               s_date = this.formattedYesterday;          
             }
-          
-            if(formValues.endDate != null){
-              e_date= this.formatDate(formValues.endDate);
-            }else{
-              e_date = this.formattedToday;
+  
+            if (formValues.endDate != null) {
+              e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+            } else {
+              e_date = this.formattedToday;          
             }
 
             const previousTimestamp = this.time_stamp[this.time_stamp.length - 1];
@@ -922,16 +1393,16 @@ logstatus(i: any, logs: any){
     
       if(formValues.clients != null){
   
-        if (formValues.startDate != null){
-          s_date= this.formatDate(formValues.startDate);
-        }else{
+        if (formValues.startDate != null) {
+          s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+        } else {
           s_date = this.formattedYesterday;          
         }
-      
-        if(formValues.endDate != null){
-          e_date= this.formatDate(formValues.endDate);
-        }else{
-          e_date = this.formattedToday;
+
+        if (formValues.endDate != null) {
+          e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+        } else {
+          e_date = this.formattedToday;          
         }
 
         const previousTimestamp = this.time_stamp[this.time_stamp.length - 1];
@@ -982,16 +1453,16 @@ logstatus(i: any, logs: any){
             client_type12 = res1.data;
             client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
             
-            if (formValues.startDate != null){
-              s_date= this.formatDate(formValues.startDate);
-            }else{
+            if (formValues.startDate != null) {
+              s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+            } else {
               s_date = this.formattedYesterday;          
             }
-          
-            if(formValues.endDate != null){
-              e_date= this.formatDate(formValues.endDate);
-            }else{
-              e_date = this.formattedToday;
+  
+            if (formValues.endDate != null) {
+              e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+            } else {
+              e_date = this.formattedToday;          
             }
 
             const previousTimestamp = this.time_stamp[this.time_stamp.length - 1];
@@ -1038,12 +1509,16 @@ logstatus(i: any, logs: any){
   
       console.log("unitname",formValues.unitname)
         
-      if (formValues.startDate != null){
-        s_date= this.formatDate(formValues.startDate);
+      if (formValues.startDate != null) {
+        s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+      } else {
+        s_date = this.formattedYesterday;          
       }
-    
-      if(formValues.endDate != null){
-        e_date= this.formatDate(formValues.endDate);
+
+      if (formValues.endDate != null) {
+        e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+      } else {
+        e_date = this.formattedToday;          
       }
     
     
@@ -1129,16 +1604,16 @@ logstatus(i: any, logs: any){
           client_type12 = res1.data;
           client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
           
-          if (formValues.startDate != null){
-            s_date= this.formatDate(formValues.startDate);
-          }else{
+          if (formValues.startDate != null) {
+            s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+          } else {
             s_date = this.formattedYesterday;          
           }
-        
-          if(formValues.endDate != null){
-            e_date= this.formatDate(formValues.endDate);
-          }else{
-            e_date = this.formattedToday;
+
+          if (formValues.endDate != null) {
+            e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+          } else {
+            e_date = this.formattedToday;          
           }
 
           var previousTimestamp: any;
@@ -1215,16 +1690,16 @@ logstatus(i: any, logs: any){
   
       if(formValues.clients != null){
   
-        if (formValues.startDate != null){
-          s_date= this.formatDate(formValues.startDate);
-        }else{
+        if (formValues.startDate != null) {
+          s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+        } else {
           s_date = this.formattedYesterday;          
         }
-      
-        if(formValues.endDate != null){
-          e_date= this.formatDate(formValues.endDate);
-        }else{
-          e_date = this.formattedToday;
+
+        if (formValues.endDate != null) {
+          e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+        } else {
+          e_date = this.formattedToday;          
         }
 
         var previousTimestamp: any;
@@ -1277,16 +1752,16 @@ logstatus(i: any, logs: any){
             client_type12 = res1.data;
             client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
             
-            if (formValues.startDate != null){
-              s_date= this.formatDate(formValues.startDate);
-            }else{
+            if (formValues.startDate != null) {
+              s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+            } else {
               s_date = this.formattedYesterday;          
             }
-          
-            if(formValues.endDate != null){
-              e_date= this.formatDate(formValues.endDate);
-            }else{
-              e_date = this.formattedToday;
+  
+            if (formValues.endDate != null) {
+              e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+            } else {
+              e_date = this.formattedToday;          
             }
 
             var previousTimestamp: any;
@@ -1343,16 +1818,16 @@ logstatus(i: any, logs: any){
     
       if(formValues.clients != null){
   
-        if (formValues.startDate != null){
-          s_date= this.formatDate(formValues.startDate);
-        }else{
+        if (formValues.startDate != null) {
+          s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+        } else {
           s_date = this.formattedYesterday;          
         }
-      
-        if(formValues.endDate != null){
-          e_date= this.formatDate(formValues.endDate);
-        }else{
-          e_date = this.formattedToday;
+
+        if (formValues.endDate != null) {
+          e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+        } else {
+          e_date = this.formattedToday;          
         }
 
         var previousTimestamp: any;
@@ -1409,16 +1884,16 @@ logstatus(i: any, logs: any){
             client_type12 = res1.data;
             client_type12.forEach( (obj: any) => client_type.push(obj.client_id)) 
             
-            if (formValues.startDate != null){
-              s_date= this.formatDate(formValues.startDate);
-            }else{
+            if (formValues.startDate != null) {
+              s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+            } else {
               s_date = this.formattedYesterday;          
             }
-          
-            if(formValues.endDate != null){
-              e_date= this.formatDate(formValues.endDate);
-            }else{
-              e_date = this.formattedToday;
+  
+            if (formValues.endDate != null) {
+              e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+            } else {
+              e_date = this.formattedToday;          
             }
 
             var previousTimestamp: any;
@@ -1463,12 +1938,16 @@ logstatus(i: any, logs: any){
     else {  
       console.log(formValues); // Replace this with your search logic
       console.log("unitname",formValues.unitname)     
-      if (formValues.startDate != null){
-        s_date= this.formatDate(formValues.startDate);
+      if (formValues.startDate != null) {
+        s_date = moment(formValues.startDate).format('DD-MM-YYYY');
+      } else {
+        s_date = this.formattedYesterday;          
       }
-    
-      if(formValues.endDate != null){
-        e_date= this.formatDate(formValues.endDate);
+
+      if (formValues.endDate != null) {
+        e_date = moment(formValues.endDate).format('DD-MM-YYYY');
+      } else {
+        e_date = this.formattedToday;          
       }
     
     
@@ -1555,7 +2034,7 @@ tabChanged(event: any) {
   console.log("event", event);
  }
 
-unitNameLocalAdminfun() {
+async unitNameLocalAdminfun() : Promise<void>  {
   this.spinner.show();
   this.common.unitNameLocalAdmin().subscribe((res: any) => {
     if (res.api_status === true) {
@@ -1574,7 +2053,7 @@ unitNameLocalAdminfun() {
   });
 }
 
-logdetails(){
+async logdetails() : Promise<void> {
   var log_de = [];
   var log_info;
 
@@ -1601,7 +2080,7 @@ logdetails(){
   );
 }
 
-onLogTypeSelection(selectedKeys: any) {
+async onLogTypeSelection(selectedKeys: any) : Promise<void>  {
   console.log("keys", selectedKeys);
 
   this.time_stamp = [];
@@ -1610,7 +2089,7 @@ onLogTypeSelection(selectedKeys: any) {
  
 }
 
-onUnitSelected(selectedUnitId: any) {
+async onUnitSelected(selectedUnitId: any) : Promise<void> {
   this.time_stamp = [];
   this.next_ts = false;
   this.prev_ts = false;
@@ -1634,16 +2113,33 @@ onUnitSelected(selectedUnitId: any) {
     "use_subclients": this.use_subclients
   };
 
-  this.common.listofclients(params).subscribe((res1) => {
-    console.log(res1);
+  // this.common.listofclients(params).subscribe((res1) => {
+  //   console.log(res1);
 
-    if (res1.api_status === true) {
-      this.unitType = res1.data;
+  //   if (res1.api_status === true) {
+  //     this.unitType = res1.data;
+  //     console.log("Status Code:", res1.Status);
+  //   }
+
+  //   console.log("client type", this.unitType);
+  //   this.checkboxEnabled = selectedUnitId !== null && selectedUnitId !== '';
+  // });
+
+  this.common.listofclients(params).subscribe(
+    (res1) => {
+      console.log(res1);
+  
+      if (res1.api_status === true) {
+        this.unitType = res1.data;
+      }
+    },
+    (error) => {
+      console.error("Error occurred:", error);
+      if (error && error.status) {
+        console.log("HTTP Response Code:", error.status);
+      }
     }
-
-    console.log("client type", this.unitType);
-    this.checkboxEnabled = selectedUnitId !== null && selectedUnitId !== '';
-  });
+  );
 }
 
 onClientSelected(selectedClientId: any) {
@@ -1682,28 +2178,43 @@ resetForm() {
 
 performSearch() {
 
+  this.tabshow = true;
+
   const formValues = this.secondFormGroup.value;
 
+  if(this.selectedTabIndex === 0){
+    this.logstatus(1, 'log')
+  }
+
+  if(this.selectedTabIndex === 1)
+  {
+    this.logstatus(2, 'view')
+  }
+
+  
+
   console.log(formValues); // Replace this with your search logic
+
+  console.log("this.selectedTabIndex",this.selectedTabIndex)
 
   // this.secondFormGroup.reset();
   // this.use_subclients = false;
 
-  this.secondFormGroup.reset({
-    unitname: null, // Reset the specific form controls
-    startDate: null,
-    endDate: null,
-    // Add other form controls here with their initial values
-});
+//   this.secondFormGroup.reset({
+//     unitname: null, // Reset the specific form controls
+//     startDate: null,
+//     endDate: null,
+//     // Add other form controls here with their initial values
+// });
 
-this.use_subclients = false;
+// this.use_subclients = false;
 
-  Object.keys(this.secondFormGroup.controls).forEach(controlName => {
-    const control = this.secondFormGroup.get(controlName);
-    if (control) {
-      control.setErrors(null);
-    }
-  });
+  // Object.keys(this.secondFormGroup.controls).forEach(controlName => {
+  //   const control = this.secondFormGroup.get(controlName);
+  //   if (control) {
+  //     control.setErrors(null);
+  //   }
+  // });
 
 }
 

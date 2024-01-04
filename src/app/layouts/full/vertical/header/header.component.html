@@ -38,34 +38,38 @@
     </p>
   </div> -->
 
-  <div *ngIf="userType !== 'policy_admin' || userType !== 'view_logs'">
-    <button mat-flat-button class="rounded m-b-2" (click)="lastcommun()" style="color: #040404; font-size: 1.3rem; margin-right: 2rem; cursor: pointer; background: none; border: none; background-color: #EA906C;" [title]="'Last Communicated Alert: ' + lastalert">
-      Last Communicated Alert : {{lastalert}}
+  <!-- <div *ngIf="userType !== 'policy_admin' || userType !== 'view_logs'">
+    <button mat-flat-button class="rounded m-b-2" (click)="lastcommun()" style="color: #040404; margin-right: 2rem; cursor: pointer; background: none; border: none; background-color: #EA906C;" matTooltip="Non Communicating Clients Alert " >
+       {{lastalert_count}}
     </button>
-  </div>
+  </div> -->
 
-  
 
-  
+
+
   <!-- <div style="margin-right:1rem; display:flex"> -->
-    <i-tabler name="user" class="icon-20 d-flex larger-icon" style=" color: white; transform: scale(1.5); margin-right: 0.5rem;"></i-tabler>
+  <!-- userName and userType   -->
+  <!-- <i-tabler name="user" class="icon-20 d-flex larger-icon" style=" color: white; transform: scale(1.3); margin-right: 0.5rem;"></i-tabler> -->
 
-  <p style="color: white; font-weight:bold; font-size: 1.3rem; margin-right: 0.5rem;">{{userName}}</p>
-  <p style="color: white;"> <span style="font-size: 1.3rem; margin-right: .7rem;">({{userType}})</span></p>
-  &nbsp; &nbsp;
+  <!-- <mat-icon style="transform: scale(1.3);">person</mat-icon> -->
+  <!-- <p style="color: white; font-weight:bold;  margin-right: 0.5rem;">{{userName}}</p>
+  <p style="color: white;"> <span style="">({{userType}})</span></p>
+  <mat-icon style="transform: scale(1.3);color:white">person</mat-icon>
+  &nbsp; &nbsp; -->
+
   <!-- </div> -->
 
   <!-- <img src="https://cdn-icons-png.flaticon.com/512/1053/1053210.png" alt="" style="height: 55px;" (click)="logout()"> -->
 
-  <div style="display: flex;
+  <!-- <div style="display: flex;
   color: white;
  
   cursor: pointer;" (click)="logout()">
-    <i-tabler name="logout" class="icon-20 d-flex" style="margin: auto; color: white; transform: scale(1.5); margin-right: 0.5rem;"></i-tabler>
-    <p style="font-size: 1.3rem">
+    <i-tabler name="logout" class="icon-20 d-flex" style="margin: auto; color: white; transform: scale(1.3); margin-right: 0.5rem;"></i-tabler>
+    <p style="">
       Logout
     </p>
-  </div>
+  </div> -->
 
   <!-- <button (click)="logout()" style="background: transparent;
   border: none;
@@ -155,16 +159,35 @@ align-items: center;">
   <!-- --------------------------------------------------------------- -->
   <!-- Messages Dropdown -->
   <!-- --------------------------------------------------------------- -->
-  <!-- <button mat-icon-button [matMenuTriggerFor]="msgmenu" aria-label="Messages">
-    <mat-icon
-      matBadge="2"
-      matBadgeOverlap="false"
-      matBadgeColor="warn"
-      class="header-badge"
-      >email</mat-icon
-    >
+
+  <!-- <button mat-icon-button (click)="alertContentPopUp()" matTooltip="Unique Alerts">
+    <mat-icon [matBadge]="alert_count" matBadgeOverlap="false" matBadgeColor="warn"
+      class="header-badge">warning</mat-icon>
   </button>
-  <mat-menu #msgmenu="matMenu" class="topbar-dd cardWithShadow">
+
+  <button mat-icon-button (click)="alertContentPopUp()" matTooltip="Unique Alerts">
+    <mat-icon [matBadge]="alert_count" matBadgeOverlap="false" matBadgeColor="warn"
+      class="header-badge">report</mat-icon>
+  </button> -->
+
+  <!-- <div  *ngIf="userType !== 'policy_admin' || userType !== 'view_logs'"> -->
+
+    <button mat-icon-button (click)="alertContentPopUp()" matTooltip="Unique Alerts">
+      <mat-icon [matBadge]="alert_count" matBadgeOverlap="false" matBadgeColor="warn"
+        class="header-badge">announcement</mat-icon>
+    </button>
+    <!-- assignment_ind -->
+    
+  <!-- </div> -->
+
+  <div  *ngIf="userType !== 'policy_admin' || userType !== 'view_logs'">
+    <button mat-icon-button (click)="lastcommun()" matTooltip="Non Communicating Clients Alerts">
+      <mat-icon [matBadge]="lastalert_count" matBadgeOverlap="false" matBadgeColor="warn"
+        class="header-badge">notifications_active</mat-icon>
+    </button>
+  </div>
+
+  <!-- <mat-menu #msgmenu="matMenu" class="topbar-dd cardWithShadow">
     <div class="d-flex align-items-center p-x-32 p-y-16">
       <h6 class="f-s-16 f-w-600 m-0">Messages</h6>
       <span class="m-l-auto">
@@ -194,98 +217,58 @@ align-items: center;">
   <!-- --------------------------------------------------------------- -->
   <!-- profile Dropdown -->
   <!-- --------------------------------------------------------------- -->
-  <!-- <button
-    mat-icon-button
-    [matMenuTriggerFor]="profilemenu"
-    aria-label="Notifications"
-  >
-    <img
-      src="/assets/images/profile/profile.png"
-      class="rounded-circle object-cover"
-      width="35"
-    />
+
+  <p style="color: white; font-weight:bold;  margin-right: 0.5rem;font-size: 18px;margin-left: 12px;">{{userName}}
+  </p>
+  <p style="color: white;font-size: 18px;"> ({{userType}})</p>
+
+  <button mat-flat-button matTooltip="User Profile" style="cursor: pointer;display: flex;background: transparent;
+  border: none; padding-left: 12px;" [matMenuTriggerFor]="profilemenu">
+
+    <div style="display:flex">
+
+      <!-- <p style="color: white; font-weight:bold;  margin-right: 0.5rem;font-size: 18px;">{{userName}}
+      </p>
+      <p style="color: white;font-size: 18px;margin-right: 6px;"> ({{userType}})</p> -->
+      <mat-icon style="transform: scale(1.3);color:white;margin: auto;">person</mat-icon>
+      <p style="font-size: 18px !important;
+      margin-left: 8px;
+      margin-top: -10px; color: white;transform: scale(1.6);">&#8964;</p>
+    </div>
   </button>
+
+  <!-- <button mat-icon-button [matMenuTriggerFor]="profilemenu" aria-label="Notifications">
+    <mat-icon matBadgeOverlap="false" matBadgeColor="warn" class="header-badge">
+      person
+    </mat-icon>
+  </button> -->
   <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
-    <ng-scrollbar
-      class="position-relative"
-      style="height: 647px"
-    >
+    <ng-scrollbar class="position-relative" style="height: 326px">
       <div class="p-x-32 p-y-16">
         <h6 class="f-s-16 f-w-600 m-0">User Profile</h6>
-
         <div class="d-flex align-items-center p-b-24 b-b-1 m-t-16">
-          <img
-            src="/assets/images/profile/profile.png"
-            class="rounded-circle"
-            width="95"
-          />
+          <img src="../../../../../assets/svgs/icon-account.svg" width="95" />
           <div class="m-l-16">
-            <h6 class="f-s-14 f-w-600 m-0">Mathew Anderson</h6>
-            <span class="f-s-14 d-block m-b-4">Designer</span>
-            <span class="d-flex align-items-center">
-              <i-tabler name="mail" class="icon-15 m-r-4"></i-tabler>
-              info@materialpro.com
-            </span>
+            <h6 class="f-s-14 f-w-600 m-0">{{userName}}</h6>
+            <span class="f-s-14 d-block m-b-4">{{userType}}</span>
+
           </div>
         </div>
       </div>
-      <div class="p-x-32">
-        <a
-          class="p-y-16 text-decoration-none d-block text-hover-primary"
-          [routerLink]="[profile.link]"
-          *ngFor="let profile of profiledd"
-        >
-          <div class="d-flex align-items-center">
-            <button
-              mat-mini-fab
-              class="text-primary bg-light-primary shadow-none rounded"
-            >
-              <img [src]="profile.img" width="20" />
-            </button>
 
-            <div class="m-l-16">
-              <h5
-                class="f-s-14 f-w-600 m-0 textprimary mat-subtitle-1 hover-text"
-              >
-                {{ profile.title }}
-              </h5>
-              <span class="mat-body-1">{{ profile.subtitle }}</span>
-            </div>
-          </div>
-        </a> -->
 
-  <!-- upgrade -->
-  <!-- <div
-          class="p-24 overflow-hidden bg-light-primary rounded position-relative m-y-16"
-        >
-          <div class="d-flex align-items-center">
-            <div>
-              <h5 class="f-s-18 m-0 f-w-600 m-b-12">
-                Unlimited <br />
-                Access
-              </h5>
-              <button mat-flat-button color="primary">Upgrade</button>
-            </div>
-            <div class="m-l-auto">
-              <img
-                src="/assets/images/backgrounds/unlimited-bg.png"
-                alt="upgrade-bg"
-                class="upgrade-bg"
-              />
-            </div>
-          </div>
-        </div>
+
+
+      <div class="p-y-12 p-x-32">
+
+        <a mat-flat-button color="primary" class="w-100" (click)="changePassword()">Change Password</a>
       </div>
 
       <div class="p-y-12 p-x-32">
-        <a
-          [routerLink]="['/authentication/side-login']"
-          mat-stroked-button
-          color="primary"
-          class="w-100"
-          >Logout</a
-        >
+
+        <a [routerLink]="['/authentication/login']" mat-stroked-button color="primary" class="w-100">Logout</a>
       </div>
+
     </ng-scrollbar>
-  </mat-menu> -->
+  </mat-menu>
 </mat-toolbar>

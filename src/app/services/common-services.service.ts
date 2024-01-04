@@ -268,7 +268,6 @@ export class CommonServicesService {
     );
   }
 
-
   lastcomalertdetails() {
     return this.http.post<any>(
       env.apiHost.concat('/registration/last-com-list'),
@@ -283,7 +282,6 @@ export class CommonServicesService {
     );
   }
 
-
   alertstatus(params: any) {
     return this.http.post<any>(
       env.apiHost.concat('/registration/alert-range-stats'),
@@ -291,7 +289,6 @@ export class CommonServicesService {
     );
   }
 
-  
   dashboardAllRegisteredClient(): Observable<any> {
     return this.http.post(
       env.apiHost.concat('/registration/all-client-reg-list'),
@@ -406,5 +403,62 @@ export class CommonServicesService {
       env.apiHost.concat('/logviewer/search-log'),
       params
     );
-    }
+  }
+
+  changeUserPassword(clientData: any): Observable<any> {
+    return this.http.post(
+      env.apiHost.concat('/usermgt/change-user-password'),
+      clientData
+    );
+  }
+
+  totalActiveClients() {
+    return this.http.post<any>(
+      env.apiHost.concat('/registration/total-active-client-count'),
+      {}
+    );
+  }
+
+  totalActiveClientsLlist() {
+    return this.http.post<any>(
+      env.apiHost.concat('/registration/total-active-client-list'),
+      {}
+    );
+  }
+
+  logsummary(params: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/logviewer/log-summary'),
+      params
+    );
+  }
+
+  usbcreate(params: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/usb-white-create'),
+      params
+    );
+  }
+
+  usbdelete(params: any) {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/usb-white-delete'),
+      params
+    );
+  }
+
+  usblist() {
+    return this.http.post<any>(
+      env.apiHost.concat('/policy/usb-white-list'),
+      {}
+    );
+  }
+
+  storeusbviolationvalue(value: any) {
+    localStorage.setItem('value', JSON.stringify(value) )
+  }
+
+  getusbviolationvalue() {
+    const value = JSON.parse(localStorage.getItem('value') ?? 'null');
+  }
 }

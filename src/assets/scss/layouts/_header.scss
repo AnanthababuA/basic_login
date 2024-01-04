@@ -47,11 +47,12 @@ html .topbar {
 }
 
 .header-badge.mat-badge-medium .mat-badge-content {
-  width: 18px;
+  // width:  fit-content;
   height: 18px;
   font-size: 10px;
   line-height: 18px;
   right: -15px;
+  min-width: max-content;
 }
 
 @media (min-width: 768px) {

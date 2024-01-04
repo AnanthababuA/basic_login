@@ -109,7 +109,12 @@ text-align: center !important;
 
 
 .dataTables_wrapper .dataTables_length {
-  margin-bottom: 20px !important;
+  margin-bottom: 16px !important;
+  margin-top: 5px;
+}
+
+div.dataTables_wrapper div.dataTables_filter{
+  margin-top: 4px;
 }
 
   

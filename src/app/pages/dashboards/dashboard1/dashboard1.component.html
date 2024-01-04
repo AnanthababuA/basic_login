@@ -1,166 +1,4 @@
 
-<!-- <div class="row">
-  <div class="col-lg-2 col-sm-2">
-    <mat-card class="cardWithShadow text-center">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56 bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
-          >
-            <mat-icon class="f-s-24">star</mat-icon>
-          </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class="f-s-20 f-w-500">
-             title
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-              sub
-            </mat-card-subtitle>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div> -->
-
-
-
-<div class="row" style="display: none">
-  <div class="col-lg-2">
-    <mat-card class="cardWithShadow bg-primary" (click)="regClientCard()">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-          class="icon-56 bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:4px"
-        >
-          <mat-icon class="" style="font-size: 45px !important;height: 45px;width: 45px;" >supervised_user_circle</mat-icon>
-        </span>
-          <div class="m-l-16">
-            <mat-card-title class="text-white m-0" style="text-align: center;"
-              >{{reg_count}} </mat-card-title
-            >
-            <span class="text-white f-w-400 m-t-13" style="font-size: 12px;">Registered Clients</span>
-          </div>
-        </div>
-      </mat-card-content>
-     
-    </mat-card>
-
-  </div>
-
-  <div class="col-lg-2">
-    <mat-card class="cardWithShadow" style="background-color: #EC8F5E;" (click)="patchCard()">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56 text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:2px; background-color: #EC8F5E;"
-          >
-            <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">settings</mat-icon>
-          </span>
-          <div class="m-l-16">
-            <mat-card-title class="text-white m-0" style="text-align: center;"
-              > {{patch_ver}} </mat-card-title
-            >
-            <span class="text-white f-w-400 m-t-10" style="font-size: 12px;">Patch Latest</span>
-          </div>
-        </div>
-      </mat-card-content>
-     
-    </mat-card>
-
-  </div>
-
-  <div class="col-lg-2">
-    <mat-card class="cardWithShadow" style="background-color: #3F979B;" (click)="policyCard()">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56  text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:3px; background-color: #3F979B !important;"
-          >
-            <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">assignment_turned_in</mat-icon>
-          </span>
-          <div class="m-l-1">
-            <mat-card-title class="text-white m-0" style="text-align: center;"
-              > {{policy_ver}} </mat-card-title
-            >
-            <span class="text-white f-w-400 m-t-10" style="font-size: 12px;"> Policy Latest </span>
-          </div>
-        </div>
-      </mat-card-content>
-     
-    </mat-card>
-
-  </div>
-
-
-  <div class="col-lg-2">
-    <mat-card class="cardWithShadow" style="background-color: #5CD2E6;" (click)="clamAvCard()">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-          class="icon-56 text-white rounded-circle d-flex align-items-center justify-content-center"  style="padding:5px; background-color: #5CD2E6;"
-        >
-          <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">assignment_returned</mat-icon>
-        </span>
-          <div class="m-l-1">
-            <mat-card-title class="text-white m-0" style="text-align: center;"
-              > {{clamAvData?.clam_updated_count}}/{{clamAvData?.total_reg}} </mat-card-title
-            >
-            <span class="text-white f-w-400 m-t-10" style="font-size: 12px;">ClamAv</span>
-          </div>
-        </div>
-      </mat-card-content>
-     
-    </mat-card>
-
-  </div>
-
-
-  <div class="col-lg-2">
-    <mat-card class="cardWithShadow" style="background-color: #A6CF98;" (click)="logCard()">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-          class="icon-56 text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:3px;background-color: #A6CF98;"
-        >
-          <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">autorenew</mat-icon>
-        </span>          
-          <div class="m-l-1">
-            <mat-card-title class="text-white m-0" style="text-align: center;"
-              > {{logRecievedData?.log_received_count}}/{{logRecievedData?.total_reg}} </mat-card-title
-            >
-            <span class="text-white f-w-400 m-t-10" style="font-size: 12px;">Log </span>
-          </div>
-        </div>
-      </mat-card-content>
-     
-    </mat-card>
-
-  </div>
-
-  <div class="col-lg-2">
-    <mat-card class="cardWithShadow"  style="background-color: #FF6969; cursor: pointer;" (click)="alertCard()">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-          class="icon-56 text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:3px;background-color: #FF6969;"
-        >
-          <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">announcement</mat-icon>
-        </span>
-          <div class="m-l-1">
-            <mat-card-title class="text-white m-0" style="text-align: center;"
-              >{{alert_count}}</mat-card-title
-            >
-            <span class="text-white f-w-400 m-t-10" style="font-size: 12px;"> Alerts  </span>
-          </div>
-        </div>
-      </mat-card-content>
-     
-      <!-- <app-spinner [showSpinner]="isSpinnerVisible['card1']">
-      </app-spinner> -->
-    </mat-card>
-  </div>
-</div>
 
 <div class="row">
   <div class="col-lg-3  col-sm-6">
@@ -189,12 +27,38 @@
     </mat-card>
   </div>
 
+
+  <div class="col-lg-3  col-sm-6" style="padding-right: 0 !important;">
+    <mat-card class="cardWithShadow text-center" (click)="totalActiveClientList()" style="cursor: pointer;">
+      <mat-card-content class="p-24">
+        <div class="d-flex align-items-center">
+          <span
+            class="icon-56 bg-warning text-white rounded-circle d-flex align-items-center justify-content-center"
+          >
+            <mat-icon class="f-s-24">assignment_ind</mat-icon>
+          </span>
+          <div class="m-l-12 text-left">
+            <mat-card-title class="f-s-20 f-w-500">
+              {{totalActiveClients}}
+            </mat-card-title>
+            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
+              Active Clients
+            </mat-card-subtitle>
+          </div>
+        </div>
+      </mat-card-content>
+      <app-spinner [showSpinner]="isSpinnerVisible['dashActiveClientCard']">
+      </app-spinner>
+    </mat-card>
+  </div>
+
+
   <div class="col-lg-3 col-sm-6">
     <mat-card class="cardWithShadow text-center" (click)="deleteClientCard()" style="cursor: pointer;">
       <mat-card-content class="p-24">
         <div class="d-flex align-items-center">
           <span
-            class="icon-56 bg-warning text-white rounded-circle d-flex align-items-center justify-content-center"
+            class="icon-56 bg-accent text-white rounded-circle d-flex align-items-center justify-content-center"
           >
             <mat-icon class="f-s-24">delete</mat-icon>
           </span>
@@ -218,7 +82,7 @@
       <mat-card-content class="p-24">
         <div class="d-flex align-items-center">
           <span
-            class="icon-56 bg-accent text-white rounded-circle d-flex align-items-center justify-content-center"
+            class="icon-56 bg-error text-white rounded-circle d-flex align-items-center justify-content-center"
           >
             <mat-icon class="f-s-24">not_interested</mat-icon>
           </span>
@@ -239,375 +103,23 @@
 
  
 
-  <div class="col-lg-3  col-sm-6" style="padding-right: 0 !important;">
-    <mat-card class="cardWithShadow text-center" (click)="alertCard()" style="cursor: pointer;">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56 bg-error text-white rounded-circle d-flex align-items-center justify-content-center"
-          >
-            <mat-icon class="f-s-24">announcement</mat-icon>
-          </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class="f-s-20 f-w-500">
-              {{alert_count}}
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-              Alerts
-            </mat-card-subtitle>
-          </div>
-        </div>
-      </mat-card-content>
-      <app-spinner [showSpinner]="isSpinnerVisible['dashAlertCard']">
-      </app-spinner>
-    </mat-card>
-  </div>
 
 
 </div>
 
-<!-- <div class="row">
-
-
-  <div class="col-lg-3 col-sm-6">
-    <mat-card class="cardWithShadow text-center" (click)="patchCard()" style="cursor: pointer;">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56 bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
-          >
-            <mat-icon class="f-s-24">settings</mat-icon>
-          </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class="f-s-20 f-w-500">
-              {{pat_upd_cli}}/{{pat_tol_cli}}
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-              Patch: {{patch_ver}} Version
-            </mat-card-subtitle>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-  <div class="col-lg-3 col-sm-6">
-    <mat-card class="cardWithShadow text-center"  (click)="policyCard()" style="cursor: pointer;">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56  bg-warning  text-white rounded-circle d-flex align-items-center justify-content-center" 
-          >
-            <mat-icon class="f-s-24">assignment_turned_in</mat-icon>
-          </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class="f-s-20 f-w-500">
-              {{pol_upd_cli}}/{{pol_tot_cli}} 
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-               Policy: {{policy_ver}} Version
-            </mat-card-subtitle>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-  <div class="col-lg-3  col-sm-6">
-    <mat-card class="cardWithShadow text-center" (click)="clamAvCard()" style="cursor: pointer;">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56 bg-accent text-white rounded-circle d-flex align-items-center justify-content-center"
-          >
-            <mat-icon class="f-s-24">assignment_returned</mat-icon>
-          </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class="f-s-20 f-w-500">
-              {{clamAvData?.clam_updated_count}}/{{clamAvData?.total_reg}}
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-              ClamAV
-            </mat-card-subtitle>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-
-  <div class="col-lg-3 col-md-3 col-sm-4">
-    <mat-card class="cardWithShadow text-center" (click)="logCard()" style="cursor: pointer;">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56 text-white  bg-error rounded-circle d-flex align-items-center justify-content-center" 
-          >
-            <mat-icon class="f-s-24">autorenew</mat-icon>
-          </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class="f-s-20 f-w-500">
-              {{logRecievedData?.log_received_count}}/{{logRecievedData?.total_reg}}
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-              Logs Received
-            </mat-card-subtitle>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
- 
-
-</div> -->
 
 
 
 
-<div class="row" style="justify-content: center;margin: 0; display: none;">
-    <mat-card class="cardWithShadow text-center flex-fill" style="min-width: 210px; max-width: 230px; cursor: pointer;" (click)="regClientCard()">
-      <mat-card-content class="p-16" style="">
-        <div class="d-flex align-items-center">
-          <span
-          class="icon-56 bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:4px"
-        >
-          <mat-icon class="" style="font-size: 45px !important;height: 45px;width: 45px;" >supervised_user_circle</mat-icon>
-        </span>
-          <div class="m-l-12 text-left" style="width: min-content;">
-            <mat-card-title class=" f-w-400 ">
-              Registered Clients           
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-             <sub style="line-height: 125%;display: flex;
-             justify-content: center;">{{reg_count}}  </sub>
-             
-            </mat-card-subtitle>
-          </div>
-        </div>
-       
-      </mat-card-content>
-    </mat-card>
-    
 
-
-    <!-- <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px">
-      <mat-card-content class="p-24" style="margin: auto;">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56 bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:5px"
-          >
-            <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">settings</mat-icon>
-          </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class="f-s-20 f-w-500">
-              {{patch_ver}} &nbsp; &nbsp; {{pat_upd_cli}}/{{pat_tol_cli}} &nbsp; &nbsp;{{ pat_per_val }}
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-             <sub style="line-height: 125%;">Latest Patch version</sub>
-            </mat-card-subtitle>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card> -->
-
-
-
-    <mat-card class="cardWithShadow text-center flex-fill" style="min-width:200px; max-width: 230px; cursor: pointer;"(click)="patchCard()">
-      <mat-card-content class="p-16" style="margin: auto;">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56 bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:2px"
-          >
-            <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">settings</mat-icon>
-          </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class=" f-w-400 ">
-              Patch &nbsp; <span style="font-size: 18px;font-weight: initial; ">Latest: {{patch_ver}}</span>
-             
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-             <sub style="line-height: 100%;display: flex;
-             justify-content: center;"> {{pat_upd_cli}}/{{pat_tol_cli}}  </sub>
-             <div>
-              <!-- <div class="progress-bar" [style.height.px]="20" style="margin-top: 6px;">
-                <div [style.width.%]=" pat_per_val?.split('.')[0] " class="progress" style="display: flex;
-                justify-content: center;
-                align-content: center;
-                align-items: center;color: white"><span style="font-size: 14px;font-weight:bold">{{pat_per_val?.split('.')[0]}}%</span> </div>
-              </div> -->
-             </div>
-            </mat-card-subtitle>
-          </div>
-        </div>
-
-        <div class="progress-bar" [style.height.px]="20" style="margin-top: 6px; ">
-          <!-- pat_per_val.split('.')[0] -->
-          <div [style.width.%]=" pat_per_val" class="progress" 
-          [style.place-content]="pat_per_val< 20  ? 'flex-start' : 'center' "
-          style="display: flex;
-          
-          align-content: center;
-          color: white; background-color: #ffb22b;"><span style="font-size: 14px;font-weight:bold">{{pat_per_val | number:'1.0-0'}}%</span> </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-    <!-- -----------  -->
-    <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px; max-width: 230px; cursor: pointer;" (click)="policyCard()">
-      <mat-card-content class="p-16" style="margin: auto;">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56  text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:3px; background-color: #abed5b !important;"
-          >
-            <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">assignment_turned_in</mat-icon>
-          </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class=" f-w-400 ">
-              Policy &nbsp; <span style="font-size: 18px;font-weight: initial; ">Latest:  {{policy_ver}}</span>
-             
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-             <sub style="line-height: 125%;display: flex;
-             justify-content: center;"> {{pol_upd_cli}}/{{pol_tot_cli}}  </sub>
-             
-            </mat-card-subtitle>
-          </div>
-        </div>
-        <div class="progress-bar" [style.height.px]="20" style="margin-top: 6px;           ">
-          <div [style.width.%]=" pol_per_val " class="progress"
-          [style.place-content]=" pol_per_val < 20  ? 'flex-start' : 'center' "
-           style="display: flex;
-         
-          align-content: center;
-          color: white; background-color: #abed5b"><span style="font-size: 14px;font-weight:bold">{{pol_per_val | number:'1.0-0'}}%</span> </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px; max-width: 230px; cursor: pointer;"(click)="clamAvCard()">
-      <mat-card-content class="p-24" style="">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56 bg-accent text-white rounded-circle d-flex align-items-center justify-content-center"  style="padding:5px"
-          >
-            <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">assignment_returned</mat-icon>
-          </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class=" f-w-500 ">
-              ClamAv  
-              <!-- &nbsp; <span style="font-size: 18px;font-weight: initial; ">
-                Latest:  {{clamAvData?.clam_updated_count}}
-              </span> -->
-             
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-12">
-             <sub style="line-height: 125%;display: flex;
-             justify-content: center;">{{clamAvData?.clam_updated_count}}/{{clamAvData?.total_reg}}  </sub>
-             
-            </mat-card-subtitle>
-          </div>
-        </div>
-        <div class="progress-bar" [style.height.px]="20" style="margin-top: 20px;           ">
-          <div [style.width.%]=" clamAvData?.clam_updated_percent " class="progress" 
-          [style.place-content]="clamAvData?.clam_updated_percent  <20  ? 'flex-start' : 'center' "
-          style="display: flex;
-          
-          align-content: center;
-          color: white; background-color: #26c6da ">
-          <span style="font-size: 14px;font-weight:bold"
-          
-          >{{clamAvData?.clam_updated_percent  | number:'1.0-0' }}%</span> </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px; max-width: 230px; cursor: pointer;" (click)="logCard()">
-      <mat-card-content class="p-16" style="">
-        <div class="d-flex align-items-center">
-          <span
-          class="icon-56 text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:3px;background-color: #D6D46D;"
-        >
-          <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">autorenew</mat-icon>
-        </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class=" f-w-400 ">
-              Log
-               <!-- &nbsp; 
-              <span style="font-size: 18px;font-weight: initial; ">Latest:  {{logRecievedData?.log_received_count}}</span> -->
-             
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-20">
-             <sub style="line-height: 125%;display: flex;
-             justify-content: center;">{{logRecievedData?.log_received_count}}/{{logRecievedData?.total_reg}}  </sub>
-             
-            </mat-card-subtitle>
-          </div>
-        </div>
-        <div class="progress-bar" [style.height.px]="20" style="margin-top: 20px;">
-          <div [style.width.%]=" logRecievedData?.log_received_percent" 
-          class="progress" 
-          [style.place-content]=" logRecievedData?.log_received_percent < 20  ? 'flex-start' : 'center' "
-          style="display: flex;
-         
-          align-content: center;
-          color: white; background-color: #D6D46D"><span style="font-size: 14px;font-weight:bold">{{logRecievedData?.log_received_percent | number:'1.0-0'}}%</span> </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="cardWithShadow text-center flex-fill" style="min-width:220px; max-width: 230px; cursor: pointer;" (click)="alertCard()">
-      <mat-card-content class="p-24" style="">
-        <div class="d-flex align-items-center">
-          <span
-          class="icon-56 bg-error text-white rounded-circle d-flex align-items-center justify-content-center" style="padding:3px"
-        >
-          <mat-icon style="font-size: 45px !important;height: 45px;width: 45px;">announcement</mat-icon>
-        </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class=" f-w-400 ">
-              Alerts
-               <!-- &nbsp; 
-              <span style="font-size: 18px;font-weight: initial; ">Latest:  {{logRecievedData?.log_received_count}}</span> -->
-             
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-18">
-             <sub style="line-height: 125%;display: flex;
-             justify-content: center;">{{alert_count}}  </sub>
-             
-            </mat-card-subtitle>
-          </div>
-        </div>
-        <!-- <div class="progress-bar" [style.height.px]="20" style="margin-top: 6px;">
-          <div [style.width.%]=" logRecievedData?.log_received_percent" 
-          class="progress" 
-          [style.place-content]=" logRecievedData?.log_received_percent < 20  ? 'flex-start' : 'center' "
-          style="display: flex;
-         
-          align-content: center;
-          color: white; background-color: #fc4b6c"><span style="font-size: 14px;font-weight:bold">{{logRecievedData?.log_received_percent | number:'1.0-0'}}%</span> </div>
-        </div> -->
-      </mat-card-content>
-      <!-- <app-spinner [showSpinner]="isSpinnerVisible['card1']">
-      </app-spinner> -->
-    </mat-card>
-
-  </div>
 
   <app-dashboard-charts2></app-dashboard-charts2>
 
+  <!-- <app-date-range-alert></app-date-range-alert> -->
+
   <app-dashboard-charts></app-dashboard-charts>
 
+
+
   
   
-
-  <!-- <app-spinner></app-spinner> -->
-
-  <!-- <div style="width: 500px; height: 500px; border: 2px solid black; margin-right: 30px; position: relative; background-color: bisque;">
-    3 my content 1s \<br> fdsfdsds \<br> fdsfdsds\<br> fdsfdsds\<br> fdsfdsds\<br> fdsfdsds\<br> fdsfdsds\<br> fdsfdsds\<br> fdsfdsds\<br> fdsfdsds\<br> fdsfdsd
-    <app-spinner [showSpinner]="isSpinnerVisible['card1']">
-    </app-spinner>
-</div>
-
-  <button (click)="sampleShow()">show button for first spinner</button>
-<button (click)="sampleHide()">hide button for first spinner</button> -->

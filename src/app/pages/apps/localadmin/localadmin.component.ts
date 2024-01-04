@@ -1,5 +1,5 @@
- import { Component, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
+ import { Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, ValidatorFn, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonServicesService } from 'src/app/services/common-services.service';
 import Swal from 'sweetalert2';
@@ -17,11 +17,26 @@ export class LocaladminComponent {
   unitName: any;
   unitType: any;
 
+
+  // search select 
+  @ViewChild('input') input: ElementRef<HTMLInputElement>;
+  myControl = new FormControl('');
+  // options: any
+  filteredOptions: any;
+
+  options: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private common: CommonServicesService,
     private spinner: NgxSpinnerService
   ) {
+
+    // select filter 
+    this.filteredOptions = this.options.slice();
+
+
+
     this.secondFormGroup = this.fb.group({
       username: ['', [Validators.required, Validators.pattern(/^.{0,10}$/)]],
       email: [
@@ -45,7 +60,17 @@ export class LocaladminComponent {
     );
   }
 
+  // select filter 
+  filter(): void {
+    const filterValue = this.input.nativeElement.value.toLowerCase();
+    this.filteredOptions = this.options.filter(
+      (o: any) => o.unit_name.toLowerCase().includes(filterValue)
+    );
+  }
+  
+
   ngOnInit(): void {
+    this.options = [];
     this.unitNameLocalAdminfun();
     this.unitTypeLocalAdminfun();
   }
@@ -65,6 +90,7 @@ export class LocaladminComponent {
       if (res.api_status === true) {
         this.spinner.hide();
         this.unitName = res.data;
+        this.options = res.data
       } else {
         this.spinner.hide();
         Swal.fire({

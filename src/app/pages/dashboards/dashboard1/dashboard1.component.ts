@@ -11,7 +11,6 @@ import {
   AppSalesOverviewComponent,
   AppWeatherCardComponent,
   AppTopCardsComponent,
-  
 } from 'src/app/components';
 
 import { NgForOf } from '@angular/common';
@@ -40,34 +39,33 @@ import { RegesteredClientPopUpComponent } from './regestered-client-pop-up/reges
 import { DeletedClientPopUpComponent } from './deleted-client-pop-up/deleted-client-pop-up.component';
 import { BlockedClientPopUpComponent } from './blocked-client-pop-up/blocked-client-pop-up.component';
 import { DashboardCharts2Component } from './dashboard-charts2/dashboard-charts2.component';
+import { DateRangeAlertComponent } from './date-range-alert/date-range-alert.component';
+import { TotalActiveClientListComponent } from 'src/app/layouts/full/vertical/header/total-active-client-list/total-active-client-list.component';
 // import { AppSalesOurVisitorsComponent as AppSalesOurVisitorsComponent } from "../../../components/dashboard1/our-visitors/our-visitors.component";
 
-
-
 @Component({
-    selector: 'app-dashboard1',
-    standalone: true,
-    templateUrl: './dashboard1.component.html',
-    styleUrls: ['./dashboard1.component.scss'],
-    imports: [
-        MatIconModule,
-        MatNativeDateModule,
-        CommonModule,
-        MatCardModule,
-        AppSalesOurVisitorsComponent,
-        PatchPopUpComponent,
-        PolicyPopUpComponent,
-        ClamAvPopUpComponent,
-        LogPopUpComponent,
-        DashboardChartsComponent,
-        DashboardCharts2Component,
-        // LastCommuniAlertpopComponent,
-        SpinnerComponent
-    ]
+  selector: 'app-dashboard1',
+  standalone: true,
+  templateUrl: './dashboard1.component.html',
+  styleUrls: ['./dashboard1.component.scss'],
+  imports: [
+    MatIconModule,
+    MatNativeDateModule,
+    CommonModule,
+    MatCardModule,
+    AppSalesOurVisitorsComponent,
+    PatchPopUpComponent,
+    PolicyPopUpComponent,
+    ClamAvPopUpComponent,
+    LogPopUpComponent,
+    DashboardChartsComponent,
+    DashboardCharts2Component,
+    DateRangeAlertComponent,
+    // LastCommuniAlertpopComponent,
+    SpinnerComponent,
+  ],
 })
 export class AppDashboard1Component {
-
-
   reg_count: any;
   policy_ver: any;
   patch_ver: any;
@@ -88,7 +86,9 @@ export class AppDashboard1Component {
   deletedClientCount: any;
   blockedClientdCount: any;
 
-  componentName : any
+  componentName: any;
+
+  totalActiveClients: any;
 
   constructor(
     private common: CommonServicesService,
@@ -107,53 +107,28 @@ export class AppDashboard1Component {
       }
     });
 
-    // this.common.policyver().subscribe((res) => {
-    //   // console.log('res1', res);
-    //   if (res.api_status === true) {
-    //     this.policy_ver = res.latest_policy_version;
-    //     this.pol_tot_cli = res.total_clients;
-    //     this.pol_upd_cli = res.updated_clients;
-    //     this.pol_per_val = res.policy_percentage;
-    //   }
-    // });
+    this.blockedClientAPI();
+    this.deletedClientAPI();
 
-    // this.common.patchver().subscribe((res) => {
-    //   // console.log('res2', res);
-    //   if (res.api_status === true) {
-    //     this.patch_ver = res.latest_patch_version;
-    //     this.pat_tol_cli = res.total_clients;
-    //     this.pat_upd_cli = res.updated_clients;
-    //     this.pat_per_val = res.patch_percentage;
-    //   }
-    // });
-
-    // this.clamAvAPI();
-    // this.logReceivedAPI();
-
-    this.alertAPI();
-
-    this.blockedClientAPI()
-    this.deletedClientAPI()
-    
+    this.totalActiveClientApi();
   }
 
-  alertAPI(){
-    this.isSpinnerVisible['dashAlertCard'] = true;
+  // alertAPI(){
+  //   this.isSpinnerVisible['dashAlertCard'] = true;
 
-    this.common.alertinfo().subscribe( (res) => {
-    this.isSpinnerVisible['dashAlertCard'] = false;
+  //   this.common.alertinfo().subscribe( (res) => {
+  //   this.isSpinnerVisible['dashAlertCard'] = false;
 
-      console.log('res alert', res)
+  //     console.log('res alert', res)
 
-      if(res.api_status == true)
-      {
-        this.alert_count = res.total_count;
-      }
-    }
+  //     if(res.api_status == true)
+  //     {
+  //       this.alert_count = res.total_count;
+  //     }
+  //   }
 
-    );
-  }
-
+  //   );
+  // }
 
   // clamAvAPI() {
   //   this.spinner.show();
@@ -214,7 +189,7 @@ export class AppDashboard1Component {
     this.deletedClientCount = '';
     this.common.dashboardDeletedClients().subscribe(
       (res: any) => {
-    this.isSpinnerVisible['dashDeleteClientCard'] = false;
+        this.isSpinnerVisible['dashDeleteClientCard'] = false;
 
         if (res.api_status === true) {
           this.spinner.hide();
@@ -230,6 +205,7 @@ export class AppDashboard1Component {
       },
       (error) => {
         this.spinner.hide();
+        this.isSpinnerVisible['dashDeleteClientCard'] = false;
 
         this.common.apiErrorHandler(error);
         // console.log('eerror---', error);
@@ -244,7 +220,7 @@ export class AppDashboard1Component {
     this.blockedClientdCount = '';
     this.common.dashboardBlockClients().subscribe(
       (res: any) => {
-    this.isSpinnerVisible['dashBlockClientCard'] = false;
+        this.isSpinnerVisible['dashBlockClientCard'] = false;
 
         if (res.api_status === true) {
           this.spinner.hide();
@@ -260,6 +236,7 @@ export class AppDashboard1Component {
       },
       (error) => {
         this.spinner.hide();
+        this.isSpinnerVisible['dashBlockClientCard'] = false;
 
         this.common.apiErrorHandler(error);
         // console.log('eerror---', error);
@@ -267,87 +244,93 @@ export class AppDashboard1Component {
     );
   }
 
- 
   regClientCard() {
-
-    this.componentName = RegesteredClientPopUpComponent
-    this.openDialogPolicy(this.componentName)
-    // this.router.navigate(['/apps/clientAdministration']);
-    
-    // this.common.triggerClientStatusFunction(1);
-    // console.log('regClientCard function called');
-
+    this.componentName = RegesteredClientPopUpComponent;
+    this.openDialogPolicy(this.componentName);
   }
-  
+
   patchCard() {
     console.log('patchCard function called');
-    this.componentName = PatchPopUpComponent
-    this.openDialogPolicy(this.componentName)
-    
+    this.componentName = PatchPopUpComponent;
+    this.openDialogPolicy(this.componentName);
   }
-  
+
   policyCard() {
     console.log('policyCard function called');
-    this.componentName = PolicyPopUpComponent
-    this.openDialogPolicy(this.componentName)
+    this.componentName = PolicyPopUpComponent;
+    this.openDialogPolicy(this.componentName);
   }
-  
+
   clamAvCard() {
     console.log('clamAvCard function called');
-    this.componentName = ClamAvPopUpComponent
-    this.openDialogPolicy(this.componentName)
-    
+    this.componentName = ClamAvPopUpComponent;
+    this.openDialogPolicy(this.componentName);
   }
-  
+
   logCard() {
     console.log('logCard function called');
-    this.componentName = LogPopUpComponent
-    this.openDialogPolicy(this.componentName)
-    
-  } 
-
-  alertCard(){
-    console.log("alert card function called")
-    this.componentName = AlertContentComponent;
-    this.openDialogPolicy(this.componentName)
+    this.componentName = LogPopUpComponent;
+    this.openDialogPolicy(this.componentName);
   }
 
-lastcommun()
-{
-  console.log("last communication alert function")
-  this.componentName = LastCommuniAlertpopComponent;
-  this.openDialogPolicy(this.componentName)
-}
+  alertCard() {
+    console.log('alert card function called');
+    this.componentName = AlertContentComponent;
+    this.openDialogPolicy(this.componentName);
+  }
 
-bolckClientCard(){
-  console.log("alert card function called")
-  this.componentName = BlockedClientPopUpComponent;
-  this.openDialogPolicy(this.componentName)
-}
+  lastcommun() {
+    console.log('last communication alert function');
+    this.componentName = LastCommuniAlertpopComponent;
+    this.openDialogPolicy(this.componentName);
+  }
 
-deleteClientCard(){
-  console.log("alert card function called")
-  this.componentName = DeletedClientPopUpComponent;
-  this.openDialogPolicy(this.componentName)
-}
-  
+  bolckClientCard() {
+    console.log('alert card function called');
+    this.componentName = BlockedClientPopUpComponent;
+    this.openDialogPolicy(this.componentName);
+  }
+
+  deleteClientCard() {
+    console.log('alert card function called');
+    this.componentName = DeletedClientPopUpComponent;
+    this.openDialogPolicy(this.componentName);
+  }
 
   //  i = PolicyPopUpComponent
-  openDialogPolicy(componentName : any) {
+  openDialogPolicy(componentName: any) {
     const dialogRef = this.dialog.open(componentName);
 
-    dialogRef.afterClosed().subscribe((result) => {
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   isSpinnerVisible: { [key: string]: boolean } = {};
 
-  sampleShow(){
-    this.isSpinnerVisible['card1'] = true;
+  totalActiveClientApi() {
+    this.isSpinnerVisible['dashActiveClientCard'] = true;
+
+    this.common.totalActiveClients().subscribe(
+      (res) => {
+        this.isSpinnerVisible['dashActiveClientCard'] = false;
+
+        if (res.api_status) {
+          this.totalActiveClients = res.reg_count;
+          console.log('success changed');
+          console.log('total count', res, this.totalActiveClients);
+        } else {
+        }
+      },
+      (err) => {
+        this.isSpinnerVisible['dashActiveClientCard'] = false;
+
+        console.log('Error: ', err);
+      }
+    );
   }
 
-  sampleHide(){
-    this.isSpinnerVisible['card1'] = false;
-  }
+  totalActiveClientList() {
+    const dialogRef = this.dialog.open(TotalActiveClientListComponent);
 
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
 }

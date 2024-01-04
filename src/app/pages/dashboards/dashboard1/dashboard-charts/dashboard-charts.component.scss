@@ -1,38 +1,9 @@
-// .mat-mdc-form-field-subscript-wrapper{
-//     display: none !important;
-// }
 
-// .mat-mdc-form-field-bottom-align {
-//     display: none !important;
-// }
-
-.mdc-text-field--filled:not(.mdc-text-field--disabled) {
-    background-color: white !important;
-    border-radius: 0.5rem;
-}
-
-// .mdc-text-field--filled{
-//     background-color: blue !important;
-// }
-// .mat-mdc-text-field-wrapper {
-//     background-color: pink !important;
-// }
-
-// .mdc-text-field  {
+// .mdc-text-field--filled:not(.mdc-text-field--disabled) {
 //     background-color: white !important;
+//     border-radius: 0.5rem;
 // }
 
-// .apexcharts-legend-text{
-//     font-size: 18px !important;
-// }
-
-.mat-mdc-form-field-subscript-wrapper{
-    // display: none !important;
-}
-
-.hideToolTip .apexcharts-tooltip {
-    display: none !important;
-}
 
 .apexcharts-legend-text{
     font-size:14px !important;
@@ -44,4 +15,7 @@
     justify-content: center;
     height: 100%; /* Adjust as needed */
   }
-  
+
+.hide-hint .mat-mdc-form-field-subscript-wrapper{
+    display: none !important;
+  }

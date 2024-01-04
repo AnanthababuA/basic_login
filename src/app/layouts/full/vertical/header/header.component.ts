@@ -20,6 +20,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { CommonServicesService } from 'src/app/services/common-services.service';
 import { LastCommuniAlertpopComponent } from 'src/app/pages/dashboards/dashboard1/last-communi-alertpop/last-communi-alertpop.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { TotalActiveClientListComponent } from './total-active-client-list/total-active-client-list.component';
+import { AlertContentComponent } from 'src/app/pages/dashboards/dashboard1/alert-content/alert-content.component';
 
 interface notifications {
   id: number;
@@ -49,13 +52,13 @@ interface profiledd {
   imports: [RouterModule, MaterialModule, TablerIconsModule, FormsModule, NgForOf],
   templateUrl: 'search-dialog.component.html',
   styleUrls: ['header.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppSearchDialogComponent {
   searchText: string = '';
   navItems = navItems;
 
-  lastalert: any;
-
+  
   componentName : any
 
   navItemsData = navItems.filter((navitem) => navitem.displayName);
@@ -81,42 +84,19 @@ export class HeaderComponent {
   @Output() toggleMobileFilterNav = new EventEmitter<void>();
   @Output() toggleCollapsed = new EventEmitter<void>();
 
+  lastalert_count: any;
+  totalActiveClients: any;
+  alert_count:any
+
   showFiller = false;
 
   userName = this.ts.getUser();
 
   userType = this.ts.getUserType()
 
-  public selectedLanguage: any = {
-    language: 'English',
-    code: 'en',
-    type: 'US',
-    icon: '/assets/images/flag/icon-flag-en.svg',
-  };
+  
 
-  public languages: any[] = [
-    {
-      language: 'English',
-      code: 'en',
-      type: 'US',
-      icon: '/assets/images/flag/icon-flag-en.svg',
-    },
-    {
-      language: 'Español',
-      code: 'es',
-      icon: '/assets/images/flag/icon-flag-es.svg',
-    },
-    {
-      language: 'Français',
-      code: 'fr',
-      icon: '/assets/images/flag/icon-flag-fr.svg',
-    },
-    {
-      language: 'German',
-      code: 'de',
-      icon: '/assets/images/flag/icon-flag-de.svg',
-    },
-  ];
+  
   componentName: typeof LastCommuniAlertpopComponent;
 
   constructor(
@@ -124,6 +104,7 @@ export class HeaderComponent {
     public dialog: MatDialog,
     private translate: TranslateService,
     private ts: TokenStorageService, private router: Router, private auth: AuthService, private cs: CommonServicesService
+    
   ) {
     translate.setDefaultLang('en');
   }
@@ -150,100 +131,6 @@ export class HeaderComponent {
     }
   
 
-  changeLanguage(lang: any): void {
-    this.translate.use(lang.code);
-    this.selectedLanguage = lang;
-  }
-
-  notifications: notifications[] = [
-    {
-      id: 1,
-      img: '/assets/images/profile/user-1.jpg',
-      title: 'Roman Joined the Team!',
-      subtitle: 'Congratulate him',
-    },
-    {
-      id: 2,
-      img: '/assets/images/profile/user-2.jpg',
-      title: 'New message received',
-      subtitle: 'Salma sent you new message',
-    },
-    {
-      id: 3,
-      img: '/assets/images/profile/user-3.jpg',
-      title: 'New Payment received',
-      subtitle: 'Check your earnings',
-    },
-    {
-      id: 4,
-      img: '/assets/images/profile/user-4.jpg',
-      title: 'Jolly completed tasks',
-      subtitle: 'Assign her new tasks',
-    },
-    {
-      id: 5,
-      img: '/assets/images/profile/user-5.jpg',
-      title: 'Roman Joined the Team!',
-      subtitle: 'Congratulate him',
-    },
-  ];
-
-  msgs: msgs[] = [
-    {
-      id: 1,
-      img: '/assets/images/profile/user-1.jpg',
-      title: 'Andrew McDownland',
-      subtitle: 'Message blocked. Try Again',
-    },
-    {
-      id: 2,
-      img: '/assets/images/profile/user-2.jpg',
-      title: 'Christopher Jamil',
-      subtitle: 'This message cannot be sent',
-    },
-    {
-      id: 3,
-      img: '/assets/images/profile/user-3.jpg',
-      title: 'Julia Roberts',
-      subtitle: 'You are trying to reach location.',
-    },
-    {
-      id: 4,
-      img: '/assets/images/profile/user-4.jpg',
-      title: 'James Johnson',
-      subtitle: 'Assign her new tasks',
-    },
-    {
-      id: 5,
-      img: '/assets/images/profile/user-5.jpg',
-      title: 'Maria Rodriguez',
-      subtitle: 'Congrats for your success',
-    },
-  ];
-
-  profiledd: profiledd[] = [
-    {
-      id: 1,
-      img: '/assets/images/svgs/icon-account.svg',
-      title: 'My Profile',
-      subtitle: 'Account Settings',
-      link: '/',
-    },
-    {
-      id: 2,
-      img: '/assets/images/svgs/icon-inbox.svg',
-      title: 'My Inbox',
-      subtitle: 'Messages & Email',
-      link: '/apps/email/inbox',
-    },
-    {
-      id: 3,
-      img: '/assets/images/svgs/icon-tasks.svg',
-      title: 'My Tasks',
-      subtitle: 'To-do and Daily Tasks',
-      link: '/apps/taskboard',
-    },
-  ];
 
   ngOnInit(): void {
 
@@ -257,6 +144,8 @@ export class HeaderComponent {
     // console.log("userType log 99999...", this.formatUserName(this.userType));
 
     this.lastalert();
+    this.totalActiveClientApi()
+    this.alertAPI()
     
   }
 
@@ -280,13 +169,74 @@ lastalert(){
     console.log('res', res);
 
     if(res.api_status == true){
-      this.lastalert = res.count;
+      this.lastalert_count = res.count;
       console.log('last count', this.lastalert)
     }
 
   }
   );
 }
+
+totalActiveClientApi() {
+  this.cs.totalActiveClients().subscribe(
+    (res) => {
+      if (res.api_status) {
+
+        this.totalActiveClients = res.reg_count;
+        console.log('success changed');
+console.log("total count", res, this.totalActiveClients);
+
+      } else {
+        
+      }
+    },
+    (err) => {
+      console.log('Error: ', err);
+    }
+  );
+
+ 
+}
+
+totalActiveClientList() {
+  
+
+  const dialogRef = this.dialog.open(TotalActiveClientListComponent);
+
+  dialogRef.afterClosed().subscribe((result) => {
+  });
+}
+
+alertAPI(){
+
+  this.cs.alertinfo().subscribe( (res) => {
+  
+
+    console.log('res alert', res)
+
+    if(res.api_status == true)
+    {
+      this.alert_count = res.total_count;
+
+      console.log("alert count", this.alert_count
+      
+      
+      
+      );
+      
+    }
+  }
+
+  );
+}
+
+alertContentPopUp(){
+  const dialogRef = this.dialog.open(AlertContentComponent);
+
+  dialogRef.afterClosed().subscribe((result) => {
+  });
+}
+
 
 openDialogPolicy(componentName : any) {
   const dialogRef = this.dialog.open(componentName);
@@ -301,6 +251,25 @@ lastcommun(){
   console.log("last communication alert function")
   this.componentName = LastCommuniAlertpopComponent;
   this.openDialogPolicy(this.componentName)
+}
+
+changePassword(){
+  console.log("change password");
+
+  // this.componentName = ChangePasswordComponent;
+  // this.openDialogPolicy(this.componentName)
+
+  this.openDialogChangePass()
+  
+  }
+
+  openDialogChangePass() {
+    const dialogRef = this.dialog.open(ChangePasswordComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  
 }
 
 }

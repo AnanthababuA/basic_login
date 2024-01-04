@@ -19,12 +19,22 @@
                       {{ item.unit_name }}
                     </mat-option>
 
-          
-
-                    <!-- <mat-option value="0100">0100</mat-option>
-                    <mat-option value="0101">0101</mat-option>
-                    <mat-option value="0102">0102</mat-option> -->
                   </mat-select>
+
+                  <!-- <input #input
+           type="text"
+           placeholder="Select Unit Name"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto"
+           (input)="filter()"
+           (focus)="filter()">
+    <mat-autocomplete requireSelection #auto="matAutocomplete" required>
+      <mat-option *ngFor="let item of filteredOptions" [value]="item.unit_name">
+        {{item.unit_name}}
+      </mat-option>
+    </mat-autocomplete> -->
+
                   <mat-error *ngIf="secondFormGroup?.get('unitid')?.hasError('required')">
                     Unit Name Is Required
                   </mat-error>
@@ -202,5 +212,26 @@
     <p class="text-white"> {{ loaderStatus }} </p>
   </ngx-spinner> -->
 
+
+
+
+
+<!-- <form class="example-form">
+  <mat-form-field class="example-full-width" appearance="outline">
+    <input #input
+           type="text"
+           placeholder="Pick one"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto"
+           (input)="filter()"
+           (focus)="filter()">
+    <mat-autocomplete requireSelection #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form> -->
 
   

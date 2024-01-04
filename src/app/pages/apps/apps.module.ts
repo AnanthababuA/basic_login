@@ -109,6 +109,8 @@ import { BlockClientListComponent } from './client-administraion/block-client-li
 import { BlockClientFormComponent } from './client-administraion/block-client/block-client-form/block-client-form.component';
 import { UnblockClientFormComponent } from './client-administraion/block-client-list/unblock-client-form/unblock-client-form.component';
 import { SpinnerComponent } from '../dashboards/dashboard1/spinner/spinner.component';
+import { UsbViolationComponent } from './usb-violation/usb-violation.component';
+// import { MatMomentDateModule } from '@angular/material-moment-adapter';
 // import { DeleteClientFormComponent } from './client-administraion/deletedClient/delete-client-form/delete-client-form.component';
 
 
@@ -132,7 +134,7 @@ import { SpinnerComponent } from '../dashboards/dashboard1/spinner/spinner.compo
     //   useFactory: adapterFactory,
     // }),
     MatNativeDateModule,
-    NgScrollbarModule,MatIconModule, SpinnerComponent
+    NgScrollbarModule,MatIconModule, SpinnerComponent,
   ],
   exports: [TablerIconsModule],
   declarations: [
@@ -192,6 +194,7 @@ import { SpinnerComponent } from '../dashboards/dashboard1/spinner/spinner.compo
     BlockClientListComponent,
     BlockClientFormComponent,
     UnblockClientFormComponent,
+    UsbViolationComponent,
     
   ],
   providers: [DatePipe],
