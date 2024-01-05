@@ -110,9 +110,11 @@ import { BlockClientFormComponent } from './client-administraion/block-client/bl
 import { UnblockClientFormComponent } from './client-administraion/block-client-list/unblock-client-form/unblock-client-form.component';
 import { SpinnerComponent } from '../dashboards/dashboard1/spinner/spinner.component';
 import { UsbViolationComponent } from './usb-violation/usb-violation.component';
+import { SelectSearchComponent } from './select-search/select-search.component';
 // import { MatMomentDateModule } from '@angular/material-moment-adapter';
 // import { DeleteClientFormComponent } from './client-administraion/deletedClient/delete-client-form/delete-client-form.component';
-
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -135,6 +137,7 @@ import { UsbViolationComponent } from './usb-violation/usb-violation.component';
     // }),
     MatNativeDateModule,
     NgScrollbarModule,MatIconModule, SpinnerComponent,
+    NgxMatSelectSearchModule,MatSelectModule
   ],
   exports: [TablerIconsModule],
   declarations: [
@@ -195,6 +198,7 @@ import { UsbViolationComponent } from './usb-violation/usb-violation.component';
     BlockClientFormComponent,
     UnblockClientFormComponent,
     UsbViolationComponent,
+    SelectSearchComponent,
     
   ],
   providers: [DatePipe],

@@ -11,6 +11,33 @@ import Swal from 'sweetalert2';
   encapsulation: ViewEncapsulation.None,
 })
 export class LocaladminComponent {
+
+
+  unitNameUpdated: any = [];
+  unitTypeUpdated: any = [];
+
+  selectedBank1: any = null;
+  selectedBank2: any | null = null;
+  selectedBank3: any | null = null;
+
+  onBankSelected(bank: any, selectNumber: number) {
+    if (selectNumber === 1) {
+      this.selectedBank1 = bank;
+      console.log("selectd value", this.selectedBank1.id);
+      this.secondFormGroup.value.unitid =  this.selectedBank1.id;
+      console.log("form data..,",this.secondFormGroup.value);
+      
+    } else if (selectNumber === 2) {
+      this.selectedBank2 = bank;
+    } else if (selectNumber === 3) {
+      this.selectedBank3 = bank;
+    }
+  }
+  // @ViewChild(SelectSearchComponent) selectSearch!: SelectSearchComponent; // ViewChild reference
+
+
+
+
   passwordVisible: boolean = false;
   cpasswordVisible: boolean = false;
   secondFormGroup: FormGroup;
@@ -38,7 +65,7 @@ export class LocaladminComponent {
 
 
     this.secondFormGroup = this.fb.group({
-      username: ['', [Validators.required, Validators.pattern(/^.{0,10}$/)]],
+      username: [''],
       email: [
         '',
         [
@@ -51,8 +78,8 @@ export class LocaladminComponent {
         [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,16}$/)],
       ],
       cpassword: ['', Validators.required],
-      unitid: ['', Validators.required],
-      usertype: ['', Validators.required],
+      unitid: [''],
+      usertype: [''],
     }, 
     {
       validator: this.matchPasswordValidator('password', 'cpassword')
@@ -91,6 +118,13 @@ export class LocaladminComponent {
         this.spinner.hide();
         this.unitName = res.data;
         this.options = res.data
+
+        this.unitNameUpdated = this.unitName.map((unit: any, index: any) => ({
+          id: unit.unit_id,
+          name: unit.unit_name
+        }));
+
+
       } else {
         this.spinner.hide();
         Swal.fire({
@@ -111,6 +145,16 @@ export class LocaladminComponent {
       if (res.api_status === true) {
         this.spinner.hide();
         this.unitType = res.data;
+
+        console.log("unit type", this.unitType);
+        
+
+        // this.unitNameUpdated = this.unitName.map((unit: any, index: any) => ({
+        //   id: unit.unit_id,
+        //   name: unit.unit_name
+        // }));
+
+
       } else {
         this.spinner.hide();
         Swal.fire({

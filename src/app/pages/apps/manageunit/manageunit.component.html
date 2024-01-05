@@ -18,8 +18,9 @@
                   align-items: center !important;">Parent Unit</mat-label>
                   <span class="hintText" style="font-size: 0.8rem; margin-left: 10px; color: gray;">&nbsp; </span>
                 </div>
+                <app-select-search [errorMessage]="'Parent Unit is Required'" [selectData]="unitNameUpdated" (bankSelected)="onBankSelected($event, 1)"></app-select-search>
 
-                <mat-form-field appearance="outline" class="w-100" color="primary">
+                <!-- <mat-form-field appearance="outline" class="w-100" color="primary">
                   <mat-select placeholder="Select" formControlName="unitid" required>
 
                     <mat-option *ngFor="let item of unitName" [value]="item.unit_id">
@@ -30,7 +31,7 @@
                   <mat-error *ngIf="secondFormGroup?.get('unitid')?.hasError('required')">
                     Parent Unit Is Required
                   </mat-error>
-                </mat-form-field>
+                </mat-form-field> -->
               </div>
 
               <div class="col-lg-6" >
@@ -116,8 +117,18 @@
 
             </mat-form-field>
           </div>
+
+
+          <!-- select search -->
+          <!-- <div class="select-container">
+          <app-select-search [selectData]="unitNameUpdated" (bankSelected)="onBankSelected($event, 1)"></app-select-search>
+        </div>
+        <p>Selected Bank 1: {{ selectedBank1?.name }}</p> -->
+          <!-- select search -->
+
+
           <div class="m-t-12">
-            <button mat-flat-button color="primary" (click)="submit()" [disabled]="secondFormGroup.invalid">Add
+            <button mat-flat-button color="primary" (click)="submit()" [disabled]="selectedBank1 === null || secondFormGroup.invalid  ">Add
               Unit</button>
             <button mat-flat-button color="warn" class="m-l-8" type="reset">Reset</button>
 

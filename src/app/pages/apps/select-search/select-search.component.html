@@ -1,0 +1,15 @@
+<mat-form-field appearance="outline" style="width:100%">
+    <mat-select placeholder="Select" [formControl]="selectCtrl">
+        <mat-option style="background-color: white;">
+
+            <ngx-mat-select-search [formControl]="SelectFilterCtrl" placeholderLabel="Search Here" noEntriesFoundLabel = 'No entries'></ngx-mat-select-search>
+        </mat-option>
+      <mat-option *ngFor="let select of filteredSelect | async" [value]="select" (click)="onBankSelected(select)">
+        {{ select.name }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="selectCtrl.hasError('required')">{{errorMessage}}</mat-error>
+  </mat-form-field>
+
+  
+  

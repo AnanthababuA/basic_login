@@ -87,13 +87,13 @@
 
             <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16" style="margin-bottom: 0 !important;
             display: flex !important;
-            align-items: center !important;">Description
+            align-items: center !important;">Purpose
             </mat-label>
             <span class="hintText" style="font-size: 0.8rem; margin-left: 10px; color: gray;">* Maximum 200 Characters</span>
           </div>
     
           <mat-form-field appearance="outline" class="w-100" color="primary">
-            <textarea  rows="5" matInput type="text" formControlName="designation" placeholder="Enter Description" required></textarea>
+            <textarea  rows="5" matInput type="text" formControlName="designation" placeholder="Enter Purpose" required></textarea>
 
             <!-- <input matInput type="text" formControlName="designation" placeholder="Enter Designation" required /> -->
             <mat-icon matPrefix>
@@ -101,10 +101,10 @@
             </mat-icon>
     
             <mat-error *ngIf="genOtpForm.get('designation')?.hasError('required')">
-              Description Is Required
+              Purpose Is Required
             </mat-error>
             <mat-error *ngIf="genOtpForm.get('designation')?.hasError('pattern') && genOtpForm.get('designation')?.invalid">
-              Description Should Be Maximum 200 Characters
+              Purpose Should Be Maximum 200 Characters
             </mat-error>
           </mat-form-field>
         </div>
@@ -132,10 +132,10 @@
               <i-tabler name="star" class="icon-20 d-flex"></i-tabler>
             </mat-icon>
             <mat-error *ngIf="genOtpForm.get('rank')?.hasError('required')">
-              Rank Is Required
+              Remarks Is Required
             </mat-error>
             <mat-error *ngIf="genOtpForm.get('rank')?.hasError('pattern') && genOtpForm.get('rank')?.invalid">
-              Remark Should Be Maximum 200 Characters
+              Remarks Should Be Maximum 200 Characters
             </mat-error>
           </mat-form-field>
         </div>

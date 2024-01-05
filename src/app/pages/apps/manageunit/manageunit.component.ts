@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SelectSearchComponent } from '../select-search/select-search.component';
 
 
 
@@ -30,6 +31,49 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class ManageunitComponent {
  
 
+  unitNameUpdated: any = [];
+  // selectData: any = [
+  //   { id: 'bank1', name: 'Bank One' },
+  //   { id: 'bank2', name: 'Bank Two' },
+  //   { id: 'bank3', name: 'Bank Three' },
+  //   { id: 'bank31', name: 'Bank Three' }
+  // ];
+
+  selectedBank1: any = null;
+  selectedBank2: any | null = null;
+  selectedBank3: any | null = null;
+
+  onBankSelected(bank: any, selectNumber: number) {
+    if (selectNumber === 1) {
+      this.selectedBank1 = bank;
+      console.log("selectd value", this.selectedBank1.id);
+      this.secondFormGroup.value.unitid =  this.selectedBank1.id;
+      console.log("form data..,",this.secondFormGroup.value);
+      
+    } else if (selectNumber === 2) {
+      this.selectedBank2 = bank;
+    } else if (selectNumber === 3) {
+      this.selectedBank3 = bank;
+    }
+  }
+  @ViewChild(SelectSearchComponent) selectSearch!: SelectSearchComponent; // ViewChild reference
+
+ 
+
+  // resetSelectData() {
+
+  //   console.log("reset field");
+    
+  //   // Reset the value and reassign the original value after a short delay
+  //   this.unitNameUpdated = null; // Reset the data
+
+  //   // Reassign the original value after a delay (e.g., 100ms)
+  //   // setTimeout(() => {
+  //   //   this.unitNameUpdated = this.originalUnitNameUpdated;
+  //   // }, 100);
+  // }
+
+
   dtOptions: any = {};
   // dtOptions: any;
   // dtTrigger: Subject<any> = new Subject<any>();
@@ -41,9 +85,8 @@ export class ManageunitComponent {
 
   manageUnitDetails: any[] = [];
   unitName: any;
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
+ 
+
 
   unitDetails = {
     unit_id: '',
@@ -64,7 +107,7 @@ export class ManageunitComponent {
       '',
       [Validators.required, Validators.pattern(/^[\s\S]{0,200}$/)],
     ],
-    unitid: ['', Validators.required],
+    unitid: [''],
   });
 
 
@@ -166,6 +209,17 @@ export class ManageunitComponent {
           this.spinner.hide();
 
           this.unitName = res.data;
+          console.log("unit Name", this.unitName);
+          
+          this.unitNameUpdated = this.unitName.map((unit: any, index: any) => ({
+            id: unit.unit_id,
+            name: unit.unit_name
+          }));
+
+          console.log("unit Name updated", this.unitNameUpdated);
+
+
+          
 
           this.spinner.hide();
         } else {
@@ -305,46 +359,29 @@ export class ManageunitComponent {
   }
 
   submit() {
-    // console.log('submit');
-    // console.log('secondform====', this.secondFormGroup);
+    
 
-    // const unitnameValue = this.secondFormGroup?.get('unitname')?.value;
-    // const unitdescValue = this.secondFormGroup?.get('unitdesc')?.value;
-
-    // // console.log('unitname:', unitnameValue);
-    // // console.log('unitdesc:', unitdescValue);
+    console.log("form data.", this.secondFormGroup.value);
+    
 
     if (this.secondFormGroup.valid) {
-      // Both fields are filled; perform the submission
-      // console.log('Submit data:', this.secondFormGroup.value);
+     
       this.params = this.secondFormGroup.value;
-      // console.log('paramsss', this.params);
 
       this.spinner.show();
       this.common.createUnit(this.secondFormGroup.value).subscribe(
         (res) => {
-          // this.spinner.hide();
-
-          // console.log('log in111');
+          
           this.unitNameLocalAdminfun();
 
           if (res.api_status) {
             this.spinner.hide();
 
-            // console.log('otp', res);
-
             Swal.fire({
               icon: 'success',
               title: `${res.message}`,
-            }).then(() => {
-              // this.router.navigate(['dashboard']);
-            });
-
-            // alert("OTP Generated Successfully\n"+ res.otp);
-            // this.isPopupVisible = 1;
-            // // console.log('Form values:', this.generateOTPForm.value.callerName);
-
-            // this.otpValue = res.otp;
+            })
+           
             this.spinner.hide();
           } else {
             this.spinner.hide();
@@ -353,14 +390,12 @@ export class ManageunitComponent {
               icon: 'error',
               title: `${res.message}`,
             });
-            // console.log('message', res.message);
           }
         },
         (err) => {
           this.spinner.hide();
 
-          // console.log('unable to log in', err);
-          // this.common.apiErrorHandler(err);
+          this.common.apiErrorHandler(err);
         }
       );
 
@@ -378,7 +413,6 @@ export class ManageunitComponent {
       // this.secondFormGroup.markAllAsTouched();
     }
 
-    // Access specific values
   }
 
   editUnitApi() {
