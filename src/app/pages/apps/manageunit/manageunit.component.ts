@@ -361,15 +361,19 @@ export class ManageunitComponent {
   submit() {
     
 
-    console.log("form data.", this.secondFormGroup.value);
+    console.log("form data.", this.secondFormGroup.value,"lll", this.selectedBank1.id);
     
 
     if (this.secondFormGroup.valid) {
      
       this.params = this.secondFormGroup.value;
 
+      const data = {unitname: this.secondFormGroup.value.unitname, unitdesc:  this.secondFormGroup.value.unitdesc, unitid: this.selectedBank1.id}
+
+      console.log("data..",data);
+      
       this.spinner.show();
-      this.common.createUnit(this.secondFormGroup.value).subscribe(
+      this.common.createUnit(data).subscribe(
         (res) => {
           
           this.unitNameLocalAdminfun();

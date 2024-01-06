@@ -29,6 +29,10 @@ export class LocaladminComponent {
       
     } else if (selectNumber === 2) {
       this.selectedBank2 = bank;
+      this.secondFormGroup.value.usertype =  this.selectedBank2.id;
+      console.log("form data..2",this.secondFormGroup.value);
+
+
     } else if (selectNumber === 3) {
       this.selectedBank3 = bank;
     }
@@ -149,10 +153,10 @@ export class LocaladminComponent {
         console.log("unit type", this.unitType);
         
 
-        // this.unitNameUpdated = this.unitName.map((unit: any, index: any) => ({
-        //   id: unit.unit_id,
-        //   name: unit.unit_name
-        // }));
+        this.unitTypeUpdated = this.unitType.map((unit: any, index: any) => ({
+          id: unit.name,
+          name: unit.name
+        }));
 
 
       } else {
@@ -186,8 +190,12 @@ export class LocaladminComponent {
 
   submit(action: string) {
     if (action === 'create') {
+      console.log("form values.. in submit", this.secondFormGroup.value, "dfd",  this.selectedBank2.id);
+
+      const data = { username: this.secondFormGroup.value.username, email: this.secondFormGroup.value.email, password: this.secondFormGroup.value.password, cpassword: this.secondFormGroup.value.cpassword, unitid: this.selectedBank1.id, usertype: this.selectedBank2.id}
+      
       this.spinner.show();
-      this.common.createLocalAdmin(this.secondFormGroup.value).subscribe(
+      this.common.createLocalAdmin(data).subscribe(
         (res) => {
           if (res.api_status) {
             this.spinner.hide();

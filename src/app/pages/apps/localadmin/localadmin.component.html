@@ -32,24 +32,24 @@
     
               <div class="col-lg-6">
                 <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">User Type</mat-label>
-                <mat-form-field appearance="outline" class="w-100" color="primary">
+
+                <app-select-search [errorMessage]="'Unit Type is Required'" [selectData]="unitTypeUpdated" (bankSelected)="onBankSelected($event, 2)"></app-select-search>
+
+
+                <!-- <mat-form-field appearance="outline" class="w-100" color="primary">
                   <mat-select placeholder="Select" formControlName="usertype" required>
 
                     <mat-option *ngFor="let item of unitType" [value]="item.name">
                       {{ item.name }}
                     </mat-option>
 
-                    <!-- <app-select-search [errorMessage]="'Unit Name Is Required'" [selectData]="unitNameUpdated" (bankSelected)="onBankSelected($event, 1)"></app-select-search> -->
-
-                    <!-- <mat-option value="local_admin">Local Admin</mat-option>
-                    <mat-option value="Log Viewer User">Log Viewer User</mat-option>
-                    <mat-option value="Policy User">Policy User</mat-option> -->
+                
                     
                   </mat-select>
                   <mat-error *ngIf="secondFormGroup?.get('usertype')?.hasError('required')">
                     User Type Is Required
                   </mat-error>
-                </mat-form-field>
+                </mat-form-field> -->
               </div>
     
             </div>
@@ -172,10 +172,10 @@
     
             </div>
 
-            <app-select-search [errorMessage]="'Parent Unit is Required'" [selectData]="unitNameUpdated" (bankSelected)="onBankSelected($event, 1)"></app-select-search>
+            <!-- <app-select-search [errorMessage]="'Parent Unit is Required'" [selectData]="unitNameUpdated" (bankSelected)="onBankSelected($event, 1)"></app-select-search>
     
     
-            <app-select-search [errorMessage]="'Unit Type is Required'" [selectData]="unitNameUpdated" (bankSelected)="onBankSelected($event, 2)"></app-select-search>
+            <app-select-search [errorMessage]="'Unit Type is Required'" [selectData]="unitTypeUpdated" (bankSelected)="onBankSelected($event, 2)"></app-select-search> -->
 
     
               <div class="row m-t-20">
