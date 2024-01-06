@@ -1,9 +1,10 @@
+
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonServicesService } from 'src/app/services/common-services.service';
-// import { UsbdeleteformComponent } from './usbdeleteform/usbdeleteform.component';
+import { UsbdeleteformComponent } from './usbdeleteform/usbdeleteform.component';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -24,14 +25,13 @@ export class UsbViolationComponent {
     private spinner: NgxSpinnerService, public dialog: MatDialog
   ){
     this.secondFormGroup = this.fb.group({
-      usbviolationtype: []
+      usbviolationname: ['', Validators.required],
+      usbviolationtype: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{4}:[a-zA-Z0-9]{4}$/)]],
     },   
     );
   }
 
   ngOnInit() {
-
-
 
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -94,15 +94,19 @@ export class UsbViolationComponent {
 
     console.log("vsb type", usbviolationtype);
 
-    this.common.usbcreate({value: usbviolationtype.usbviolationtype}).subscribe( (res) => {
+    this.common.usbcreate({usb_name: usbviolationtype.usbviolationname, value: usbviolationtype.usbviolationtype}).subscribe( (res) => {
       console.log("res useb", res)
       if(res.api_status === true){
         Swal.fire('New usb violation value updated', '', 'success');   
         this.usbviolationlist();
       }
+
+      if(res.api_status === false){
+        Swal.fire(res.message, '', 'info');
+      }
     }    );
 
-    this.secondFormGroup.reset();
+    this.secondFormGroup.reset({usbviolationname: null, usbviolationtype: null});
 
       Object.keys(this.secondFormGroup.controls).forEach(controlName => {
     const control = this.secondFormGroup.get(controlName);
@@ -114,14 +118,14 @@ export class UsbViolationComponent {
   }
 
 
-  deleteRow(row: any) {
-    console.log('row', row);
+  deleteRow(row: any, name: any) {
+    console.log('row', row, name);
 
     // localStorage.setItem()
 
-    this.common.storeusbviolationvalue(row);
+    this.common.storeusbviolationvalue(row, name);
     
-    // this.openDialog()
+    this.openDialog()
 
   }
 
@@ -132,17 +136,19 @@ export class UsbViolationComponent {
     this.ngOnInit()
   }
 
-  // openDialog() {
-  //   const dialogRef = this.dialog.open(UsbdeleteformComponent, {
+  openDialog() {
+    const dialogRef = this.dialog.open(UsbdeleteformComponent, {
      
-  //   });
+    });
 
-  //   dialogRef.componentInstance.reloadParent.subscribe(() => {
-  //     this.reloadParentComponent(); // Call the function to reload the parent component
-  //   });
+    dialogRef.componentInstance.reloadParent.subscribe(() => {
+      this.reloadParentComponent(); // Call the function to reload the parent component
+    });
 
   
-  // }
+  }
 
 
 }
+
+

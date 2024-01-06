@@ -1,14 +1,14 @@
 
  
  
-  .chartContainer {
-    height: 85vh; 
-    overflow: auto; 
-    // box-sizing: border-box; 
-    margin-top: 1vm;
-    // justify-content: center;
-    // position: center;
-  }
+.chartContainer {
+  height: 85vh; 
+  overflow: auto; 
+  // box-sizing: border-box; 
+  margin-top: 10px;
+  justify-content: center;
+  position: center;
+}
   
   #min, #max {
     position: absolute;

@@ -454,11 +454,14 @@ export class CommonServicesService {
     );
   }
 
-  storeusbviolationvalue(value: any) {
+  storeusbviolationvalue(value: any, name: any) {
     localStorage.setItem('value', JSON.stringify(value) )
+    localStorage.setItem('name', JSON.stringify(name) )
   }
 
   getusbviolationvalue() {
     const value = JSON.parse(localStorage.getItem('value') ?? 'null');
+    const name = JSON.parse(localStorage.getItem('name') ?? 'null');
+    return {value, name};
   }
 }

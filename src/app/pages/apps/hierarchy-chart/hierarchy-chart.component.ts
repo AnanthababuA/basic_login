@@ -149,7 +149,7 @@ updateChart() {
     const styledNode = `
       <div style="border: 1px solid black; border-radius: 8px; background-color: #5FBDFF;  overflow: hidden;  margin-left: 27px; ">
         <div style="background-color: #5FBDFF; color: white; padding: 5px; font-size: 1.2em; font-weight: bold; text-align: center;">${nodeName}</div>
-        <div style="padding: 11px;  background-color: white;">${bodyContent}</div>
+        <div style="padding: 6px;  background-color: white;">${bodyContent}</div>
       </div>
     `;
   

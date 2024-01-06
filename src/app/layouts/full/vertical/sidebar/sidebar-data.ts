@@ -53,9 +53,11 @@ export const navItems: NavItem[] = [
   },
 
   {
-    displayName: 'USB Violation',
+    displayName: 'Whitelist USB Log',
     iconName: 'usb',
+    // iconName: 'point',
     route: 'apps/usbviolation',
   },
+  
   
 ];

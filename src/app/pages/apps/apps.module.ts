@@ -115,6 +115,7 @@ import { SelectSearchComponent } from './select-search/select-search.component';
 // import { DeleteClientFormComponent } from './client-administraion/deletedClient/delete-client-form/delete-client-form.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatSelectModule } from '@angular/material/select';
+import { UsbdeleteformComponent } from './usb-violation/usbdeleteform/usbdeleteform.component';
 
 @NgModule({
   imports: [
@@ -199,6 +200,7 @@ import { MatSelectModule } from '@angular/material/select';
     UnblockClientFormComponent,
     UsbViolationComponent,
     SelectSearchComponent,
+    UsbdeleteformComponent,
     
   ],
   providers: [DatePipe],
