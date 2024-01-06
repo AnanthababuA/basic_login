@@ -1,47 +1,5 @@
-<!-- <div id="tree-container"> -->
-  <!-- *ngIf="(userDetails.usertype === 'superadmin_user' || userDetails.usertype === 'department') && userDetails.usertype !== 'teacher' &&  blocklist.length > 0" -->
-
-  <!-- <div *ngIf="userType == 'admin_user' || userType == 'superadmin_user'"> -->
-
-    <!-- <div></div>
-  <div id="tree"></div>
-  <div class="zoom-buttons">
-    
-    <button (click)="zoomIn()">Zoom In</button>
-    <button (click)="zoomOut()">Zoom Out</button>
-  </div>
-</div> -->
-<!-- <div *ngIf="(this.user === 'sadmin' || this.user === 'test')"> -->
- 
- 
-  <div id="tree-container" style="height: 80vh;  overflow-y: auto;       "> 
-    <!-- <div id="tree-container" style="height: 80vh;  overflow-y: auto; overflow-x: auto;width: 160vh; ">  -->
-
-    <button id="max"  (click)="zoomIn()">+</button>
-    <button id="min" (click)="zoomOut()">-</button>
-  
-    
-  <div id="tree"></div>
-  
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
-    <p class="text-white"> {{ loaderStatus }} </p>
-  </ngx-spinner>
+<div class="chartContainer bg-white">
+  <div #chartContainer></div>
+  <button id="max" (click)="zoomIn()">+</button>
+  <button id="min" (click)="zoomOut()">-</button>
 </div>
-
-  
-  <!-- <div id="tree-container"> -->
-   
-    <!-- <div class="zoom-buttons">
-      <button (click)="zoomIn()">+</button>
-      <button (click)="zoomOut()">-</button>
-    </div> -->
-    <!-- <button id="max"  (click)="zoomIn()">+</button>
-    <button id="min" (click)="zoomOut()">-</button>
-  
-    
-  <div id="tree"></div>
-  </div> -->
-  <!-- </div> -->
-  <!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
-    <p class="text-white"> {{ loaderStatus }} </p>
-  </ngx-spinner> -->

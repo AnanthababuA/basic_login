@@ -46,11 +46,11 @@ export const navItems: NavItem[] = [
     iconName: 'file',
     route: 'apps/logViewer',
   },
-  // {
-  //   displayName: 'Hierarchy Chart',
-  //   iconName: 'hierarchy-3',
-  //   route: 'apps/hierarchyChart',
-  // },
+  {
+    displayName: 'Hierarchy Chart',
+    iconName: 'hierarchy-3',
+    route: 'apps/hierarchyChart',
+  },
 
   {
     displayName: 'USB Violation',

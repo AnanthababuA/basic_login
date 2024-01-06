@@ -1,58 +1,38 @@
 
-// .card{
-//   // width: 100%;
-//   // height: 100%; 
-//   // margin-left: 0;
-//   // top: -5px;
-//   // position: top;
-//   overflow-y: auto;
-//   overflow-x: auto;
-// }
+ 
+ 
+  .chartContainer {
+    height: 85vh; 
+    overflow: auto; 
+    // box-sizing: border-box; 
+    margin-top: 1vm;
+    // justify-content: center;
+    // position: center;
+  }
+  
+  #min, #max {
+    position: absolute;
+    top: 70px;
+    right: 107px;
+    z-index: 5000000;
+    width: 30px;
+    height: 30px; 
+  }
+  #max {
+    right: 140px; 
+  }
 
+@media screen and (max-width: 768px) {
+  .chartContainer {
+    padding: 20px;
+  }
 
-#min, #max {
-  position: absolute;
-  top: 50px;
-  right: 107px;
-  z-index: 5000000;
-  width: 30px;
-  height: 30px; 
+  #min, #max {
+    top: 70px;
+    right: 25px;
+  }
+
+  #max {
+    right: 50px; 
+  }
 }
-#max {
-  right: 140px; 
-}
-
-
-// .label {
-//   margin-right: 8px; /* Adjust the value based on your preference */
-// }
-
-
-
-// .zoom-buttons button:hover {
-//   background-color: #45a049; 
-// }
-
-
-
-// #tree-container {
-  // max-height: 100%;
-  // max-width: 100%;
-// scroll-padding-left: 10px;// top: 0;
-
-// overflow-x: auto;
-// overflow-y: auto;
-// padding-top: 50px;
-// }
-// html, body {
-//   top: 0px;
-//     // padding: 0px;
-//     width: 50%;
-//     height: 10%;
-//     // font-family: Helvetica;
-//     // overflow: hidden;
-//   // height: 100%;
-//   // margin: 40px;
-//   // padding: 0;
-// }
-
