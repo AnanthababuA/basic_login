@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     MaterialModule,
-    FormsModule,
+    FormsModule, 
     RouterModule.forChild(PagesRoutes),
   ],
 })

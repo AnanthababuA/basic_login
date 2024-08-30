@@ -2,11 +2,6 @@ import { Routes } from '@angular/router';
 
 // dashboards
 import { AppDashboard1Component } from './dashboard1/dashboard1.component';
-// import { AppDashboard2Component } from './dashboard2/dashboard2.component';
-// import { AppDashboard3Component } from './dashboard3/dashboard3.component';
-// import { AppDashboard4Component } from './dashboard4/dashboard4.component';
-// import { AppDashboard5Component } from './dashboard5/dashboard5.component';
-// import { AppDashboard6Component } from './dashboard6/dashboard6.component';
 
 export const DashboardsRoutes: Routes = [
   {

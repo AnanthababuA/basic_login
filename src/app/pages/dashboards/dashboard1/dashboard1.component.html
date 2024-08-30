@@ -1,125 +1,169 @@
+<mat-card class="cardWithShadow">
+    
 
+</mat-card>
 
-<div class="row">
-  <div class="col-lg-3  col-sm-6">
-    <mat-card class="cardWithShadow text-center " (click)="regClientCard()" style="cursor: pointer;">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56 bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
-          >
-            <mat-icon class="f-s-24">supervised_user_circle</mat-icon>
+<div class="col-sm-4 col-lg-4">
+    <mat-card id="myDiv" #registeredClientsBtn class="cardWithShadow card2 position-relative card-hover"
+      style="min-height:30vh; cursor: pointer;">
+      <mat-card-content style="margin: auto;">
+        <div style="display:flex; justify-content: center;">
+          <span>
+            <i-tabler name="align-box-bottom-center" class=" d-flex" color="accent"  style="
+          font-size: 80px;
+          height: 80px;
+          width: 80px;"></i-tabler>
           </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class="f-s-20 f-w-500">
-              {{reg_count}} 
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-              Registered Clients
-            </mat-card-subtitle>
-          </div>
         </div>
+        <mat-card-title style="display: flex; justify-content: center; margin-top:10px">Dashboard
+          </mat-card-title>
+          <p style="font-size: 25px; text-align: center;">Click here to view status of Online and Descriptive Events<br></p>
+                    <p >
       </mat-card-content>
-
-      <app-spinner [showSpinner]="isSpinnerVisible['Registrationcard']">
-      </app-spinner>
-
     </mat-card>
   </div>
 
 
-  <div class="col-lg-3  col-sm-6" style="padding-right: 0 !important;">
-    <mat-card class="cardWithShadow text-center" (click)="totalActiveClientList()" style="cursor: pointer;">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56 bg-warning text-white rounded-circle d-flex align-items-center justify-content-center"
-          >
-            <mat-icon class="f-s-24">assignment_ind</mat-icon>
-          </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class="f-s-20 f-w-500">
-              {{totalActiveClients}}
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-              Active Clients
-            </mat-card-subtitle>
+
+<div class="container mt-4">
+    <div class="mb-5">
+        <div class="row">
+
+          <div class="col-md-4">
+            <div class="card" style="background-color:#F2EBE9;" >
+                <div class="card-body">
+                    <div style="text-align: center;">
+                        <i class="bi bi-card-list text-info custom-icon icon-large"></i> <br>
+                    </div>                      
+              
+                    <div style="text-align: center;">
+                        <button class="btn btn-warning btn-lg" style="width: 1.6in; height: 0.5in;">Dashboard</button>                    
+                    </div>    
+                              
+                    <br>
+              
+                    <p style="font-size: 25px; text-align: center;">Click here to view status of Online and Descriptive Events<br></p>
+                    <p >  </p>
+                </div>
+            </div>
           </div>
+            <div class="col-md-4">
+              <div class="card" style="background-color: #DDE6ED;" >
+                  <div class="card-body">
+                      <div style="text-align: center;">
+                          <i class="bi bi-card-list text-info custom-icon icon-large"></i> <br>
+                      </div>                      
+                
+                      <div style="text-align: center;">
+                          <button class="btn btn-primary btn-lg" style="width: 1.6in; height: 0.5in;">Events</button>                    
+                      </div>    
+                                
+                      <br>
+                
+                      <p style="font-size: 25px; text-align: center;">Click here to show all online and Desriptive events<br></p>
+                      <p >  </p>
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card" style="background-color:#E8FCF6;" >
+                  <div class="card-body">
+                      <div style="text-align: center;">
+                          <i class="bi bi-card-list text-info custom-icon icon-large"></i> <br>
+                      </div>                      
+                
+                      <div style="text-align: center;">
+                          <button class="btn btn-danger btn-lg" style="width: 1.6in; height: 0.5in;">Add Event</button>                    
+                      </div>    
+                                
+                      <br>
+                
+                      <p style="font-size: 25px; text-align: center;">Click here to create the online or descriptive event<br></p>
+                      <p >  </p>
+                  </div>
+              </div>
+            </div>
         </div>
-      </mat-card-content>
-      <app-spinner [showSpinner]="isSpinnerVisible['dashActiveClientCard']">
-      </app-spinner>
-    </mat-card>
-  </div>
 
+        <br>
 
-  <div class="col-lg-3 col-sm-6">
-    <mat-card class="cardWithShadow text-center" (click)="deleteClientCard()" style="cursor: pointer;">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56 bg-accent text-white rounded-circle d-flex align-items-center justify-content-center"
-          >
-            <mat-icon class="f-s-24">delete</mat-icon>
-          </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class="f-s-20 f-w-500">
-              {{deletedClientCount}}
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-              Deleted Clients
-            </mat-card-subtitle>
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <div class="card" style="background-color:#E3E7B3;">
+                <div class="card-body hover-pointer">
+                    <div style="text-align: center;">
+                        <i class="bi bi-card-list text-info custom-icon icon-large" id="click-icon"></i> <br>
+                    </div>                      
+              
+                    <div style="text-align: center;">
+                        <button class="btn btn-success btn-lg" style="width: 1.6in; height: 0.5in;">Descriptive</button>                    
+                    </div>    
+                              
+                    <br>
+              
+                    <p style="font-size: 25px; text-align: center;">Click here to download QP for descriptive and submit feedback<br></p>
+                    <p >  </p>
+                </div>
+            </div>
           </div>
-        </div>
-      </mat-card-content>
-      <app-spinner [showSpinner]="isSpinnerVisible['dashDeleteClientCard']">
-      </app-spinner>
-    </mat-card>
-  </div>
 
-  <div class="col-lg-3  col-sm-6">
-    <mat-card class="cardWithShadow text-center" (click)="bolckClientCard()" style="cursor: pointer;">
-      <mat-card-content class="p-24">
-        <div class="d-flex align-items-center">
-          <span
-            class="icon-56 bg-error text-white rounded-circle d-flex align-items-center justify-content-center"
-          >
-            <mat-icon class="f-s-24">not_interested</mat-icon>
-          </span>
-          <div class="m-l-12 text-left">
-            <mat-card-title class="f-s-20 f-w-500">
-              {{blockedClientdCount}}
-            </mat-card-title>
-            <mat-card-subtitle class="m-t-4 f-s-14 f-w-400 m-t-8">
-              Blocked Clients
-            </mat-card-subtitle>
+          <div class="col-md-4">
+            <div class="card" style="background-color:#E1EEDD;" >
+                <div class="card-body">
+                    <div style="text-align: center;">
+                        <i class="bi bi-card-list text-info custom-icon icon-large"></i> <br>
+                    </div>                      
+              
+                    <div style="text-align: center;">
+                        <button class="btn btn-secondary btn-lg" style="width: 1.6in; height: 0.5in;">Online</button>                    
+                    </div>    
+                              
+                    <br>
+              
+                    <p style="font-size: 25px; text-align: center;">Click here to Allocate, Generate, and Download Online<br></p>
+                    <p >  </p>
+                </div>
+            </div>
           </div>
+
+          <!-- <div class="col-md-4">
+              <div class="card" style="background-color: #E1EEDD;">
+                  <div class="card-body text-center">
+                    <div style="text-align: center;">
+                      <i class="bi bi-window-desktop text-info custom-icon icon-large"></i> <br>
+                    </div>                      
+                    
+                    <div style="text-align: center;">
+                      <button class="btn btn-secondary btn-lg" style="width: 1.6in; height: 0.5in;" [routerLink]="['/offline']">Online</button>                    
+                    </div>   
+                    
+                    <br>
+
+                    <p style="font-size: 25px; text-align: center;"> Click here, to Allocate, Generate, and Download Online </p>
+      
+                  </div>
+              </div>
+            </div> -->
+          
+          <div class="col-md-4">
+            <div class="card" style="background-color: #E8FFE8;">
+                <div class="card-body">
+                  <div style="text-align: center;">
+                    <i class="bi bi-headset text-info custom-icon icon-large"></i> <br>
+                  </div>
+
+                  <div style="text-align: center;">
+                    <button class="btn btn-info btn-lg" style="width: 1.6in; height: 0.5in;">Call 14417 </button>                 
+                  </div>
+                  
+                  <br>
+
+                    <p style="font-size: 25px; text-align: center;"> For any queries / grievances please call helpline number</p>
+    
+                </div>
+            </div>
         </div>
-      </mat-card-content>
-      <app-spinner [showSpinner]="isSpinnerVisible['dashBlockClientCard']">
-      </app-spinner>
-    </mat-card>
-  </div>
-
- 
-
-
-
+      </div>
+    </div>
 </div>
-
-
-
-
-
-
-
-  <app-dashboard-charts2></app-dashboard-charts2>
-
-  <!-- <app-date-range-alert></app-date-range-alert> -->
-
-  <app-dashboard-charts></app-dashboard-charts>
-
-
-
-  
-  

@@ -1,0 +1,39 @@
+.editable-title {
+    overflow-wrap: break-word;
+    position: relative;
+}
+
+// .editable-title h2 {
+//     margin: 0; /* Remove default margin */
+// }
+
+// .title-line {
+//     border: none;
+//     border-bottom: 1px solid black; /* Change the color and thickness as needed */
+//     width: 100%; /* Ensure the line spans the entire width */
+//     position: absolute;
+//     bottom: 0;
+// }
+
+.question-text-container {
+    flex-grow: 1; /* Allow the question text to grow */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.question-text-container h2 {
+    margin: 0; /* Remove default margin */
+    width: 100%; /* Ensure the text expands to fit its container */
+}
+
+.editable-title hr {
+    border-color: transparent; /* Initially set to transparent */
+    height: 2px; /* Initial height */
+    transition: border-color 0.3s; /* Add transition effect */
+}
+
+.editable-title h2:hover + hr {
+    border-color: blue; /* Change border color to blue when hovering over h2 */
+}

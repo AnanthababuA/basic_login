@@ -1,83 +1,84 @@
 import { Routes } from '@angular/router';
-
-// import { AppChatComponent } from './chat/chat.component';
-// import { AppNotesComponent } from './notes/notes.component';
-// import { AppTodoComponent } from './todo/todo.component';
-// import { AppPermissionComponent } from './permission/permission.component';
-// import { AppEmailComponent } from './email/email.component';
-// import { DetailComponent } from './email/detail/detail.component';
-// import { AppTaskboardComponent } from './taskboard/taskboard.component';
-// import { AppFullcalendarComponent } from './fullcalendar/fullcalendar.component';
-// import { AppTicketlistComponent } from './ticketlist/ticketlist.component';
-// import { AppContactComponent } from './contact/contact.component';
-// import { AppCoursesComponent } from './courses/courses.component';
-// import { AppCourseDetailComponent } from './courses/course-detail/course-detail.component';
-// import { AppEmployeeComponent } from './employee/employee.component';
-// import { AppInvoiceListComponent } from './invoice/invoice-list/invoice-list.component';
-// import { AppAddInvoiceComponent } from './invoice/add-invoice/add-invoice.component';
-// import { AppInvoiceViewComponent } from './invoice/invoice-view/invoice-view.component';
-// import { AppEditInvoiceComponent } from './invoice/edit-invoice/edit-invoice.component';
-// import { AppBlogsComponent } from './blogs/blogs.component';
-// import { AppBlogDetailsComponent } from './blogs/details/details.component';
-import { GenerateotpComponent } from './generateotp/generateotp.component';
-import { ManageunitComponent } from './manageunit/manageunit.component';
-import { LocaladminComponent } from './localadmin/localadmin.component';
-import { ClientAdministraionComponent } from './client-administraion/client-administraion.component';
-import { PolicyConfigurationComponent } from './policy-configuration/policy-configuration.component';
-import { ListregclientComponent } from './listregclient/listregclient.component';
-import { RegstatusclientComponent } from './regstatusclient/regstatusclient.component';
-import { GroupsComponent } from './groups/groups.component';
-import { LogViewerComponent } from './log-viewer/log-viewer.component';
-import { HierarchyChartComponent } from './hierarchy-chart/hierarchy-chart.component';
-import { UsbViolationComponent } from './usb-violation/usb-violation.component';
+import { HomeComponent } from './home/home.component';
+import { EventslistComponent } from './eventslist/eventslist.component';
+import { SchedulerformComponent } from './schedulerform/schedulerform.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SurveyFormsComponent } from './survey-forms/survey-forms.component';
+import { OnlineMeetComponent } from './online-meet/online-meet.component';
 
 export const AppsRoutes: Routes = [
   {
     path: '',
     children: [
-      {
-        path: 'generateotp',
-        component: GenerateotpComponent,
-        data: {
-          title: 'Generate OTP',
-          urls: [
-            { title: 'Dashboard', url: '/dashboards/dashboard1' },
-            { title: 'generateotp' },
-          ],
-        },
-      },
 
- {
-        path: 'manageunit',
-        component: ManageunitComponent,
-        data: {
-          title: 'Manage Unit',
-          urls: [
-            { title: 'Dashboard', url: '/dashboards/dashboard1' },
-            { title: 'Unit' },
-          ],
-        },
-      },
       {
-        path: 'localadmin',
-        component: LocaladminComponent,
+        path: 'home',
+        component: HomeComponent,
         data: {
-          title: 'Local Admin',
+          title: 'Home',
           urls: [
-            { title: 'Dashboard', url: '/dashboards/dashboard1' },
-            { title: 'Local Admin' },
+            { title: 'Home', url: '/apps/home' },
+            { title: 'Home' },
           ],
         },
       },
 
       {
-        path: 'policyConfiguration',
-        component: PolicyConfigurationComponent,
+        path: 'events',
+        component: EventslistComponent,
         data: {
-          title: 'Manage Policy',
+          title: 'Event',
           urls: [
-            { title: 'Dashboard', url: '/dashboards/dashboard1' },
-            { title: 'Policy Configuration' },
+            { title: 'Home', url: '/apps/events' },
+            { title: 'Event' },
+          ],
+        },
+      },
+
+      {
+        path: 'schedulerform',
+        component: SchedulerformComponent,
+        data: {
+          title: 'schedulerform',
+          urls: [
+            { title: 'schedulerform', url: '/apps/schedulerform' },
+            { title: 'schedulerform' },
+          ],
+        },
+      },
+
+      {
+        path: 'Dashboard',
+        component: DashboardComponent,
+        data: {
+          title: 'Dashboard',
+          urls: [
+            { title: 'Dashboard', url: '/apps/Dashboard' },
+            { title: 'Dashboard' },
+          ],
+        },
+      },
+
+      {
+        path: 'survey',
+        component: SurveyFormsComponent,
+        data: {
+          title: 'survey',
+          urls: [
+            { title: 'survey', url: '/apps/survey' },
+            { title: 'survey' },
+          ],
+        },
+      },
+
+      {
+        path: 'online-meet',
+        component: OnlineMeetComponent,
+        data: {
+          title: 'online-meet',
+          urls: [
+            { title: 'online-meet', url: '/apps/online-meet' },
+            { title: 'online-meet' },
           ],
         },
       },
@@ -93,56 +94,7 @@ export const AppsRoutes: Routes = [
       //     ],
       //   },
       // },
-      {
-        path: 'usbviolation',
-        component: UsbViolationComponent,
-        data: {
-          title: 'USB Violation',
-          urls: [
-            { title: 'Dashboard', url: '/dashboards/dashboard1' },
-            { title: 'USB Violation' },
-          ],
-        },
-      },
       
-      {
-        path: 'logViewer',
-        component: LogViewerComponent,
-        data: {
-          title: 'Log Viewer',
-          urls: [
-            { title: 'Dashboard', url: '/dashboards/dashboard1' },
-            { title: 'Log Viewer' },
-          ],
-        },
-      },
-      {
-        path: 'hierarchyChart',
-        component: HierarchyChartComponent,
-        data: {
-          title: 'HierarchyvChart',
-          urls: [
-            { title: 'Dashboard', url: '/dashboards/dashboard1' },
-            { title: 'HierarchyvChart' },
-          ],
-        },
-      },
-     
-      { path: 'email', redirectTo: 'email/inbox', pathMatch: 'full' },
-      { path: 'listregclient', component: ListregclientComponent }, 
-  {path:'statusregclients',component:RegstatusclientComponent},
-      
-      {
-        path: 'clientAdministration',
-        component: ClientAdministraionComponent,
-        data: {
-          title: 'Manage Client',
-          urls: [
-            { title: 'Dashboard', url: '/dashboards/dashboard1' },
-            { title: 'clientAdministration' },
-          ],
-        },
-      },
       
     ],
   },

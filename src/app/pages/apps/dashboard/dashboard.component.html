@@ -1,0 +1,141 @@
+
+<div style="display: flex; font-size: 12pt;">
+    <div class="card" style="padding: 3pt 3pt; margin-right: 10pt; align-items: center;"
+       [ngClass]="{ 'highlight': isOnlineHighlighted, 'lighter': !isOnlineHighlighted }">
+    <h1 (click)="toggleStyle('online')" style="display: flex; flex-direction: row; font-size: 20px; align-items: center; cursor: pointer;">
+      <i class="bi bi-laptop" style="margin-right: 5pt; padding: 3pt 3pt; background: linear-gradient(to right, #70B6DB, #94DAFF); color: white; font-size: 12pt;"></i>
+      Online Exam
+    </h1>
+  </div>
+  
+  <div class="card" style="padding: 3pt 3pt;"
+       [ngClass]="{ 'highlight1': isDescriptiveHighlighted, 'lighter': !isDescriptiveHighlighted }">
+    <h1 (click)="toggleStyle('descriptive')" style="display: flex; flex-direction: row; font-size: 20px; align-items: center; cursor: pointer;">
+      <i class="bi bi-pencil-square" style="margin-right: 4pt; padding: 3pt 3pt; background: linear-gradient(to right, #CD6767, #EEC588); color: white; font-size: 12pt;"></i>
+      Descriptive Exam
+    </h1>
+  </div>
+  </div>
+
+  <mat-card class="cardWithShadow" style="margin-top: 10pt;">
+    <div class="row" style="margin: 5pt 5pt;">
+        <div class="col-lg-2">
+            <p>Event Type</p>
+            <mat-form-field appearance="outline" class="w-100">
+              <!-- <mat-label>Select Event Type</mat-label> -->
+              <mat-select [(value)]="selectedeventtype" (selectionChange)="onSelectedschooltype($event)">
+                <mat-option *ngFor="let event of event_type" [value]="event.id">
+                  {{ event.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-3">
+            <p class="text_bold">Districts</p>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select
+                [(value)]="selectedDistricts"
+                (selectionChange)="onSelecteddistrictChange($event)"
+                multiple>
+                <mat-option *ngFor="let district of districts" [value]="district.District_id">
+                  {{ district.District_name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <p>Blocks</p>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select
+                [(value)]="selectedblocks"
+                (selectionChange)="onSelectedblockChange($event)"
+                multiple>
+                <mat-option *ngFor="let blocklist of blocklist_select_list" [value]="blocklist.Block_id">
+                  {{ blocklist.Block_name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2">
+            <p>School Type</p>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select
+                [(value)]="selectedschooltype"
+                (selectionChange)="onSelectedschoolChange($event)"
+                multiple>
+                <mat-option *ngFor="let sch_type of schooltype_select_list" [value]="sch_type.id">
+                  {{ sch_type.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2">
+            <p>School Category</p>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select
+                [(value)]="selectedschoolcattype"
+                (selectionChange)="onSelectionCategoryChange($event)"
+                multiple>
+                <mat-option *ngFor="let sch_type of schoolcate_select_list" [value]="sch_type.id">
+                  {{ sch_type.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <p>Class</p>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select
+                [(value)]="selectedClasses"
+                (selectionChange)="onSelectedClassesChange($event)"
+                multiple>
+                <mat-option *ngFor="let class_list of classListWithSelectAll" [value]="class_list.label">
+                  {{ class_list.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div> 
+          
+          <div class="col-md-3">
+            <p>Medium</p>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select
+                [(value)]="selectedMedium"
+                (selectionChange)="onSelectionMediumChange($event)"
+                multiple>
+                <mat-option *ngFor="let medium_list of mediumListWithSelectAll" [value]="medium_list.id">
+                  {{ medium_list.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div> 
+    
+      
+    
+       
+    
+        <!-- <div class="col-md-3">
+          <p>Start Date</p>
+          <input class="form-control" placeholder="dd/mm/yyyy" name="d5" ngbDatepicker (click)="d5.toggle()"
+                            #d5="ngbDatepicker" [(ngModel)]="startDate" (ngModelChange)="startdates($event); validateRange()" />
+         
+        </div>
+      
+        <div class="col-md-3">
+          <p>End Date</p>
+      
+          <input class="form-control" placeholder="dd/mm/yyyy" name="d6" ngbDatepicker (click)="d6.toggle()"
+                            #d6="ngbDatepicker" [(ngModel)]="EndDate" (ngModelChange)="endDates($event); validateRange()" [minDate]="startDate" [maxDate]="maxDate"
+                            required />
+        </div> -->
+    
+      </div>  
+  </mat-card>
+
+
+

@@ -1,0 +1,114 @@
+
+
+.last
+{
+    color:#7987a1!important
+}
+
+.card{
+    border-radius: 1pt !important;
+  }
+  
+  .mat-checkbox-input {
+      background-color: none !important;
+      border: none !important;
+  }
+
+  .color-text{
+    color: #2CABE3;
+    font-weight: bolder;
+    // color: blue;
+  }
+  
+  .lighter{
+    background-color: #DBE1E6 !important;
+    // background-color: linear-gradient(to right, #DBE1E6, #F8F8F8)
+  }
+  
+  .highlight {
+      background-color: #EDFEFE !important;
+      font-weight: bold !important;
+      text-decoration: underline;
+      box-shadow: 0 10px 10px -5px;
+    }
+
+     .highlight1 {
+      background-color: #FDFFEC !important;
+      font-weight: bold !important;
+      text-decoration: underline;
+      box-shadow: 0 10px 10px -5px;
+    }
+
+  
+    .header_styles{
+      margin: 10pt;
+    }
+  
+    .custom-card {
+      margin: 15pt 15pt;
+      padding: 0;
+      // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .text-green-bg {
+      background-color: #deefe0;
+      padding: 4px 6px; /* add some padding to make the background color visible */
+      border-radius: 4px; /* add some rounded corners to make it look nice */
+      color: green;
+    }
+    
+    .text-red-bg {
+      background-color: #f7c7c7;
+      padding: 4px 6px; /* add some padding to make the background color visible */
+      border-radius: 4px; /* add some rounded corners to make it look nice */
+      color: red;
+    }
+    
+    
+    .custom-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .custom-card-title {
+      font-weight: bold;
+    }
+    
+    .custom-button {
+      margin-right: 10pt;
+      padding: 5px 10px; /* Adjust padding to make the button size smaller */
+      background: none; /* Remove background color */
+      border: none; /* Remove border */
+      font-size: 14px; /* Adjust font size */
+      display: flex;
+      align-items: center;
+      // color: #007bff; /* Set icon color */
+    }
+
+    
+    
+    .custom-button .pi {
+      margin-right: 5px; /* Add space between icon and label */
+      // color: #007bff; /* Set icon color */
+    }
+
+    .custom-card-header {
+      border-bottom: 1px solid #ccc;
+      flex-grow: 1; 
+    }
+    
+    .custom-button:hover {
+      background: none; /* Ensure no background color on hover */
+      // color: #0056b3; /* Change text color on hover */
+    }
+    
+    .custom-button:focus {
+      outline: none; /* Remove outline on focus */
+    }
+
+
+    .text_bold{
+      font-size: medium;
+      // font-weight: bold;
+    }

@@ -10,7 +10,7 @@ import { CoreService } from 'src/app/services/core.service';
     <!-- <div class="branding d-none d-lg-flex align-items-center">
       <a [routerLink]="['/dashboards/dashboard']" class="d-flex" style="text-decoration: none; ">
         <img
-          src="./assets/images/logo.png"
+          src="./assets/images/dse.png"
           class="align-middle m-2"
           alt="logo"
           style= "height: 40px; "
@@ -30,7 +30,7 @@ import { CoreService } from 'src/app/services/core.service';
         style="text-decoration: none;"
       >
         <img
-          src="./assets/images/logo.png"
+          src="./assets/images/dse.png"
           class="align-middle m-2"
           alt="logo"
           style="height: 40px;"
@@ -39,10 +39,10 @@ import { CoreService } from 'src/app/services/core.service';
           style="margin-left: 18px; width: 200px !important; overflow: hidden; white-space: nowrap;"
         >
           <span style="color: white; display: block; text-overflow: ellipsis;text-align: center;"
-            >Internet Security</span
+            >Department of</span
           >
           <span style="color: white; display: block; text-overflow: ellipsis;text-align: center;"
-            >Operation Centre</span
+            >School Education</span
           >
         </div>
       </a>

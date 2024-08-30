@@ -10,7 +10,8 @@
     aqua_theme: options.activeTheme == 'aqua_theme',
     purple_theme: options.activeTheme == 'purple_theme',
     green_theme: options.activeTheme == 'green_theme',
-    cyan_theme: options.activeTheme == 'cyan_theme'
+    cyan_theme: options.activeTheme == 'cyan_theme',
+    pink_theme: options.activeTheme == 'pink_theme'
   }"
   [dir]="options.dir!"
 >
@@ -111,9 +112,9 @@
         <!-- ============================================================== -->
         <router-outlet></router-outlet>
         <div class="customizerBtn">
-          <!-- <button mat-fab color="primary" (click)="customizerRight.toggle()">
+          <button mat-fab color="primary" (click)="customizerRight.toggle()">
             <mat-icon>settings</mat-icon>
-          </button> -->
+          </button>
         </div>
       </main>
     </mat-sidenav-content>

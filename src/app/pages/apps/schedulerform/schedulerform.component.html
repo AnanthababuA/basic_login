@@ -1,0 +1,228 @@
+<mat-card class="cardWithShadow">
+    <mat-card-header>
+        <mat-card-title>Create Event</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content class="b-t-1">
+        <form [formGroup]="scheduleForm" (ngSubmit)="onClickSubmit()">
+            <div class="row m-t-8">
+                <div class="col-lg-4">
+                    <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                >Event Title
+              </mat-label>
+
+              <mat-form-field appearance="outline" class="w-100">
+                <input formControlName="title" matInput placeholder="Enter the Event title" />
+              </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                >Event Mode
+              </mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <!-- <mat-label>Class</mat-label> -->
+                <mat-select placeholder="Select class">
+                  <mat-option *ngFor="let item of choiceList.location_choices" [value]="item.value">
+                    {{ item.value === 'OFFLINE' ? 'ONLINE' : item.value }}
+                  </mat-option>
+                  
+                </mat-select>
+              </mat-form-field>
+
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                >School Type
+              </mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <!-- <mat-label>Class</mat-label> -->
+                <mat-select placeholder="Select school type" multiple (selectionChange)="selectedSchoolType($event)">
+                  <mat-option *ngFor="let item of choiceList.school_type_choices" [value]="item.value">
+                    {{ item.value }}
+                  </mat-option>
+                  
+                </mat-select>
+              </mat-form-field>
+              
+
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                >Class
+              </mat-label>
+
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <!-- <mat-label>Class</mat-label> -->
+                <mat-select placeholder="Select class" (selectionChange)="stdvalue($event)">
+                  <mat-option *ngFor="let item of choiceList.std_choices" [value]="item.id">
+                    {{ item.value }}
+                  </mat-option>
+                  
+                </mat-select>
+              </mat-form-field>
+
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                >Section
+              </mat-label>
+
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <!-- <mat-label>Class</mat-label> -->
+                <mat-select placeholder="Select class">
+                    <mat-option [value]=""> All Section </mat-option>
+                  <mat-option *ngFor="let item of choiceList.section_choices" [value]="item.id">
+                    {{ item.value }}
+                  </mat-option>
+                  
+                </mat-select>
+              </mat-form-field>
+
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                >Subject
+              </mat-label>
+
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <!-- <mat-label>Class</mat-label> -->
+                <mat-select placeholder="Select subject">
+                  <mat-option *ngFor="let item of subjectChoices" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                  
+                </mat-select>
+              </mat-form-field>
+
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                >Medium
+              </mat-label>
+
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <!-- <mat-label>Class</mat-label> -->
+                <mat-select placeholder="Select subject">
+                  <mat-option *ngFor="let item of choiceList.medium_choices" [value]="item.id">
+                    {{ item.value }}
+                  </mat-option>
+                  
+                </mat-select>
+              </mat-form-field>
+
+                </div>
+
+                <div class="col-lg-4">
+                    <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                >All Day
+              </mat-label>
+
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <mat-select>
+                  <mat-option [value]="No" selected> No </mat-option>
+                  <mat-option [value]="Yes"> Yes </mat-option>                  
+                </mat-select>
+              </mat-form-field>
+
+                </div>
+
+                <div class="col-lg-4">
+                    <div style="display: flex;">
+                      <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Start Date</mat-label>
+                      <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">&nbsp; </span>
+                    </div> 
+                    <mat-form-field class="w-100" appearance="outline">
+                      <input matInput [matDatepicker]="dp3" formControlName="startDate" />
+                      <mat-datepicker-toggle
+                        matIconSuffix
+                        [for]="dp3"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+          
+                  <div class="col-lg-4">
+                    <div style="display: flex;">
+                      <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">End Date</mat-label>
+                      <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">&nbsp; </span>
+                    </div> 
+                    <mat-form-field class="w-100" appearance="outline">
+                      <input matInput [matDatepicker]="dp4" formControlName="endDate" />
+                      <mat-datepicker-toggle
+                        matIconSuffix
+                        [for]="dp4"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #dp4 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+
+
+                  <div class="col-lg-4">
+                    <div style="display: flex;">
+                      <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">End time</mat-label>
+                      <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">&nbsp; </span>
+                    </div> 
+                    <mat-form-field class="w-100" appearance="outline">
+                      <input matTimepicker>
+                      <mat-datepicker-toggle
+                        matIconSuffix
+                        [for]="dp4"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #dp4 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+
+
+                  <div class="col-lg-4">
+                    <mat-form-field appearance="outline">
+                        <!-- <mat-label>TIMEPICKER</mat-label> -->
+                      
+                        <!-- The timepicker input -->
+                        <input matTimepicker #t="matTimepicker" 
+                            mode="24h"
+                          placeholder="Please select time..." name="time" 
+                          >
+                      
+                        <!-- An icon for the timepicker input that will open the timepicker dialog when clicked -->
+                        <mat-icon matSuffix (click)="t.showDialog()">access_time</mat-icon>
+                      
+                        <!-- Error that will be shown when the input date is invalid -->
+                        <!-- <mat-error *ngIf="time.touched && time.invalid">Invalid Date</mat-error> -->
+                      </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-4">
+                    <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                >Participant Category
+              </mat-label>
+
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <!-- <mat-label>Class</mat-label> -->
+                <mat-select placeholder="Select Category">
+                  <mat-option *ngFor="let item of choiceList.category_choices" [value]="item.id">
+                    {{ item.value }}
+                  </mat-option>
+                  
+                </mat-select>
+              </mat-form-field>
+
+                </div>
+
+
+                
+
+
+                  
+
+
+            </div>
+        </form>
+      </mat-card-content>
+
+</mat-card>

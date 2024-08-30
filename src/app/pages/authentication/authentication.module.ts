@@ -25,7 +25,6 @@ import { AppBoxedLoginComponent } from './boxed-login/boxed-login.component';
 // import { AppSideRegisterComponent } from './side-register/side-register.component';
 // import { AppSideTwoStepsComponent } from './side-two-steps/side-two-steps.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { SpinnerComponent } from '../dashboards/dashboard1/spinner/spinner.component';
 
 
 @NgModule({
@@ -40,7 +39,6 @@ import { SpinnerComponent } from '../dashboards/dashboard1/spinner/spinner.compo
     FormsModule,
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
-    SpinnerComponent
   ],
   declarations: [
   //  AppBoxedForgotPasswordComponent,

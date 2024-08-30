@@ -36,7 +36,7 @@ export class AppBoxedLoginComponent {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      captcha: ['', Validators.required],
+      // captcha: ['', Validators.required],
 
       
     })
@@ -46,15 +46,15 @@ export class AppBoxedLoginComponent {
 
     localStorage.clear();
 
-    this.auth.getVersionNumber().subscribe((data: any) => {
-
-    
+    this.auth.version().subscribe((data: any) => { 
+      
+      console.log("response data",data);
 
       this.spinner.hide();
 
       if (data.api_status === true) {
 
-        this.versionNumber = data
+        this.versionNumber = data;
 
       }
 
@@ -69,7 +69,7 @@ export class AppBoxedLoginComponent {
 
     })
 
-    this.captchaAPI()
+    // this.captchaAPI();
   }
 
 
@@ -91,14 +91,14 @@ export class AppBoxedLoginComponent {
 
   submit() {
     
-    // console.log("form value:", this.loginForm.value);
+    console.log("form value:", this.loginForm.value);
     
-    // console.log("captcha text:", this.captchaText, "user enter: ", this.loginForm.value.captcha);
+    console.log("captcha text:", this.captchaText, "user enter: ", this.loginForm.value.captcha);
 
-    if (this.captchaText == this.loginForm.value.captcha) {
+    // if (this.captchaText == this.loginForm.value.captcha) {
 
     //   console.log("valid captcha");
-      this.spinner.show();
+    //   this.spinner.show();
 
     
 
@@ -111,19 +111,18 @@ export class AppBoxedLoginComponent {
   
           this.isSpinnerVisible['loginComponent'] = false;
           if (res.api_status) {
-           
-            this.spinner.hide();
-  
-  
             this.tokenStorage.saveToken(res.access);
             this.tokenStorage.saveRefreshToken(res.refresh);
-            this.tokenStorage.saveUserType(res.user_type); // set userType here for now user name set
+            this.tokenStorage.saveUser(res);// set userType here for now user name set
             this.tokenStorage.saveUser(res.username);
+
+            // this.dbs.storeValues(this.district,this.blockvalue,this.classvalues,this.startDat,this.endDat);
+
+            this.tokenStorage.storeValues(res.udise_code, res.school_name, res.standard, res.Name, res.class_section)
   
-  
-            this.router.navigate(['/dashboards/dashboard']);
+            this.router.navigate(['/apps/home']);
            
-            
+            this.spinner.hide();
   
           } else {
             this.spinner.hide();
@@ -140,11 +139,11 @@ export class AppBoxedLoginComponent {
       }
   
       
-    } else {
-      // console.log("INvalid captcha");
-      this.loginError = 'Invalid Captcha';
+    // } else {
+    //   // console.log("INvalid captcha");
+    //   this.loginError = 'Invalid Captcha';
       
-    }
+    // }
     
 
   
@@ -155,15 +154,28 @@ export class AppBoxedLoginComponent {
     this.spinner.show();
     this.captchaUrl = '';
     this.captchaText = '';
+    // this.auth.genCaptcha().subscribe(
+    //   (res: any) => {
+    //     if (res.api_status === true) {
+    //       this.spinner.hide();
+    //       this.captchaUrl = 'data:image/png;base64,' + res.image; // Update URL with base64 data
+    //       this.captchaText =  res.captcha_text;
+    //       console.log("Captcha URL:", this.captchaUrl); // Log captcha URL
+    //       console.log("Captcha Text:", this.captchaText); // Log captcha text
+    //     }
+    //   },
+    //   (error: any) => {
+    //     console.error('Error occurred while generating captcha:', error);
+    //   }
+    // );
     this.auth.genCaptcha().subscribe(
       (res: any) => {
         if (res.api_status === true) {
           this.spinner.hide();
-          this.captchaUrl = res.captcha_img;
+          // this.captchaUrl = res.captcha_img;
+          this.captchaUrl = 'data:image/png;base64,' + res.captcha_img; // Update URL with base64 data
           this.captchaText =  res.captcha_text
-console.log("captch..", this.captchaUrl);
-
-         
+          console.log("captch..", this.captchaUrl);         
           
         } else {
           this.spinner.hide();
@@ -182,11 +194,17 @@ console.log("captch..", this.captchaUrl);
       }
     );
   }
+
   refreshCaptcha(){
     console.log("refresh captcha");
 
     this.captchaAPI()
     
+  }
+
+  handleImageError() {
+    console.error('Error loading captcha image.');
+    // Handle error gracefully, e.g., display a placeholder image or show an error message.
   }
 }
 

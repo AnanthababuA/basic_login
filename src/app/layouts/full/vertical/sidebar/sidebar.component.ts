@@ -27,7 +27,7 @@ export class SidebarComponent implements OnInit {
 
   userName = this.ts.getUser();
 
-  userType = this.ts.getUserType();
+  // userType = this.ts.getUserType();
 
 
   constructor(public navService: NavService, private ts: TokenStorageService) {}

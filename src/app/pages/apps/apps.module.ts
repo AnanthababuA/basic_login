@@ -4,8 +4,6 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../material.module';
 import { NgxPermissionsModule } from 'ngx-permissions';
-
-
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -15,107 +13,24 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 // icons
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
-
-//Chat
-// import { AppChatComponent } from './chat/chat.component';
-//Contact
-// import { AppContactDialogContentComponent } from './contact/contact.component';
-// import { AppContactComponent } from './contact/contact.component';
-//Courses
-// import { AppCoursesComponent } from './courses/courses.component';
-// import { AppCourseDetailComponent } from './courses/course-detail/course-detail.component';
-
-//Notes
-// import { AppNotesComponent } from './notes/notes.component';
-//Todo
-// import { AppTodoComponent } from './todo/todo.component';
-// Permission
-// import { AppPermissionComponent } from './permission/permission.component';
-//Mailbox
-// import {
-//   ListingComponent,
-//   ListingDialogDataExampleDialogComponent,
-// } from './email/listing/listing.component';
-// import { DetailComponent } from './email/detail/detail.component';
-// import { AppEmailComponent } from './email/email.component';
-
-//Taskboard
-// import { AppTaskboardComponent } from './taskboard/taskboard.component';
-// import { TaskDialogComponent } from './taskboard/task-dialog.component';
-// import { OkAppTaskComponent } from './taskboard/ok-task/ok-task.component';
-// import { DeleteAppTaskComponent } from './taskboard/delete-task/delete-task.component';
-
-//Calendar
-// import { AppFullcalendarComponent } from './fullcalendar/fullcalendar.component';
-// import { CalendarDialogComponent } from './fullcalendar/fullcalendar.component';
-// import { CalendarFormDialogComponent } from './fullcalendar/calendar-form-dialog/calendar-form-dialog.component';
-// import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-
-// import { AppEmployeeComponent } from './employee/employee.component';
-// import { AppEmployeeDialogContentComponent } from './employee/employee.component';
-// import { AppAddEmployeeComponent } from './employee/add/add.component';
-
 import { AppsRoutes } from './apps.routing';
 import { MatNativeDateModule } from '@angular/material/core';
-// import {
-  // AppTicketlistComponent,
-  // AppTicketDialogContentComponent,
-// } from './ticketlist/ticketlist.component';
-
-//Invoice
-// import { AppInvoiceListComponent } from './invoice/invoice-list/invoice-list.component';
-// import { AppInvoiceViewComponent } from './invoice/invoice-view/invoice-view.component';
-// import { AppAddInvoiceComponent } from './invoice/add-invoice/add-invoice.component';
-// import { AppEditInvoiceComponent } from './invoice/edit-invoice/edit-invoice.component';
-// import { OkDialogComponent } from './invoice/edit-invoice/ok-dialog/ok-dialog.component';
-// import { AddedDialogComponent } from './invoice/add-invoice/added-dialog/added-dialog.component';
-
-// blog
-// import { AppBlogsComponent } from './blogs/blogs.component';
-// import { AppBlogDetailsComponent } from './blogs/details/details.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-// import { ClientComponent } from './client/client.component';
-import { GenerateotpComponent } from './generateotp/generateotp.component';
-import { LocaladminComponent } from './localadmin/localadmin.component';
-import { ManageunitComponent } from './manageunit/manageunit.component';
-import { ClientAdministraionComponent } from './client-administraion/client-administraion.component';
-
 import {MatIconModule} from '@angular/material/icon';
 import { DataTablesModule } from "angular-datatables";
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { PolicyConfigurationComponent } from './policy-configuration/policy-configuration.component';
-import { AddPolicyComponent } from './add-policy/add-policy.component';
-import { ListregclientComponent } from './listregclient/listregclient.component';
-import { RegstatusclientComponent } from './regstatusclient/regstatusclient.component';
-import { GroupsComponent } from './groups/groups.component';
-import { PolicyUpdateComponent } from './policy-update/policy-update.component';
-import { PolicySummaryComponent } from './policy-summary/policy-summary.component';
-import { AllServerPolicyVersionComponent } from './all-server-policy-version/all-server-policy-version.component';
-import { AllServerPatchVersionComponent } from './all-server-patch-version/all-server-patch-version.component';
-import { ClientInfoComponent } from './listregclient/client-info/client-info.component';
-import { LogViewerComponent } from './log-viewer/log-viewer.component';
-
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { HierarchyChartComponent } from './hierarchy-chart/hierarchy-chart.component';
-
-
-// import { OrganizationChartModule } from 'primeng/organizationchart';
-import { DeletedClientListComponent } from './client-administraion/deleted-client-list/deleted-client-list.component';
-import { DeletedClientComponent } from './client-administraion/deleted-client/deleted-client.component';
-import { DeleteClientFormComponent } from './client-administraion/deleted-client/delete-client-form/delete-client-form.component';
-import { BlockClientComponent } from './client-administraion/block-client/block-client.component';
-import { BlockClientListComponent } from './client-administraion/block-client-list/block-client-list.component';
-import { BlockClientFormComponent } from './client-administraion/block-client/block-client-form/block-client-form.component';
-import { UnblockClientFormComponent } from './client-administraion/block-client-list/unblock-client-form/unblock-client-form.component';
-import { SpinnerComponent } from '../dashboards/dashboard1/spinner/spinner.component';
-import { UsbViolationComponent } from './usb-violation/usb-violation.component';
-import { SelectSearchComponent } from './select-search/select-search.component';
-// import { MatMomentDateModule } from '@angular/material-moment-adapter';
-// import { DeleteClientFormComponent } from './client-administraion/deletedClient/delete-client-form/delete-client-form.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatSelectModule } from '@angular/material/select';
-import { UsbdeleteformComponent } from './usb-violation/usbdeleteform/usbdeleteform.component';
+import { MatTimepickerModule } from 'mat-timepicker';
+import { HomeComponent } from './home/home.component';
+import { EventslistComponent } from './eventslist/eventslist.component';
+import { SchedulerformComponent } from './schedulerform/schedulerform.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SurveyFormsComponent } from './survey-forms/survey-forms.component';
+import { OnlineExamComponent } from './online-exam/online-exam.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
@@ -131,77 +46,14 @@ import { UsbdeleteformComponent } from './usb-violation/usbdeleteform/usbdeletef
     NgxPaginationModule,
     HttpClientModule,
     AngularEditorModule,NgxSpinnerModule,MatDatepickerModule,
-    // OrganizationChartModule,
-    // CalendarModule.forRoot({
-    //   provide: DateAdapter,
-    //   useFactory: adapterFactory,
-    // }),
     MatNativeDateModule,
-    NgScrollbarModule,MatIconModule, SpinnerComponent,
-    NgxMatSelectSearchModule,MatSelectModule
+    NgScrollbarModule,MatIconModule,
+    NgxMatSelectSearchModule,MatSelectModule, MatTimepickerModule, NgSelectModule,
+    // NgxSurveyModule,
   ],
   exports: [TablerIconsModule],
-  declarations: [
-    // AppChatComponent,
-    // AppPermissionComponent,
-    // AppNotesComponent,
-    // AppTodoComponent,
-    // AppTaskboardComponent,
-    // TaskDialogComponent,
-    // OkAppTaskComponent,
-    // DeleteAppTaskComponent,
-    // ListingDialogDataExampleDialogComponent,
-    // ListingComponent,
-    // DetailComponent,
-    // AppEmailComponent,
-    // AppFullcalendarComponent,
-    // CalendarDialogComponent,
-    // CalendarFormDialogComponent,
-    // AppTicketlistComponent,
-    // AppTicketDialogContentComponent,
-    // AppContactComponent,
-    // AppContactDialogContentComponent,
-    // AppCoursesComponent,
-    // AppCourseDetailComponent,
-    // AppEmployeeComponent,
-    // AppEmployeeDialogContentComponent,
-    // AppAddEmployeeComponent,
-    // AppInvoiceListComponent,
-    // AppInvoiceViewComponent,
-    // AppAddInvoiceComponent,
-    // AppEditInvoiceComponent,
-    // AddedDialogComponent,
-    // OkDialogComponent,
-    // AppBlogsComponent,
-    // AppBlogDetailsComponent,
-    // ClientComponent,
-    GenerateotpComponent,
-    LocaladminComponent,
-    ManageunitComponent,
-    ClientAdministraionComponent,
-    PolicyConfigurationComponent,
-    AddPolicyComponent,
-    ListregclientComponent,
-    RegstatusclientComponent,
-    GroupsComponent,
-    PolicyUpdateComponent,
-    PolicySummaryComponent,
-    AllServerPolicyVersionComponent,
-    AllServerPatchVersionComponent,
-    ClientInfoComponent,
-    LogViewerComponent,
-    HierarchyChartComponent,
-    DeletedClientListComponent,
-    DeletedClientComponent,
-    DeleteClientFormComponent,
-    BlockClientComponent,
-    BlockClientListComponent,
-    BlockClientFormComponent,
-    UnblockClientFormComponent,
-    UsbViolationComponent,
-    SelectSearchComponent,
-    UsbdeleteformComponent,
-    
+  declarations: [  
+    HomeComponent, EventslistComponent, SchedulerformComponent, DashboardComponent, SurveyFormsComponent, OnlineExamComponent
   ],
   providers: [DatePipe],
 })

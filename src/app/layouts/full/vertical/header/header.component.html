@@ -1,4 +1,4 @@
-<mat-toolbar class="topbar">
+<mat-toolbar class="topbar" >
   <app-branding></app-branding>
 
   <!-- --------------------------------------------------------------- -->
@@ -11,216 +11,18 @@
   <button mat-icon-button (click)="toggleMobileNav.emit()" *ngIf="!showToggle" class="d-flex justify-content-center">
     <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
   </button>
-  <!-- --------------------------------------------------------------- -->
-
-  <!-- --------------------------------------------------------------- -->
-  <!--  Search -->
-  <!-- --------------------------------------------------------------- -->
-  <!-- <button
-    mat-icon-button
-    (click)="openDialog()"
-    class="d-flex justify-content-center"
-  >
-    <i-tabler name="search" class="icon-20 d-flex"></i-tabler>
-  </button> -->
-
-
 
   <span class="flex-1-auto"></span>
 
-  <!-- <div *ngIf="userType !== 'policy_admin' || userType !== 'view_logs'">
-    <p style="color: white; font-size: 1.3rem; margin-right: 2rem;">(Last Communicated Alert : {{lastalert}})</p>
-  </div> -->
 
-  <!-- <div *ngIf="userType !== 'policy_admin' || userType !== 'view_logs'">
-    <p (click)="lastcommun()" style="color: white; font-size: 1.3rem; margin-right: 2rem; cursor: pointer;" [title]="'Last Communicated Alert: ' + lastalert">
-      (Last Communicated Alert : {{lastalert}})
-    </p>
-  </div> -->
-
-  <!-- <div *ngIf="userType !== 'policy_admin' || userType !== 'view_logs'">
-    <button mat-flat-button class="rounded m-b-2" (click)="lastcommun()" style="color: #040404; margin-right: 2rem; cursor: pointer; background: none; border: none; background-color: #EA906C;" matTooltip="Non Communicating Clients Alert " >
-       {{lastalert_count}}
-    </button>
-  </div> -->
-
-
-
-
-  <!-- <div style="margin-right:1rem; display:flex"> -->
-  <!-- userName and userType   -->
-  <!-- <i-tabler name="user" class="icon-20 d-flex larger-icon" style=" color: white; transform: scale(1.3); margin-right: 0.5rem;"></i-tabler> -->
-
-  <!-- <mat-icon style="transform: scale(1.3);">person</mat-icon> -->
-  <!-- <p style="color: white; font-weight:bold;  margin-right: 0.5rem;">{{userName}}</p>
-  <p style="color: white;"> <span style="">({{userType}})</span></p>
-  <mat-icon style="transform: scale(1.3);color:white">person</mat-icon>
-  &nbsp; &nbsp; -->
-
-  <!-- </div> -->
-
-  <!-- <img src="https://cdn-icons-png.flaticon.com/512/1053/1053210.png" alt="" style="height: 55px;" (click)="logout()"> -->
-
-  <!-- <div style="display: flex;
-  color: white;
- 
-  cursor: pointer;" (click)="logout()">
-    <i-tabler name="logout" class="icon-20 d-flex" style="margin: auto; color: white; transform: scale(1.3); margin-right: 0.5rem;"></i-tabler>
-    <p style="">
-      Logout
-    </p>
-  </div> -->
-
-  <!-- <button (click)="logout()" style="background: transparent;
-  border: none;
-  cursor: pointer;
-  
-width: 117px;
-display: flex;
-color: white;
-/* font-size: 1.2rem; */
-justify-content: center;
-transform: scale(1.2);
-align-items: center;">
-    <mat-icon style="align-items: center; display: flex;">
-      <i-tabler name="logout" class="icon-20 d-flex"></i-tabler>
-    </mat-icon>
-    <p>
-      Logout
-    </p>
-  </button> -->
-
-  <!-- --------------------------------------------------------------- -->
-  <!-- langugage Dropdown -->
-  <!-- --------------------------------------------------------------- -->
-  <!-- <button [matMenuTriggerFor]="flags" mat-icon-button class="m-r-5">
-    <img [src]="selectedLanguage.icon" class="rounded object-cover icon-20" />
-  </button>
-  <mat-menu #flags="matMenu" class="cardWithShadow">
-    <button
-      mat-menu-item
-      *ngFor="let lang of languages"
-      (click)="changeLanguage(lang)"
-    >
-      <div class="d-flex align-items-center">
-        <img [src]="lang.icon" class="rounded object-cover m-r-8 icon-20" />
-        <span class="mat-subtitle-1 f-s-14">{{ lang.language }}</span>
-      </div>
-    </button>
-  </mat-menu> -->
-
-  <!-- --------------------------------------------------------------- -->
-  <!-- Notification Dropdown -->
-  <!-- --------------------------------------------------------------- -->
-  <!-- <button
-    mat-icon-button
-    [matMenuTriggerFor]="notificationmenu"
-    aria-label="Notifications"
-  >
-    <mat-icon
-      matBadge="1"
-      matBadgeOverlap="false"
-      matBadgeColor="warn"
-      class="header-badge"
-      >message</mat-icon
-    >
-  </button>
-  <mat-menu #notificationmenu="matMenu" class="topbar-dd cardWithShadow">
-    <div class="d-flex align-items-center p-x-32 p-y-16">
-      <h6 class="f-s-16 f-w-600 m-0">Notifications</h6>
-      <span class="m-l-auto">
-        <span class="bg-primary text-white p-x-8 p-y-4 f-w-500 rounded f-s-12"
-          >5 new</span
-        >
-      </span>
-    </div>
-    <button
-      mat-menu-item
-      class="p-x-32 p-y-16"
-      *ngFor="let notification of notifications"
-    >
-      <div class="d-flex align-items-center">
-        <img [src]="notification.img" class="rounded-circle" width="48" />
-        <div class="m-l-16">
-          <h5 class="f-s-14 f-w-600 m-0 mat-subtitle-1">
-            {{ notification.title }}
-          </h5>
-          <span>{{ notification.subtitle }}</span>
-        </div>
-      </div>
-    </button>
-    <div class="p-y-12 p-x-32">
-      <button mat-stroked-button color="primary" class="w-100">
-        See all notifications
-      </button>
-    </div>
-  </mat-menu> -->
-
-  <!-- --------------------------------------------------------------- -->
-  <!-- Messages Dropdown -->
-  <!-- --------------------------------------------------------------- -->
-
-  <!-- <button mat-icon-button (click)="alertContentPopUp()" matTooltip="Unique Alerts">
-    <mat-icon [matBadge]="alert_count" matBadgeOverlap="false" matBadgeColor="warn"
-      class="header-badge">warning</mat-icon>
-  </button>
-
-  <button mat-icon-button (click)="alertContentPopUp()" matTooltip="Unique Alerts">
-    <mat-icon [matBadge]="alert_count" matBadgeOverlap="false" matBadgeColor="warn"
-      class="header-badge">report</mat-icon>
-  </button> -->
-
-  <!-- <div  *ngIf="userType !== 'policy_admin' || userType !== 'view_logs'"> -->
-
-    <button mat-icon-button (click)="alertContentPopUp()" matTooltip="Unique Alerts">
+    <!-- <button mat-icon-button matTooltip="Unique Alerts">
       <mat-icon [matBadge]="alert_count" matBadgeOverlap="false" matBadgeColor="warn"
         class="header-badge">announcement</mat-icon>
-    </button>
-    <!-- assignment_ind -->
-    
-  <!-- </div> -->
-
-  <div  *ngIf="userType !== 'policy_admin' || userType !== 'view_logs'">
-    <button mat-icon-button (click)="lastcommun()" matTooltip="Non Communicating Clients Alerts">
-      <mat-icon [matBadge]="lastalert_count" matBadgeOverlap="false" matBadgeColor="warn"
-        class="header-badge">notifications_active</mat-icon>
-    </button>
-  </div>
-
-  <!-- <mat-menu #msgmenu="matMenu" class="topbar-dd cardWithShadow">
-    <div class="d-flex align-items-center p-x-32 p-y-16">
-      <h6 class="f-s-16 f-w-600 m-0">Messages</h6>
-      <span class="m-l-auto">
-        <span class="bg-primary text-white p-x-8 p-y-4 f-w-500 rounded f-s-12"
-          >5 new</span
-        >
-      </span>
-    </div>
-    <button mat-menu-item class="p-x-32 p-y-16" *ngFor="let msg of msgs">
-      <div class="d-flex align-items-center">
-        <img [src]="msg.img" class="rounded-circle" width="48" />
-        <div class="m-l-16">
-          <h5 class="f-s-14 f-w-600 m-0 mat-subtitle-1">
-            {{ msg.title }}
-          </h5>
-          <span>{{ msg.subtitle }}</span>
-        </div>
-      </div>
-    </button>
-    <div class="p-y-12 p-x-32">
-      <button mat-stroked-button color="primary" class="w-100">
-        See all messages
-      </button>
-    </div>
-  </mat-menu> -->
-
-  <!-- --------------------------------------------------------------- -->
-  <!-- profile Dropdown -->
-  <!-- --------------------------------------------------------------- -->
+    </button> -->
 
   <p style="color: white; font-weight:bold;  margin-right: 0.5rem;font-size: 18px;margin-left: 12px;">{{userName}}
   </p>
-  <p style="color: white;font-size: 18px;"> ({{userType}})</p>
+  <!-- <p style="color: white;font-size: 18px;"> ({{userType}})</p> -->
 
   <button mat-flat-button matTooltip="User Profile" style="cursor: pointer;display: flex;background: transparent;
   border: none; padding-left: 12px;" [matMenuTriggerFor]="profilemenu">
@@ -250,7 +52,7 @@ align-items: center;">
           <img src="../../../../../assets/svgs/icon-account.svg" width="95" />
           <div class="m-l-16">
             <h6 class="f-s-14 f-w-600 m-0">{{userName}}</h6>
-            <span class="f-s-14 d-block m-b-4">{{userType}}</span>
+            <!-- <span class="f-s-14 d-block m-b-4">{{userType}}</span> -->
 
           </div>
         </div>
@@ -258,11 +60,11 @@ align-items: center;">
 
 
 
-
+<!-- 
       <div class="p-y-12 p-x-32">
 
         <a mat-flat-button color="primary" class="w-100" (click)="changePassword()">Change Password</a>
-      </div>
+      </div> -->
 
       <div class="p-y-12 p-x-32">
 

@@ -24,6 +24,7 @@ import { authInterceptorProviders } from './interceptor/auth.interceptor';
 // import { DataTablesModule } from "angular-datatables";
 import { DataTablesModule } from "angular-datatables";
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 // import { OrganizationChartModule } from 'primeng/organizationchart';
 
@@ -47,7 +48,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
     MaterialModule,NgxSpinnerModule,
     TablerIconsModule.pick(TablerIcons),
     NgApexchartsModule,
-    TablerIconsModule,
+    TablerIconsModule, NgxPaginationModule,
     // OrganizationChartModule,
     TranslateModule.forRoot({
       loader: {

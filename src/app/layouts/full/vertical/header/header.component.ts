@@ -19,10 +19,7 @@ import { NgFor, NgForOf, NgIf } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { CommonServicesService } from 'src/app/services/common-services.service';
-import { LastCommuniAlertpopComponent } from 'src/app/pages/dashboards/dashboard1/last-communi-alertpop/last-communi-alertpop.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import { TotalActiveClientListComponent } from './total-active-client-list/total-active-client-list.component';
-import { AlertContentComponent } from 'src/app/pages/dashboards/dashboard1/alert-content/alert-content.component';
+
 
 interface notifications {
   id: number;
@@ -84,20 +81,14 @@ export class HeaderComponent {
   @Output() toggleMobileFilterNav = new EventEmitter<void>();
   @Output() toggleCollapsed = new EventEmitter<void>();
 
-  lastalert_count: any;
-  totalActiveClients: any;
-  alert_count:any
+  userDetails: any;
 
   showFiller = false;
 
   userName = this.ts.getUser();
 
-  userType = this.ts.getUserType()
+  // userType = this.ts.getUserType()
 
-  
-
-  
-  componentName: typeof LastCommuniAlertpopComponent;
 
   constructor(
     private vsidenav: CoreService,
@@ -133,143 +124,30 @@ export class HeaderComponent {
 
 
   ngOnInit(): void {
+ // console.log("userName log...", this.capitalizeFirstLetter(this.userName));
+//  this.userName = this.capitalizeFirstLetter(this.userName)
 
-    // console.log("userName log...", this.capitalizeFirstLetter(this.userName));
-    this.userName = this.capitalizeFirstLetter(this.userName)
-
-    this.userType = this.formatUserName(this.userType)
-    // console.log("userType log...", this.userType);
-
-    // console.log("userName log...", this.userName);
-    // console.log("userType log 99999...", this.formatUserName(this.userType));
-
-    this.lastalert();
-    this.totalActiveClientApi()
-    this.alertAPI()
-    
-  }
+//  this.userType = this.formatUserName(this.userType)
+//  console.log("this user", this.userType);
+ }
 
 
 // Function to capitalize the first letter of a string
- capitalizeFirstLetter(str: string): string {
-  return str.toUpperCase() 
-}
+//  capitalizeFirstLetter(str: string): string {
+//   return str.toUpperCase() 
+// }
 
- formatUserName(str: string): string {
-  const formattedString = str.replace(/_/g, ' '); // Replace underscores with spaces
-  return formattedString.toUpperCase() 
+//  formatUserName(str: string): string {
+//   const formattedString = str.replace(/_/g, ' '); // Replace underscores with spaces
+//   return formattedString.toUpperCase() 
 
-  // return formattedString.charAt(0).toUpperCase() + formattedString.slice(1);
+//   // return formattedString.charAt(0).toUpperCase() + formattedString.slice(1);
 
-}
-
-lastalert(){
-  this.cs.lastcomalerts().subscribe( (res) => {
-
-    console.log('res', res);
-
-    if(res.api_status == true){
-      this.lastalert_count = res.count;
-      console.log('last count', this.lastalert)
-    }
-
-  }
-  );
-}
-
-totalActiveClientApi() {
-  this.cs.totalActiveClients().subscribe(
-    (res) => {
-      if (res.api_status) {
-
-        this.totalActiveClients = res.reg_count;
-        console.log('success changed');
-console.log("total count", res, this.totalActiveClients);
-
-      } else {
-        
-      }
-    },
-    (err) => {
-      console.log('Error: ', err);
-    }
-  );
-
- 
-}
-
-totalActiveClientList() {
-  
-
-  const dialogRef = this.dialog.open(TotalActiveClientListComponent);
-
-  dialogRef.afterClosed().subscribe((result) => {
-  });
-}
-
-alertAPI(){
-
-  this.cs.alertinfo().subscribe( (res) => {
-  
-
-    console.log('res alert', res)
-
-    if(res.api_status == true)
-    {
-      this.alert_count = res.total_count;
-
-      console.log("alert count", this.alert_count
-      
-      
-      
-      );
-      
-    }
-  }
-
-  );
-}
-
-alertContentPopUp(){
-  const dialogRef = this.dialog.open(AlertContentComponent);
-
-  dialogRef.afterClosed().subscribe((result) => {
-  });
-}
+// }
 
 
-openDialogPolicy(componentName : any) {
-  const dialogRef = this.dialog.open(componentName);
 
-  dialogRef.afterClosed().subscribe((result) => {
-  });
-}
 
-lastcommun(){
-  console.log("last communication")
-  
-  console.log("last communication alert function")
-  this.componentName = LastCommuniAlertpopComponent;
-  this.openDialogPolicy(this.componentName)
-}
 
-changePassword(){
-  console.log("change password");
-
-  // this.componentName = ChangePasswordComponent;
-  // this.openDialogPolicy(this.componentName)
-
-  this.openDialogChangePass()
-  
-  }
-
-  openDialogChangePass() {
-    const dialogRef = this.dialog.open(ChangePasswordComponent);
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
-  
-}
 
 }

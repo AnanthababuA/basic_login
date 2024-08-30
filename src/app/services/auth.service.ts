@@ -18,20 +18,29 @@ export class AuthService {
 
   login(loginCredentials: any): Observable<any> {
 
-    return this.http.post(env.apiHost.concat('/registration/db_auth'), loginCredentials, httpOptions)
+    // return this.http.post(env.apiHost.concat('/exammgt/db_auth'), loginCredentials, httpOptions)
+    return this.http.post(env.apiHost.concat('/auth/login'), loginCredentials, httpOptions)
 
-
-  }
-
-  genOtpService(generateOTP: any): Observable<any> {
-   
-    return this.http.post(env.apiHost.concat('/registration/generate-otp'), generateOTP, httpOptions)
 
   }
 
   refreshToken(token: string) {
 
-    return this.http.post(env.apiHost.concat('/registration/token/refresh'), { refresh: token }, httpOptions);
+    return this.http.post(env.apiHost.concat('/exammgt/token/refresh'), { refresh: token }, httpOptions);
+
+  }
+
+  version(){
+    // return this.http.post(env.apiHost.concat('/exammgt/version-detail'), {});
+    return this.http.get(env.apiHost.concat('/auth/version'), {});
+
+
+  }
+
+
+  genOtpService(generateOTP: any): Observable<any> {
+   
+    return this.http.post(env.apiHost.concat('/registration/generate-otp'), generateOTP, httpOptions)
 
   }
 
@@ -43,7 +52,7 @@ export class AuthService {
 
   genCaptcha(): Observable<any> {
 
-    return this.http.post(env.apiHost.concat('/registration/gen_captcha') , {})
+    return this.http.get(env.apiHost.concat('/auth/captcha') , {})
 
   }
 

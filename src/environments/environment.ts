@@ -10,7 +10,10 @@ export const environment = {
 
   // bharat sir 
   
-  apiHost: 'http://10.184.36.117:8000'
+  // apiHost: 'http://10.184.36.117:8000'
+  apiHost: 'http://localhost:5000',
+
+  dashboardserver: 'http://0.0.0.0:4005',
 
 };
 

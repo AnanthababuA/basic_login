@@ -1,0 +1,257 @@
+<mat-card class="cardWithShadow">
+    <mat-card-header>
+      <mat-card-title>Search Event</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="b-t-1">
+      <form [formGroup]="eventlist">
+        <div class="row m-t-16 m-l-16" >
+          <div class="col-lg-3">
+            <div style="display: flex;">
+              <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">Start Date</mat-label>
+              <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">&nbsp; </span>
+            </div> 
+            <mat-form-field class="w-100" appearance="outline">
+              <input matInput [matDatepicker]="dp3" formControlName="startDate" />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="dp3"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
+  
+          <div class="col-lg-3">
+            <div style="display: flex;">
+              <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">End Date</mat-label>
+              <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">&nbsp; </span>
+            </div> 
+            <mat-form-field class="w-100" appearance="outline">
+              <input matInput [matDatepicker]="dp4" formControlName="endDate" />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="dp4"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #dp4 disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
+  
+          <div class="col-lg-3">
+            <div style="display: flex;">
+              <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">class</mat-label>
+              <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">&nbsp; </span>
+            </div>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <!-- <mat-label>Class</mat-label> -->
+              <mat-select placeholder="Select class" formControlName="class_std">
+                <mat-option *ngFor="let item of classvalue" [value]="item">
+                  {{ item }}
+                </mat-option>
+                
+              </mat-select>
+            </mat-form-field>
+          </div>
+  
+          <div class="col-lg-1" style="margin-top: 32px! important;">
+            <button mat-raised-button color="primary" style="padding: 25px 20px;" (click)="qpSubmit()">Submit</button>
+          </div>
+
+          <div class="col-lg-2" style="margin-top: 32px! important;">
+            <mat-form-field appearance="outline" class="w-100" color="primary" style=" ">
+              <input matInput type="text" placeholder="Search events" />
+              <mat-icon matSuffix style="cursor: pointer; background-color: #f7c878; border-radius: 0.5rem;"
+                >
+                <i-tabler name="search" class="icon-20 d-flex searchIcon"></i-tabler>
+              </mat-icon>
+            </mat-form-field>
+          </div>
+      </div>
+      </form>
+     
+    </mat-card-content>
+   
+
+</mat-card>
+
+<!-- <mat-card class="cardWithShadow">
+  <mat-card-header>
+    <mat-card-title>Events List</mat-card-title>
+  </mat-card-header>  -->
+
+  <!-- <mat-card-content class="b-t-1"> -->
+    <div class="row" style="margin-top: 10px; ">
+      <div class="col-lg-3" *ngFor="let e of events.data">
+  
+        <mat-card class="cardWithShadow">
+          <div class="row">
+            <div class="col-lg-12">
+              <mat-card-header>
+                <mat-card-title> {{ e.Event_title }}</mat-card-title>
+              </mat-card-header> 
+  
+              <mat-card-content class="b-t-1" >
+
+                <div class="row m-t-20 ">
+                  <div class="col-4">
+                    <span class="f-s-12">Event ID </span>
+                    <span class="f-s-12 f-w-500 d-block">{{ e.Event_id }} </span>
+                  </div>
+                  <div class="col-4">
+                    <span class="f-s-12 ">Standard</span>
+                    <span class="f-s-12 f-w-500 d-block">{{ e.standard }}</span>
+                  </div>
+                  <div class="col-4" *ngIf=" e.event_section !== '' && e.event_section !== null ">
+                    <span class="f-s-12">Section</span>
+                    <span class="f-s-12 f-w-500 d-block">{{ e.event_section }} </span>
+                  </div>
+                  
+                </div> 
+
+                <!-- <div class="row m-t-12">
+                  <div class="col-lg-6">
+                    
+                    <h5 class="f-s-16 d-flex align-items-center mat-subtitle-1 m-b-8"><span
+                      class="icon-26 bg-accent text-white rounded-circle d-flex align-items-center justify-content-center m-r-8"
+                    >
+                      <i-tabler name="book" class="icon-18"></i-tabler>
+                    </span>{{ e.class_subject }}</h5>
+                  </div>
+                  <div class="col-lg-6">
+                    
+                    <h5 class="f-s-16 d-flex align-items-center mat-subtitle-1 m-b-8"><span
+                      class="icon-26 bg-primary text-white rounded-circle d-flex align-items-center justify-content-center m-r-8"
+                    >
+                      <i-tabler name="users-group" class="icon-18"></i-tabler>
+                    </span>{{ e.event_medium }} </h5>
+                  </div>
+                  
+                </div> -->
+
+                <div class="row m-t-12">
+                  <div class="col-lg-6">
+                    
+                    <h5 class="f-s-16 d-flex align-items-center mat-subtitle-1 m-b-8"><span
+                      class="icon-26 bg-accent text-white rounded-circle d-flex align-items-center justify-content-center m-r-8"
+                    >
+                      <i-tabler name="book" class="icon-18"></i-tabler>
+                    </span>{{ e.class_subject }}</h5>
+                  </div>
+                  <div class="col-lg-6">
+                    
+                    <h5 class="f-s-16 d-flex align-items-center mat-subtitle-1 m-b-8"><span
+                      class="icon-26 bg-primary text-white rounded-circle d-flex align-items-center justify-content-center m-r-8"
+                    >
+                      <i-tabler name="users-group" class="icon-18"></i-tabler>
+                    </span>{{ e.event_medium }} </h5>
+                  </div>
+                  
+                </div>
+
+                
+
+                
+
+                <div class="m-t-12 align-items-center justify-content-center">
+
+                  <!-- <h4>Start Date and Time</h4> -->
+                  <div class="d-flex align-items-center w-100"> 
+                    <span
+                        class="icon-26 bg-warning text-white rounded-circle d-flex align-items-center justify-content-center m-r-8"
+                      >
+                        <i-tabler name="calendar-stats" class="icon-18"></i-tabler>
+                      </span>
+                    <div>
+                      <h5 class="f-s-14 f-w-600 m-0 mat-subtitle-1"> Start Date and Time
+                        <!-- {{ e.event_startdate | date: 'MMM dd, yyyy' }} {{ e.event_starttime }} -->
+                      </h5>
+                    </div>
+                  </div>
+
+                  <div class="m-l-30">
+                    <span
+                  class="bg-light-warning text-warning rounded f-s-12 f-w-500 p-x-8 p-y-4"
+                  >{{ e.e_s_date | date: 'MMM dd, yyyy' }} {{ e.event_starttime }}
+                </span>
+                  </div>            
+               
+                  <div class="d-flex align-items-center w-100 m-t-12" >
+                    <span
+                        class="icon-26 bg-error text-white rounded-circle d-flex align-items-center justify-content-center m-r-8"
+                      >
+                        <i-tabler name="calendar-stats" class="icon-18"></i-tabler>
+                      </span>
+                    <div>
+                      <h5 class="f-s-14 f-w-600 m-0 mat-subtitle-1"> Start Date and Time
+                        <!-- {{ e.event_enddate  | date: 'MMM dd, yyyy' }} {{ e.event_endtime }} -->
+                      </h5>
+                    </div>
+                  </div>
+
+                  <div class="m-l-30">
+                    <span
+                  class="bg-light-error text-error rounded f-s-12 f-w-500 p-x-8 p-y-4"
+                  >{{ e.e_e_date  | date: 'MMM dd, yyyy' }} {{ e.event_endtime }}
+                </span>
+                  </div> 
+
+
+                  <!-- <span
+                  class="bg-light-primary text-primary rounded f-s-12 f-w-500 p-x-8 p-y-4"
+                  >{{ e.event_startdate | date: 'MMM dd, yyyy' }}
+                </span> -->
+                <!-- <div class="row m-t-20 ">
+                  <div class="col-4">
+                    <span class="f-s-12 ">Start Time</span>
+                    <span class="f-s-12 f-w-500 d-block">{{ e.event_starttime }}</span>
+                  </div>
+                  <div class="col-4">
+                    <span class="f-s-12">End Date</span>
+                    <span class="f-s-12 f-w-500 d-block">{{ e.event_enddate  | date: 'MMM dd, yyyy' }}</span>
+                  </div>
+                  <div class="col-4">
+                    <span class="f-s-12">End Time </span>
+                    <span class="f-s-12 f-w-500 d-block">{{ e.event_endtime }}</span>
+                  </div>
+                </div> -->
+                </div>
+
+                
+
+                <!-- <div class="row m-t-2" style="display: flex;">
+                  <span
+                class="bg-light-primary text-primary rounded f-s-14 f-w-500 p-x-8 p-y-4"
+                style="margin-top: 10px;"> 
+                <div class="row align-items-center justify-content-center"> 
+                  <div class="col-lg-12">  <i-tabler name="clock-up" class="icon-14 "></i-tabler> {{ e.event_startdate | date: 'MMMM dd, yyyy' }} {{ e.event_starttime }}                  </div>
+                </div>  
+              </span>
+
+              <span
+                class="bg-light-error text-error rounded f-s-14 f-w-500 p-x-8 p-y-4"
+                style="margin-top: 10px;"> 
+                <div class="row"> 
+                  <div class="col-lg-12">{{ e.event_enddate  | date: 'MMMM dd, yyyy' }} {{ e.event_endtime }}                  </div>
+                </div>  
+              </span>
+                </div> -->
+
+                <div class="row m-t-10 d-flex flex-sm-row flex-column align-items-center justify-content-center gap-8" style="align-items: center;">
+                  
+              <button mat-raised-button color="primary"> <i-tabler name="edit" class="icon-18 m-r-8"></i-tabler> Edit</button>
+              <button mat-raised-button color="warn"> <i-tabler name="trash-filled" class="icon-18 m-r-8"></i-tabler> Delete</button>
+                        
+            
+              </div>
+  
+              </mat-card-content>         
+              
+            </div>
+          </div>
+        </mat-card>
+        
+      </div>
+    </div>  
+  <!-- </mat-card-content> -->
+  
+  
+<!-- </mat-card> -->

@@ -70,7 +70,7 @@ export class FullComponent implements OnInit {
     return this.resView;
   }
 
-  userType = this.ts.getUserType()
+  // userType = this.ts.getUserType()
 
   // userType: string = "admin"
   filteredNavItems: any[] =[];
@@ -145,25 +145,17 @@ export class FullComponent implements OnInit {
     }
   }
 
-  // filterNavItems() {
-  //   if (this.userType === 'adminn') {
-  //     // Show all items for admin
-  //     this.filteredNavItems = navItems.slice(); // Copy all items
-  //   } else {
-  //     // Show all items except 'Dashboard' for non-admin users
-  //     this.filteredNavItems = navItems.filter(item => item.displayName !== 'Manage Unit');
-  //   }
-  // }
-
   filterNavItems() {
+    this.filteredNavItems = navItems.slice();
     
-    if (this.userType === 'admin_user' || this.userType === 'superadmin_user') {
+    // if (this.userType === 'admin_user' || this.userType === 'superadmin_user') {
      
-      this.filteredNavItems = navItems.slice();
-    } else {
-      
-      this.filteredNavItems = navItems.filter(item => item.displayName !== 'Manage Unit');
-    }
+    //   this.filteredNavItems = navItems.slice();
+    // }
+    // else
+    // {
+    //   this.filteredNavItems = navItems.slice();      
+    // }
   }
   
 

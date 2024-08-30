@@ -1,0 +1,228 @@
+<div>
+    <mat-tab-group>
+        <mat-tab label="Create Survey">
+          
+
+          <mat-card class="b-1 shadow-none">
+            <mat-card-content class="b-t-1" style="background-color: white;">
+                <div class="row">
+                    <div class="col-sm-12 d-flex align-items-center justify-content-end">
+                      <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16"
+                        >Full Name
+                      </mat-label>
+                    </div>
+                    <div class="col-sm-12">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <input matInput placeholder="John Deo" />
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  
+                <div class="row">
+                    <div class="col-lg-8">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Survey title"/>
+                        </mat-form-field>
+                    </div>
+                </div>
+                
+                <div class="row m-t-16 m-l-16" >
+                   
+            
+                    <div class="col-lg-3">
+                      <div style="display: flex;">
+                        <mat-label class="mat-subtitle-2 f-w-600 m-b-16 d-block">class</mat-label>
+                        <span style="font-size: 0.7rem; margin-left: 10px; color: gray;">&nbsp; </span>
+                      </div>
+                      <mat-form-field appearance="outline" class="w-100" color="primary">
+                        <!-- <mat-label>Class</mat-label> -->
+                        <mat-select placeholder="Select class" formControlName="class_std">
+                          <!-- <mat-option *ngFor="let item of classvalue" [value]="item">
+                            {{ item }}
+                          </mat-option> -->
+                          
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+            
+                    <div class="col-lg-1" style="margin-top: 32px! important;">
+                      <!-- <button mat-raised-button color="primary" style="padding: 25px 20px;" (click)="qpSubmit()">Submit</button> -->
+                    </div>
+          
+                    <div class="col-lg-2" style="margin-top: 32px! important;">
+                      <mat-form-field appearance="outline" class="w-100" color="primary" style=" ">
+                        <input matInput type="text" placeholder="Search events" />
+                        <mat-icon matSuffix style="cursor: pointer; background-color: #f7c878; border-radius: 0.5rem;"
+                          >
+                          <i-tabler name="search" class="icon-20 d-flex searchIcon"></i-tabler>
+                        </mat-icon>
+                      </mat-form-field>
+                    </div>
+                </div>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- <mat-card class="b-1 shadow-none">
+            <mat-card-header>
+              <mat-card-title>Basic</mat-card-title>
+            </mat-card-header>
+            
+          </mat-card> -->
+
+          
+        </mat-tab>
+        <mat-tab label="Surveys list"
+          ><div class="bg-light-primary mat-body-1 p-16 rounded m-t-12">
+            
+          </div></mat-tab
+        >
+
+        <mat-tab label="Survey Form">
+
+            <div class="mat-body-1 p-16 rounded m-t-12" style="background-color: white;">
+                <!-- Using Angular interpolation -->
+                <div class="editable-title">
+                  <h2 contenteditable="true" (input)="onTitleChange($event)">
+                    {{ survey_forms.title ? survey_forms.title : 'Survey Title' }}
+                  </h2>
+                  <hr>
+                </div>
+
+                              
+                <div *ngFor="let question of questions" style="background-color: #FFF7F1; margin-bottom: 10pt; padding: 10pt 10pt;">
+                   
+                    <div class="row" style="padding: 4pt 4pt;">
+                        
+                        <div style="margin-right: 10pt; margin-bottom: 10pt;">
+                            <h3>{{ question.Q_n }}</h3>
+                        </div>
+                    
+                        <div class="col-lg-9" >
+                                <h2 contenteditable="true" (input)="onQuestionTextChange($event, question)">{{ question.Q_text }}</h2>
+                                <hr>
+                        </div>
+                    
+                        <div class="col-lg-2" style="flex-grow: 1; display: flex; align-items: center; justify-content: flex-end;">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Question Type</mat-label>
+                                <mat-select [(ngModel)]="question.selectedChoiceType" (selectionChange)="updateQType(question)">
+                                    <mat-option *ngFor="let item of choice_type | keyvalue" [value]="item.key">
+                                        {{ item.value }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                
+                              
+                    
+                    <div *ngIf="question.selectedChoiceType === 'shortanswer'" style="">
+                        <mat-form-field appearance="outline" class="w-100" color="primary">
+                            <input matInput type="text" [(ngModel)]="question.shortAnswerText" [disabled]="true"/>    
+                        </mat-form-field>
+                    </div>
+                
+                    <div *ngIf="question.selectedChoiceType === 'radio'">
+                        <div *ngIf="question.Q_choices && question.Q_choices.length > 0; else defaultChoices">
+                            <div *ngFor="let choice of question.Q_choices; let i=index">
+                                <label>
+                                    <!-- Radio button -->
+                                    <input type="radio" name="radioChoices{{question.Q_n}}">
+                                    <!-- Editable span for choice text -->
+                                    <span contenteditable="true" 
+                                          (input)="onChoiceTextChange($event, question, i)"
+                                          (click)="$event.preventDefault()">
+                                        {{ choice.ch_text }}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <ng-template #defaultChoices>
+                            <div style="display: block">
+                                <div>
+                                    <label>
+                                        <input type="radio" name="radioChoices{{question.Q_n}}">
+                                        <span contenteditable="true">Default Choice 1</span>
+                                    </label>
+                                </div>
+                    
+                                <div>
+                                    <label>
+                                        <input type="radio" name="radioChoices{{question.Q_n}}">
+                                        <span contenteditable="true">Default Choice 2</span>
+                                    </label>
+                                    <button *ngIf="question.selectedChoiceType !== 'shortanswer' && question.selectedChoiceType !== 'paragraph'" mat-button color="primary" (click)="addChoice(question)">Add Option</button>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <button *ngIf="question.Q_choices && question.Q_choices.length > 0" (click)="addChoice(question)" mat-button color="primary">Add option</button>
+                    </div>
+                
+                
+                    <div *ngIf="question.selectedChoiceType === 'Checkbox'">
+                        <div *ngIf="question.Q_choices && question.Q_choices.length > 0; else defaultChoices">
+                            <div *ngFor="let choice of question.Q_choices; let i=index">
+                                <label>
+                                    <!-- Radio button -->
+                                    <input type="checkbox" name="radioChoices{{question.Q_n}}">
+                                    <!-- Editable span for choice text -->
+                                    <span contenteditable="true" 
+                                          (input)="onChoiceTextChange($event, question, i)"
+                                          (click)="$event.preventDefault()">
+                                        {{ choice.ch_text }}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <ng-template #defaultChoices>
+                            <div style="display: block">
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="radioChoices{{question.Q_n}}">
+                                        <span contenteditable="true">Default Choice 1</span>
+                                    </label>
+                                </div>
+                    
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="radioChoices{{question.Q_n}}">
+                                        <span contenteditable="true">Default Choice 2</span>
+                                    </label>
+                                    <button *ngIf="question.selectedChoiceType !== 'shortanswer' && question.selectedChoiceType !== 'paragraph'" mat-button color="primary" (click)="addChoice(question)">Add Option</button>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <button *ngIf="question.Q_choices && question.Q_choices.length > 0" (click)="addChoice(question)" mat-button color="primary">Add option</button>
+                    </div>
+                
+                </div>          
+                
+                  <div class="row">
+                    <!-- <h2>Add Questions</h2> -->
+                    <div style="margin-left: 10pt; margin-right: 15pt;">
+                        <button mat-raised-button color="primary" (click)="addQuestion()" >Add Question</button>
+                    </div>
+                
+                    <div *ngIf="questions && questions.length > 0;" style="margin-left: 10pt; margin-right: 15pt;">
+                        <button mat-raised-button color="warn" (click)="submit()" >Save as Draft</button>
+                    </div>
+                
+                    <div *ngIf="questions && questions.length > 0;">
+                        <button mat-raised-button color="accent" (click)="submit()" >Submit</button>
+                    </div>
+                    
+                  </div>
+            </div>
+
+            
+
+        </mat-tab>
+        
+      </mat-tab-group>
+</div>
+
+
+
+
+
+
